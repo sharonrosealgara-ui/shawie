@@ -22,12 +22,21 @@ import {
 } from "@/lib/seed-data";
 import { generateId } from "@/lib/id";
 
+interface PortfolioItem {
+  id: string;
+  title: string;
+  url?: string;
+  description?: string;
+}
+
 interface CareerState {
   applications: JobApplication[];
   interviews: Interview[];
   clients: Client[];
   certificates: Certificate[];
   resumes: ResumeVersion[];
+  coverLetters: ResumeVersion[];
+  portfolioItems: PortfolioItem[];
   goals: CareerGoal[];
   skills: Skill[];
   incomeSources: IncomeSource[];
@@ -49,6 +58,12 @@ interface CareerState {
   addResume: (item: Omit<ResumeVersion, "id">) => void;
   removeResume: (id: string) => void;
 
+  addCoverLetter: (item: Omit<ResumeVersion, "id">) => void;
+  removeCoverLetter: (id: string) => void;
+
+  addPortfolioItem: (item: Omit<PortfolioItem, "id">) => void;
+  removePortfolioItem: (id: string) => void;
+
   addGoal: (item: Omit<CareerGoal, "id">) => void;
   updateGoal: (id: string, patch: Partial<CareerGoal>) => void;
   removeGoal: (id: string) => void;
@@ -69,6 +84,8 @@ export const useCareerStore = create<CareerState>()(
       clients: SEED_CLIENTS,
       certificates: SEED_CERTIFICATES,
       resumes: SEED_RESUMES,
+      coverLetters: [],
+      portfolioItems: [],
       goals: SEED_CAREER_GOALS,
       skills: SEED_SKILLS,
       incomeSources: SEED_INCOME_SOURCES,
@@ -92,6 +109,12 @@ export const useCareerStore = create<CareerState>()(
 
       addResume: (item) => set((s) => ({ resumes: [{ ...item, id: generateId() }, ...s.resumes] })),
       removeResume: (id) => set((s) => ({ resumes: s.resumes.filter((r) => r.id !== id) })),
+
+      addCoverLetter: (item) => set((s) => ({ coverLetters: [{ ...item, id: generateId() }, ...s.coverLetters] })),
+      removeCoverLetter: (id) => set((s) => ({ coverLetters: s.coverLetters.filter((r) => r.id !== id) })),
+
+      addPortfolioItem: (item) => set((s) => ({ portfolioItems: [{ ...item, id: generateId() }, ...s.portfolioItems] })),
+      removePortfolioItem: (id) => set((s) => ({ portfolioItems: s.portfolioItems.filter((p) => p.id !== id) })),
 
       addGoal: (item) => set((s) => ({ goals: [...s.goals, { ...item, id: generateId() }] })),
       updateGoal: (id, patch) =>
