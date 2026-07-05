@@ -157,7 +157,7 @@ export default function DashboardPage() {
             <PieChart>
               <Tooltip content={<ChartTooltip />} />
               <Legend verticalAlign="bottom" height={24} iconType="circle" wrapperStyle={{ fontSize: 12 }} />
-              <Pie data={budgetBreakdown} dataKey="value" nameKey="name" innerRadius={55} outerRadius={85} paddingAngle={2}>
+              <Pie data={budgetBreakdown} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={2} isAnimationActive={false}>
                 {budgetBreakdown.map((entry, index) => (
                   <Cell key={entry.name} fill={CHART_COLORS[index % CHART_COLORS.length]} stroke="var(--card)" strokeWidth={2} />
                 ))}
@@ -171,7 +171,7 @@ export default function DashboardPage() {
             <PieChart>
               <Tooltip content={<ChartTooltip />} />
               <Legend verticalAlign="bottom" height={24} iconType="circle" wrapperStyle={{ fontSize: 12 }} />
-              <Pie data={billsProgress} dataKey="value" nameKey="name" innerRadius={55} outerRadius={85} paddingAngle={2}>
+              <Pie data={billsProgress} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={2} isAnimationActive={false}>
                 <Cell fill="var(--chart-2)" stroke="var(--card)" strokeWidth={2} />
                 <Cell fill="var(--chart-3)" stroke="var(--card)" strokeWidth={2} />
               </Pie>

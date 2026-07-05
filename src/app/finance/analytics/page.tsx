@@ -86,7 +86,7 @@ export default function AnalyticsPage() {
             <PieChart>
               <Tooltip content={<ChartTooltip />} />
               <Legend verticalAlign="bottom" iconType="circle" wrapperStyle={{ fontSize: 12 }} />
-              <Pie data={budgetBreakdown} dataKey="value" nameKey="name" innerRadius={60} outerRadius={95} paddingAngle={2}>
+              <Pie data={budgetBreakdown} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={95} paddingAngle={2} isAnimationActive={false}>
                 {budgetBreakdown.map((entry, i) => (
                   <Cell key={entry.name} fill={CHART_COLORS[i % CHART_COLORS.length]} stroke="var(--card)" strokeWidth={2} />
                 ))}
@@ -142,7 +142,7 @@ export default function AnalyticsPage() {
             <PieChart>
               <Tooltip content={<ChartTooltip />} />
               <Legend verticalAlign="bottom" iconType="circle" wrapperStyle={{ fontSize: 12 }} />
-              <Pie data={paidVsPending} dataKey="value" nameKey="name" innerRadius={60} outerRadius={95} paddingAngle={2}>
+              <Pie data={paidVsPending} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={95} paddingAngle={2} isAnimationActive={false}>
                 <Cell fill="var(--chart-2)" stroke="var(--card)" strokeWidth={2} />
                 <Cell fill="var(--chart-3)" stroke="var(--card)" strokeWidth={2} />
               </Pie>

@@ -1,4 +1,3 @@
-import { generateId } from "@/lib/id";
 import type {
   BudgetCategory,
   SavingsGoal,
@@ -20,6 +19,14 @@ import type {
   LearningTrack,
   Settings,
 } from "@/types";
+
+// Seed data needs deterministic IDs (not random uuids) so server-rendered and
+// client-rendered output match on first paint — a plain incrementing counter
+// produces the same sequence on both since call order is identical.
+let seedCounter = 0;
+function generateId(): string {
+  return `seed-${seedCounter++}`;
+}
 
 export const MONTHLY_SALARY = 25000;
 

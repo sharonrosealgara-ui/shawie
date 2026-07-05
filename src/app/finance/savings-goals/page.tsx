@@ -13,7 +13,8 @@ import { formatCurrency } from "@/lib/format";
 import type { SavingsGoal } from "@/types";
 
 export default function SavingsGoalsPage() {
-  const goals = useSavingsStore((s) => s.goals.filter((g) => g.category === "savings"));
+  const allGoals = useSavingsStore((s) => s.goals);
+  const goals = allGoals.filter((g) => g.category === "savings");
   const addGoal = useSavingsStore((s) => s.addGoal);
   const updateGoal = useSavingsStore((s) => s.updateGoal);
   const removeGoal = useSavingsStore((s) => s.removeGoal);
