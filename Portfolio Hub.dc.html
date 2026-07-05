@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.hub{--cream:#f4ede3;--cream2:#eadfce;--ink:#1b140d;--mut:#5f4f40;--gold:#9c6a34;--gold2:#7d5324;--champ:#c2984f;--rose:#bd6980;--line:#e2d5bf;--card:#fff;background:var(--cream);color:var(--ink);font-family:'Jost',system-ui,sans-serif;font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;min-height:100vh}
+.hub h1,.hub h2,.hub h3,.hub h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.04;color:var(--ink)}
+.hub.dark{--cream:#17120d;--cream2:#20191220;--ink:#f4ede3;--mut:#b6a48c;--gold:#e0b878;--gold2:#c2984f;--champ:#e9c9a8;--rose:#d68aa0;--line:#3a2e22;--card:#221a12;background:#17120d;color:var(--ink)}
+.hub.dark .sec-cream2{background:#1e160f}
+.hub.dark .top{background:#17120d}
+.hub.dark h1,.hub.dark h2,.hub.dark h3,.hub.dark h4{color:var(--ink)}
+.hub.dark .stk{background:#221a12;color:var(--ink)}
+.hub.dark .cap-card,.hub.dark .expc,.hub.dark .svcc,.hub.dark .proj{background:#221a12}
+.hub.dark .about2 .ab-body p{color:var(--mut)}
+.hub a{color:inherit;text-decoration:none}
+.ey{font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:var(--gold)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+.promobar{display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(90deg,#241d16,#5a4133);color:#f4ede3;font-size:12.5px;letter-spacing:.05em;font-weight:600;padding:12px 20px;text-decoration:none;text-align:center}
+.promobar:hover{background:linear-gradient(90deg,#3a2c22,#6a4d38);color:#fff}
+.promobar .pa{color:#e9c9a8;font-weight:700}
+.promobar{display:flex;align-items:center;justify-content:center;gap:14px;background:linear-gradient(90deg,#241d16,#5a4133);color:#f4ede3;font-size:13.5px;letter-spacing:.05em;font-weight:600;padding:14px 20px;text-decoration:none;text-align:center;flex-wrap:wrap}
+.promobar:hover{background:linear-gradient(90deg,#3a2c22,#6a4d38);color:#fff}
+.promobar .pa{color:#e9c9a8;font-weight:700}
+.promobar .go{background:#e9c9a8;color:#241d16;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:7px 15px;border-radius:30px;animation:pbpulse 2s ease-in-out infinite}
+@keyframes pbpulse{0%,100%{box-shadow:0 0 0 0 rgba(233,201,168,.55)}50%{box-shadow:0 0 0 8px rgba(233,201,168,0)}}
+.top{display:flex;align-items:center;justify-content:space-between;padding:22px 40px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--cream);z-index:20}
+.brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;letter-spacing:.1em}
+.brand small{display:block;font-family:'Jost';font-size:8px;letter-spacing:.36em;color:var(--mut);font-weight:500;margin-top:1px}
+.tnav{display:flex;align-items:center;gap:24px}
+.tnav a{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--ink);cursor:pointer}
+.tnav a:hover{color:var(--gold)}
+.tnav .agency{border:1px solid var(--gold);color:var(--gold);padding:10px 18px;border-radius:30px;font-weight:700}
+.tnav .agency:hover{background:var(--gold);color:#fff}
+.themebtn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;flex:none}
+.themebtn:hover{border-color:var(--gold);color:var(--gold)}
+.tnav .cta{background:var(--gold);color:#fff;padding:11px 20px;border-radius:30px;font-weight:600}
+.tnav .cta:hover{background:var(--gold2)}
+.hero{position:relative;overflow:hidden;padding:96px 0 80px}
+.hero::before{content:'';position:absolute;top:-140px;right:-90px;width:620px;height:620px;background:radial-gradient(circle,rgba(189,105,128,.26),transparent 68%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-160px;left:-80px;width:520px;height:520px;background:radial-gradient(circle,rgba(156,106,52,.2),transparent 70%);pointer-events:none}
+.hero-in{position:relative;z-index:2;max-width:860px}
+.htag{display:inline-flex;align-items:center;gap:9px;background:#f0d7dd;color:#9a4f64;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:8px 16px;border-radius:30px;border:1px solid rgba(154,79,100,.24);margin-bottom:24px}
+.htag .pd{width:7px;height:7px;border-radius:50%;background:#4d8259;box-shadow:0 0 0 3px rgba(77,130,89,.2)}
+.hero h1{font-size:clamp(42px,6.4vw,84px);letter-spacing:-.01em;margin-bottom:20px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero p{font-size:18px;color:var(--mut);line-height:1.8;max-width:60ch;margin-bottom:32px}
+.hbtns{display:flex;flex-wrap:wrap;gap:14px}
+.hero-grid{display:grid;grid-template-columns:1.22fr .78fr;gap:56px;align-items:center}
+.hero-photo{position:relative;z-index:2}
+.hero-photo img{width:100%;aspect-ratio:854/1030;object-fit:cover;object-position:center 12%;border-radius:16px;box-shadow:0 34px 74px rgba(27,20,13,.32);border:1px solid var(--line);display:block}
+.hero-photo .pcap{position:absolute;left:18px;bottom:18px;right:18px;background:rgba(27,20,13,.72);color:#fff;border-radius:10px;padding:12px 16px}
+.hero-photo .pcap .pn{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;line-height:1.1}
+.hero-photo .pcap .pr{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#e9d4b8;margin-top:3px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:54px;padding:0 28px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;border-radius:3px;cursor:pointer;transition:.24s;border:none}
+.btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn-agency{background:var(--gold);color:#fff;box-shadow:0 8px 22px rgba(156,106,52,.32)}.btn-agency:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--ink);color:var(--ink);background:none}.btn-ghost:hover{background:var(--ink);color:var(--cream)}
+.stripe{display:flex;flex-wrap:wrap;gap:36px;padding:30px 0 0;margin-top:44px;border-top:1px solid var(--line)}
+.stat .n{font-family:'Cormorant Garamond',serif;font-size:40px;color:var(--gold);line-height:1}
+.stat .l{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-top:5px}
+.sec{padding:78px 0}
+.sec-cream2{background:var(--cream2)}
+.sec-head{max-width:640px;margin:0 auto 52px;text-align:center}
+.sec-head .ey{display:block;margin-bottom:13px}
+.sec-head h2{font-size:clamp(34px,4.6vw,56px)}
+.sec-head p{font-size:16px;color:var(--mut);margin-top:14px;line-height:1.75}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.proj{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 6px 22px rgba(43,30,15,.07);transition:transform .3s cubic-bezier(.4,0,.2,1),box-shadow .3s,border-color .3s;cursor:pointer}
+.proj:hover{transform:translateY(-6px);box-shadow:0 28px 60px rgba(43,30,15,.17);border-color:var(--gold)}
+.proj .cap{height:200px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff}
+.proj .cap svg.mock{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.proj .cap .pklabel{position:absolute;left:16px;bottom:14px;z-index:3;font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#fff;background:rgba(20,14,10,.5);padding:6px 12px;border-radius:20px;backdrop-filter:none}
+.cap.c1{background:linear-gradient(135deg,#3a2d26,#6a4a3a 55%,#9c6a34)}
+.cap.c2{background:linear-gradient(135deg,#5a2f3c,#8f4a5f 55%,#bd6980)}
+.cap.c3{background:linear-gradient(135deg,#2c3a2c,#4f6b49 60%,#7f9468)}
+.cap.c4{background:linear-gradient(135deg,#241d16,#4a352a 60%,#5a4133)}
+.cap.c5{background:linear-gradient(135deg,#3b3552,#6a5f8f 55%,#8a6f9c)}
+.cap.c6{background:linear-gradient(135deg,#22403c,#3f6b62 55%,#5fa08f)}
+.proj .pb{padding:24px 26px 26px}
+.proj .role{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.proj h3{font-size:25px;margin:8px 0 9px;line-height:1.12}
+.proj .pd2{font-size:14px;color:var(--mut);line-height:1.62;margin-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+.chip{background:var(--cream);border:1px solid var(--line);color:var(--gold2);font-size:10.5px;letter-spacing:.04em;padding:5px 11px;border-radius:20px;font-weight:600}
+.plink{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--ink);border-bottom:2px solid var(--gold);padding-bottom:3px}
+.proj:hover .plink{color:var(--gold)}
+.cap-grain{position:absolute;inset:0;z-index:2;opacity:.1;background:linear-gradient(120deg,rgba(255,255,255,.4),transparent 45%);pointer-events:none}
+.proj .cap .mockwrap{position:absolute;inset:0;z-index:1}
+.caps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1000px;margin:0 auto}
+.cap-card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:26px 22px;text-align:center;box-shadow:0 4px 16px rgba(43,30,15,.05)}
+.cap-card .ci{font-size:24px;color:var(--gold);margin-bottom:12px}
+.cap-card h4{font-size:19px;margin-bottom:7px}
+.cap-card p{font-size:12.5px;color:var(--mut);line-height:1.6}
+.stackrow{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:920px;margin:0 auto}
+.about2{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;max-width:1000px;margin:0 auto}
+.about2 .ab-body h2{font-size:clamp(30px,3.8vw,46px);margin-bottom:18px}
+.about2 .ab-body p{font-size:15.5px;color:var(--mut);line-height:1.9;margin-bottom:15px}
+.about2 .ab-body p strong{color:var(--gold);font-weight:600}
+.about2 .ab-photo img{width:100%;aspect-ratio:854/1010;object-fit:cover;object-position:center 15%;border-radius:14px;border:1px solid var(--line);box-shadow:0 24px 54px rgba(27,20,13,.24)}
+.expgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1000px;margin:0 auto}
+.expc{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:24px 26px;box-shadow:0 4px 16px rgba(43,30,15,.05)}
+.expc h3{font-size:21px;margin-bottom:4px}
+.expc .niche{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:11px}
+.expc p{font-size:13.5px;color:var(--mut);line-height:1.65}
+.svcgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1060px;margin:0 auto}
+.svcc{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:24px 24px;box-shadow:0 4px 16px rgba(43,30,15,.05);transition:transform .25s,box-shadow .25s,border-color .25s}
+.svcc:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(43,30,15,.14);border-color:var(--gold)}
+.svcc .sp{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold);font-weight:600;margin-bottom:4px}
+.svcc h4{font-size:19px;margin-bottom:9px}
+.svcc p{font-size:13px;color:var(--mut);line-height:1.6}
+.stk{background:var(--card);border:1px solid var(--line);border-radius:30px;padding:10px 18px;font-size:12.5px;color:var(--ink);font-weight:500}
+.stk b{color:var(--gold);font-weight:700}
+.contact{background:linear-gradient(150deg,#241d16,#4a352a 60%,#5a4133);color:#fff;text-align:center;padding:90px 0}
+.contact h2{color:#fff;font-size:clamp(34px,4.6vw,54px);margin-bottom:14px}
+.contact p{color:rgba(255,255,255,.82);font-size:16px;max-width:48ch;margin:0 auto 30px;line-height:1.7}
+.contact .btn-gold{background:var(--gold)}.contact .btn-gold:hover{background:var(--champ)}
+.clinks{display:flex;gap:26px;justify-content:center;margin-top:26px;flex-wrap:wrap}
+.clinks a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#e9d4b8;cursor:pointer;border-bottom:1px solid rgba(233,212,184,.4);padding-bottom:2px}
+.clinks a:hover{color:#fff}
+.foot{background:var(--ink);color:#c9b99f;text-align:center;padding:34px 0;font-size:12.5px}
+.foot b{color:var(--champ);font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.06em}
+.mtoast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);z-index:200;background:var(--ink);color:#fff;padding:14px 26px;border-radius:40px;font-size:13.5px;box-shadow:0 18px 44px rgba(0,0,0,.32);animation:mt .3s ease}
+.qbar{position:fixed;right:22px;bottom:24px;z-index:180;display:flex;flex-direction:column;gap:12px}
+.qbtn{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 8px 22px rgba(20,14,10,.28);transition:transform .2s,box-shadow .2s;position:relative}
+.qbtn:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(20,14,10,.36)}
+.qbtn svg{width:26px;height:26px}
+.qbtn.wa{background:#25d366}
+.qbtn.cal{background:var(--gold)}
+.qbtn.mail{background:var(--ink)}
+.qbtn .qtip{position:absolute;right:64px;top:50%;transform:translateY(-50%);background:var(--ink);color:#fff;font-size:11.5px;font-weight:600;letter-spacing:.03em;padding:7px 13px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
+.qbtn:hover .qtip{opacity:1}
+@media(max-width:640px){.qbar{right:14px;bottom:16px;gap:10px}.qbtn{width:48px;height:48px}.qbtn svg{width:23px;height:23px}}
+@keyframes mt{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(max-width:820px){.pgrid{grid-template-columns:1fr}.caps{grid-template-columns:1fr 1fr}.tnav a:not(.cta){display:none}.hero-grid{grid-template-columns:1fr;gap:40px}.hero-photo{max-width:400px}.about2{grid-template-columns:1fr;gap:32px}.about2 .ab-photo{max-width:360px}.expgrid{grid-template-columns:1fr}.svcgrid{grid-template-columns:1fr}}
+</style>
+</helmet>
+<div class="hub {{ themeCls }}">
+<a class="promobar" href="Portfolio.dc.html"><span class="pa">✦ Visit the full Digital Solutions Studio Agency Site</span> — services, pricing &amp; portfolio<span class="go">Enter →</span></a>
+<div class="top"><div class="brand">SHARON ROSE<small>DIGITAL SOLUTIONS STUDIO</small></div><nav class="tnav"><a onClick="{{ toWork }}">Work</a><a onClick="{{ toAbout }}">About</a><a onClick="{{ toServices }}">Services</a><a onClick="{{ toContact }}">Contact</a><a class="agency" href="Portfolio.dc.html">Agency Site →</a><button class="themebtn" onClick="{{ toggleTheme }}" title="Toggle theme">{{ themeIcon }}</button><a class="cta" onClick="{{ book }}">Book a Call</a></nav></div>
+<section class="hero"><div class="wrap hero-grid"><div class="hero-in"><span class="htag"><span class="pd"></span>Available for freelance &amp; contract</span><h1>Complete business systems, <em>designed &amp; automated</em>.</h1><p>I’m Sharon Rose — a Digital Solutions Designer &amp; AI Automation Specialist. I design and build end-to-end platforms: premium websites, admin dashboards, CRMs, client portals, payment flows, and AI-powered automation that runs the business while you sleep.</p><div class="hbtns"><a class="btn btn-agency" href="Portfolio.dc.html">Visit the full agency site →</a><button class="btn btn-ghost" onClick="{{ toWork }}">View the work</button><button class="btn btn-ghost" onClick="{{ book }}">Book a call</button></div><div class="stripe"><div class="stat"><div class="n">10+</div><div class="l">Live projects</div></div><div class="stat"><div class="n">5</div><div class="l">Interactive demos</div></div><div class="stat"><div class="n">13</div><div class="l">Automated email stages</div></div><div class="stat"><div class="n">End-to-end</div><div class="l">Design → deploy</div></div></div></div><div class="hero-photo"><img src="assets/sharon-portrait.jpg" alt="Sharon Rose — Digital Solutions Designer"><div class="pcap"><div class="pn">Sharon Rose</div><div class="pr">Digital Solutions Designer</div></div></div></div></section>
+<section class="sec" id="work"><div class="wrap"><div class="sec-head"><span class="ey">Selected Work</span><h2>Live projects &amp; case studies</h2><p>Each is a working, interactive build — click any card to explore it live.</p></div><div class="pgrid"><sc-for list="{{ projects }}" as="p" hint-placeholder-count="5"><a class="proj" href="{{ p.href }}"><div class="cap {{ p.cap }}"><div class="cap-grain"></div>{{ p.cover }}<div class="pklabel">{{ p.kicker }}</div></div><div class="pb"><div class="role">{{ p.role }}</div><h3>{{ p.title }}</h3><p class="pd2">{{ p.desc }}</p><div class="chips"><sc-for list="{{ p.tags }}" as="t" hint-placeholder-count="4"><span class="chip">{{ t }}</span></sc-for></div><span class="plink">Explore live →</span></div></a></sc-for></div></div></section>
+<section class="sec sec-cream2" id="caps"><div class="wrap"><div class="sec-head"><span class="ey">What I Deliver</span><h2>From first pixel to production</h2></div><div class="caps"><sc-for list="{{ caps }}" as="c" hint-placeholder-count="4"><div class="cap-card"><div class="ci">{{ c.ic }}</div><h4>{{ c.title }}</h4><p>{{ c.desc }}</p></div></sc-for></div></div></section>
+<section class="sec" id="about"><div class="wrap"><div class="about2"><div class="ab-photo"><img src="assets/sharon-portrait-2.jpg" alt="Sharon Rose"></div><div class="ab-body"><span class="ey">About Me</span><h2>Hi, I’m Sharon Rose.</h2><p>I’m a <strong>Digital Solutions Designer &amp; AI Automation Specialist</strong> based in the Philippines, helping businesses grow through modern websites and automation that runs itself.</p><p>My background spans <strong>virtual assistance, administration, social media and brand design</strong> — so I don’t just build the system, I understand the operations behind it. That means websites, dashboards, CRMs and AI assistants that actually fit how a business runs day to day.</p><p>Every project is designed to look premium, work flawlessly across devices, and be ready to deploy on your own domain.</p></div></div></div></section>
+<section class="sec sec-cream2" id="experience"><div class="wrap"><div class="sec-head"><span class="ey">Work Experience</span><h2>Where I’ve made an impact</h2><p>Experience across virtual assistance, administration, social media and design.</p></div><div class="expgrid"><sc-for list="{{ experience }}" as="e" hint-placeholder-count="4"><div class="expc"><h3>{{ e.title }}</h3><div class="niche">{{ e.niche }}</div><p>{{ e.body }}</p></div></sc-for></div></div></section>
+<section class="sec" id="services"><div class="wrap"><div class="sec-head"><span class="ey">Services &amp; Pricing</span><h2>Everything your business needs to grow</h2><p>Transparent starting rates — every project tailored to your goals.</p></div><div class="svcgrid"><sc-for list="{{ services }}" as="s" hint-placeholder-count="6"><div class="svcc"><div class="sp">{{ s.price }}</div><h4>{{ s.title }}</h4><p>{{ s.desc }}</p></div></sc-for></div></div></section>
+<section class="sec" id="stack"><div class="wrap"><div class="sec-head"><span class="ey">Toolkit</span><h2>Modern, scalable stack</h2></div><div class="stackrow"><sc-for list="{{ stack }}" as="s" hint-placeholder-count="10"><span class="stk">{{ s }}</span></sc-for></div></div></section>
+<section class="contact" id="contact"><div class="wrap"><h2>Let’s build something that works.</h2><p>Websites, automation, dashboards and AI systems for growing businesses — designed to look premium and run themselves.</p><button class="btn btn-gold" onClick="{{ book }}">Book a free consultation</button><div class="clinks"><a href="mailto:sharonrosealgara@gmail.com?subject=Project%20inquiry">sharonrosealgara@gmail.com</a><a href="https://calendly.com/sharonrosealgara/30min" target="_blank">Book a 30-min call</a><a href="https://wa.me/639369037613?text=Hi%20Sharon%2C%20I%27d%20like%20to%20enquire%20about%20your%20services" target="_blank">WhatsApp +63 936 903 7613</a><a href="Portfolio.dc.html">Full agency site →</a></div></div></section>
+<footer class="foot"><b>Sharon Rose</b> · Digital Solutions Studio &nbsp;·&nbsp; © 2026 · Web · AI · Automation · Marketing</footer>
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}"><div class="mtoast">{{ toast }}</div></sc-if>
+<div class="qbar"><a class="qbtn wa" href="https://wa.me/639369037613?text=Hi%20Sharon%2C%20I%27d%20like%20to%20enquire%20about%20your%20services" target="_blank" aria-label="WhatsApp"><span class="qtip">Chat on WhatsApp</span><svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.8.8.8-3.7-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8-4.4 9.8-9.9 9.8zm5.4-7.3c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.8-1.6.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2 .8 2.7.9 3.7.8.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg></a><a class="qbtn cal" href="https://calendly.com/sharonrosealgara/30min" target="_blank" aria-label="Book a call"><span class="qtip">Book a 30-min call</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></a><a class="qbtn mail" href="mailto:sharonrosealgara@gmail.com?subject=Project%20inquiry" aria-label="Email"><span class="qtip">Email me</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></a></div>
+<template id="__bundler_thumbnail" data-bg-color="#f4ede3"><svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#f4ede3"/><circle cx="600" cy="360" r="150" fill="none" stroke="#9c6a34" stroke-width="10"/><text x="600" y="410" font-family="Cormorant Garamond, Georgia, serif" font-size="150" font-weight="700" fill="#9c6a34" text-anchor="middle">SR</text><text x="600" y="560" font-family="Jost, sans-serif" font-size="42" letter-spacing="14" fill="#211a13" text-anchor="middle">SHARON ROSE</text><text x="600" y="608" font-family="Jost, sans-serif" font-size="20" letter-spacing="10" fill="#5f4f40" text-anchor="middle">DIGITAL SOLUTIONS STUDIO</text></svg></template>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:860}}">
+class Component extends DCLogic {
+  state = { toast:'', dark:false };
+  PROJECTS = [
+    { href:'Portfolio.dc.html', cap:'c1', img:'assets/sharon-portrait.jpg', imgpos:'center 22%', kicker:'Digital Solutions Studio', role:'Agency Website · Lead System', title:'Digital Solutions Studio', desc:'The flagship agency site — services, portfolio CMS, lead capture, AI chatbot and booking, with a warm luxury aesthetic.', tags:['Next.js-ready','AI Chatbot','CRM','Booking'] },
+    { href:'Shawie%20Bakes%20and%20Events.dc.html', cap:'c2', img:'assets/photos/p08.jpg', kicker:'Shawie Bakes & Events', role:'Luxury Events Platform', title:'Shawie Bakes & Events', desc:'End-to-end events brand: AI-searchable gallery, packages, booking drawer, an AI concierge, and a full interactive Demo Center.', tags:['AI Search','Gallery','Booking','Demo Center'] },
+    { href:'Shawie%20Admin.dc.html', cap:'c4', img:'https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&cs=tinysrgb&w=900', kicker:'Shawie Admin Console', role:'Admin Dashboard · Operations', title:'Shawie Admin Console', desc:'The operational hub — revenue analytics, bookings, CRM pipeline, GCash/Wise payment verification, automation logs and CMS.', tags:['Dashboard','CRM','Payments','n8n Logs'] },
+    { href:'Studio%20Admin.dc.html', cap:'c4', img:'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=900', kicker:'Studio Admin Console', role:'Agency Ops · CRM · Payments', title:'Studio Admin Console', desc:'My own studio operations hub — revenue, lead pipeline, projects, GCash/Wise/PayPal payment verification and proposals.', tags:['Dashboard','CRM','Payments','Proposals'] },
+    { href:'Shawie%20Messenger.dc.html', cap:'c2', img:'https://images.pexels.com/photos/5077047/pexels-photo-5077047.jpeg?auto=compress&cs=tinysrgb&w=900', kicker:'Messenger AI Chatbot', role:'AI Automation · Social', title:'Messenger AI Assistant', desc:'A Facebook Messenger AI console — customer chats auto-answered with availability, pricing and lead capture, plus a live Page-integration panel.', tags:['AI Chatbot','Messenger','Lead Capture','Automation'] },
+    { href:'Shawie%20Portal.dc.html', cap:'c6', img:'assets/photos/p13.jpg', kicker:'Shawie Client Portal', role:'Client Portal · Payments', title:'Shawie Client Portal', desc:'Where booked couples track their timeline, pay via GCash/Wise with proof upload, sign contracts, message their planner and download galleries.', tags:['Portal','GCash/Wise','Timeline','Messaging'] },
+    { href:'Studio%20AI%20Assistant.dc.html', cap:'c4', img:'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=900', kicker:'AI Assistant Studio', role:'AI · Conversational UX', title:'AI Assistant Studio', desc:'A multi-mode AI concierge — website assistant, FAQ bot, lead qualifier, booking helper, portfolio search and knowledge base — with live Claude chat.', tags:['AI Chatbot','Claude','Lead Gen','UX'] },
+    { href:'Studio%20AI%20Automation.dc.html', cap:'c4', img:'https://images.pexels.com/photos/7947663/pexels-photo-7947663.jpeg?auto=compress&cs=tinysrgb&w=900', kicker:'AI Automation · Airtable', role:'AI Automation · Airtable · No-Code', title:'AI Automation Studio', desc:'Airtable turned into an operations brain — inquiries flow in, an AI step categorises, prioritises and drafts replies, and the right action fires automatically. Includes a live run-it-yourself demo.', tags:['Airtable','AI','Automation','No-Code'] },
+    { href:'Studio%20Email%20Templates.dc.html', cap:'c3', img:'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=900', kicker:'Email Automation Suite', role:'Email Design · Automation', title:'Transactional Email Suite', desc:'11 branded, merge-field email templates — welcome, proposal, invoice, reminder, review, follow-up and more — powering the client journey.', tags:['Email','Automation','Branding','Merge Fields'] },
+    { href:'Shawie%20Blog.dc.html', cap:'c3', img:'assets/photos/p26.jpg', kicker:'Shawie Journal', role:'CMS Blog · Content', title:'Shawie Journal', desc:'A CMS-powered editorial blog with category filtering, live search, article overlays, related content and newsletter capture.', tags:['CMS','Search','SEO','Newsletter'] },
+    { href:'BrewBloom%20Admin.dc.html', cap:'c4', img:'https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&cs=tinysrgb&w=900', kicker:'BrewBloom Admin', role:'Café Ops · Orders · Loyalty', title:'BrewBloom Admin', desc:'The café operations console — live order queue, sales analytics, menu availability, loyalty members and GCash verification.', tags:['Orders','Menu CMS','Loyalty','Payments'] },
+    { href:'Verde%20Realty.dc.html', cap:'c3', img:'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=900', kicker:'Verde Realty', role:'Real Estate · Property Platform', title:'Verde Realty', desc:'A fine-homes real-estate platform — property search, smart filters, save-to-favorites and full listing detail views, in an editorial green aesthetic.', tags:['Real Estate','Search','Filters','Listings'] },
+    { href:'Lumina%20Dental.dc.html', cap:'c1', img:'https://images.pexels.com/photos/3845810/pexels-photo-3845810.jpeg?auto=compress&cs=tinysrgb&w=900', kicker:'Lumina Dental Studio', role:'Healthcare · Clinic Website · Booking', title:'Lumina Dental Studio', desc:'A modern dental-clinic website — services with transparent pricing, dentist profiles and a full online appointment booking flow with GCash & insurance.', tags:['Web Design','Healthcare','Booking','GCash'] },
+    { href:'BrewBloom%20Coffee.dc.html', cap:'c1', img:'assets/brew/g1.png', kicker:'BrewBloom Coffee', role:'Brand · Website · Ordering', title:'BrewBloom Coffee', desc:'A warm specialty-coffee brand site with a live ordering cart, GCash checkout, a loyalty rewards program and shop details.', tags:['Web Design','Ordering Cart','Loyalty','Branding'] },
+    { href:'Canva%20Wedding%20Invitation.dc.html', cap:'c5', img:'assets/photos/p09.jpg', kicker:'Interactive Invitation Guide', role:'Product Guide · Tutorial', title:'Tap-to-Open Invitation Guide', desc:'A step-by-step interactive guide to building a wax-seal envelope invitation that opens to reveal photo and music.', tags:['Tutorial','Interactive','Product'] }
+  ];
+  CAPS = [
+    { ic:'✎', title:'Design & UX', desc:'Premium, brand-driven interfaces that convert — responsive from mobile to ultra-wide.' },
+    { ic:'⚙', title:'Automation & AI', desc:'n8n workflows, email journeys and AI assistants that handle inquiries, bookings and follow-ups.' },
+    { ic:'▤', title:'Dashboards & CRM', desc:'Admin consoles, pipelines, payment verification and analytics that run the business.' },
+    { ic:'◈', title:'Full-Stack Build', desc:'Auth, database, APIs, storage and payments — architected to scale and deploy.' }
+  ];
+  STACK = ['Next.js','React','TypeScript','Tailwind','Supabase','PostgreSQL','n8n','OpenAI','Claude','Cloudinary','Resend','Stripe','GCash','Vercel'];
+  EXPERIENCE = [
+    { title:'General Virtual Assistant', niche:'Freelance · Remote', body:'End-to-end virtual support for business owners — administration, communications, scheduling and content creation as a reliable remote partner.' },
+    { title:'Virtual Assistant', niche:'Freelance · Remote', body:'Focused day-to-day assistance — research, data entry, scheduling and professional correspondence via Trello, Notion & Google Workspace.' },
+    { title:'Social Media Manager', niche:'Content & Strategy', body:'Built and ran social strategies on Facebook & Instagram — content calendars, Canva graphics and real audience engagement via Meta Business Suite.' },
+    { title:'Brand & Admin Support', niche:'Design & Operations', body:'Brand design and back-office support for small businesses — visual assets, documents and systems that keep things running.' }
+  ];
+  SERVICES = [
+    { title:'Website Development', price:'₱12,000', desc:'A fast, responsive, professional website that builds credibility and converts visitors into customers.' },
+    { title:'Blog Website', price:'₱7,000', desc:'A clean, easy-to-manage blog to grow your audience and establish authority in your niche.' },
+    { title:'Email Automation', price:'₱10,000', desc:'Done-for-you email systems that nurture leads and keep customers coming back — on autopilot.' },
+    { title:'AI Chatbot Automation', price:'₱15,000', desc:'A 24/7 AI assistant across your channels that answers questions, books appointments and qualifies leads.' },
+    { title:'Digital Wedding Invitation', price:'₱5,000', desc:'A published, share-ready wedding website invitation your guests open on their phone.' },
+    { title:'Complete Business Package', price:'₱25,000', desc:'The full system — website, blog, email automation and an AI chatbot, working together as one engine.' }
+  ];
+  SVGS = {
+    c1:`<svg class="mock" viewBox="0 0 560 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect x="44" y="28" width="472" height="150" rx="11" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-opacity="0.34"/><path d="M44 39a11 11 0 0 1 11-11h450a11 11 0 0 1 11 11v14H44z" fill="#ffffff" fill-opacity="0.14"/><circle cx="62" cy="40" r="4" fill="#ffffff" fill-opacity="0.6"/><circle cx="76" cy="40" r="4" fill="#ffffff" fill-opacity="0.42"/><circle cx="90" cy="40" r="4" fill="#ffffff" fill-opacity="0.32"/><rect x="66" y="72" width="176" height="15" rx="4" fill="#ffffff" fill-opacity="0.88"/><rect x="66" y="95" width="228" height="8" rx="4" fill="#ffffff" fill-opacity="0.4"/><rect x="66" y="109" width="196" height="8" rx="4" fill="#ffffff" fill-opacity="0.3"/><rect x="66" y="132" width="98" height="24" rx="12" fill="#e9c9a8"/><rect x="336" y="72" width="158" height="84" rx="8" fill="#ffffff" fill-opacity="0.18" stroke="#ffffff" stroke-opacity="0.3"/></svg>`,
+    c2:`<svg class="mock" viewBox="0 0 560 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect x="40" y="26" width="108" height="72" rx="7" fill="#ffffff" fill-opacity="0.2"/><rect x="40" y="104" width="108" height="70" rx="7" fill="#ffffff" fill-opacity="0.13"/><rect x="164" y="26" width="108" height="104" rx="7" fill="#ffffff" fill-opacity="0.15"/><rect x="164" y="136" width="108" height="38" rx="7" fill="#ffffff" fill-opacity="0.22"/><rect x="288" y="26" width="108" height="60" rx="7" fill="#ffffff" fill-opacity="0.22"/><rect x="288" y="92" width="108" height="82" rx="7" fill="#ffffff" fill-opacity="0.14"/><rect x="412" y="26" width="108" height="90" rx="7" fill="#ffffff" fill-opacity="0.16"/><rect x="412" y="122" width="108" height="52" rx="7" fill="#ffffff" fill-opacity="0.2"/><path d="M120 52c-4-6-13-3-13 4 0 5 7 9 13 13 6-4 13-8 13-13 0-7-9-10-13-4z" fill="#e9c9a8"/></svg>`,
+    c4:`<svg class="mock" viewBox="0 0 560 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect x="40" y="26" width="74" height="150" rx="9" fill="#000000" fill-opacity="0.24"/><rect x="54" y="44" width="46" height="7" rx="3" fill="#e9c9a8"/><rect x="54" y="60" width="40" height="6" rx="3" fill="#ffffff" fill-opacity="0.4"/><rect x="54" y="74" width="44" height="6" rx="3" fill="#ffffff" fill-opacity="0.3"/><rect x="54" y="88" width="38" height="6" rx="3" fill="#ffffff" fill-opacity="0.3"/><rect x="130" y="30" width="120" height="42" rx="7" fill="#ffffff" fill-opacity="0.16"/><rect x="258" y="30" width="120" height="42" rx="7" fill="#ffffff" fill-opacity="0.16"/><rect x="386" y="30" width="130" height="42" rx="7" fill="#ffffff" fill-opacity="0.16"/><rect x="142" y="40" width="46" height="16" rx="4" fill="#e9c9a8"/><rect x="270" y="40" width="40" height="16" rx="4" fill="#ffffff" fill-opacity="0.7"/><rect x="398" y="40" width="52" height="16" rx="4" fill="#ffffff" fill-opacity="0.7"/><g fill="#e9c9a8"><rect x="140" y="150" width="20" height="24" rx="2"/><rect x="172" y="132" width="20" height="42" rx="2"/><rect x="204" y="142" width="20" height="32" rx="2"/><rect x="236" y="118" width="20" height="56" rx="2"/><rect x="268" y="136" width="20" height="38" rx="2"/></g><g fill="#ffffff" fill-opacity="0.28"><rect x="300" y="128" width="20" height="46" rx="2"/><rect x="332" y="112" width="20" height="62" rx="2"/><rect x="364" y="140" width="20" height="34" rx="2"/><rect x="396" y="120" width="20" height="54" rx="2"/><rect x="428" y="104" width="20" height="70" rx="2"/><rect x="460" y="132" width="20" height="42" rx="2"/></g></svg>`,
+    c6:`<svg class="mock" viewBox="0 0 560 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><line x1="66" y1="44" x2="66" y2="158" stroke="#ffffff" stroke-opacity="0.3" stroke-width="2"/><circle cx="66" cy="50" r="7" fill="#e9c9a8"/><circle cx="66" cy="90" r="7" fill="#e9c9a8"/><circle cx="66" cy="128" r="6" fill="#ffffff" fill-opacity="0.4"/><rect x="84" y="45" width="120" height="9" rx="4" fill="#ffffff" fill-opacity="0.8"/><rect x="84" y="60" width="90" height="7" rx="3" fill="#ffffff" fill-opacity="0.35"/><rect x="84" y="85" width="110" height="9" rx="4" fill="#ffffff" fill-opacity="0.7"/><rect x="84" y="123" width="96" height="8" rx="4" fill="#ffffff" fill-opacity="0.3"/><rect x="270" y="36" width="246" height="130" rx="10" fill="#ffffff" fill-opacity="0.14" stroke="#ffffff" stroke-opacity="0.3"/><rect x="290" y="56" width="72" height="72" rx="6" fill="#ffffff" fill-opacity="0.9"/><g fill="#1b140d"><rect x="298" y="64" width="10" height="10"/><rect x="314" y="64" width="10" height="10"/><rect x="330" y="64" width="10" height="10"/><rect x="298" y="80" width="10" height="10"/><rect x="330" y="80" width="10" height="10"/><rect x="298" y="96" width="10" height="10"/><rect x="314" y="96" width="10" height="10"/><rect x="346" y="96" width="8" height="8"/></g><rect x="382" y="60" width="116" height="10" rx="4" fill="#ffffff" fill-opacity="0.6"/><rect x="382" y="78" width="90" height="8" rx="4" fill="#ffffff" fill-opacity="0.35"/><rect x="382" y="106" width="116" height="26" rx="6" fill="#e9c9a8"/></svg>`,
+    c3:`<svg class="mock" viewBox="0 0 560 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect x="44" y="30" width="228" height="140" rx="9" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-opacity="0.28"/><rect x="60" y="44" width="196" height="70" rx="6" fill="#ffffff" fill-opacity="0.22"/><rect x="60" y="124" width="70" height="14" rx="4" fill="#e9c9a8"/><rect x="60" y="146" width="150" height="7" rx="3" fill="#ffffff" fill-opacity="0.4"/><rect x="288" y="30" width="228" height="140" rx="9" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-opacity="0.28"/><rect x="304" y="44" width="196" height="70" rx="6" fill="#ffffff" fill-opacity="0.16"/><rect x="304" y="124" width="70" height="14" rx="4" fill="#e9c9a8"/><rect x="304" y="146" width="150" height="7" rx="3" fill="#ffffff" fill-opacity="0.4"/></svg>`,
+    c5:`<svg class="mock" viewBox="0 0 560 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect x="196" y="46" width="168" height="112" rx="8" fill="#ffffff" fill-opacity="0.16" stroke="#ffffff" stroke-opacity="0.34"/><path d="M196 54l84 60 84-60" fill="none" stroke="#ffffff" stroke-opacity="0.4" stroke-width="2.5"/><path d="M196 54l84 56 84-56" fill="#ffffff" fill-opacity="0.1"/><circle cx="280" cy="112" r="22" fill="#b5524f"/><circle cx="280" cy="112" r="22" fill="none" stroke="#e9c9a8" stroke-opacity="0.5" stroke-width="1.5"/><text x="280" y="118" font-family="Georgia, serif" font-size="17" fill="#f1d9db" text-anchor="middle">R&amp;L</text></svg>`
+  };
+  mock(k){ return React.createElement('div',{className:'mockwrap',dangerouslySetInnerHTML:{__html:this.SVGS[k]||''}}); }
+  flash(m){ if(this._t) clearTimeout(this._t); this.setState({toast:m}); this._t=setTimeout(()=>this.setState({toast:''}),2200); }
+  scrollTo(id){ try{ const el=document.getElementById(id); if(el) window.scrollTo({top:el.offsetTop-70,behavior:'smooth'}); }catch(_){} }
+  toggleTheme(){ this.setState(s=>{ const d=!s.dark; this.flash(d?'Studio Dark — tech mode ✦':'Warm mode ✦'); return {dark:d}; }); }
+  renderVals(){
+    return {
+      themeCls:this.state.dark?'dark':'', themeIcon:this.state.dark?'☀':'☾', toggleTheme:()=>this.toggleTheme(),
+      projects:this.PROJECTS.map(p=>({...p, cover: p.img ? React.createElement('img',{src:p.img,alt:p.title,loading:'lazy',style:{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',objectPosition:p.imgpos||'center'}}) : this.mock(p.cap)})), caps:this.CAPS, stack:this.STACK,
+      experience:this.EXPERIENCE, services:this.SERVICES,
+      toWork:()=>this.scrollTo('work'), toStack:()=>this.scrollTo('caps'), toAbout:()=>this.scrollTo('about'), toServices:()=>this.scrollTo('services'), toContact:()=>this.scrollTo('contact'),
+      book:()=>{ try{ window.open('https://calendly.com/sharonrosealgara/30min','_blank'); }catch(_){ window.location.href='https://calendly.com/sharonrosealgara/30min'; } },
+      email:()=>{ window.location.href='mailto:sharonrosealgara@gmail.com?subject=Project%20inquiry'; },
+      toast:this.state.toast, toastShow:!!this.state.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

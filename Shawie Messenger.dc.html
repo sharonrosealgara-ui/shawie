@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.msgr{--bg:#f2ebde;--panel:#fff;--ink:#211a13;--mut:#6b5a46;--gold:#9c6a34;--gold2:#7d5324;--rose:#bd6980;--rose2:#9a4f64;--blush:#f4ddd7;--line:#e5dac5;--ok:#4d8259;--fb:#0866ff;--side1:#241a17;--side2:#3a2620;display:flex;min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Jost',system-ui,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+.msgr h1,.msgr h2,.msgr h3,.msgr h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.06}
+.side{width:236px;flex:none;background:linear-gradient(180deg,var(--side1),var(--side2));color:#d8c3b4;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:22px 0}
+.sbrand{padding:6px 22px 18px;border-bottom:1px solid rgba(216,195,180,.16);margin-bottom:12px}
+.sbrand .bn{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;letter-spacing:.1em;color:#fff}
+.sbrand .bs{font-size:8px;letter-spacing:.3em;color:var(--rose);margin-top:3px;text-transform:uppercase}
+.snav{display:flex;align-items:center;gap:11px;padding:11px 22px;font-size:13.5px;color:#d8c3b4;cursor:pointer;transition:.16s;font-weight:500}
+.snav:hover{background:rgba(216,195,180,.09);color:#fff}
+.snav.on{background:var(--rose);color:#fff}
+.snav .ic{width:18px;text-align:center;flex:none}
+.snav .bdg{margin-left:auto;background:var(--rose);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px}
+.snav.on .bdg{background:rgba(255,255,255,.28)}
+.sfoot{margin-top:auto;padding:16px 22px 4px;border-top:1px solid rgba(216,195,180,.16)}
+.aitoggle{display:flex;align-items:center;gap:10px;font-size:12px;color:#d8c3b4}
+.tg{width:40px;height:22px;border-radius:20px;background:rgba(216,195,180,.28);position:relative;cursor:pointer;transition:.2s;flex:none}
+.tg.on{background:var(--ok)}
+.tg .kn{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s}
+.tg.on .kn{left:20px}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding:15px 28px;display:flex;align-items:center;gap:14px}
+.top .tt{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600}
+.top .tsub{font-size:11.5px;color:var(--mut);margin-top:1px}
+.fbchip{margin-left:auto;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:30px;padding:7px 14px;font-size:12px;color:var(--ink);font-weight:500}
+.fbchip .fbdot{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+.fbchip b{color:var(--fb)}
+.content{flex:1;min-height:0}
+/* INBOX */
+.inbox{display:grid;grid-template-columns:300px 1fr;height:calc(100vh - 56px)}
+.convlist{border-right:1px solid var(--line);background:var(--panel);overflow-y:auto}
+.clh{padding:16px 18px 12px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel);z-index:2}
+.clh .srch{background:var(--bg);border:1px solid var(--line);border-radius:30px;padding:9px 14px;font-size:12.5px;color:var(--mut)}
+.conv{display:flex;gap:11px;padding:13px 18px;cursor:pointer;border-bottom:1px solid var(--line);transition:.14s;position:relative}
+.conv:hover{background:#faf5ec}
+.conv.on{background:var(--blush)}
+.conv .av{width:44px;height:44px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:18px;color:#fff}
+.conv .ct{flex:1;min-width:0}
+.conv .cn{font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:6px}
+.conv .cm{font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.conv .cr{font-size:10.5px;color:var(--mut);flex:none}
+.conv .unread{width:9px;height:9px;border-radius:50%;background:var(--rose);flex:none;align-self:center}
+.botpill{font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--ok);background:rgba(77,130,89,.14);padding:1px 6px;border-radius:10px}
+/* THREAD */
+.thread{display:flex;flex-direction:column;min-width:0;background:linear-gradient(180deg,#faf6ef,#f2ebde)}
+.th-h{padding:13px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;background:var(--panel)}
+.th-h .av{width:40px;height:40px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;color:#fff}
+.th-h .nm{font-size:14.5px;font-weight:600}
+.th-h .st{font-size:11px;color:var(--mut)}
+.th-h .via{margin-left:auto;font-size:11px;color:var(--fb);font-weight:600;display:flex;align-items:center;gap:5px}
+.th-body{flex:1;overflow-y:auto;padding:22px 26px;display:flex;flex-direction:column;gap:4px}
+.daysep{text-align:center;font-size:10.5px;color:var(--mut);letter-spacing:.08em;text-transform:uppercase;margin:12px 0}
+.bub{max-width:74%;padding:11px 15px;font-size:13.5px;line-height:1.5;border-radius:16px;margin-bottom:3px}
+.bub.them{background:#fff;border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:5px;color:var(--ink)}
+.bub.me{background:var(--rose);color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
+.bub.bot{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
+.bublbl{font-size:9.5px;letter-spacing:.05em;margin:0 6px 5px;color:var(--mut);align-self:flex-end;display:flex;align-items:center;gap:5px}
+.bublbl.bot{color:var(--gold2);font-weight:600}
+.qrbar{display:flex;gap:8px;flex-wrap:wrap;padding:12px 26px;border-top:1px solid var(--line);background:var(--panel)}
+.qr{font-size:12px;border:1px solid var(--gold);color:var(--gold2);background:#fff;border-radius:30px;padding:8px 14px;cursor:pointer;font-weight:600;transition:.15s}
+.qr:hover{background:var(--gold);color:#fff}
+.composer{display:flex;gap:11px;align-items:center;padding:14px 26px;border-top:1px solid var(--line);background:var(--panel)}
+.composer input{flex:1;height:46px;border:1px solid var(--line);border-radius:24px;padding:0 18px;font-family:inherit;font-size:14px;outline:none}
+.composer input:focus{border-color:var(--rose)}
+.sendb{width:46px;height:46px;border-radius:50%;background:var(--rose);color:#fff;border:none;font-size:17px;cursor:pointer;flex:none}
+.sendb:hover{background:var(--rose2)}
+.aibanner{display:flex;align-items:center;gap:9px;padding:9px 26px;background:rgba(156,106,52,.09);border-top:1px solid var(--line);font-size:12px;color:var(--gold2)}
+.aibanner b{font-weight:600}
+/* SETTINGS */
+.setwrap{padding:26px 32px 60px;max-width:920px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 4px 16px rgba(43,30,15,.05);margin-bottom:18px}
+.card h3{font-size:20px;margin-bottom:4px}
+.card .sub{font-size:12.5px;color:var(--mut);margin-bottom:18px}
+.fbconnect{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,#0866ff,#0a53c4);border-radius:12px;padding:20px 22px;color:#fff}
+.fbconnect .fbi{width:52px;height:52px;border-radius:12px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;flex:none}
+.fbconnect .fbt{flex:1;min-width:0}
+.fbconnect .fbn{font-size:16px;font-weight:600}
+.fbconnect .fbid{font-size:11.5px;color:rgba(255,255,255,.8);margin-top:2px;word-break:break-all}
+.fbconnect .fbst{background:rgba(255,255,255,.2);border-radius:30px;padding:6px 13px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:6px;flex:none}
+.fbconnect .fbst .d{width:7px;height:7px;border-radius:50%;background:#48e07a}
+.row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:none}
+.row .ri{width:38px;height:38px;border-radius:10px;background:var(--bg);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:17px;flex:none}
+.row .rt{flex:1}
+.row .rn{font-size:13.5px;font-weight:600}
+.row .rd{font-size:11.5px;color:var(--mut);margin-top:2px}
+.qredit{display:flex;flex-direction:column;gap:10px}
+.qrline{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:13px 15px}
+.qrline .k{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold2);font-weight:700;flex:none;width:110px;padding-top:2px}
+.qrline .v{font-size:13px;color:var(--ink);line-height:1.5}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.kpi .kn{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold);line-height:1}
+.kpi .kl{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-top:5px}
+.mtoast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);z-index:200;background:var(--ink);color:#fff;padding:14px 26px;border-radius:40px;font-size:13.5px;box-shadow:0 18px 44px rgba(0,0,0,.32);animation:mt .3s ease}
+@keyframes mt{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(max-width:860px){.side{display:none}.inbox{grid-template-columns:1fr}.convlist{display:none}}
+</style>
+</helmet>
+<div class="msgr">
+<aside class="side">
+<div class="sbrand"><div class="bn">SHAWIE</div><div class="bs">Messenger AI</div></div>
+<div class="snav {{ inboxCls }}" onClick="{{ goInbox }}"><span class="ic">💬</span>Inbox<span class="bdg">{{ unreadTotal }}</span></div>
+<div class="snav {{ analyticsCls }}" onClick="{{ goAnalytics }}"><span class="ic">▦</span>Overview</div>
+<div class="snav {{ settingsCls }}" onClick="{{ goSettings }}"><span class="ic">⚙</span>AI &amp; Integrations</div>
+<div class="sfoot"><div class="aitoggle"><div class="{{ aiCls }}" onClick="{{ toggleAI }}"><span class="kn"></span></div><span>AI auto-reply {{ aiState }}</span></div></div>
+</aside>
+<div class="main">
+<div class="top"><div><div class="tt">{{ viewTitle }}</div><div class="tsub">{{ viewSub }}</div></div><div class="fbchip"><span class="fbdot"></span>Connected · <b>Shawie Bakes &amp; Events</b></div></div>
+<div class="content">
+
+<sc-if value="{{ isInbox }}" hint-placeholder-val="{{ true }}">
+<div class="inbox">
+<div class="convlist"><div class="clh"><div class="srch">⌕ Search conversations</div></div><sc-for list="{{ convs }}" as="c" hint-placeholder-count="5"><div class="{{ c.cls }}" onClick="{{ c.open }}"><div class="av" style="background: {{ c.color }}">{{ c.initial }}</div><div class="ct"><div class="cn">{{ c.name }}<sc-if value="{{ c.botHandled }}" hint-placeholder-val="{{ false }}"><span class="botpill">AI</span></sc-if></div><div class="cm">{{ c.preview }}</div></div><div class="cr">{{ c.time }}</div><sc-if value="{{ c.unread }}" hint-placeholder-val="{{ false }}"><span class="unread"></span></sc-if></div></sc-for></div>
+<div class="thread"><div class="th-h"><div class="av" style="background: {{ active.color }}">{{ active.initial }}</div><div><div class="nm">{{ active.name }}</div><div class="st">Active now · via Messenger</div></div><div class="via">ⓕ Messenger</div></div>
+<div class="th-body"><div class="daysep">Today</div><sc-for list="{{ thread }}" as="m" hint-placeholder-count="5"><sc-if value="{{ m.isBot }}" hint-placeholder-val="{{ false }}"><div class="bublbl bot">✦ AI Assistant</div></sc-if><div class="bub {{ m.cls }}">{{ m.text }}</div></sc-for></div>
+<div class="qrbar"><sc-for list="{{ quickReplies }}" as="q" hint-placeholder-count="3"><span class="qr" onClick="{{ q.send }}">{{ q.label }}</span></sc-for></div>
+<div class="aibanner">✦ <b>AI auto-reply is {{ aiState }}</b> — {{ aiHint }}</div>
+<div class="composer"><input placeholder="Reply as Shawie…" value="{{ draft }}" onInput="{{ onDraft }}" onKeyDown="{{ onKey }}"><button class="sendb" onClick="{{ send }}">➤</button></div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isAnalytics }}" hint-placeholder-val="{{ false }}">
+<div class="setwrap"><div class="kpis"><sc-for list="{{ stats }}" as="s" hint-placeholder-count="4"><div class="kpi"><div class="kn">{{ s.n }}</div><div class="kl">{{ s.l }}</div></div></sc-for></div>
+<div class="card"><h3>How the AI is helping</h3><div class="sub">Automatic replies handle the common questions so you only step in when it matters.</div><sc-for list="{{ aiRows }}" as="r" hint-placeholder-count="4"><div class="row"><span class="ri">{{ r.ic }}</span><div class="rt"><div class="rn">{{ r.n }}</div><div class="rd">{{ r.d }}</div></div><span class="botpill">{{ r.tag }}</span></div></sc-for></div></div>
+</sc-if>
+
+<sc-if value="{{ isSettings }}" hint-placeholder-val="{{ false }}">
+<div class="setwrap">
+<div class="card"><h3>Connected Page</h3><div class="sub">Your Facebook Page is linked — messages flow into this inbox in real time.</div><div class="fbconnect"><div class="fbi">f</div><div class="fbt"><div class="fbn">Shawie Bakes &amp; Events</div><div class="fbid">facebook.com/profile.php?id=61591749803136</div></div><div class="fbst"><span class="d"></span>Live</div></div></div>
+<div class="card"><h3>AI Assistant Behavior</h3><div class="sub">Toggle what the assistant answers automatically. You can jump into any chat anytime.</div><sc-for list="{{ toggles }}" as="t" hint-placeholder-count="4"><div class="row"><span class="ri">{{ t.ic }}</span><div class="rt"><div class="rn">{{ t.n }}</div><div class="rd">{{ t.d }}</div></div><div class="{{ t.cls }}" onClick="{{ t.toggle }}"><span class="kn"></span></div></div></sc-for></div>
+<div class="card"><h3>Quick-Reply Knowledge</h3><div class="sub">The answers the AI pulls from — edit anytime to match your latest pricing and dates.</div><div class="qredit"><sc-for list="{{ knowledge }}" as="k" hint-placeholder-count="4"><div class="qrline"><span class="k">{{ k.q }}</span><span class="v">{{ k.a }}</span></div></sc-for></div></div>
+</div>
+</sc-if>
+
+</div></div>
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}"><div class="mtoast">{{ toast }}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1240,&quot;height&quot;:840}}">
+class Component extends DCLogic {
+  state = { view:'inbox', activeId:'ana', ai:true, draft:'', threads:null, tg:{greet:true,pricing:true,availability:true,handoff:false}, toast:'' };
+  CONVS=[
+    { id:'ana', name:'Ana Marquez', initial:'A', color:'#bd6980', time:'2m', preview:'Do you have Feb 14 2026 open for a garden wedding?', unread:true, botHandled:true },
+    { id:'josh', name:'Josh Rivera', initial:'J', color:'#9c6a34', time:'18m', preview:'How much for a 3-tier naked cake?', unread:false, botHandled:true },
+    { id:'mia', name:'Mia Santos', initial:'M', color:'#7f9468', time:'1h', preview:'Thank you! See you at the tasting ♥', unread:false, botHandled:false },
+    { id:'leo', name:'Leo & Kaye', initial:'L', color:'#c08a2e', time:'3h', preview:'Can we move our consult to Friday?', unread:false, botHandled:true },
+    { id:'tita', name:'Tita Ching', initial:'T', color:'#9a4f64', time:'yest', preview:'Do you cater debut packages?', unread:false, botHandled:true }
+  ];
+  THREADS={
+    ana:[['them','Hi! Do you have Feb 14, 2026 open for a garden wedding?'],['bot','Hi Ana! ✦ Thank you for reaching out to Shawie Bakes & Events. Yes — February 14, 2026 is currently available for garden weddings! 🌿 Our garden packages start at ₱120,000 and include styling, cake and coordination.'],['bot','Would you like me to pencil you in for a free consultation? I can offer this week or next.'],['them','Yes please! This week if possible 😊'],['bot','Wonderful! I\u2019ve noted your interest — our planner Sharon will confirm a slot within the hour. May I get your preferred day & guest count?']],
+    josh:[['them','How much for a 3-tier naked cake?'],['bot','Hi Josh! ✦ Our 3-tier naked cakes start at ₱8,500 and serve ~80 guests. That includes fresh florals and your choice of 3 flavors. Would you like to see our flavor menu?'],['them','Yes!']],
+    mia:[['them','Thank you! See you at the tasting ♥'],['me','See you Saturday, Mia! We\u2019ll have all 5 flavors ready 🍰']],
+    leo:[['them','Can we move our consult to Friday?'],['bot','Of course! ✦ I\u2019ve flagged your request to reschedule to Friday. Sharon will confirm the exact time shortly. Morning or afternoon better for you?']],
+    tita:[['them','Do you cater debut packages?'],['bot','Yes po! ✦ Our debut packages start at ₱95,000 — including cake, styling, and dessert table for 100 guests. Shall I send the full inclusions?']]
+  };
+  QUICK=[['Check availability','Let me check our calendar for you ✦'],['Send price list','Here\u2019s our latest package pricing ✦'],['Book consultation','I\u2019d love to set up a free consultation ✦']];
+  STATS=[['142','Chats this month'],['87%','AI-handled'],['1.4m','Avg reply time'],['31','Booked from chat']];
+  AIROWS=[['🗓','Availability checks','Answers date questions instantly from your calendar','Auto'],['₱','Pricing & packages','Shares current package rates and inclusions','Auto'],['✦','Lead capture','Collects name, date & guest count for Sharon','Auto'],['🙋','Human handoff','Flags complex chats for you to take over','Smart']];
+  KNOW=[['Availability','Feb 14, 2026 open · garden packages from ₱120,000'],['Wedding cakes','3-tier naked cake from ₱8,500 (~80 guests), 3 flavors + florals'],['Debut','Debut packages from ₱95,000 for 100 guests'],['Consultation','Free 45-min consult, this week or next — morning or afternoon']];
+  TOGGLES=[['greet','👋','Greet new messages','Instantly welcome anyone who messages the Page','ic'],['pricing','₱','Answer pricing questions','Auto-share package rates and inclusions','ic'],['availability','🗓','Check availability','Reply to date questions from your calendar','ic'],['handoff','🙋','Auto-handoff on booking intent','Notify Sharon the moment someone wants to book','ic']];
+  go(v){ this.setState({view:v}); }
+  open(id){ this.setState(s=>({activeId:id, threads:s.threads})); this.setState(s=>{ const c=this.CONVS.find(x=>x.id===id); if(c) c.unread=false; return {}; }); }
+  toggleAI(){ this.setState(s=>({ai:!s.ai})); this.flash(this.state.ai?'AI auto-reply paused':'AI auto-reply resumed ✦'); }
+  setTg(k){ this.setState(s=>({tg:{...s.tg,[k]:!s.tg[k]}})); }
+  onDraft(e){ this.setState({draft:e.target.value}); }
+  onKey(e){ if(e.key==='Enter') this.send(); }
+  send(){ const t=(this.state.draft||'').trim(); if(!t) return; this.pushMsg(['me',t]); this.setState({draft:''}); }
+  quickSend(txt){ this.pushMsg(['me',txt]); }
+  pushMsg(m){ this.setState(s=>{ const th=s.threads||JSON.parse(JSON.stringify(this.THREADS)); const id=s.activeId; th[id]=(th[id]||[]).concat([m]); return {threads:th}; }); }
+  flash(m){ if(this._t) clearTimeout(this._t); this.setState({toast:m}); this._t=setTimeout(()=>this.setState({toast:''}),1900); }
+  renderVals(){
+    const S=this.state, v=S.view;
+    const TITLES={inbox:['Messenger Inbox','Live chats from your Facebook Page'],analytics:['Overview','How your AI assistant is performing'],settings:['AI & Integrations','Connect your Page and tune the assistant']};
+    const t=TITLES[v]||['',''];
+    const convs=this.CONVS.map(c=>({...c,cls:c.id===S.activeId?'conv on':'conv',open:()=>this.open(c.id)}));
+    const active=this.CONVS.find(c=>c.id===S.activeId)||this.CONVS[0];
+    const rawThread=(S.threads||this.THREADS)[S.activeId]||[];
+    const thread=rawThread.map(m=>({text:m[1],isBot:m[0]==='bot',cls:m[0]==='them'?'them':(m[0]==='bot'?'bot':'me')}));
+    const quickReplies=this.QUICK.map(q=>({label:q[0],send:()=>this.quickSend(q[1])}));
+    const toggles=this.TOGGLES.map(t=>({ic:t[1],n:t[2],d:t[3],cls:S.tg[t[0]]?'tg on':'tg',toggle:()=>this.setTg(t[0])}));
+    return {
+      inboxCls:v==='inbox'?'snav on':'snav', analyticsCls:v==='analytics'?'snav on':'snav', settingsCls:v==='settings'?'snav on':'snav',
+      goInbox:()=>this.go('inbox'), goAnalytics:()=>this.go('analytics'), goSettings:()=>this.go('settings'),
+      isInbox:v==='inbox', isAnalytics:v==='analytics', isSettings:v==='settings',
+      viewTitle:t[0], viewSub:t[1], unreadTotal:String(this.CONVS.filter(c=>c.unread).length||1),
+      aiCls:S.ai?'tg on':'tg', aiState:S.ai?'ON':'OFF', toggleAI:()=>this.toggleAI(),
+      aiHint:S.ai?'new questions get an instant, on-brand reply.':'you\u2019re replying manually right now.',
+      convs, active, thread, quickReplies,
+      draft:S.draft, onDraft:(e)=>this.onDraft(e), onKey:(e)=>this.onKey(e), send:()=>this.send(),
+      stats:this.STATS.map(s=>({n:s[0],l:s[1]})), aiRows:this.AIROWS.map(r=>({ic:r[0],n:r[1],d:r[2],tag:r[3]})),
+      toggles, knowledge:this.KNOW.map(k=>({q:k[0],a:k[1]})),
+      toast:S.toast, toastShow:!!S.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

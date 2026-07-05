@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="notify.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4ede3;color:#211a13;font-family:'Jost',system-ui,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+img{image-rendering:auto}
+h1,h2,h3,h4{margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.01em}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select{font-family:inherit}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#cdbfae;border-radius:8px}::-webkit-scrollbar-track{background:transparent}
+.app{--gold:#9c6a34;--ink:#211a13;--mute:#5c4c3d;--line:rgba(43,36,32,.24)}
+.disp{font-family:'Cormorant Garamond',serif}
+.gold{color:var(--gold,#a67c52)}
+.mute{color:#665648}
+.eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;font-weight:500;color:var(--gold,#a67c52)}
+.wrap{max-width:1280px;margin:0 auto;padding:0 40px}
+.grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.14;mix-blend-mode:overlay;pointer-events:none}
+.cphoto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;animation:imgIn .7s ease both}
+@keyframes imgIn{from{opacity:0}to{opacity:1}}
+.lboxPhoto{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.pal1{background:linear-gradient(150deg,#efe2d8,#caa98e)}
+.pal2{background:linear-gradient(150deg,#ddc8b2,#a98a6c)}
+.pal3{background:linear-gradient(150deg,#d8e0d0,#94a684)}
+.pal4{background:linear-gradient(150deg,#e6d2da,#b18a99)}
+.pal5{background:linear-gradient(150deg,#ecdfc4,#c4a766)}
+.pal6{background:linear-gradient(150deg,#d3dbe2,#8a9bb2)}
+.pal7{background:linear-gradient(150deg,#ecd6c4,#c58a68)}
+.pal8{background:linear-gradient(150deg,#dcd3de,#9a8aa2)}
+.ar1{height:300px}.ar2{height:360px}.ar3{height:440px}.ar4{height:340px}.ar5{height:400px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:50px;padding:0 28px;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;border-radius:2px;transition:.3s;white-space:nowrap}
+.btn-solid{background:var(--ink);color:#f6f0e9}.btn-solid:hover{background:#000}
+.btn-gold{background:var(--gold,#a67c52);color:#fff}.btn-gold:hover{background:#845724}
+.btn-ghost{border:1px solid currentColor;color:var(--ink)}.btn-ghost:hover{background:var(--ink);color:#f6f0e9}
+.btn-lghost{border:1px solid rgba(255,255,255,.6);color:#fff}.btn-lghost:hover{background:#fff;color:var(--ink)}
+.btn-sm{height:42px;padding:0 20px;font-size:11px}
+.hdr{position:sticky;top:0;z-index:40;background:#f4ede3;border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(43,36,32,.04)}
+.hdr-in{display:flex;align-items:center;justify-content:space-between;height:74px}
+.brand{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;letter-spacing:.16em}
+.brand small{display:block;font-family:'Jost';font-size:8.5px;letter-spacing:.42em;font-weight:400;color:#8a7b6e;margin-top:-2px}
+.nav{display:flex;gap:30px}
+.navlink{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);transition:.2s;position:relative;cursor:pointer}
+.navlink:hover{color:var(--gold,#a67c52)}
+.hdr-r{display:flex;align-items:center;gap:16px}
+.favpill{display:flex;align-items:center;gap:7px;font-size:12px;letter-spacing:.1em;color:var(--ink);padding:9px 14px;border:1px solid var(--line);border-radius:30px;transition:.2s}
+.favpill:hover{border-color:var(--gold,#a67c52)}
+.favpill b{font-weight:600;color:var(--gold,#a67c52)}
+.hero{position:relative;min-height:620px;display:flex;align-items:center;overflow:hidden;color:#fff}
+.heroBg{position:absolute;inset:0;background:linear-gradient(140deg,#3a2d26,#6a4a3a 45%,#a67c52)}
+.heroVig{position:absolute;inset:0;background:radial-gradient(120% 90% at 30% 30%,transparent,rgba(20,14,10,.72))}
+.heroInner{position:relative;z-index:2;padding:80px 0}
+.hero h1{font-size:80px;line-height:.98;letter-spacing:.01em;max-width:13ch}
+.hero h1 em{font-style:italic;color:#e9d4b8}
+.herosub{max-width:50ch;font-size:17px;line-height:1.7;color:rgba(255,255,255,.86);font-weight:300;margin:26px 0 34px}
+.herobtns{display:flex;gap:14px;flex-wrap:wrap}
+.herostats{display:flex;gap:46px;margin-top:54px;padding-top:30px;border-top:1px solid rgba(255,255,255,.22);max-width:640px}
+.stat .n{font-family:'Cormorant Garamond',serif;font-size:42px;line-height:1;color:#fff}
+.stat .l{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:8px}
+.hero-light{background:linear-gradient(165deg,#faf3ed 0%,#f4e4dd 52%,#efd7d2 100%);color:var(--ink);min-height:auto;text-align:center}
+.hero-light .heroInner{padding:54px 0 64px;display:flex;flex-direction:column;align-items:center;width:100%}
+.heroLogo{width:min(760px,92%);border-radius:12px;overflow:hidden;box-shadow:0 34px 90px rgba(150,95,85,.2);margin:6px 0 4px;line-height:0}
+.heroLogo video{width:100%;display:block}
+.herosub2{max-width:52ch;font-size:17px;line-height:1.7;color:#6c5b51;font-weight:300;margin:26px 0 30px}
+.hero-light .herobtns{justify-content:center}
+.herostats-light{justify-content:center;margin-left:auto;margin-right:auto;border-top-color:rgba(43,36,32,.14)}
+.herostats-light .n{color:var(--ink)}
+.herostats-light .l{color:var(--mute)}
+.hero-video{position:relative;padding:0;min-height:auto;background:#f4ddd7;overflow:hidden;color:var(--ink);text-align:center}
+.heroFull{width:100%;max-height:82vh;object-fit:cover;object-position:center;display:block}
+.heroScrim{position:absolute;left:0;right:0;bottom:0;height:48%;background:linear-gradient(to top,#f4ddd7 5%,rgba(244,221,215,.72) 38%,transparent);pointer-events:none;z-index:2}
+.heroOver{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 24px 50px;display:flex;flex-direction:column;align-items:center}
+.hero-video .herosub2{margin:0 0 26px;color:#5c4b42}
+.hero-video .herobtns{justify-content:center}
+.bar{position:sticky;top:74px;z-index:30;background:#f4ede3;border-bottom:1px solid var(--line);padding:18px 0}
+.bar-top{display:flex;align-items:center;gap:18px;margin-bottom:14px}
+.search{flex:1;display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:3px;padding:0 18px;height:50px;transition:.2s}
+.search:focus-within{border-color:var(--gold,#a67c52);box-shadow:0 6px 24px rgba(166,124,82,.12)}
+.search input{flex:1;border:none;outline:none;background:none;font-size:15px;color:var(--ink);height:100%}
+.search .ai{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold,#a67c52);border:1px solid var(--gold,#a67c52);border-radius:20px;padding:6px 12px;font-weight:500;cursor:pointer;white-space:nowrap;transition:.2s}
+.search button.ai:hover{background:var(--gold,#a67c52);color:#fff}
+.search .aiOn{background:var(--gold,#a67c52);color:#fff;animation:aiPulse 1s ease-in-out infinite}
+@keyframes aiPulse{0%,100%{opacity:1}50%{opacity:.55}}
+.aiBanner{display:flex;align-items:center;gap:10px;background:rgba(166,124,82,.1);border:1px solid rgba(166,124,82,.28);border-radius:8px;padding:11px 16px;margin-bottom:14px;font-size:13.5px;color:#5c4b42}
+.aiBanner .bd{color:var(--gold,#a67c52);font-weight:600}
+.aiBanner .x{margin-left:auto;cursor:pointer;color:var(--mute);font-size:13px;border:1px solid var(--line);border-radius:16px;padding:4px 11px;transition:.2s}
+.aiBanner .x:hover{border-color:var(--gold,#a67c52);color:var(--ink)}
+.sortsel{height:50px;border:1px solid var(--line);background:#fff;border-radius:3px;padding:0 16px;font-size:13px;letter-spacing:.06em;color:var(--ink);outline:none;cursor:pointer}
+.favtgl{height:50px;padding:0 20px;border:1px solid var(--line);border-radius:3px;background:#fff;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);transition:.2s;display:flex;align-items:center;gap:8px}
+.favtgl.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.sugg{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:14px}
+.sugg-l{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.sgchip{font-size:12px;letter-spacing:.04em;color:var(--ink);background:rgba(166,124,82,.08);border:1px solid transparent;border-radius:20px;padding:6px 13px;transition:.2s}
+.sgchip:hover{border-color:var(--gold,#a67c52);background:rgba(166,124,82,.14)}
+.chips{display:flex;gap:9px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding:9px 16px;border:1px solid var(--line);border-radius:30px;background:#fff;transition:.22s;white-space:nowrap}
+.chip:hover{color:var(--ink);border-color:var(--gold,#a67c52)}
+.chip.on{background:var(--gold,#a67c52);color:#fff;border-color:var(--gold,#a67c52)}
+.results{padding:30px 0 10px;display:flex;align-items:baseline;justify-content:space-between}
+.results .c{font-family:'Cormorant Garamond',serif;font-size:30px}
+.results .c b{color:var(--gold,#a67c52);font-weight:600}
+.masonry{column-gap:22px;padding-bottom:80px}
+.cols2{column-count:2}.cols3{column-count:3}.cols4{column-count:4}
+@media(max-width:980px){.masonry{column-count:2!important}}
+@media(max-width:600px){.masonry{column-count:1!important}}
+.tile{break-inside:avoid;margin-bottom:22px;position:relative;border-radius:3px;overflow:hidden;cursor:pointer;box-shadow:0 6px 26px rgba(43,36,32,.16)}
+.tileImg{position:relative;width:100%}
+.tileShade{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,20,15,.74) 0%,rgba(28,20,15,.12) 42%,transparent 70%);opacity:.55;transition:.4s}
+.tile:hover .tileShade{opacity:1}
+.tileTop{position:absolute;top:14px;left:14px;right:14px;display:flex;align-items:flex-start;justify-content:space-between;z-index:3}
+.tag{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:rgba(28,20,15,.72);padding:6px 11px;border-radius:20px;font-weight:500}
+.heart{width:38px;height:38px;border-radius:50%;background:rgba(28,20,15,.6);color:#fff;font-size:17px;display:flex;align-items:center;justify-content:center;transition:.2s;line-height:1}
+.heart:hover{background:rgba(28,20,15,.6)}
+.heart.on{color:#f1b6b6}
+.tileMeta{position:absolute;left:0;right:0;bottom:0;padding:20px;z-index:3;color:#fff;transform:translateY(8px);transition:.4s}
+.tile:hover .tileMeta{transform:translateY(0)}
+.tileMeta .th{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#e9d4b8}
+.tileMeta h3{font-size:27px;line-height:1.04;margin-top:4px}
+.tileVenue{font-size:12.5px;color:rgba(255,255,255,.78);margin-top:5px;display:flex;align-items:center;gap:6px}
+.tileActions{display:flex;align-items:center;gap:14px;margin-top:14px;max-height:0;opacity:0;overflow:hidden;transition:.4s}
+.tile:hover .tileActions{max-height:60px;opacity:1}
+.tileActions .view{font-size:11px;letter-spacing:.18em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:3px}
+.bookmini{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:var(--gold,#a67c52);color:#fff;padding:8px 13px;border-radius:2px;transition:.2s}
+.bookmini:hover{background:#845724}
+.empty{text-align:center;padding:90px 0}
+.empty h3{font-size:34px;margin-bottom:8px}
+/* Closing CTA */
+.cta{position:relative;overflow:hidden;color:#fff;text-align:center;padding:110px 0}
+.ctaBg{position:absolute;inset:0;background:linear-gradient(135deg,#241d16,#4a352a 55%,#5a4133)}
+.cta h2{position:relative;font-size:58px;line-height:1.05;max-width:18ch;margin:0 auto}
+.cta p{position:relative;max-width:46ch;margin:20px auto 36px;color:rgba(255,255,255,.82);font-size:16px;line-height:1.7}
+.ctaBtns{position:relative;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.foot{background:#221b16;color:rgba(255,255,255,.6);padding:54px 0;font-size:13px}
+.foot-in{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.foot .brand{color:#fff}
+/* Agency banner */
+.agencyBar{background:#1c1612;color:#f6f0e9;font-size:12px;letter-spacing:.04em}
+.agencyBar-in{display:flex;align-items:center;justify-content:center;gap:14px;height:38px;flex-wrap:wrap;text-align:center}
+.agencyBar .tagm{color:#e9d4b8;font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:10.5px}
+.agencyBar .c001{background:var(--gold,#a67c52);color:#fff;padding:3px 9px;border-radius:20px;font-size:10px;letter-spacing:.14em;font-weight:600}
+.agencyBar a{color:#f6f0e9;text-decoration:underline;text-underline-offset:3px;cursor:pointer;opacity:.85}
+.agencyBar a:hover{opacity:1;color:#e9d4b8}
+/* Demo center */
+.demoGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.demoCard{position:relative;background:#fff;border:1px solid var(--line);border-radius:8px;padding:26px 22px;transition:.26s;cursor:pointer;overflow:hidden}
+.demoCard:hover{transform:translateY(-4px);box-shadow:0 22px 56px rgba(43,36,32,.13);border-color:var(--gold,#a67c52)}
+.demoCard .di{font-size:25px;line-height:1}
+.demoCard h4{font-size:19px;margin:14px 0 6px;font-family:'Cormorant Garamond',serif;font-weight:600}
+.demoCard p{font-size:12.5px;line-height:1.55;color:#6c5b51;margin:0}
+.demoCard .badge{position:absolute;top:14px;right:14px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;border-radius:20px;font-weight:600}
+.badge.live{background:rgba(95,191,126,.16);color:#3f8c5c}
+.badge.soon{background:rgba(166,124,82,.14);color:var(--gold,#a67c52)}
+.demoCard .try{margin-top:14px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold,#a67c52);font-weight:600}
+.capRow{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:46px}
+.capChip{font-size:12px;color:#5c4b42;background:#fff;border:1px solid var(--line);border-radius:24px;padding:9px 16px}
+.capChip b{color:var(--gold,#a67c52);font-weight:600}
+@media(max-width:980px){.demoGrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.demoGrid{grid-template-columns:1fr}}
+/* ===== Demo overlay ===== */
+.demoModal{max-width:1020px;width:100%}
+.demoHead{display:flex;gap:16px;align-items:flex-start;padding:30px 44px 22px;border-bottom:1px solid var(--line)}
+.demoHead .di2{font-size:30px;line-height:1;flex:none}
+.demoHead .eyebrow{margin-bottom:5px}
+.demoHead h3{font-size:26px;line-height:1.12}
+.demoHead p{font-size:13px;color:var(--mute);margin:5px 0 0;line-height:1.5;max-width:62ch}
+.demoBody{padding:26px 44px 40px;max-height:72vh;overflow-y:auto}
+.qr{background:#fff}
+.qrg{width:100%;height:100%;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);gap:1.5px}
+.qrg i{border-radius:1px}.qrg i.on{background:var(--ink)}
+.emJourney{display:grid;grid-template-columns:290px 1fr;gap:24px}
+.emToolbar{grid-column:1 / -1;display:flex;align-items:center;gap:14px;margin-bottom:2px;flex-wrap:wrap}
+.emPlay{background:var(--ink);color:#f6f0e9;border-radius:3px;padding:11px 20px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;cursor:pointer}
+.emProg{flex:1;min-width:150px;height:5px;background:#e7dccb;border-radius:4px;overflow:hidden}
+.emProgFill{height:100%;background:var(--gold);border-radius:4px;transition:width .5s ease}
+.emList{display:flex;flex-direction:column;gap:6px;max-height:430px;overflow-y:auto;padding-right:6px}
+.emItem{display:flex;gap:12px;align-items:flex-start;padding:12px 13px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:#fff;transition:.18s}
+.emItem:hover{border-color:var(--gold)}
+.emItem.on{border-color:var(--gold);background:#fbf3ea;box-shadow:0 6px 18px rgba(156,106,52,.12)}
+.emItem.done{opacity:.6}
+.emNum{width:26px;height:26px;border-radius:50%;background:#f0e6d6;color:var(--gold);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;font-family:'Jost'}
+.emItem.on .emNum,.emItem.done .emNum{background:var(--gold);color:#fff}
+.emIt-day{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:2px}
+.emIt-subj{font-size:13px;color:var(--ink);line-height:1.32;font-weight:500}
+.emMail{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;height:fit-content;box-shadow:0 14px 40px rgba(43,36,32,.08)}
+.emMailBar{display:flex;align-items:center;gap:8px;padding:12px 16px;background:#faf5ee;border-bottom:1px solid var(--line)}
+.emDot{width:11px;height:11px;border-radius:50%}
+.emMailBody{padding:24px 26px}
+.emTrig{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:#f4e9db;padding:5px 11px;border-radius:20px;margin-bottom:14px;font-weight:600}
+.emFrom{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.emAva{width:38px;height:38px;border-radius:50%;background:linear-gradient(140deg,var(--gold),#7d5324);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;flex:none}
+.emFrom .ef-n{font-size:13px;font-weight:600;color:var(--ink)}.emFrom .ef-e{font-size:11px;color:var(--mute)}
+.emSubj{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--ink);margin-bottom:10px;line-height:1.15}
+.emText{font-size:14px;color:#5c4b42;line-height:1.75}
+.emCta{margin-top:18px;display:inline-flex;background:var(--gold);color:#fff;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:11px 22px;border-radius:3px}
+.rsvpGrid{display:grid;grid-template-columns:1fr 1.15fr;gap:24px}
+.rInvite{background:linear-gradient(160deg,#f4ddd7,#efe2d8);border:1px solid var(--line);border-radius:12px;padding:26px}
+.rInvite .rScript{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--gold);text-align:center}
+.rInvite h4{font-family:'Cormorant Garamond',serif;font-size:30px;margin:2px 0 4px;text-align:center}
+.rInvite .rDate{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#5c4b42;margin-bottom:18px;text-align:center}
+.rField{margin-bottom:12px}
+.rField label{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:600;margin-bottom:5px}
+.rInput{width:100%;height:44px;border:1px solid var(--line);border-radius:6px;padding:0 13px;font-size:14px;background:#fff;color:var(--ink)}
+.rBtns{display:flex;gap:8px}
+.rBtn{flex:1;height:44px;border:1px solid var(--line);border-radius:6px;background:#fff;font-size:12.5px;font-weight:600;color:var(--ink);cursor:pointer;transition:.16s}
+.rBtn.on{background:var(--gold);color:#fff;border-color:var(--gold)}
+.rBtn.onNo{background:#b5524f;color:#fff;border-color:#b5524f}
+.rSubmit{width:100%;height:48px;background:var(--ink);color:#f6f0e9;border-radius:4px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin-top:4px;cursor:pointer}
+.rDash{display:flex;flex-direction:column;gap:14px}
+.rStats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.rStat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 12px;text-align:center}
+.rStat .n{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold);line-height:1}
+.rStat .l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+.rQrRow{display:flex;gap:14px;align-items:center;background:#faf5ee;border:1px solid var(--line);border-radius:10px;padding:14px}
+.rGuests{border:1px solid var(--line);border-radius:10px;overflow:hidden;max-height:236px;overflow-y:auto}
+.gRow{display:flex;align-items:center;gap:12px;padding:12px 15px;border-bottom:1px solid var(--line);background:#fff}
+.gRow:last-child{border-bottom:none}
+.gMark{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:none;color:#fff}
+.gYes .gMark{background:#5f9c6c}.gNo .gMark{background:#b5524f}
+.gRow .gn{font-size:13.5px;color:var(--ink);font-weight:500;flex:1}
+.gRow .gc{font-size:12px;color:var(--mute)}
+.gRow .gm{font-size:11px;color:var(--gold);margin-left:8px}
+.kbTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+.kanban{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.kcol{background:#f7f0e6;border:1px solid var(--line);border-radius:10px;padding:12px 10px;min-height:120px}
+.kcolH{display:flex;justify-content:space-between;align-items:baseline;padding:0 3px}
+.kcolH .kn{font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);font-weight:700}
+.kcolH .kc{font-size:11px;color:var(--gold);font-weight:700}
+.kcolVal{font-size:10px;color:var(--mute);padding:2px 3px 9px}
+.kcard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:8px;box-shadow:0 4px 12px rgba(43,36,32,.05)}
+.kcard .ktitle{font-size:13px;font-weight:600;color:var(--ink);line-height:1.2}
+.kcard .kmeta{font-size:10.5px;color:var(--mute);margin:3px 0 8px;line-height:1.45}
+.kcard .kval{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--gold)}
+.kadv{width:100%;margin-top:9px;height:32px;border-radius:5px;border:1px solid var(--gold);color:var(--gold);background:#fff;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:.16s}
+.kadv:hover{background:var(--gold);color:#fff}
+.kadv.done{border-color:#5f9c6c;color:#5f9c6c;cursor:default}
+.perBtns{display:flex;gap:6px}
+.perBtn{border:1px solid var(--line);background:#fff;border-radius:20px;padding:8px 15px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--mute);cursor:pointer}
+.perBtn.on{background:var(--ink);color:#f6f0e9;border-color:var(--ink)}
+.adStats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.adStat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 16px}
+.adStat .n{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--ink);line-height:1}
+.adStat .l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:5px}
+.adGrid{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+.adCard{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px}
+.adCard h5{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px}
+.adBars{display:flex;align-items:flex-end;gap:10px;height:130px}
+.adBar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;height:100%}
+.adBar .bar{width:100%;background:linear-gradient(180deg,var(--gold),#c9a06a);border-radius:4px 4px 0 0;transition:height .5s ease}
+.adBar .bl{font-size:9px;color:var(--mute);letter-spacing:.03em}
+.adPerf{margin-bottom:14px}
+.adPerf .pl{display:flex;justify-content:space-between;font-size:12px;color:var(--ink);margin-bottom:5px}
+.adTrack{height:7px;background:#eee3d3;border-radius:4px;overflow:hidden}
+.adTrack .fill{height:100%;background:var(--gold);border-radius:4px}
+.adTop{display:flex;flex-direction:column;gap:9px;margin-top:6px}
+.adTopRow{display:flex;align-items:center;gap:10px;font-size:12px}
+.adTopRow .tn{width:82px;color:var(--ink)}
+.adTopRow .tt{flex:1;height:7px;background:#eee3d3;border-radius:4px;overflow:hidden}
+.adTopRow .tt .fill{height:100%;background:var(--gold)}
+.adTopRow .tp{width:34px;text-align:right;color:var(--mute)}
+.ptabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:20px}
+.ptab{padding:11px 15px;font-size:12px;letter-spacing:.05em;color:var(--mute);cursor:pointer;border-bottom:2px solid transparent;font-weight:600}
+.ptab.on{color:var(--gold);border-bottom-color:var(--gold)}
+.pWelcome{display:flex;align-items:center;gap:14px;background:linear-gradient(150deg,#f4ddd7,#efe2d8);border-radius:12px;padding:20px 22px;margin-bottom:16px}
+.pWelcome .pAva{width:50px;height:50px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;flex:none}
+.pWelcome h4{font-family:'Cormorant Garamond',serif;font-size:24px}
+.pWelcome p{font-size:12.5px;color:#5c4b42}
+.pProg .pt{display:flex;justify-content:space-between;font-size:12px;color:var(--ink);margin-bottom:6px}
+.pBar{height:8px;background:#eee3d3;border-radius:5px;overflow:hidden}
+.pBar .fill{height:100%;background:var(--gold);border-radius:5px;transition:width .4s}
+.pOverGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+.pMini{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px}
+.pMini .l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.pMini .v{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);margin-top:3px}
+.ivRow{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:10px}
+.ivRow .ivl{flex:1}
+.ivRow .ivn{font-size:14px;font-weight:600;color:var(--ink)}
+.ivRow .iva{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold)}
+.ivStat{font-size:11px;padding:5px 11px;border-radius:20px;font-weight:600;letter-spacing:.03em}
+.ivPaid{background:rgba(95,156,108,.15);color:#4d8259}
+.ivDue{color:var(--gold)}
+.ivPay{height:38px;padding:0 18px;border-radius:5px;background:var(--gold);color:#fff;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;cursor:pointer;flex:none}
+.pContract{background:#fff;border:1px solid var(--line);border-radius:10px;padding:30px;text-align:center}
+.pContract .pcIco{font-size:34px}
+.pContract h4{font-family:'Cormorant Garamond',serif;font-size:24px;margin:8px 0 6px}
+.pContract p{font-size:13px;color:var(--mute);max-width:46ch;margin:0 auto 18px;line-height:1.6}
+.pSign{height:46px;padding:0 26px;border-radius:4px;background:var(--ink);color:#f6f0e9;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;cursor:pointer}
+.pSigned{display:inline-flex;align-items:center;gap:8px;color:#4d8259;font-weight:600;font-size:14px}
+.ptask{display:flex;align-items:center;gap:13px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:14px 16px;margin-bottom:9px;cursor:pointer;transition:.16s}
+.ptask:hover{border-color:var(--gold)}
+.ptask .pck{width:24px;height:24px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;flex:none}
+.ptask.done .pck{background:var(--gold);border-color:var(--gold);color:#fff}
+.ptask .plabel{font-size:13.5px;color:var(--ink)}
+.ptask.done .plabel{color:var(--mute);text-decoration:line-through}
+.pGallery{text-align:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:32px}
+.pgThumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0}
+.pgThumbs img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px}
+.pgDl{height:48px;padding:0 28px;border-radius:4px;background:var(--gold);color:#fff;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;cursor:pointer}
+@media(max-width:820px){.emJourney,.rsvpGrid,.adGrid,.pOverGrid{grid-template-columns:1fr}.kanban{grid-template-columns:1fr;gap:16px}.adStats{grid-template-columns:1fr 1fr}.emList{max-height:210px}.demoHead{padding:24px 22px 18px}.demoBody{padding:22px 22px 30px}}
+/* Section heading */
+.secHead{text-align:center;max-width:60ch;margin:0 auto 52px}
+.secHead .eyebrow{display:block;margin-bottom:14px}
+.secHead h2{font-size:50px;line-height:1.02}
+.secHead p{color:#6c5b51;font-size:16px;line-height:1.7;margin-top:14px}
+.block{padding:96px 0}
+.block-cream{background:#ece0cf}
+/* Services */
+.svcWrap{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.svcCard{background:#fff;border:1px solid var(--line);border-radius:6px;padding:34px 30px;transition:.28s;cursor:pointer}
+.svcCard:hover{transform:translateY(-4px);box-shadow:0 22px 56px rgba(43,36,32,.12);border-color:var(--gold,#a67c52)}
+.svcCard .ico{font-size:26px;color:var(--gold,#a67c52);line-height:1}
+.svcCard h3{font-size:25px;margin:16px 0 9px}
+.svcCard p{font-size:14px;line-height:1.65;color:#6c5b51}
+.svcCard .lk{display:inline-flex;align-items:center;gap:7px;margin-top:16px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold,#a67c52);font-weight:500}
+/* Packages section */
+.pkgWrap{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.pkgGrp{margin-bottom:30px;display:flex;align-items:center;justify-content:center;gap:16px}
+.pkgGrp .gl{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold,#a67c52)}
+.pkgGrp .ln{height:1px;width:60px;background:var(--line)}
+/* About */
+.aboutWrap{display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:center}
+.aboutImg{position:relative;border-radius:8px;overflow:hidden;height:540px;box-shadow:0 30px 70px rgba(43,36,32,.18)}
+.aboutImg img{width:100%;height:100%;object-fit:cover}
+.about h2{font-size:50px;line-height:1.04;margin-bottom:8px}
+.about .lead2{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;line-height:1.6;color:#4a3f37;margin:18px 0}
+.about p{font-size:15px;line-height:1.8;color:#6c5b51;margin:0 0 16px}
+.aboutStats{display:flex;gap:40px;margin-top:30px;padding-top:28px;border-top:1px solid var(--line)}
+.aboutStats .n{font-family:'Cormorant Garamond',serif;font-size:40px;color:var(--ink)}
+.aboutStats .l{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.aboutSig{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:30px;color:var(--gold,#a67c52);margin-top:28px}
+/* AI Chat */
+.chatFab{position:fixed;right:26px;bottom:96px;z-index:70;width:62px;height:62px;border-radius:50%;background:var(--gold,#a67c52);color:#fff;display:flex;align-items:center;justify-content:center;font-size:25px;box-shadow:0 14px 40px rgba(166,124,82,.45);transition:.25s}
+.chatFab:hover{background:#845724;box-shadow:0 14px 34px rgba(20,14,10,.4)}
+.chatDot{position:absolute;top:2px;right:2px;width:14px;height:14px;border-radius:50%;background:#5fbf7e;border:2px solid #fff}
+.chatPanel{position:fixed;right:26px;bottom:96px;z-index:90;width:min(390px,92vw);height:min(580px,80vh);background:#f6f0e9;border-radius:14px;box-shadow:0 30px 90px rgba(20,14,10,.4);display:flex;flex-direction:column;overflow:hidden;animation:chatIn .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes chatIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.chatHead{background:linear-gradient(135deg,#241d16,#4a352a 55%,#5a4133);color:#fff;padding:20px 22px;display:flex;align-items:center;gap:13px}
+.chatAva{width:42px;height:42px;border-radius:50%;background:var(--gold,#a67c52);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;flex:none}
+.chatHead .ch-n{font-family:'Cormorant Garamond',serif;font-size:20px;line-height:1.1}
+.chatHead .ch-s{font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:6px;margin-top:2px}
+.chatHead .ch-s .live{width:7px;height:7px;border-radius:50%;background:#5fbf7e}
+.chatX{margin-left:auto;color:rgba(255,255,255,.8);font-size:18px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.chatX:hover{background:rgba(255,255,255,.16)}
+.chatBody{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:84%;padding:12px 16px;font-size:14px;line-height:1.55;border-radius:16px}
+.msg.bot{background:#fff;border:1px solid var(--line);color:#3a312a;align-self:flex-start;border-bottom-left-radius:5px}
+.msg.user{background:var(--ink);color:#f6f0e9;align-self:flex-end;border-bottom-right-radius:5px}
+.msg.typing{color:var(--mute);font-style:italic}
+.chatChips{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 12px}
+.chatChip{font-size:12px;color:var(--gold,#a67c52);background:rgba(166,124,82,.1);border:1px solid rgba(166,124,82,.28);border-radius:18px;padding:7px 13px;transition:.2s}
+.chatChip:hover{background:rgba(166,124,82,.2)}
+.chatInput{display:flex;gap:9px;padding:14px 16px;border-top:1px solid var(--line);background:#fff}
+.chatInput input{flex:1;border:1px solid var(--line);border-radius:24px;padding:11px 16px;font-size:14px;outline:none;color:var(--ink)}
+.chatInput input:focus{border-color:var(--gold,#a67c52)}
+.chatSend{width:44px;height:44px;border-radius:50%;background:var(--gold,#a67c52);color:#fff;font-size:17px;flex:none;display:flex;align-items:center;justify-content:center;transition:.2s}
+.chatSend:hover{background:#845724}
+.chatSend:disabled{opacity:.5}
+@media(max-width:760px){.svcWrap,.pkgWrap{grid-template-columns:1fr}.aboutWrap{grid-template-columns:1fr;gap:30px}.aboutImg{height:340px}.secHead h2,.about h2{font-size:34px}.block{padding:60px 0}}
+/* Modal */
+.ovl{position:fixed;inset:0;z-index:80;background:rgba(20,14,10,.78);display:flex;justify-content:center;overflow-y:auto;padding:40px 20px}
+.modal{position:relative;width:100%;max-width:1080px;background:#f6f0e9;border-radius:5px;overflow:hidden;box-shadow:0 50px 130px rgba(0,0,0,.6);margin:auto}
+.mClose{position:absolute;top:20px;right:20px;z-index:10;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);font-size:20px;display:flex;align-items:center;justify-content:center;transition:.2s;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+.mClose:hover{background:#fff;transform:rotate(90deg)}
+.mHero{position:relative;height:380px;display:flex;align-items:flex-end;color:#fff}
+.mHeroShade{position:absolute;inset:0;background:linear-gradient(to top,rgba(24,16,11,.86),rgba(24,16,11,.1) 60%,transparent)}
+.mHeroIn{position:relative;z-index:2;padding:44px}
+.mHeroIn h2{font-size:58px;line-height:1}
+.mHeroIn .vn{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;font-size:13px;color:rgba(255,255,255,.82);letter-spacing:.04em}
+.mHeroBtns{position:absolute;right:44px;bottom:44px;z-index:2;display:flex;gap:12px}
+.mBody{padding:46px}
+.mSec{padding:38px 0;border-top:1px solid var(--line)}
+.mSec:first-child{border-top:none;padding-top:6px}
+.secTitle{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.secTitle h3{font-size:30px}
+.secTitle .num{font-size:11px;letter-spacing:.2em;color:var(--gold,#a67c52);font-weight:500;border:1px solid var(--gold,#a67c52);border-radius:20px;padding:5px 11px}
+.lead{font-size:18px;line-height:1.85;color:#4a3f37;font-weight:300;font-family:'Cormorant Garamond',serif;font-style:italic}
+.infoGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.infoCell{background:#fbf7f1;padding:20px 22px}
+.infoCell .k{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+.infoCell .v{font-size:18px;margin-top:6px;color:var(--ink);font-family:'Cormorant Garamond',serif;font-weight:500}
+.svcGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.svc{display:flex;align-items:center;gap:11px;background:#fbf7f1;border:1px solid var(--line);border-radius:3px;padding:14px 16px;font-size:14px;color:var(--ink)}
+.svc .ck{color:var(--gold,#a67c52);font-size:15px}
+.swrow{display:flex;align-items:center;gap:14px;margin-top:22px;flex-wrap:wrap}
+.swrow .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+.swatch{width:46px;height:46px;border-radius:50%;box-shadow:inset 0 0 0 3px rgba(255,255,255,.7),0 2px 8px rgba(0,0,0,.12)}
+.deco{display:flex;flex-wrap:wrap;gap:10px}
+.pill{font-size:12.5px;letter-spacing:.04em;color:var(--ink);background:#fbf7f1;border:1px solid var(--line);border-radius:24px;padding:9px 16px;transition:.2s}
+.pill.act{cursor:pointer}.pill.act:hover{border-color:var(--gold,#a67c52);background:rgba(166,124,82,.08)}
+/* slider */
+.slider{position:relative;border-radius:4px;overflow:hidden;background:#000}
+.slideImg{height:460px;width:100%;position:relative}
+.slCap{position:absolute;left:0;bottom:0;padding:24px;z-index:3;color:#fff}
+.slCap .th{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#e9d4b8}
+.slCap h4{font-size:24px;margin-top:4px}
+.slShade{position:absolute;inset:0;background:linear-gradient(to top,rgba(20,14,10,.6),transparent 50%)}
+.slBtn{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.9);color:var(--ink);font-size:20px;display:flex;align-items:center;justify-content:center;transition:.2s}
+.slBtn:hover{background:#fff}.slPrev{left:18px}.slNext{right:18px}
+.slCount{position:absolute;top:18px;right:18px;z-index:4;font-size:12px;letter-spacing:.14em;color:#fff;background:rgba(20,14,10,.72);padding:7px 13px;border-radius:20px}
+.slZoom{position:absolute;top:18px;left:18px;z-index:4;width:40px;height:40px;border-radius:50%;background:rgba(20,14,10,.72);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.slZoom:hover{background:rgba(20,14,10,.7)}
+.sthumbs{display:flex;gap:10px;margin-top:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.sthumbs::-webkit-scrollbar{display:none}
+.sthumb{flex:none;width:96px;height:64px;border-radius:3px;cursor:pointer;opacity:.5;transition:.2s;position:relative;outline:2px solid transparent}
+.sthumb:hover{opacity:.85}
+.sthumb.on{opacity:1;outline:2px solid var(--gold,#a67c52);outline-offset:2px}
+/* video gallery */
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.vcard{position:relative;border-radius:4px;overflow:hidden;cursor:pointer;aspect-ratio:16/10}
+.vShade{position:absolute;inset:0;background:linear-gradient(to top,rgba(20,14,10,.7),rgba(20,14,10,.15))}
+.vplay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.9);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:18px;transition:.2s}
+.vcard:hover .vplay{background:#fff;box-shadow:0 8px 24px rgba(20,14,10,.4)}
+.vMeta{position:absolute;left:0;bottom:0;padding:16px;z-index:3;color:#fff}
+.vMeta .t{font-size:15px;font-weight:400}
+/* video player modal */
+.vbox{position:fixed;inset:0;z-index:120;background:rgba(12,8,6,.95);display:flex;align-items:center;justify-content:center;padding:30px}
+.vboxInner{position:relative;width:min(92vw,1100px)}
+.vboxVideo{width:100%;max-height:78vh;border-radius:6px;display:block;background:#000;box-shadow:0 30px 90px rgba(0,0,0,.6)}
+.vboxCap{margin-top:16px;color:#fff;text-align:center}
+.vboxCap .ty{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#e9d4b8}
+.vboxCap .t{font-family:'Cormorant Garamond',serif;font-size:24px;margin-top:3px}
+.vboxNote{margin-top:8px;font-size:11.5px;color:rgba(255,255,255,.5);letter-spacing:.04em}
+.vMeta .ty{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#e9d4b8;margin-bottom:3px}
+.vlen{position:absolute;top:12px;right:12px;z-index:3;font-size:11px;color:#fff;background:rgba(20,14,10,.5);padding:4px 9px;border-radius:14px}
+/* spec cards */
+.spec2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.specCard{background:#fbf7f1;border:1px solid var(--line);border-radius:5px;padding:26px}
+.specCard h4{font-size:22px;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.specRow{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-top:1px solid var(--line);font-size:14px}
+.specRow:first-of-type{border-top:none}
+.specRow .k{color:var(--mute)}.specRow .v{color:var(--ink);font-weight:400}
+/* review */
+.review{background:#fbf7f1;border:1px solid var(--line);border-radius:6px;padding:40px 44px;text-align:center}
+.stars{color:var(--gold,#a67c52);font-size:20px;letter-spacing:5px}
+.review q{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:25px;line-height:1.5;color:#3a312a;margin:20px auto;max-width:42ch}
+.rby{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:18px}
+.rava{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:19px;color:#fff;letter-spacing:.04em;box-shadow:inset 0 0 0 2px rgba(255,255,255,.55)}
+.rby .rn{font-weight:500;letter-spacing:.04em}
+.rby .rr{font-size:12px;color:var(--mute)}
+/* packages */
+.pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pkg{background:#fff;border:1px solid var(--line);border-radius:6px;padding:30px 26px;transition:.25s;display:flex;flex-direction:column}
+.pkg:hover{box-shadow:0 18px 50px rgba(43,36,32,.1);transform:translateY(-3px)}
+.pkg.feat{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pkg .pn{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold,#a67c52)}
+.pkg .pp{font-family:'Cormorant Garamond',serif;font-size:38px;margin:10px 0 4px}
+.pkg .pfrom{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.pkg.feat .pfrom{color:rgba(255,255,255,.6)}
+.pfeat{list-style:none;padding:0;margin:20px 0 24px;flex:1}
+.pfeat li{display:flex;gap:9px;font-size:13.5px;padding:7px 0;color:#4a3f37}
+.pkg.feat .pfeat li{color:rgba(255,255,255,.82)}
+.pfeat li .ck{color:var(--gold,#a67c52)}
+/* faq */
+.faqItem{border-top:1px solid var(--line);padding:20px 0;cursor:pointer}
+.faqItem .q{display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:18px;font-family:'Cormorant Garamond',serif;font-weight:500;color:var(--ink)}
+.faqItem .q .pl{color:var(--gold,#a67c52);font-size:22px;flex:none}
+.faqItem .a{font-size:14.5px;line-height:1.7;color:#5a4f46;max-height:0;overflow:hidden;transition:.35s;opacity:0}
+.faqItem.open .a{max-height:200px;opacity:1;margin-top:12px}
+/* share */
+.share{display:flex;gap:10px;flex-wrap:wrap}
+.shbtn{display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.08em;border:1px solid var(--line);border-radius:30px;padding:11px 18px;background:#fff;transition:.2s;color:var(--ink)}
+.shbtn:hover{border-color:var(--gold,#a67c52);background:rgba(166,124,82,.06)}
+.shdot{width:9px;height:9px;border-radius:50%}
+/* lightbox */
+.lbox{position:fixed;inset:0;z-index:120;background:rgba(12,8,6,.95);display:flex;align-items:center;justify-content:center;flex-direction:column}
+.lboxImg{width:min(86vw,1200px);height:min(80vh,820px);border-radius:4px;position:relative}
+.lboxCap{color:rgba(255,255,255,.8);margin-top:18px;font-size:14px;letter-spacing:.1em}
+.lboxClose{position:absolute;top:26px;right:30px;color:#fff;font-size:30px;width:50px;height:50px;display:flex;align-items:center;justify-content:center}
+.lboxNav{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:40px;width:64px;height:64px;display:flex;align-items:center;justify-content:center;opacity:.8;transition:.2s}
+.lboxNav:hover{opacity:1}
+/* booking drawer */
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:100;width:min(460px,92vw);background:#f6f0e9;box-shadow:-20px 0 80px rgba(0,0,0,.4);overflow-y:auto;animation:slideIn .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+.drawer-h{background:linear-gradient(135deg,#241d16,#4a352a 55%,#5a4133);color:#fff;padding:38px 34px}
+.drawer-h .eyebrow{color:#e9d4b8}
+.drawer-h h3{font-size:34px;margin-top:8px}
+.drawer-h p{color:rgba(255,255,255,.78);font-size:13.5px;line-height:1.6;margin-top:8px}
+.drawer-b{padding:30px 34px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-bottom:7px}
+.field input,.field textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:3px;padding:13px 15px;font-size:14px;color:var(--ink);outline:none;transition:.2s}
+.field input:focus,.field textarea:focus{border-color:var(--gold,#a67c52)}
+.prefill{background:rgba(166,124,82,.09);border:1px solid rgba(166,124,82,.25)}
+.drawerClose{position:absolute;top:22px;right:22px;color:#fff;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:18px;transition:.2s}
+.drawerClose:hover{background:rgba(255,255,255,.3)}
+.pfnote{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold,#a67c52);display:flex;align-items:center;gap:7px;margin-bottom:14px}
+.okmsg{color:#4d8259;font-weight:500}.errmsg{color:#b5524f;font-weight:500}
+.okOvl{position:fixed;inset:0;z-index:130;display:flex;align-items:center;justify-content:center;background:rgba(20,14,10,.55);padding:24px;animation:okfade .3s ease}
+@keyframes okfade{from{opacity:0}to{opacity:1}}
+.okCard{background:#f6f0e9;border-radius:14px;max-width:430px;width:100%;padding:46px 40px;text-align:center;box-shadow:0 40px 110px rgba(0,0,0,.42);animation:okpop .42s cubic-bezier(.2,.8,.2,1)}
+@keyframes okpop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.okTick{width:76px;height:76px;border-radius:50%;background:linear-gradient(140deg,var(--gold,#a67c52),#7d5324);color:#fff;font-size:38px;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;box-shadow:0 14px 34px rgba(166,124,82,.4)}
+.okCard h3{font-family:'Cormorant Garamond',serif;font-size:33px;line-height:1.1;margin-bottom:12px;color:var(--ink)}
+.okCard p{font-size:14px;color:#5c4b42;line-height:1.65;margin-bottom:28px}
+.okDone{height:50px;padding:0 36px;background:var(--ink);color:#f6f0e9;border:none;border-radius:4px;font-family:inherit;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:.2s}
+.okDone:hover{background:#000}
+/* float */
+.floatBook{position:fixed;right:26px;bottom:26px;z-index:60;display:flex;align-items:center;gap:10px;background:var(--ink);color:#fff;padding:15px 22px;border-radius:40px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 14px 40px rgba(43,36,32,.34);transition:.25s}
+.floatBook:hover{background:var(--gold,#a67c52);transform:translateY(-2px)}
+/* toast */
+.toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%);z-index:200;background:var(--ink);color:#fff;padding:15px 26px;border-radius:40px;font-size:13.5px;letter-spacing:.04em;box-shadow:0 14px 44px rgba(0,0,0,.3);display:flex;align-items:center;gap:11px;animation:toastIn .3s ease}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+.toast .td{color:#e9d4b8}
+.ovl-fade{animation:fade .3s ease}@keyframes fade{from{opacity:0}to{opacity:1}}
+@media(max-width:760px){.hero h1{font-size:52px}.wrap{padding:0 22px}.nav{display:none}.mBody{padding:26px}.infoGrid,.svcGrid,.vgrid,.pkgs{grid-template-columns:1fr}.spec2{grid-template-columns:1fr}.mHeroIn h2{font-size:40px}.mHeroBtns{position:static;margin-top:18px;padding:0 44px 30px}.herostats{gap:26px;flex-wrap:wrap}.cta h2{font-size:38px}.results .c{font-size:22px}}
+</style>
+<script src="shawie-config.js"></script>
+</helmet>
+<div class="app" style="--gold: {{ accent }}">
+<div class="agencyBar"><div class="wrap agencyBar-in"><span class="c001">Client #001</span><span class="tagm">Built by {{ agencyName }} — Web · AI · Automation · Marketing</span><a onClick="{{ navDemo }}">Explore the Interactive Demo Center →</a></div></div>
+<header class="hdr"><div class="wrap hdr-in"><div class="brand">SHAWIE<small>BAKES &amp; EVENTS</small></div><nav class="nav"><a class="navlink" onClick="{{ navHome }}">Home</a><a class="navlink" onClick="{{ navGalleries }}">Galleries</a><a class="navlink" onClick="{{ navServices }}">Services</a><a class="navlink" onClick="{{ navPackages }}">Packages</a><a class="navlink" onClick="{{ navAbout }}">About</a><a class="navlink" onClick="{{ navDemo }}">Demo Center</a><a class="navlink" href="Shawie Blog.dc.html">Journal</a><a class="navlink" onClick="{{ openChat }}">Contact</a></nav><div class="hdr-r"><button class="favpill" onClick="{{ toggleFavOnly }}">♥ Saved <b>{{ favCount }}</b></button><button class="btn btn-gold btn-sm" onClick="{{ openConsult }}">Book Consultation</button></div></div></header>
+
+<section class="hero hero-video"><video class="heroFull" src="assets/shawie-logo.mp4" autoplay muted loop playsinline preload="auto"></video><div class="heroScrim"></div><div class="heroOver"><p class="herosub2">From garden weddings to milestone debuts — every celebration styled, baked and filmed with intention.</p><div class="herobtns"><button class="btn btn-gold" onClick="{{ openConsult }}">Book This Service</button><button class="btn btn-ghost" onClick="{{ openQuote }}">Request a Quotation</button></div></div></section>
+
+<div class="bar"><div class="wrap"><div class="bar-top"><div class="search"><span class="gold" style="font-size:17px">⌕</span><input placeholder="Search any theme, color, cake or vibe — try “beach wedding”, “boho”, “gold”…" value="{{ q }}" onInput="{{ onSearch }}" onKeyDown="{{ onSearchKey }}"><sc-if value="{{ aiBusy }}" hint-placeholder-val="{{ false }}"><span class="ai aiOn">✦ Thinking…</span></sc-if><sc-if value="{{ aiIdle }}" hint-placeholder-val="{{ true }}"><button class="ai" onClick="{{ runAiSearch }}">✦ AI Search</button></sc-if></div><select class="sortsel" onChange="{{ onSort }}"><sc-for list="{{ sortOpts }}" as="s" hint-placeholder-count="4"><option value="{{ s.v }}" selected="{{ s.sel }}">{{ s.label }}</option></sc-for></select><button class="favtgl {{ favOnlyCls }}" onClick="{{ toggleFavOnly }}">♥ Favorites</button></div><div class="sugg"><span class="sugg-l">Popular:</span><sc-for list="{{ suggestions }}" as="sg" hint-placeholder-count="6"><button class="sgchip" onClick="{{ sg.onClick }}">{{ sg.label }}</button></sc-for></div><div class="chips"><sc-for list="{{ chips }}" as="c" hint-placeholder-count="10"><button class="chip {{ c.onCls }}" onClick="{{ c.onClick }}">{{ c.label }}</button></sc-for></div></div></div>
+
+<div class="wrap"><sc-if value="{{ aiActive }}" hint-placeholder-val="{{ false }}"><div class="aiBanner"><span class="bd">✦ AI match</span><span>{{ aiSummary }}</span><span class="x" onClick="{{ clearAi }}">Clear ✕</span></div></sc-if><div class="results"><div class="c disp"><b>{{ count }}</b> {{ countLabel }}</div><div class="mute" style="font-size:13px;letter-spacing:.06em">{{ ctxLabel }}</div></div></div>
+
+<div class="wrap"><sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}"><div class="masonry {{ colsCls }}" id="gallery"><sc-for list="{{ list }}" as="ev" hint-placeholder-count="9"><div class="tile" onClick="{{ ev.onOpen }}"><div class="tileImg {{ ev.pal }} {{ ev.ar }}"><img class="cphoto" src="{{ ev.img }}" loading="lazy" alt="{{ ev.name }}"><div class="tileShade"></div><div class="tileTop"><span class="tag">{{ ev.cat }}</span><button class="heart {{ ev.favCls }}" onClick="{{ ev.onFav }}">{{ ev.heart }}</button></div><div class="tileMeta"><div class="th">{{ ev.theme }}</div><h3 class="disp">{{ ev.name }}</h3><div class="tileVenue">⌖ {{ ev.venue }}</div><div class="tileActions"><span class="view">View Story</span><button class="bookmini" onClick="{{ ev.onBook }}">Book This Style</button></div></div></div></div></sc-for></div></sc-if><sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}"><div class="empty"><h3 class="disp">No celebrations match — yet.</h3><p class="mute">Try a different theme, color or category. Or let us design something entirely new for you.</p><button class="btn btn-ghost" onClick="{{ clearFilters }}" style="margin-top:18px">Clear Filters</button></div></sc-if></div>
+
+<section class="block block-cream" id="services"><div class="wrap"><div class="secHead"><span class="eyebrow">What We Create</span><h2 class="disp">Every detail, under one roof.</h2><p>From the first sketch to the final frame, SHAWIE styles, bakes and films your celebration as one seamless story — so nothing feels stitched together.</p></div><div class="svcWrap"><sc-for list="{{ serviceCards }}" as="s" hint-placeholder-count="6"><div class="svcCard" onClick="{{ s.onClick }}"><div class="ico">{{ s.ico }}</div><h3 class="disp">{{ s.title }}</h3><p>{{ s.desc }}</p><span class="lk">View Gallery →</span></div></sc-for></div></div></section>
+
+<section class="block" id="packages"><div class="wrap"><div class="secHead"><span class="eyebrow">Investment</span><h2 class="disp">Packages made to be tailored.</h2><p>A starting point, never a ceiling. Every package flexes to your guest count, venue and vision — mix, match and make it yours.</p></div><div class="pkgGrp"><span class="ln"></span><span class="gl">Wedding Collections</span><span class="ln"></span></div><div class="pkgWrap"><sc-for list="{{ weddingPkgs }}" as="p" hint-placeholder-count="3"><div class="pkg {{ p.featCls }}"><div class="pn">{{ p.name }}</div><div class="pp disp">{{ p.price }}</div><div class="pfrom">Starting Price</div><ul class="pfeat"><sc-for list="{{ p.features }}" as="f" hint-placeholder-count="4"><li><span class="ck">✦</span>{{ f }}</li></sc-for></ul><button class="btn {{ p.btnCls }} btn-sm w100" onClick="{{ openConsult }}">Book Now</button></div></sc-for></div><div class="pkgGrp" style="margin-top:44px"><span class="ln"></span><span class="gl">Milestone &amp; Celebration</span><span class="ln"></span></div><div class="pkgWrap"><sc-for list="{{ eventPkgs }}" as="p" hint-placeholder-count="3"><div class="pkg {{ p.featCls }}"><div class="pn">{{ p.name }}</div><div class="pp disp">{{ p.price }}</div><div class="pfrom">Starting Price</div><ul class="pfeat"><sc-for list="{{ p.features }}" as="f" hint-placeholder-count="4"><li><span class="ck">✦</span>{{ f }}</li></sc-for></ul><button class="btn {{ p.btnCls }} btn-sm w100" onClick="{{ openConsult }}">Book Now</button></div></sc-for></div><p class="mute tc" style="margin-top:30px;font-size:13px">Custom quotations welcome — <a onClick="{{ openQuote }}" style="color:var(--gold);cursor:pointer;text-decoration:underline">request yours here</a>.</p></div></section>
+
+<section class="block block-cream about" id="about"><div class="wrap"><div class="aboutWrap"><div class="aboutImg"><img src="assets/photos/p08.jpg" loading="lazy" alt="SHAWIE Bakes & Events"></div><div><span class="eyebrow">Our Story</span><h2 class="disp">Crafted with love, since 2016.</h2><p class="lead2">“We believe a celebration should feel like you — every flavor, every flower, every frame.”</p><p>SHAWIE Bakes &amp; Events began with a single tiered cake and a deep love for bringing people together. Nine years on, we’re a full-service studio styling, baking and filming the moments that matter most — from intimate garden weddings to grand ballroom debuts.</p><p>Because cake, styling, flowers and film all live under one roof, your day flows as one cohesive story. No mismatched vendors, no missed details — just a team that knows your vision inside out.</p><div class="aboutStats"><div><div class="n disp">480+</div><div class="l">Events Styled</div></div><div><div class="n disp">14</div><div class="l">Signature Services</div></div><div><div class="n disp">9 yrs</div><div class="l">Crafting Moments</div></div></div><div class="aboutSig">— Sharon Rose, Founder</div></div></div></div></section>
+
+<section class="block" id="democenter"><div class="wrap"><div class="secHead"><span class="eyebrow">Interactive Demo Center</span><h2 class="disp">More than a website — a complete business engine.</h2><p>Shawie Bakes &amp; Events is our flagship build. Below is everything the platform powers — try the live pieces now, the rest are available as guided walkthroughs.</p></div><div class="demoGrid"><sc-for list="{{ demoCards }}" as="d" hint-placeholder-count="8"><div class="demoCard" onClick="{{ d.onClick }}"><span class="badge {{ d.badgeCls }}">{{ d.badge }}</span><div class="di">{{ d.ico }}</div><h4>{{ d.title }}</h4><p>{{ d.desc }}</p><div class="try">{{ d.cta }}</div></div></sc-for></div><div class="capRow"><sc-for list="{{ capChips }}" as="c" hint-placeholder-count="6"><span class="capChip">{{ c }}</span></sc-for></div></div></section>
+
+<section class="cta"><div class="ctaBg"></div><div class="grain"></div><div class="wrap"><h2 class="disp">Ready to create your own beautiful celebration?</h2><p>Tell us your date and your dream — we’ll handle the cake, the styling, the flowers and the film. Every detail, beautifully held.</p><div class="ctaBtns"><button class="btn btn-gold" onClick="{{ openConsult }}">Book Consultation</button><button class="btn btn-lghost" onClick="{{ openQuote }}">Request Quotation</button><button class="btn btn-lghost" onClick="{{ openChat }}">Chat With Us</button></div></div></section>
+
+<footer class="foot"><div class="wrap foot-in"><div class="brand">SHAWIE<small style="color:rgba(255,255,255,.5)">BAKES &amp; EVENTS</small></div><div>Weddings · Debuts · Cakes · Styling · Photo &amp; Film</div><div>© 2025 SHAWIE Bakes &amp; Events · Crafted with love</div></div></footer>
+
+<sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}"><div class="ovl ovl-fade" onClick="{{ onOvlClick }}"><div class="modal" onClick="{{ stop }}"><button class="mClose" onClick="{{ closeModal }}">✕</button><div class="mHero {{ m.pal }}">{{ mHeroImg }}<div class="mHeroShade"></div><div class="mHeroIn"><div class="eyebrow" style="color:#e9d4b8">{{ m.cat }}</div><h2 class="disp">{{ m.name }}</h2><div class="vn"><span>⌖ {{ m.venue }}</span><span>◆ {{ m.theme }}</span><span>♛ {{ m.guests }} Guests</span></div></div><div class="mHeroBtns"><button class="heart {{ m.favCls }}" onClick="{{ m.onFav }}" style="background:rgba(255,255,255,.92);color:#2b2420">{{ m.heart }}</button><button class="btn btn-gold btn-sm" onClick="{{ m.onBook }}">Book This Style</button></div></div>
+<div class="mBody">
+<div class="mSec"><div class="secTitle"><span class="num">01</span><h3 class="disp">Event Details</h3></div><div class="infoGrid"><div class="infoCell"><div class="k">Event Name</div><div class="v">{{ m.name }}</div></div><div class="infoCell"><div class="k">Event Type</div><div class="v">{{ m.type }}</div></div><div class="infoCell"><div class="k">Theme</div><div class="v">{{ m.theme }}</div></div><div class="infoCell"><div class="k">Venue</div><div class="v">{{ m.venue }}</div></div><div class="infoCell"><div class="k">Event Date</div><div class="v">{{ m.date }}</div></div><div class="infoCell"><div class="k">Guests</div><div class="v">{{ m.guests }}</div></div></div><div class="swrow"><span class="lbl">Color Palette</span><sc-for list="{{ m.colors }}" as="c" hint-placeholder-count="4"><div class="swatch" style="background: {{ c }}"></div></sc-for></div></div>
+
+<div class="mSec"><div class="secTitle"><span class="num">02</span><h3 class="disp">Services Included</h3></div><div class="svcGrid"><sc-for list="{{ m.services }}" as="s" hint-placeholder-count="6"><div class="svc"><span class="ck">✦</span>{{ s }}</div></sc-for></div></div>
+
+<div class="mSec"><div class="secTitle"><span class="num">03</span><h3 class="disp">The Story</h3></div><p class="lead">{{ m.story }}</p></div>
+
+<div class="mSec"><div class="secTitle"><span class="num">04</span><h3 class="disp">Photo Gallery</h3></div><div class="slider"><div class="slideImg {{ mPhoto.pal }}">{{ mSlideImg }}<div class="slShade"></div><button class="slZoom" onClick="{{ openLight }}">⛶</button><div class="slCount">{{ photoLabel }}</div><button class="slBtn slPrev" onClick="{{ prevPhoto }}">‹</button><button class="slBtn slNext" onClick="{{ nextPhoto }}">›</button><div class="slCap"><div class="th">{{ m.theme }}</div><h4 class="disp">{{ mPhoto.label }}</h4></div></div></div><div class="sthumbs"><sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="7"><div class="{{ t.cls }}" onClick="{{ t.onClick }}"><img class="cphoto" src="{{ t.src }}" loading="lazy" alt=""></div></sc-for></div></div>
+
+<sc-if value="{{ m.hasVideo }}" hint-placeholder-val="{{ false }}"><div class="mSec"><div class="secTitle"><span class="num">05</span><h3 class="disp">Video Gallery</h3></div><div class="vgrid"><sc-for list="{{ m.videos }}" as="v" hint-placeholder-count="3"><div class="vcard {{ v.pal }}" onClick="{{ v.onPlay }}"><img class="cphoto" src="{{ v.src }}" loading="lazy" alt=""><div class="vShade"></div><span class="vlen">{{ v.len }}</span><div class="vplay">▶</div><div class="vMeta"><div class="ty">{{ v.type }}</div><div class="t">{{ v.title }}</div></div></div></sc-for></div></div></sc-if>
+
+<sc-if value="{{ m.hasCake }}" hint-placeholder-val="{{ false }}"><div class="mSec"><div class="secTitle"><span class="num">{{ secCake }}</span><h3 class="disp">Cake Details</h3></div><div class="infoGrid"><div class="infoCell"><div class="k">Cake Style</div><div class="v">{{ m.cake.style }}</div></div><div class="infoCell"><div class="k">Flavor</div><div class="v">{{ m.cake.flavor }}</div></div><div class="infoCell"><div class="k">Size</div><div class="v">{{ m.cake.size }}</div></div></div><p class="mute" style="margin-top:16px;font-size:14px;line-height:1.7"><b style="color:var(--ink);font-weight:500">Customization · </b>{{ m.cake.custom }}</p></div></sc-if>
+
+<div class="mSec"><div class="secTitle"><span class="num">{{ secDeco }}</span><h3 class="disp">Decorations</h3></div><div class="deco"><sc-for list="{{ m.decorations }}" as="d" hint-placeholder-count="5"><span class="pill">{{ d }}</span></sc-for></div></div>
+
+<sc-if value="{{ hasSpecs }}" hint-placeholder-val="{{ false }}"><div class="mSec"><div class="secTitle"><span class="num">{{ secSpec }}</span><h3 class="disp">Coverage Details</h3></div><div class="spec2"><sc-if value="{{ m.hasPhoto }}" hint-placeholder-val="{{ false }}"><div class="specCard"><h4 class="disp"><span class="gold">❖</span> Photography</h4><div class="specRow"><span class="k">Photographer</span><span class="v">{{ m.photography.photographer }}</span></div><div class="specRow"><span class="k">Coverage</span><span class="v">{{ m.photography.hours }}</span></div><div class="specRow"><span class="k">Edited Photos</span><span class="v">{{ m.photography.photos }}</span></div><div class="specRow"><span class="k">Drone Coverage</span><span class="v">{{ m.photography.drone }}</span></div><div class="specRow"><span class="k">Photo Album</span><span class="v">{{ m.photography.album }}</span></div></div></sc-if><sc-if value="{{ m.hasVideoSpec }}" hint-placeholder-val="{{ false }}"><div class="specCard"><h4 class="disp"><span class="gold">❖</span> Videography</h4><div class="specRow"><span class="k">Video Length</span><span class="v">{{ m.videography.length }}</span></div><div class="specRow"><span class="k">Highlight Film</span><span class="v">{{ m.videography.highlight }}</span></div><div class="specRow"><span class="k">Same-Day Edit</span><span class="v">{{ m.videography.sde }}</span></div><div class="specRow"><span class="k">Drone Coverage</span><span class="v">{{ m.videography.drone }}</span></div><div class="specRow"><span class="k">Recording</span><span class="v">{{ m.videography.k4 }}</span></div></div></sc-if></div></div></sc-if>
+
+<div class="mSec"><div class="secTitle"><span class="num">{{ secReview }}</span><h3 class="disp">Client Review</h3></div><div class="review"><div class="stars">★★★★★</div><q>{{ m.review.text }}</q><div class="rby"><div class="rava {{ m.review.pal }}">{{ m.review.initials }}</div><div style="text-align:left"><div class="rn">{{ m.review.name }}</div><div class="rr">{{ m.review.role }}</div></div></div></div></div>
+
+<div class="mSec"><div class="secTitle"><span class="num">{{ secPkg }}</span><h3 class="disp">Similar Packages</h3></div><div class="pkgs"><sc-for list="{{ packages }}" as="p" hint-placeholder-count="3"><div class="pkg {{ p.featCls }}"><div class="pn">{{ p.name }}</div><div class="pp disp">{{ p.price }}</div><div class="pfrom">Starting Price</div><ul class="pfeat"><sc-for list="{{ p.features }}" as="f" hint-placeholder-count="3"><li><span class="ck">✦</span>{{ f }}</li></sc-for></ul><button class="btn {{ p.btnCls }} btn-sm w100" onClick="{{ p.onBook }}">Book Now</button></div></sc-for></div></div>
+
+<div class="mSec"><div class="secTitle"><span class="num">{{ secRel }}</span><h3 class="disp">Related Services</h3></div><div class="deco"><sc-for list="{{ related }}" as="r" hint-placeholder-count="8"><span class="pill act" onClick="{{ openQuote }}">{{ r }}</span></sc-for></div></div>
+
+<div class="mSec"><div class="secTitle"><span class="num">{{ secInsp }}</span><h3 class="disp">Inspiration</h3></div><p class="mute" style="margin:-12px 0 18px;font-size:14px">The mood, palette and references behind this celebration.</p><div class="deco"><sc-for list="{{ inspiration }}" as="i" hint-placeholder-count="6"><span class="pill act" onClick="{{ openChat }}">{{ i }}</span></sc-for></div></div>
+
+<div class="mSec"><div class="secTitle"><span class="num">{{ secFaq }}</span><h3 class="disp">Frequently Asked</h3></div><sc-for list="{{ faqs }}" as="fq" hint-placeholder-count="4"><div class="{{ fq.cls }}" onClick="{{ fq.onClick }}"><div class="q"><span>{{ fq.q }}</span><span class="pl">{{ fq.sign }}</span></div><div class="a">{{ fq.a }}</div></div></sc-for></div>
+
+<div class="mSec"><div class="secTitle"><span class="num">{{ secShare }}</span><h3 class="disp">Share This Story</h3></div><div class="share"><sc-for list="{{ shareBtns }}" as="sh" hint-placeholder-count="6"><button class="shbtn" onClick="{{ sh.onClick }}"><span class="shdot" style="background: {{ sh.color }}"></span>{{ sh.label }}</button></sc-for></div></div>
+
+<div class="mSec" style="border-top:1px solid var(--line);text-align:center;background:#fbf7f1;margin:0 -46px -46px;padding:54px 46px"><div class="eyebrow">Your Turn</div><h3 class="disp" style="font-size:42px;margin:10px 0 8px">Create your own beautiful celebration.</h3><p class="mute" style="max-width:44ch;margin:0 auto 26px;font-size:15px;line-height:1.7">Loved this {{ m.type }}? We’ll tailor every detail to your story, your colors and your guest list.</p><div class="ctaBtns"><button class="btn btn-gold" onClick="{{ m.onBook }}">Book Consultation</button><button class="btn btn-ghost" onClick="{{ openQuote }}">Request Quotation</button><button class="btn btn-ghost" onClick="{{ openChat }}">Chat With Us</button></div></div>
+</div></div></div></sc-if>
+
+<sc-if value="{{ lightbox }}" hint-placeholder-val="{{ false }}"><div class="lbox"><button class="lboxClose" onClick="{{ closeLight }}">✕</button><button class="lboxNav" style="left:20px" onClick="{{ prevPhoto }}">‹</button><div class="lboxImg {{ mPhoto.pal }}">{{ mLboxImg }}</div><button class="lboxNav" style="right:20px" onClick="{{ nextPhoto }}">›</button><div class="lboxCap">{{ mPhoto.label }} — {{ photoLabel }}</div></div></sc-if>
+
+<sc-if value="{{ videoOpen }}" hint-placeholder-val="{{ false }}"><div class="vbox" onClick="{{ closeVideo }}"><div class="vboxInner" onClick="{{ stop }}"><button class="lboxClose" onClick="{{ closeVideo }}">✕</button>{{ videoPlayer }}<div class="vboxCap"><div class="ty">{{ videoMeta.type }}</div><div class="t">{{ videoMeta.title }}</div></div></div></div></sc-if>
+
+<sc-if value="{{ bookingOpen }}" hint-placeholder-val="{{ false }}"><div class="ovl ovl-fade" onClick="{{ closeBooking }}" style="justify-content:flex-end;padding:0;background:rgba(20,14,10,.5)"><div class="drawer" onClick="{{ stop }}"><div class="drawer-h"><button class="drawerClose" onClick="{{ closeBooking }}">✕</button><div class="eyebrow">{{ booking.kind }}</div><h3 class="disp">{{ booking.title }}</h3><p>{{ booking.sub }}</p></div><div class="drawer-b"><sc-if value="{{ booking.prefilled }}" hint-placeholder-val="{{ false }}"><div class="pfnote">✦ Pre-filled from “{{ booking.from }}”</div></sc-if><div class="field"><label>Client Name</label><input data-field="Client Name" placeholder="Your full name"></div><div class="field"><label>Email</label><input data-field="Email" type="email" placeholder="you@email.com"></div><div class="field"><label>Phone Number</label><input data-field="Phone Number" type="tel" placeholder="0917 000 0000"></div><div class="field"><label>Facebook Profile</label><input data-field="Facebook Profile" placeholder="facebook.com/yourname"></div><div class="field"><label>Event Type</label><input data-field="Event Type" value="{{ booking.type }}" class="{{ booking.pfCls }}" placeholder="Wedding, Debut, Birthday…"></div><div class="field"><label>Preferred Theme / Style</label><input data-field="Event Theme" value="{{ booking.style }}" class="{{ booking.pfCls }}" placeholder="Elegant, rustic, minimalist…"></div><div class="field"><label>Package</label><input data-field="Package" value="{{ booking.pkg }}" class="{{ booking.pfCls }}" placeholder="Classic, Premium, Luxury…"></div><div class="field"><label>Selected Services</label><textarea data-field="Services" rows="2" class="{{ booking.pfCls }}">{{ booking.services }}</textarea></div><div class="field"><label>Event Date</label><input data-field="Event Date" type="date"></div><div class="field"><label>Event Time</label><input data-field="Event Time" type="time"></div><div class="field"><label>Venue</label><input data-field="Venue" placeholder="Venue or location"></div><div class="field"><label>Number of Guests</label><input data-field="Number of Guests" type="number" min="1" placeholder="e.g. 150"></div><div class="field"><label>Budget</label><input data-field="Budget" placeholder="e.g. ₱80,000"></div><div class="field"><label>Notes</label><textarea data-field="Notes" rows="3" placeholder="Tell us about your dream event…"></textarea></div><button class="btn btn-gold w100" onClick="{{ submitBooking }}" disabled="{{ submitting }}" style="margin-top:6px">{{ submitLabel }}</button><p class="{{ statusCls }}" style="font-size:12px;text-align:center;margin-top:14px">{{ statusMsg }}</p></div></div></div></sc-if>
+
+<sc-if value="{{ successModal }}" hint-placeholder-val="{{ false }}"><div class="okOvl" onClick="{{ closeSuccess }}"><div class="okCard" onClick="{{ stop }}"><div class="okTick">✓</div><h3 class="disp">Inquiry received!</h3><p>Thank you, {{ successName }} — your inquiry is on its way to SHAWIE. Sharon will personally reply within 24 hours. ✦</p><button class="okDone" onClick="{{ closeSuccess }}">Done</button></div></div></sc-if>
+
+<sc-if value="{{ showFloat }}" hint-placeholder-val="{{ true }}"><button class="floatBook" onClick="{{ openConsult }}">✦ Book Your Date</button></sc-if>
+
+<sc-if value="{{ chatClosed }}" hint-placeholder-val="{{ true }}"><button class="chatFab" onClick="{{ openChat }}" title="Chat with SHAWIE">✦<span class="chatDot"></span></button></sc-if>
+
+<sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}"><div class="chatPanel"><div class="chatHead"><div class="chatAva">S</div><div><div class="ch-n">Ask SHAWIE</div><div class="ch-s"><span class="live"></span>Replies instantly</div></div><button class="chatX" onClick="{{ closeChat }}">✕</button></div><div class="chatBody">{{ chatThread }}</div><div class="chatChips"><sc-for list="{{ chatSuggest }}" as="cs" hint-placeholder-count="3"><button class="chatChip" onClick="{{ cs.onClick }}">{{ cs.label }}</button></sc-for></div><div class="chatInput"><input placeholder="Ask about pricing, services, dates…" value="{{ chatInput }}" onInput="{{ onChatInput }}" onKeyDown="{{ onChatKey }}"><button class="chatSend" onClick="{{ sendChat }}" disabled="{{ chatBusy }}">➤</button></div></div></sc-if>
+
+<sc-if value="{{ demoOpen }}" hint-placeholder-val="{{ false }}"><div class="ovl" onClick="{{ closeDemo }}"><div class="modal demoModal" onClick="{{ stop }}"><button class="mClose" onClick="{{ closeDemo }}">✕</button><div class="demoHead"><span class="di2">{{ demoIco }}</span><div><span class="eyebrow">Interactive Demo</span><h3 class="disp">{{ demoTitle }}</h3><p>{{ demoSub }}</p></div></div><div class="demoBody">
+<sc-if value="{{ demoIsEmail }}" hint-placeholder-val="{{ false }}"><div class="emJourney"><div class="emToolbar"><button class="emPlay" onClick="{{ emailPlay }}">{{ emailPlayLabel }}</button><div class="emProg"><div class="emProgFill" style="width: {{ emProgPct }}"></div></div><span class="mute" style="font-size:12px">Email {{ emStageNo }} of {{ emTotal }}</span></div><div class="emList"><sc-for list="{{ emJourney }}" as="s" hint-placeholder-count="13"><div class="{{ s.cls }}" onClick="{{ s.onClick }}"><span class="emNum">{{ s.num }}</span><div><div class="emIt-day">{{ s.day }} · {{ s.trig }}</div><div class="emIt-subj">{{ s.subj }}</div></div></div></sc-for></div><div class="emMail"><div class="emMailBar"><span class="emDot" style="background:#ff5f57"></span><span class="emDot" style="background:#febc2e"></span><span class="emDot" style="background:#28c840"></span></div><div class="emMailBody"><span class="emTrig">Trigger · {{ emCur.day }} — {{ emCur.trig }}</span><div class="emFrom"><div class="emAva">S</div><div><div class="ef-n">SHAWIE Bakes &amp; Events</div><div class="ef-e">hello@shawie.events → bianca@email.com</div></div></div><div class="emSubj">{{ emCur.subj }}</div><div class="emText">{{ emCur.body }}</div><span class="emCta">Book a free consultation ✦</span></div></div></div></sc-if>
+<sc-if value="{{ demoIsRsvp }}" hint-placeholder-val="{{ false }}"><div class="rsvpGrid"><div class="rInvite"><div class="rScript">You’re invited to</div><h4 class="disp">Bianca &amp; Marco</h4><div class="rDate">Feb 14, 2026 · Tagaytay</div><div class="rField"><label>Your name</label><input class="rInput" value="{{ rsvpName }}" onInput="{{ rsvpOnName }}" placeholder="e.g. Maria Santos"></div><div class="rField"><label>Will you attend?</label><div class="rBtns"><button class="{{ rsvpYesCls }}" onClick="{{ rsvpSetYes }}">Joyfully accepts</button><button class="{{ rsvpNoCls }}" onClick="{{ rsvpSetNo }}">Regretfully declines</button></div></div><sc-if value="{{ rsvpIsYes }}" hint-placeholder-val="{{ true }}"><div class="rField"><label>Number of guests</label><input class="rInput" type="number" min="1" value="{{ rsvpCount }}" onInput="{{ rsvpOnCount }}"></div><div class="rField"><label>Meal preference</label><select class="rInput" value="{{ rsvpMeal }}" onChange="{{ rsvpOnMeal }}"><option>Chicken</option><option>Beef</option><option>Fish</option><option>Vegetarian</option></select></div></sc-if><button class="rSubmit" onClick="{{ rsvpSubmit }}">Send RSVP</button></div><div class="rDash"><div class="rStats"><div class="rStat"><div class="n">{{ rsvpHeads }}</div><div class="l">Attending</div></div><div class="rStat"><div class="n">{{ rsvpYes }}</div><div class="l">Accepts</div></div><div class="rStat"><div class="n">{{ rsvpNo }}</div><div class="l">Regrets</div></div></div><div class="rQrRow"><div class="qr" style="width:88px;height:88px;padding:7px;border-radius:8px;flex:none"><div class="qrg"><sc-for list="{{ qrCells }}" as="c" hint-placeholder-count="121"><i class="{{ c }}"></i></sc-for></div></div><div><div style="font-size:13px;font-weight:600;color:var(--ink)">Scan to RSVP</div><div style="font-size:12px;color:var(--mute);line-height:1.5">Every printed invitation carries a unique QR — guests tap, RSVP and check in on arrival.</div></div></div><div class="rGuests"><sc-for list="{{ guestRows }}" as="g" hint-placeholder-count="4"><div class="gRow {{ g.cls }}"><span class="gMark">{{ g.mark }}</span><span class="gn">{{ g.name }}</span><span class="gc">{{ g.countLabel }}</span><span class="gm">{{ g.meal }}</span></div></sc-for></div></div></div></sc-if>
+<sc-if value="{{ demoIsCrm }}" hint-placeholder-val="{{ false }}"><div class="kbTop"><span class="mute" style="font-size:13px">Tap <b class="gold">Advance →</b> to move a lead through the pipeline.</span><button class="perBtn" onClick="{{ crmReset }}">↺ Reset pipeline</button></div><div class="kanban"><sc-for list="{{ kanban }}" as="col" hint-placeholder-count="5"><div class="kcol"><div class="kcolH"><span class="kn">{{ col.name }}</span><span class="kc">{{ col.count }}</span></div><div class="kcolVal">{{ col.value }}</div><sc-for list="{{ col.cards }}" as="c" hint-placeholder-count="2"><div class="kcard"><div class="ktitle">{{ c.name }}</div><div class="kmeta">{{ c.event }} · {{ c.when }}</div><div class="kval">{{ c.valLabel }}</div><sc-if value="{{ c.notEnd }}" hint-placeholder-val="{{ true }}"><button class="kadv" onClick="{{ c.advance }}">Advance →</button></sc-if><sc-if value="{{ c.atEnd }}" hint-placeholder-val="{{ false }}"><button class="kadv done">✓ Completed</button></sc-if></div></sc-for></div></sc-for></div></sc-if>
+<sc-if value="{{ demoIsAdmin }}" hint-placeholder-val="{{ false }}"><div class="kbTop"><span class="mute" style="font-size:13px">Business overview · updates by period</span><div class="perBtns"><sc-for list="{{ adminPeriods }}" as="p" hint-placeholder-count="3"><button class="{{ p.cls }}" onClick="{{ p.onClick }}">{{ p.name }}</button></sc-for></div></div><div class="adStats"><div class="adStat"><div class="n">{{ adminP.rev }}</div><div class="l">Revenue</div></div><div class="adStat"><div class="n">{{ adminP.book }}</div><div class="l">Bookings</div></div><div class="adStat"><div class="n">{{ adminP.leads }}</div><div class="l">New Leads</div></div><div class="adStat"><div class="n">{{ adminP.conv }}</div><div class="l">Conversion</div></div></div><div class="adGrid"><div class="adCard"><h5>Revenue Trend</h5><div class="adBars"><sc-for list="{{ adminBars }}" as="b" hint-placeholder-count="6"><div class="adBar"><div class="bar" style="height: {{ b.h }}%"></div><div class="bl">{{ b.label }}</div></div></sc-for></div></div><div class="adCard"><h5>Email Performance</h5><div class="adPerf"><div class="pl"><span>Open rate</span><b class="gold">{{ adminP.open }}</b></div><div class="adTrack"><div class="fill" style="width: {{ adminP.open }}"></div></div></div><div class="adPerf"><div class="pl"><span>Click rate</span><b class="gold">{{ adminP.click }}</b></div><div class="adTrack"><div class="fill" style="width: {{ adminP.click }}"></div></div></div><h5 style="margin-top:18px">Top Services</h5><div class="adTop"><sc-for list="{{ adminTop }}" as="t" hint-placeholder-count="4"><div class="adTopRow"><span class="tn">{{ t.name }}</span><span class="tt"><span class="fill" style="width: {{ t.pct }}%"></span></span><span class="tp">{{ t.pct }}%</span></div></sc-for></div></div></div></sc-if>
+<sc-if value="{{ demoIsPortal }}" hint-placeholder-val="{{ false }}"><div class="ptabs"><sc-for list="{{ portalTabs }}" as="t" hint-placeholder-count="5"><div class="{{ t.cls }}" onClick="{{ t.onClick }}">{{ t.label }}</div></sc-for></div><sc-if value="{{ portalShowOverview }}" hint-placeholder-val="{{ true }}"><div class="pWelcome"><div class="pAva">B</div><div><h4 class="disp">Welcome back, Bianca ✦</h4><p>Garden Wedding · Feb 14, 2026 · The Orangery, Tagaytay</p></div></div><div class="pProg"><div class="pt"><span>Planning progress</span><b class="gold">{{ portalPct }}</b></div><div class="pBar"><div class="fill" style="width: {{ portalPct }}"></div></div></div><div class="pOverGrid"><div class="pMini"><div class="l">Balance Due</div><div class="v">₱155,000</div></div><div class="pMini"><div class="l">Days to go</div><div class="v">28</div></div><div class="pMini"><div class="l">Guests confirmed</div><div class="v">184 / 220</div></div><div class="pMini"><div class="l">Next milestone</div><div class="v">Cake tasting</div></div></div></sc-if><sc-if value="{{ portalShowInv }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ portalInvoices }}" as="iv" hint-placeholder-count="3"><div class="ivRow"><div class="ivl"><div class="ivn">{{ iv.label }}</div><div class="iva">{{ iv.amt }}</div></div><sc-if value="{{ iv.paid }}" hint-placeholder-val="{{ false }}"><span class="ivStat ivPaid">✓ {{ iv.statusLabel }}</span></sc-if><sc-if value="{{ iv.notPaid }}" hint-placeholder-val="{{ true }}"><span class="ivStat ivDue">{{ iv.statusLabel }}</span><button class="ivPay" onClick="{{ iv.pay }}">Pay now</button></sc-if></div></sc-for></sc-if><sc-if value="{{ portalShowContract }}" hint-placeholder-val="{{ false }}"><div class="pContract"><sc-if value="{{ portalSigned }}" hint-placeholder-val="{{ false }}"><div class="pcIco">✅</div><h4 class="disp">Contract signed</h4><p>Thank you! A countersigned copy has been emailed to you and stored securely in your portal.</p><span class="pSigned">✓ Signed electronically</span></sc-if><sc-if value="{{ portalUnsigned }}" hint-placeholder-val="{{ true }}"><div class="pcIco">📄</div><h4 class="disp">Service Agreement</h4><p>Your celebration contract outlines packages, inclusions, the payment schedule and terms. Review and sign electronically below.</p><button class="pSign" onClick="{{ portalSign }}">Review &amp; sign</button></sc-if></div></sc-if><sc-if value="{{ portalShowTimeline }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ portalTasks }}" as="t" hint-placeholder-count="6"><div class="{{ t.cls }}" onClick="{{ t.onClick }}"><span class="pck">✓</span><span class="plabel">{{ t.label }}</span></div></sc-for></sc-if><sc-if value="{{ portalShowGallery }}" hint-placeholder-val="{{ false }}"><div class="pGallery"><h4 class="disp" style="font-size:24px">Your Gallery</h4><p class="mute" style="font-size:13px;margin-top:4px">248 edited photos · highlight film · ready to download</p><div class="pgThumbs"><img src="assets/photos/p09.jpg" alt=""><img src="assets/photos/p26.jpg" alt=""><img src="assets/photos/p10.jpg" alt=""><img src="assets/photos/p27.jpg" alt=""></div><button class="pgDl" onClick="{{ openConsult }}">⬇ Download all (248)</button></div></sc-if></sc-if>
+</div></div></div></sc-if>
+
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}"><div class="toast"><span class="td">✦</span>{{ toast }}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;agencyName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Sharon Rose Studio&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Agency&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#b0506a&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Style&quot;,&quot;options&quot;:[&quot;#a67c52&quot;,&quot;#b0506a&quot;,&quot;#6f7d5a&quot;,&quot;#8a6f9c&quot;,&quot;#2b6a6a&quot;]},&quot;columns&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;3&quot;,&quot;options&quot;:[&quot;2&quot;,&quot;3&quot;,&quot;4&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Style&quot;},&quot;floatingBook&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Style&quot;}}">
+class Component extends DCLogic {
+  state = { cat:'All', q:'', sort:'Newest', favOnly:false, favs:[], openId:null, photoIdx:0, lightbox:false, booking:null, toast:'', openFaq:0, chatOpen:false, chatInput:'', chatBusy:false, videoOpen:false, videoMeta:null, aiBusy:false, aiIds:null, aiSummary:'', chatMsgs:[{ role:'bot', text:'Hi, I’m SHAWIE’s assistant ✦ Ask me about our services, packages, pricing or available dates — or tell me about the celebration you’re dreaming up!' }] , demo:null, emailStage:0, emailPlaying:false, adminPeriod:'Month', rsvpName:'', rsvpAttend:'yes', rsvpCount:'2', rsvpMeal:'Chicken', rsvpList:[{name:'Bianca Reyes',attend:'yes',count:2,meal:'Beef'},{name:'Marco Santos',attend:'yes',count:1,meal:'Fish'},{name:'Tita Lorna',attend:'no',count:0,meal:'—'},{name:'The Cruz Family',attend:'yes',count:4,meal:'Chicken'}], crmStages:{}, portalTab:'overview', portalPaid:{}, portalTasks:{}, portalSigned:false };
+
+  CATS = ['All','Weddings','Prenup','Photography','Videography','Birthday','Debut','Baptism','Anniversary','Corporate','Custom Cakes','Dessert Tables','Grazing Tables','Event Styling','Floral'];
+  SORTS = ['Newest','Most Popular','Price: Low','Price: High'];
+  SUGGEST = ['Garden Wedding','Beach Wedding','Rustic','Cathedral','Boho','Pink','Gold','Sage','Emerald','Minimalist Cake','Drone Film','Golden Hour'];
+
+  RAW = [
+    { id:'amara-liam', name:'Amara & Liam', cat:'Weddings', type:'Wedding', theme:'Garden Romance', venue:'Hacienda Isabella, Tagaytay', date:'March 2025', guests:180, pal:'pal3', ar:'ar3', pop:98, order:14, price:'₱185,000', colors:['#d8e0d0','#b9c4a6','#e8d5ce','#a67c52'], tags:['garden','outdoor','romantic','sage','green','wedding'],
+      services:['Wedding Cake','Event Styling','Dessert Table','Grazing Table','Photography','Videography','Drone Coverage','Same Day Edit','Coordination'],
+      story:'A soft botanical wedding set among the cool gardens of Tagaytay — where hand-piped buttercream blooms met fresh garden roses, and the couple exchanged vows beneath a living floral arch as golden hour fell.',
+      decorations:['Fresh Flowers','Floral Arch','Luxury Table Setup','Candle Arrangement','Backdrop Design'],
+      cake:{ style:'5-Tier Semi-Naked', flavor:'Vanilla Bean & Raspberry', size:'5 Tiers · 200 servings', custom:'Hand-piped buttercream florals, fresh garden roses and delicate gold-leaf accents cascading down the tiers.' },
+      photography:{ photographer:'SHAWIE Studio · Lead: Mara Cruz', hours:'12 Hours', photos:'650 edited', drone:'Yes', album:'30-page heirloom album' },
+      videography:{ length:'5–7 min Highlight', highlight:'Cinematic Highlight Film', sde:'Yes', drone:'Yes', k4:'4K' },
+      review:{ name:'Amara D.', role:'Bride', pal:'pal4', text:'SHAWIE made our garden dream feel effortless — the cake, the flowers, the film. We still tear up watching our same-day edit.' } },
+    { id:'bea-noah', name:'Bea & Noah', cat:'Weddings', type:'Wedding', theme:'Rustic Vineyard', venue:'Alon Vineyard, Cavite', date:'November 2024', guests:140, pal:'pal7', ar:'ar4', pop:88, order:11, price:'₱165,000', colors:['#ecd6c4','#c58a68','#a98a6c','#6b4a3f'], tags:['rustic','vineyard','warm','terracotta','wedding'],
+      services:['Wedding Cake','Event Styling','Grazing Table','Photography','Videography','Coordination'],
+      story:'Warm terracotta tones, hanging amber lights and a long harvest table beneath the vines. A relaxed, romantic celebration built around great food and golden light.',
+      decorations:['Fresh Flowers','Candle Arrangement','Luxury Table Setup','Backdrop Design'],
+      cake:{ style:'3-Tier Rustic Buttercream', flavor:'Salted Caramel & Apple', size:'3 Tiers · 120 servings', custom:'Textured buttercream, dried florals and a hand-tied wheat detail.' },
+      photography:{ photographer:'SHAWIE Studio · Lead: Jio Reyes', hours:'10 Hours', photos:'520 edited', drone:'Yes', album:'24-page album' },
+      videography:{ length:'5 min Highlight', highlight:'Cinematic Highlight Film', sde:'Yes', drone:'Yes', k4:'4K' },
+      review:{ name:'Bea M.', role:'Bride', pal:'pal7', text:'Everything felt warm and intentional. Our guests are still talking about the grazing table and the cake.' } },
+    { id:'garden-prenup', name:'Soft Botanical Prenup', cat:'Prenup', type:'Prenuptial Photoshoot', theme:'Soft Botanical', venue:'Sonya’s Garden, Tagaytay', date:'January 2025', guests:2, pal:'pal3', ar:'ar5', pop:74, order:9, price:'₱28,000', colors:['#d8e0d0','#cdd6c9','#e6d2da','#94a684'], tags:['prenup','garden','soft','botanical','green'],
+      services:['Photography','Drone Coverage','Hair & Makeup','Styling Direction'],
+      story:'A tender pre-wedding shoot wandering through a botanical garden at first light — linen tones, wildflowers and unhurried, candid moments between the two of them.',
+      decorations:['Fresh Flowers','Floral Bouquet'],
+      photography:{ photographer:'SHAWIE Studio · Lead: Mara Cruz', hours:'4 Hours', photos:'120 edited', drone:'Yes', album:'Digital gallery' },
+      review:{ name:'Liza & Paolo', role:'Engaged Couple', pal:'pal3', text:'They captured us exactly as we are — relaxed, in love, laughing. The light in every photo is unreal.' } },
+    { id:'sofia-debut', name:'Sofia’s Rose Gold Debut', cat:'Debut', type:'Debut (18th)', theme:'Rose Gold Glam', venue:'The Glass Pavilion, Manila', date:'December 2024', guests:120, pal:'pal5', ar:'ar3', pop:91, order:12, price:'₱120,000', colors:['#ecdfc4','#e6d2da','#c4a766','#b18a99'], tags:['debut','glam','rose gold','pink','18th'],
+      services:['Custom Cake','Event Styling','Dessert Table','Photography','Videography','Photo Booth','Invitation Design','Coordination'],
+      story:'Eighteen roses, eighteen candles and a shimmering rose-gold ballroom. A glamorous debut with a dramatic dessert wall and a showstopping floral-draped cake.',
+      decorations:['Fresh Flowers','Balloon Styling','Luxury Table Setup','Backdrop Design','Candle Arrangement'],
+      cake:{ style:'4-Tier Metallic Drip', flavor:'Red Velvet & Cream Cheese', size:'4 Tiers · 150 servings', custom:'Rose-gold drip, sugar roses and a monogrammed acrylic topper.' },
+      photography:{ photographer:'SHAWIE Studio · Lead: Jio Reyes', hours:'8 Hours', photos:'480 edited', drone:'No', album:'Digital + 20 prints' },
+      videography:{ length:'4 min Highlight', highlight:'Glam Highlight Reel', sde:'Yes', drone:'No', k4:'4K' },
+      review:{ name:'Sofia R.', role:'Debutante', pal:'pal5', text:'It felt like a dream — the dessert table, the cake, the whole room glowing. Best night of my life.' } },
+    { id:'mateo-bday', name:'Mateo Turns One', cat:'Birthday', type:'Birthday Celebration', theme:'Safari Adventure', venue:'Private Residence, QC', date:'October 2024', guests:60, pal:'pal2', ar:'ar2', pop:79, order:8, price:'₱55,000', colors:['#ddc8b2','#a98a6c','#cdd6c9','#6b4a3f'], tags:['birthday','kids','safari','first birthday','warm'],
+      services:['Custom Cake','Event Styling','Dessert Table','Balloon Styling','Photography','Photo Booth'],
+      story:'A playful little safari for a very important first birthday — woven textures, balloon foliage and a friendly herd of fondant animals leading to the cake.',
+      decorations:['Balloon Styling','Fresh Flowers','Backdrop Design','Luxury Table Setup'],
+      cake:{ style:'2-Tier Sculpted Safari', flavor:'Chocolate & Vanilla', size:'2 Tiers · 60 servings', custom:'Hand-sculpted fondant animals, palm leaves and a “ONE” topper.' },
+      photography:{ photographer:'SHAWIE Studio · Lead: Mara Cruz', hours:'4 Hours', photos:'200 edited', drone:'No', album:'Digital gallery' },
+      review:{ name:'The Santos Family', role:'Parents', pal:'pal2', text:'Mateo’s safari was beyond adorable. The cake was almost too cute to cut!' } },
+    { id:'eliana-baptism', name:'Baby Eliana’s Christening', cat:'Baptism', type:'Baptism', theme:'Cloud Nine', venue:'San Antonio Parish + Hotel', date:'September 2024', guests:80, pal:'pal6', ar:'ar4', pop:70, order:7, price:'₱48,000', colors:['#d3dbe2','#e8d5ce','#dcd3de','#8a9bb2'], tags:['baptism','christening','soft','blue','clouds'],
+      services:['Custom Cake','Event Styling','Dessert Table','Floral Arrangements','Photography'],
+      story:'Soft as a cloud — powder blues, drifting florals and gentle gauze. A serene celebration to welcome baby Eliana, styled around angelic whites and pastels.',
+      decorations:['Fresh Flowers','Candle Arrangement','Luxury Table Setup','Backdrop Design'],
+      cake:{ style:'3-Tier Pastel Buttercream', flavor:'Vanilla Chiffon', size:'3 Tiers · 80 servings', custom:'Cloud-textured buttercream, sugar wings and a fondant cross.' },
+      photography:{ photographer:'SHAWIE Studio · Lead: Jio Reyes', hours:'5 Hours', photos:'260 edited', drone:'No', album:'Digital + album' },
+      review:{ name:'The Cruz Family', role:'Parents', pal:'pal6', text:'So gentle and beautiful. Every detail felt blessed. Thank you for making Eliana’s day perfect.' } },
+    { id:'aurora-gala', name:'Aurora Brand Gala', cat:'Corporate', type:'Corporate Event', theme:'Modern Noir', venue:'The Penthouse, BGC', date:'August 2024', guests:250, pal:'pal8', ar:'ar3', pop:84, order:6, price:'₱320,000', colors:['#dcd3de','#9a8aa2','#2b2420','#c4a766'], tags:['corporate','gala','modern','luxury','noir'],
+      services:['Event Styling','Grazing Table','Dessert Table','Photography','Videography','Drone Coverage','Coordination'],
+      story:'A sleek product gala in monochrome and metallics — architectural florals, a mirrored grazing bar and cinematic lighting for a launch that felt like a film premiere.',
+      decorations:['Luxury Table Setup','Backdrop Design','Candle Arrangement','Floral Arch'],
+      photography:{ photographer:'SHAWIE Studio · Lead: Mara Cruz', hours:'6 Hours', photos:'400 edited', drone:'Yes', album:'Digital gallery' },
+      videography:{ length:'3 min Event Film', highlight:'Brand Highlight Film', sde:'No', drone:'Yes', k4:'4K' },
+      review:{ name:'Aurora Co.', role:'Marketing Director', pal:'pal8', text:'Flawless execution. The styling and film elevated our launch far beyond expectations.' } },
+    { id:'golden-50', name:'The Golden 50th', cat:'Anniversary', type:'Anniversary', theme:'Champagne Gold', venue:'Manila Hotel Ballroom', date:'July 2024', guests:160, pal:'pal5', ar:'ar4', pop:76, order:5, price:'₱140,000', colors:['#ecdfc4','#c4a766','#e8d5ce','#a67c52'], tags:['anniversary','gold','classic','elegant','50th'],
+      services:['Custom Cake','Event Styling','Dessert Table','Grazing Table','Photography','Videography','Coordination'],
+      story:'Fifty years of love, celebrated in champagne and gold. Classic florals, a renewal of vows and a grand tiered cake recreating the couple’s original wedding design.',
+      decorations:['Fresh Flowers','Candle Arrangement','Luxury Table Setup','Floral Arch'],
+      cake:{ style:'4-Tier Classic Gold', flavor:'Mocha & Hazelnut', size:'4 Tiers · 160 servings', custom:'Gold-leafed tiers with a sugar-flower recreation of the 1974 wedding bouquet.' },
+      photography:{ photographer:'SHAWIE Studio · Lead: Jio Reyes', hours:'7 Hours', photos:'380 edited', drone:'No', album:'Heirloom album' },
+      videography:{ length:'5 min Highlight', highlight:'Anniversary Film', sde:'Yes', drone:'No', k4:'4K' },
+      review:{ name:'Mr. & Mrs. Lim', role:'Celebrants', pal:'pal5', text:'They recreated our wedding cake from 50 years ago. We wept. An unforgettable golden night.' } },
+    { id:'peony-cake', name:'Cascading Peony Cake', cat:'Custom Cakes', type:'Custom Cake', theme:'Floral Couture', venue:'Studio Commission', date:'2025', guests:0, pal:'pal4', ar:'ar5', pop:95, order:13, price:'₱18,000', colors:['#e6d2da','#e8d5ce','#b18a99','#94a684'], tags:['cake','custom','floral','peony','pink','minimalist'],
+      services:['Custom Cake','Sugar Flowers','Delivery & Setup'],
+      story:'A couture commission — five tiers of smooth ivory buttercream brought to life with a cascade of hand-crafted sugar peonies in blush, cream and dusty rose.',
+      decorations:['Fresh Flowers','Sugar Florals'],
+      cake:{ style:'5-Tier Buttercream Couture', flavor:'Earl Grey & Lavender', size:'5 Tiers · 180 servings', custom:'Over 60 individually crafted sugar peonies cascading asymmetrically across the tiers.' },
+      review:{ name:'Camille V.', role:'Bride', pal:'pal4', text:'The most beautiful cake I have ever seen. Guests refused to believe the flowers were sugar.' } },
+    { id:'blush-dessert', name:'Blush Dessert Affair', cat:'Dessert Tables', type:'Dessert Table', theme:'Blush & Cream', venue:'The Orangery, Alabang', date:'June 2024', guests:100, pal:'pal1', ar:'ar2', pop:81, order:4, price:'₱45,000', colors:['#efe2d8','#e8d5ce','#e6d2da','#caa98e'], tags:['dessert','blush','pink','sweets','styling'],
+      services:['Dessert Table','Custom Cake','Event Styling','Floral Arrangements'],
+      story:'A dreamy dessert affair in blush and cream — macarons, tarts, cake pops and a centerpiece cake, all arranged on a draped pedestal display framed by florals.',
+      decorations:['Fresh Flowers','Luxury Table Setup','Backdrop Design'],
+      cake:{ style:'2-Tier Buttercream', flavor:'Strawberries & Cream', size:'2 Tiers · 50 servings', custom:'Soft blush ombré with fresh berries and edible petals.' },
+      review:{ name:'Hannah G.', role:'Host', pal:'pal1', text:'The dessert table was the heart of the party. Every piece was gorgeous and delicious.' } },
+    { id:'harvest-grazing', name:'Harvest Grazing Spread', cat:'Grazing Tables', type:'Grazing Table', theme:'Rustic Abundance', venue:'Open-Air Barn, Bulacan', date:'May 2024', guests:90, pal:'pal7', ar:'ar4', pop:77, order:3, price:'₱60,000', colors:['#ecd6c4','#c58a68','#cdd6c9','#a98a6c'], tags:['grazing','rustic','food','abundance','warm'],
+      services:['Grazing Table','Event Styling','Floral Arrangements'],
+      story:'A four-metre grazing table overflowing with artisan cheeses, cured meats, seasonal fruit and warm bread — styled with foliage, candles and rustic timber boards.',
+      decorations:['Fresh Flowers','Candle Arrangement','Luxury Table Setup'],
+      review:{ name:'The Reyes Family', role:'Hosts', pal:'pal7', text:'Abundant, beautiful and absolutely delicious. The grazing table stopped everyone in their tracks.' } },
+    { id:'sage-marble', name:'Sage & Marble Reception', cat:'Event Styling', type:'Event Styling', theme:'Sage Minimal', venue:'The Atrium, Makati', date:'April 2024', guests:130, pal:'pal3', ar:'ar3', pop:83, order:2, price:'₱110,000', colors:['#d8e0d0','#cdd6c9','#94a684','#e8d5ce'], tags:['styling','sage','minimal','green','modern','minimalist'],
+      services:['Event Styling','Floral Arrangements','Grazing Table','Coordination'],
+      story:'Understated and elegant — sage greenery against white marble, sculptural taper candles and minimalist tablescapes for a couple who wanted calm, modern beauty.',
+      decorations:['Fresh Flowers','Candle Arrangement','Luxury Table Setup','Floral Arch'],
+      review:{ name:'Andrea & Marco', role:'Couple', pal:'pal3', text:'Exactly the calm, modern elegance we dreamed of. Not one detail out of place.' } },
+    { id:'cathedral-arch', name:'Cathedral Floral Arch', cat:'Floral', type:'Floral Arrangement', theme:'Romantic Blooms', venue:'San Agustin Church, Manila', date:'March 2024', guests:0, pal:'pal4', ar:'ar5', pop:86, order:1, price:'₱75,000', colors:['#e6d2da','#e8d5ce','#b18a99','#caa98e'], tags:['floral','arch','blooms','romantic','pink','church'],
+      services:['Floral Arrangements','Floral Arch','Aisle Styling','Bridal Bouquet'],
+      story:'A breathtaking seven-foot floral arch in garden roses, ranunculus and trailing greenery — the centerpiece of a romantic cathedral ceremony.',
+      decorations:['Fresh Flowers','Floral Arch','Candle Arrangement'],
+      review:{ name:'Patricia L.', role:'Bride', pal:'pal4', text:'I gasped when I saw the arch. It was the most romantic thing I have ever stood beneath.' } },
+    { id:'maya-sde', name:'Same-Day Edit: Maya & Co', cat:'Videography', type:'Wedding Videography', theme:'Cinematic Love', venue:'Shangri-La, Mactan', date:'February 2025', guests:200, pal:'pal6', ar:'ar3', pop:89, order:10, price:'₱95,000', colors:['#d3dbe2','#8a9bb2','#ecdfc4','#a67c52'], tags:['videography','film','sde','drone','cinematic','wedding'],
+      services:['Videography','Same Day Edit','Drone Coverage','Highlight Film','Photography'],
+      story:'A destination beach wedding told in motion — aerial sweeps of the coastline, a tearful first look and a same-day edit that played to a standing ovation at the reception.',
+      decorations:['Fresh Flowers','Floral Arch','Luxury Table Setup'],
+      photography:{ photographer:'SHAWIE Studio · Lead: Mara Cruz', hours:'12 Hours', photos:'600 edited', drone:'Yes', album:'Digital gallery' },
+      videography:{ length:'6 min Highlight + SDE', highlight:'Cinematic Highlight Film', sde:'Yes', drone:'Yes', k4:'4K + 6K Drone' },
+      review:{ name:'Maya & Co', role:'Newlyweds', pal:'pal6', text:'The same-day edit had the whole room in tears. We relive our wedding every time we watch it.' } },
+    { id:'editorial-bridal', name:'Editorial Bridal Story', cat:'Photography', type:'Wedding Photography', theme:'Timeless Editorial', venue:'Las Casas, Bataan', date:'January 2025', guests:0, pal:'pal8', ar:'ar4', pop:82, order:9, price:'₱65,000', colors:['#dcd3de','#9a8aa2','#e8d5ce','#a67c52'], tags:['photography','editorial','bridal','timeless','elegant'],
+      services:['Photography','Bridal Portraits','Drone Coverage','Photo Album'],
+      story:'A timeless editorial bridal session in heritage stone halls — film-inspired tones, sculptural posing and quiet, painterly light for portraits made to last generations.',
+      decorations:['Fresh Flowers','Bridal Bouquet'],
+      photography:{ photographer:'SHAWIE Studio · Lead: Jio Reyes', hours:'6 Hours', photos:'300 edited', drone:'Yes', album:'40-page fine-art album' },
+      review:{ name:'Isabel C.', role:'Bride', pal:'pal8', text:'Like stepping into a magazine. These portraits are heirlooms — timeless and so elegant.' } },
+    { id:'liam-grace', name:'Liam & Grace', cat:'Weddings', type:'Wedding', theme:'Classic Cathedral', venue:'San Agustin Church, Manila', date:'October 2024', guests:220, pal:'pal4', ar:'ar4', pop:90, order:11, price:'₱210,000', colors:['#e8d5ce','#e6d2da','#caa98e','#a67c52'], tags:['wedding','classic','cathedral','elegant','white','timeless'],
+      services:['Wedding Cake','Event Styling','Floral Arrangements','Photography','Videography','Drone Coverage','Coordination'],
+      story:'A grand cathedral wedding in timeless white and ivory — towering floral arrangements, a candlelit aisle and a five-tier classic cake to close a day of pure elegance.',
+      decorations:['Fresh Flowers','Floral Arch','Candle Arrangement','Luxury Table Setup'],
+      cake:{ style:'5-Tier Classic White', flavor:'Vanilla & White Chocolate', size:'5 Tiers · 220 servings', custom:'Smooth fondant, hand-piped lace detail and a fresh-flower crown.' },
+      photography:{ photographer:'SHAWIE Studio · Lead: Mara Cruz', hours:'12 Hours', photos:'700 edited', drone:'Yes', album:'40-page heirloom album' },
+      videography:{ length:'7 min Highlight', highlight:'Cinematic Highlight Film', sde:'Yes', drone:'Yes', k4:'4K' },
+      review:{ name:'Grace T.', role:'Bride', pal:'pal4', text:'Timeless, elegant and absolutely seamless. Our cathedral wedding was everything we dreamed of.' } },
+    { id:'urban-prenup', name:'City Lights Prenup', cat:'Prenup', type:'Prenuptial Photoshoot', theme:'Urban Boho', venue:'BGC High Street, Taguig', date:'February 2025', guests:2, pal:'pal8', ar:'ar4', pop:72, order:8, price:'₱32,000', colors:['#dcd3de','#9a8aa2','#ecd6c4','#c58a68'], tags:['prenup','urban','boho','city','modern','candid'],
+      services:['Photography','Styling Direction','Hair & Makeup'],
+      story:'A relaxed boho-urban engagement shoot through golden city streets at dusk — denim, linen and laughter against glowing skyline light.',
+      decorations:['Floral Bouquet'],
+      photography:{ photographer:'SHAWIE Studio · Lead: Jio Reyes', hours:'3 Hours', photos:'100 edited', drone:'No', album:'Digital gallery' },
+      review:{ name:'Nica & Reign', role:'Engaged Couple', pal:'pal8', text:'Effortless and so us — the city-light photos at dusk are absolutely magical.' } },
+    { id:'boho-bday', name:'Willow’s Boho Birthday', cat:'Birthday', type:'Birthday Celebration', theme:'Boho Pampas', venue:'Garden Pavilion, Antipolo', date:'November 2024', guests:50, pal:'pal2', ar:'ar3', pop:80, order:7, price:'₱58,000', colors:['#ddc8b2','#a98a6c','#ecd6c4','#cdd6c9'], tags:['birthday','boho','pampas','neutral','earthy','kids'],
+      services:['Custom Cake','Event Styling','Dessert Table','Balloon Styling','Floral Arrangements','Photography'],
+      story:'An earthy boho birthday in pampas grass, terracotta and macramé — a soft neutral palette with a dried-floral cake and a dreamy fringe backdrop.',
+      decorations:['Pampas Grass','Balloon Styling','Fresh Flowers','Backdrop Design','Luxury Table Setup'],
+      cake:{ style:'2-Tier Boho Buttercream', flavor:'Carrot & Cream Cheese', size:'2 Tiers · 45 servings', custom:'Textured neutral buttercream with dried palms, pampas and a wood topper.' },
+      photography:{ photographer:'SHAWIE Studio · Lead: Mara Cruz', hours:'4 Hours', photos:'180 edited', drone:'No', album:'Digital gallery' },
+      review:{ name:'The Aquino Family', role:'Parents', pal:'pal2', text:'The boho theme was styled to perfection. Every neutral detail was just gorgeous.' } },
+    { id:'emerald-debut', name:'Bianca’s Emerald Debut', cat:'Debut', type:'Debut (18th)', theme:'Emerald Garden', venue:'The Conservatory, Tagaytay', date:'January 2025', guests:110, pal:'pal3', ar:'ar4', pop:85, order:9, price:'₱135,000', colors:['#d8e0d0','#94a684','#ecdfc4','#c4a766'], tags:['debut','emerald','green','garden','glam','18th'],
+      services:['Custom Cake','Event Styling','Dessert Table','Photography','Videography','Photo Booth','Invitation Design','Coordination'],
+      story:'A lush emerald-and-gold debut in a glass conservatory — eighteen roses among hanging greenery, a botanical dessert wall and a striking emerald-draped cake.',
+      decorations:['Fresh Flowers','Balloon Styling','Luxury Table Setup','Backdrop Design','Candle Arrangement'],
+      cake:{ style:'4-Tier Emerald & Gold', flavor:'Pistachio & White Chocolate', size:'4 Tiers · 140 servings', custom:'Emerald marbled fondant, gold leaf and cascading sugar greenery.' },
+      photography:{ photographer:'SHAWIE Studio · Lead: Jio Reyes', hours:'8 Hours', photos:'460 edited', drone:'No', album:'Digital + 20 prints' },
+      videography:{ length:'4 min Highlight', highlight:'Glam Highlight Reel', sde:'Yes', drone:'No', k4:'4K' },
+      review:{ name:'Bianca S.', role:'Debutante', pal:'pal3', text:'Emerald and gold in a glass garden — it felt like a fairytale. Every photo is stunning.' } },
+    { id:'naked-cake', name:'Rustic Naked Cake', cat:'Custom Cakes', type:'Custom Cake', theme:'Rustic Botanical', venue:'Studio Commission', date:'2025', guests:0, pal:'pal7', ar:'ar5', pop:78, order:6, price:'₱14,000', colors:['#ecd6c4','#c58a68','#cdd6c9','#94a684'], tags:['cake','custom','rustic','naked','botanical','wedding'],
+      services:['Custom Cake','Fresh Florals','Delivery & Setup'],
+      story:'A semi-naked buttercream cake crowned with fresh garden roses, figs and trailing eucalyptus — rustic, organic and effortlessly romantic.',
+      decorations:['Fresh Flowers','Greenery'],
+      cake:{ style:'3-Tier Semi-Naked', flavor:'Lemon & Elderflower', size:'3 Tiers · 100 servings', custom:'Bare buttercream sides with fresh figs, garden roses and eucalyptus.' },
+      review:{ name:'Denise R.', role:'Bride', pal:'pal7', text:'Exactly the rustic-but-elegant cake I wanted. The fresh figs and roses were perfect.' } },
+    { id:'goldleaf-cake', name:'Gold Leaf Wedding Cake', cat:'Custom Cakes', type:'Custom Cake', theme:'Gilded Glam', venue:'Studio Commission', date:'2025', guests:0, pal:'pal5', ar:'ar4', pop:88, order:10, price:'₱22,000', colors:['#ecdfc4','#c4a766','#e8d5ce','#a67c52'], tags:['cake','custom','gold','glam','luxury','minimalist'],
+      services:['Custom Cake','Sugar Flowers','Delivery & Setup'],
+      story:'A gilded showpiece — four tiers of ivory buttercream wrapped in hand-applied 24k gold leaf with a single dramatic sugar-orchid spray.',
+      decorations:['Sugar Florals','Gold Leaf'],
+      cake:{ style:'4-Tier Gold Leaf', flavor:'Champagne & Vanilla', size:'4 Tiers · 150 servings', custom:'Hand-applied 24k gold leaf panels with a cascading sugar orchid.' },
+      review:{ name:'Mariel & Josh', role:'Newlyweds', pal:'pal5', text:'The gold leaf was breathtaking in person — our guests could not stop photographing it.' } },
+    { id:'pastel-dessert', name:'Pastel Sweet Corner', cat:'Dessert Tables', type:'Dessert Table', theme:'Pastel Dream', venue:'The Loft, Pasig', date:'August 2024', guests:80, pal:'pal6', ar:'ar2', pop:75, order:5, price:'₱42,000', colors:['#d3dbe2','#e6d2da','#dcd3de','#8a9bb2'], tags:['dessert','pastel','pink','blue','sweets','minimalist'],
+      services:['Dessert Table','Custom Cake','Event Styling','Floral Arrangements'],
+      story:'A pastel sweet corner in powder blue and blush — macarons, meringue kisses, cupcakes and a soft ombré cake on a draped, floral-framed display.',
+      decorations:['Fresh Flowers','Luxury Table Setup','Backdrop Design'],
+      cake:{ style:'2-Tier Pastel Ombré', flavor:'Ube & Cream', size:'2 Tiers · 45 servings', custom:'Powder-blue to blush ombré with meringue kisses and edible pearls.' },
+      review:{ name:'Joanna L.', role:'Host', pal:'pal6', text:'The pastel sweet corner was pure joy — so pretty nobody wanted to take the first bite!' } },
+    { id:'golden-prenup', name:'Golden Hour Engagement', cat:'Photography', type:'Engagement Photography', theme:'Golden Hour', venue:'Seaside Cliffs, Batangas', date:'March 2025', guests:0, pal:'pal5', ar:'ar5', pop:84, order:9, price:'₱40,000', colors:['#ecdfc4','#c4a766','#e8d5ce','#caa98e'], tags:['photography','golden','prenup','engagement','sunset','romantic','drone'],
+      services:['Photography','Drone Coverage','Styling Direction','Photo Album'],
+      story:'A golden-hour engagement on the cliffs — warm backlight, salt air and unhurried, candid frames as the sun melted into the sea.',
+      decorations:['Floral Bouquet'],
+      photography:{ photographer:'SHAWIE Studio · Lead: Mara Cruz', hours:'4 Hours', photos:'140 edited', drone:'Yes', album:'20-page album' },
+      review:{ name:'Karla & Dave', role:'Engaged Couple', pal:'pal5', text:'The golden light, the sea, the way they captured us — we could not have asked for more.' } },
+    { id:'coastal-wedding', name:'Maya & Co — Coastal', cat:'Weddings', type:'Wedding', theme:'Beach Coastal', venue:'Shangri-La, Mactan', date:'February 2025', guests:200, pal:'pal6', ar:'ar3', pop:92, order:12, price:'₱240,000', colors:['#d3dbe2','#8a9bb2','#e8d5ce','#ecdfc4'], tags:['wedding','beach','coastal','seaside','blue','destination','drone'],
+      services:['Wedding Cake','Event Styling','Floral Arrangements','Photography','Videography','Drone Coverage','Same Day Edit','Coordination'],
+      story:'A barefoot beach wedding on white Mactan sand — flowing fabrics in the sea breeze, an aisle of driftwood and shells, and vows beneath an open coastal sky at sunset.',
+      decorations:['Fresh Flowers','Floral Arch','Driftwood Styling','Luxury Table Setup'],
+      cake:{ style:'3-Tier Coastal Buttercream', flavor:'Coconut & Mango', size:'3 Tiers · 150 servings', custom:'Soft blue watercolor buttercream with sugar shells and a fresh-flower crown.' },
+      photography:{ photographer:'SHAWIE Studio · Lead: Mara Cruz', hours:'12 Hours', photos:'620 edited', drone:'Yes', album:'30-page album' },
+      videography:{ length:'6 min Highlight + SDE', highlight:'Cinematic Highlight Film', sde:'Yes', drone:'Yes', k4:'4K + 6K Drone' },
+      review:{ name:'Maya R.', role:'Bride', pal:'pal6', text:'Barefoot on the sand at sunset — our coastal wedding was a dream from start to finish.' } },
+    { id:'modern-wedding', name:'Andrea & Marco — Modern', cat:'Weddings', type:'Wedding', theme:'Modern Minimalist', venue:'The Atrium, Makati', date:'April 2025', guests:120, pal:'pal3', ar:'ar4', pop:86, order:13, price:'₱195,000', colors:['#d8e0d0','#cdd6c9','#e8d5ce','#2b2420'], tags:['wedding','modern','minimalist','clean','sage','contemporary'],
+      services:['Wedding Cake','Event Styling','Floral Arrangements','Photography','Videography','Coordination'],
+      story:'A sleek modern wedding in a glass atrium — clean architectural lines, sculptural florals, monochrome tablescapes and a minimalist single-tier statement cake.',
+      decorations:['Fresh Flowers','Sculptural Florals','Candle Arrangement','Luxury Table Setup'],
+      cake:{ style:'2-Tier Minimalist', flavor:'Matcha & Vanilla', size:'2 Tiers · 120 servings', custom:'Smooth white buttercream, a single gold band and one architectural bloom.' },
+      photography:{ photographer:'SHAWIE Studio · Lead: Jio Reyes', hours:'10 Hours', photos:'480 edited', drone:'No', album:'Fine-art album' },
+      videography:{ length:'5 min Highlight', highlight:'Modern Highlight Film', sde:'Yes', drone:'No', k4:'4K' },
+      review:{ name:'Andrea & Marco', role:'Newlyweds', pal:'pal3', text:'Clean, modern and so elegant — every detail was intentional. Exactly our aesthetic.' } },
+    { id:'ballroom-wedding', name:'Sofia & James — Glam', cat:'Weddings', type:'Wedding', theme:'Glamorous Ballroom', venue:'Manila Hotel Ballroom', date:'December 2024', guests:300, pal:'pal5', ar:'ar3', pop:94, order:14, price:'₱360,000', colors:['#ecdfc4','#c4a766','#e6d2da','#a67c52'], tags:['wedding','glam','ballroom','luxury','gold','grand','crystal'],
+      services:['Wedding Cake','Event Styling','Dessert Table','Floral Arrangements','Photography','Videography','Drone Coverage','Same Day Edit','Coordination'],
+      story:'A grand ballroom wedding dripping in gold and crystal — towering centerpieces, a mirrored dance floor, a dessert wall and a six-tier chandelier-lit cake.',
+      decorations:['Fresh Flowers','Crystal Styling','Candle Arrangement','Luxury Table Setup','Floral Arch'],
+      cake:{ style:'6-Tier Grand Gold', flavor:'Mocha, Red Velvet & Vanilla', size:'6 Tiers · 300 servings', custom:'Gold-leafed tiers, crystal beading and a cascade of ivory sugar roses.' },
+      photography:{ photographer:'SHAWIE Studio · Lead: Mara Cruz', hours:'14 Hours', photos:'800 edited', drone:'Yes', album:'50-page heirloom album' },
+      videography:{ length:'8 min Highlight + SDE', highlight:'Cinematic Highlight Film', sde:'Yes', drone:'Yes', k4:'4K' },
+      review:{ name:'Sofia & James', role:'Newlyweds', pal:'pal5', text:'Pure glamour — the ballroom, the gold, the six-tier cake. Our guests still call it the wedding of the year.' } },
+    { id:'tropical-wedding', name:'Bea & Noah — Tropical', cat:'Weddings', type:'Wedding', theme:'Tropical Boho', venue:'Garden Villa, Palawan', date:'May 2025', guests:130, pal:'pal2', ar:'ar5', pop:83, order:11, price:'₱220,000', colors:['#ddc8b2','#a98a6c','#cdd6c9','#94a684'], tags:['wedding','tropical','boho','palm','greenery','destination','earthy'],
+      services:['Wedding Cake','Event Styling','Grazing Table','Floral Arrangements','Photography','Videography','Drone Coverage','Coordination'],
+      story:'A lush tropical-boho wedding among palms and monstera — pampas and banana-leaf styling, a macramé arch and a naked cake trailing tropical greenery.',
+      decorations:['Tropical Greenery','Pampas Grass','Floral Arch','Luxury Table Setup'],
+      cake:{ style:'3-Tier Tropical Naked', flavor:'Calamansi & Coconut', size:'3 Tiers · 130 servings', custom:'Semi-naked buttercream with monstera leaves, palm fronds and tropical blooms.' },
+      photography:{ photographer:'SHAWIE Studio · Lead: Jio Reyes', hours:'11 Hours', photos:'560 edited', drone:'Yes', album:'30-page album' },
+      videography:{ length:'6 min Highlight', highlight:'Cinematic Highlight Film', sde:'Yes', drone:'Yes', k4:'4K' },
+      review:{ name:'Bea & Noah', role:'Newlyweds', pal:'pal2', text:'Tropical, lush and so us — the palm-filled villa and macramé arch were beyond beautiful.' } }
+  ];
+
+  VIDS = [
+    { title:'Wedding Highlight Film', type:'Highlight', len:'6:30', pal:'pal3' },
+    { title:'Same-Day Edit', type:'SDE', len:'3:10', pal:'pal5' },
+    { title:'Drone Footage', type:'Aerial', len:'1:45', pal:'pal6' },
+    { title:'Behind the Scenes', type:'BTS', len:'2:20', pal:'pal7' },
+    { title:'Client Testimonial', type:'Testimonial', len:'1:05', pal:'pal4' }
+  ];
+  PALRING = ['pal3','pal5','pal1','pal7','pal6','pal4','pal8','pal2'];
+  LBL = ['The Setting','Styled Details','The Centerpiece','Floral Moments','Candid Joy','Before · The Venue','After · The Reveal'];
+  RELATED = ['Prenup Photoshoot','Bridal Bouquet','Hair & Makeup','Coffee Cart','Live Band','Mobile Bar','Invitation Design','Wedding Host'];
+  INSPIRATION = ['Mood Board','Pinterest Picks','Color Palette','Cake Inspiration','Floral Inspiration','Venue Styling'];
+  FAQ = [
+    { q:'How far in advance should I book?', a:'We recommend securing your date 6–12 months ahead for weddings and 2–3 months for milestone celebrations. Popular weekends book quickly.' },
+    { q:'Can I customize this package?', a:'Absolutely. Every package is a starting point — we tailor the styling, menu, cake design and coverage to your vision and budget.' },
+    { q:'Can I use my own suppliers?', a:'Yes. We happily collaborate with your trusted suppliers, or you can lean on our curated network of florists, hosts and entertainers.' },
+    { q:'Do you travel outside the city?', a:'We do. Destination and out-of-town events are welcome; travel and accommodation are quoted transparently upfront.' }
+  ];
+  SHARE = [
+    { label:'Facebook', color:'#1877f2' }, { label:'Instagram', color:'#e1306c' }, { label:'Pinterest', color:'#e60023' },
+    { label:'WhatsApp', color:'#25d366' }, { label:'Messenger', color:'#a435f0' }, { label:'Copy Link', color:'#a67c52' }
+  ];
+
+  componentDidMount(){
+    try { const f = JSON.parse(localStorage.getItem('shawie_favs') || '[]'); if (Array.isArray(f)) this.setState({ favs:f }); } catch(e){}
+    this._key = (e) => {
+      if (e.key === 'Escape') { if (this.state.videoOpen) this.closeVideo(); else if (this.state.lightbox) this.setState({ lightbox:false }); else if (this.state.booking) this.closeBooking(); else if (this.state.chatOpen) this.closeChat(); else if (this.state.openId) this.closeModal(); }
+      if (this.state.openId || this.state.lightbox) { if (e.key === 'ArrowRight') this.movePhoto(1); if (e.key === 'ArrowLeft') this.movePhoto(-1); }
+    };
+    window.addEventListener('keydown', this._key);
+  }
+  componentWillUnmount(){ window.removeEventListener('keydown', this._key); if (this._t) clearTimeout(this._t); }
+  componentDidUpdate(){ const b=document.querySelector('.chatBody'); if(b) b.scrollTop=b.scrollHeight; }
+
+  GAL = {
+    'amara-liam':['p08','p26','p19','p17','p12','p06'],
+    'bea-noah':['p27','p16','p07','p13','p11'],
+    'garden-prenup':['prenup1','prenup3','prenup5','prenup6','p06','p07'],
+    'sofia-debut':['debut1','debut2','debut3','p02','p04','p05'],
+    'mateo-bday':['p25','p31','p14','p15'],
+    'eliana-baptism':['p18','p30','p29','p22'],
+    'aurora-gala':['p24','p20','p28','p29'],
+    'golden-50':['p19','p34','p17','p32'],
+    'peony-cake':['p34','p18','p33','p17','p32'],
+    'blush-dessert':['p29','p30','p14','p15'],
+    'harvest-grazing':['p28','p29','p30'],
+    'sage-marble':['p17','p18','p22','p32'],
+    'cathedral-arch':['p26','p08','p09','p10'],
+    'maya-sde':['p09','p27','p10','p07'],
+    'editorial-bridal':['p03','p05','p01','p02'],
+    'liam-grace':['p26','p09','p10','p08'],
+    'urban-prenup':['prenup2','prenup4','prenup6','prenup1'],
+    'boho-bday':['p25','p15','p14','p31'],
+    'emerald-debut':['p01','p02','p04','p05'],
+    'naked-cake':['p17','p33','p32'],
+    'goldleaf-cake':['p19','p34','p24'],
+    'pastel-dessert':['p30','p21','p29'],
+    'golden-prenup':['p06','p12','p03'],
+    'coastal-wedding':['p07','p09','p10','p27'],
+    'modern-wedding':['p17','p13','p18','p32'],
+    'ballroom-wedding':['p19','p08','p24','p34'],
+    'tropical-wedding':['p11','p06','p26','p12']
+  };
+
+  VIDSETS = {
+    wedding:[{title:'Wedding Highlight Film',type:'Highlight',len:'6:30'},{title:'Same-Day Edit',type:'SDE',len:'3:10'},{title:'Drone Footage',type:'Aerial',len:'1:45'},{title:'Behind the Scenes',type:'BTS',len:'2:20'},{title:'Client Testimonial',type:'Testimonial',len:'1:05'}],
+    cake:[{title:'Cake Process Film',type:'Studio',len:'2:40'},{title:'The Reveal',type:'Reveal',len:'0:55'},{title:'Sugar Flower Close-Ups',type:'Detail',len:'1:20'},{title:'Behind the Scenes',type:'BTS',len:'1:45'}],
+    debut:[{title:'Debut Highlight Reel',type:'Highlight',len:'4:10'},{title:'Same-Day Edit',type:'SDE',len:'2:30'},{title:'18 Roses Moment',type:'Feature',len:'1:35'},{title:'Behind the Scenes',type:'BTS',len:'2:00'},{title:'Client Testimonial',type:'Testimonial',len:'0:58'}],
+    party:[{title:'Celebration Highlight',type:'Highlight',len:'3:20'},{title:'Same-Day Edit',type:'SDE',len:'2:00'},{title:'Candid Moments',type:'Feature',len:'1:30'},{title:'Behind the Scenes',type:'BTS',len:'1:40'},{title:'Client Testimonial',type:'Testimonial',len:'1:00'}],
+    styling:[{title:'Venue Transformation',type:'Time-lapse',len:'1:50'},{title:'Styling Walkthrough',type:'Feature',len:'2:25'},{title:'Detail Tour',type:'Detail',len:'1:15'},{title:'Behind the Scenes',type:'BTS',len:'1:40'}],
+    photo:[{title:'Photoshoot Film',type:'Highlight',len:'2:45'},{title:'Drone Footage',type:'Aerial',len:'1:30'},{title:'Behind the Scenes',type:'BTS',len:'1:50'},{title:'Client Testimonial',type:'Testimonial',len:'1:00'}]
+  };
+  vidKey(ev){ const c=ev.cat, t=ev.type||''; if(c==='Custom Cakes') return 'cake'; if(c==='Debut') return 'debut'; if(/Birthday|Baptism|Anniversary|Corporate/.test(c)) return 'party'; if(/Event Styling|Dessert Tables|Grazing Tables|Floral/.test(c)) return 'styling'; if(/Photography|Prenup/.test(c)) return 'photo'; return 'wedding'; }
+  DEFPHOTO = { photographer:'SHAWIE Studio · Lead: Mara Cruz', hours:'Full Coverage', photos:'250+ edited', drone:'Available', album:'Digital gallery + album' };
+  build(){
+    if (this._ev) return this._ev;
+    const L = ['Featured Moment','Styled Details','The Centerpiece','Floral Touches','Candid Joy','The Setting','The Reveal','Sweet Details','Golden Light'];
+    this._ev = this.RAW.map(ev => {
+      const g = (this.GAL[ev.id] || []).slice();
+      while (g.length && g.length < 5) g.push(g[g.length % g.length]); // pad to 5 for a fuller slider
+      const photos = g.map((bn,i) => ({ src:'assets/photos/'+bn+'.jpg', label:L[i%L.length] }));
+      const img = photos.length ? photos[0].src : '';
+      const o = Object.assign({}, ev, { photos, img });
+      if (ev.review){ const w = ev.review.name.replace(/[^A-Za-z ]/g,' ').split(/\s+/).filter(Boolean); const ini = ((w[0]||'S')[0] + (w[1]||w[0]||'B')[0]).toUpperCase(); o.review = Object.assign({}, ev.review, { initials: ini }); }
+      const vset = this.VIDSETS[this.vidKey(ev)] || this.VIDSETS.wedding;
+      o.videos = vset.map((v,i)=>({ ...v, pal:photos[(i+1)%photos.length] ? '' : 'pal3', src: photos.length?photos[(i+1)%photos.length].src:img, clip:'assets/shawie-logo.mp4' }));
+      if (!o.photography) o.photography = this.DEFPHOTO;
+      return o;
+    });
+    return this._ev;
+  }
+
+  toast(msg){ this.setState({ toast:msg }); if (this._t) clearTimeout(this._t); this._t = setTimeout(()=>this.setState({ toast:'' }), 2600); }
+
+  setCat(c){ this.setState({ cat:c, aiIds:null, aiSummary:'' }); }
+  onSearch(e){ this.setState({ q:e.target.value, aiIds:null, aiSummary:'' }); }
+  onSearchKey(e){ if(e.key==='Enter'){ e.preventDefault(); this.runAiSearch(); } }
+  clearAi(){ this.setState({ aiIds:null, aiSummary:'' }); }
+  async runAiSearch(){
+    const q=(this.state.q||'').trim();
+    if(!q || this.state.aiBusy) return;
+    this.setState({ aiBusy:true });
+    const cat=[]; const idx=this.build().map(e=>({ id:e.id, name:e.name, type:e.type, theme:e.theme, cat:e.cat, venue:e.venue, tags:(e.tags||[]).join(',') }));
+    const prompt='You are the search engine for a luxury events & cake studio gallery. The visitor searched: "'+q+'".\nFrom this list of gallery items (JSON), choose every item that matches the search intent — by theme, color, style, vibe, event type, venue or season. Be generous and inclusive (e.g. "beach" matches coastal/seaside, "boho" matches bohemian/pampas, "elegant" matches classic/luxury). Always return at least the 3 closest matches even if none are perfect.\n\nITEMS:\n'+JSON.stringify(idx)+'\n\nReturn ONLY valid JSON in this exact shape, no prose: {"ids":["id1","id2",...],"summary":"a short friendly 6-12 word description of what you found"}';
+    let ids=null, summary='';
+    try{
+      if(window.claude && window.claude.complete){
+        const raw=await window.claude.complete(prompt);
+        const m=raw && raw.match(/\{[\s\S]*\}/);
+        if(m){ const o=JSON.parse(m[0]); if(Array.isArray(o.ids)){ ids=o.ids.filter(id=>idx.some(e=>e.id===id)); summary=o.summary||''; } }
+      }
+    }catch(_){}
+    if(!ids || !ids.length){ // fallback to local concept search
+      const r=this.localSearch(q); ids=r.map(e=>e.id); summary='Showing the closest matches for “'+q+'”';
+    }
+    this.setState({ aiIds:ids, aiSummary:summary||('Matches for “'+q+'”'), aiBusy:false, cat:'All' });
+    setTimeout(()=>{const el=document.querySelector('.bar'); if(el) window.scrollTo({top:el.offsetTop-74,behavior:'smooth'});},60);
+  }
+  SYN = { beach:['beach','coastal','seaside','sea','shore','mactan','shangri'], coastal:['beach','coastal','seaside'], boho:['boho','bohemian','pampas','macrame','earthy'], bohemian:['boho','bohemian','pampas'], rustic:['rustic','barn','vineyard','wood','harvest','terracotta'], garden:['garden','botanical','outdoor','greenery'], pink:['pink','blush','rose','peony'], blush:['blush','pink','rose'], gold:['gold','golden','gilded','champagne','metallic'], golden:['gold','golden','gilded'], green:['green','sage','emerald','botanical'], sage:['sage','green'], emerald:['emerald','green'], minimalist:['minimalist','minimal','modern','simple','clean'], minimal:['minimalist','minimal','modern'], modern:['modern','minimalist','contemporary','noir'], vintage:['vintage','classic','timeless','retro'], classic:['classic','timeless','elegant','cathedral'], elegant:['elegant','luxury','glam','classic','editorial'], luxury:['luxury','glam','gilded','premium'], cathedral:['cathedral','church'], drone:['drone','aerial','film','video'], film:['film','video','cinematic','sde','highlight'], video:['video','film','cinematic','drone'] };
+  localSearch(q){
+    const STOP={theme:1,style:1,color:1,colour:1,vibe:1,inspo:1,inspiration:1,the:1,a:1,an:1,of:1,for:1,wedding:1,party:1,event:1};
+    let toks=q.toLowerCase().split(/\s+/).filter(Boolean);
+    let core=toks.filter(t=>!STOP[t]); if(!core.length) core=toks;
+    const score=(e)=>{ const hay=(e.name+' '+e.theme+' '+e.type+' '+e.cat+' '+e.venue+' '+(e.tags||[]).join(' ')).toLowerCase(); let s=0; core.forEach(t=>{ const forms=this.SYN[t]||[t]; if(forms.some(f=>hay.includes(f))) s++; }); return s; };
+    const all=this.build().map(e=>({ e, s:score(e) })).filter(x=>x.s>0).sort((a,b)=>b.s-a.s);
+    if(all.length) return all.map(x=>x.e);
+    // nothing — return 3 most popular as graceful fill
+    return this.build().slice().sort((a,b)=>b.pop-a.pop).slice(0,3);
+  }
+  onSort(e){ this.setState({ sort:e.target.value }); }
+  toggleFavOnly(){ this.setState(s=>({ favOnly:!s.favOnly })); }
+  clearFilters(){ this.setState({ cat:'All', q:'', favOnly:false, aiIds:null, aiSummary:'' }); }
+  stop(e){ e.stopPropagation(); }
+
+  toggleFav(id,e){ if(e) e.stopPropagation(); this.setState(s=>{ const has = s.favs.includes(id); const favs = has ? s.favs.filter(x=>x!==id) : [...s.favs, id]; try{ localStorage.setItem('shawie_favs', JSON.stringify(favs)); }catch(_){}; return { favs }; }); this.toast(this.state.favs.includes(id) ? 'Removed from your favorites' : 'Saved to your favorites ♥'); }
+
+  openModal(id){ this.setState({ openId:id, photoIdx:0, openFaq:0 }); document.body.style.overflow='hidden'; }
+  closeModal(){ this.setState({ openId:null, lightbox:false }); document.body.style.overflow=''; }
+  onOvlClick(){ this.closeModal(); }
+  movePhoto(d){ const ev = this.build().find(e=>e.id===this.state.openId); if(!ev) return; const n = ev.photos.length; this.setState(s=>({ photoIdx:(s.photoIdx+d+n)%n })); }
+  prevPhoto(e){ if(e) e.stopPropagation(); this.movePhoto(-1); }
+  nextPhoto(e){ if(e) e.stopPropagation(); this.movePhoto(1); }
+  setPhoto(i){ this.setState({ photoIdx:i }); }
+  openLight(e){ if(e) e.stopPropagation(); this.setState({ lightbox:true }); }
+  closeLight(){ this.setState({ lightbox:false }); }
+  toggleFaq(i){ this.setState(s=>({ openFaq: s.openFaq===i ? -1 : i })); }
+
+  bookFromEvent(ev){ this.setState({ booking:{ kind:'Book This Style', title:'Reserve '+ev.theme, sub:'We’ve pre-filled this request from “'+ev.name+'”. Adjust anything you like.', prefilled:true, from:ev.name, type:ev.type, theme:ev.theme, style:ev.theme, pkg:'To be discussed', services:ev.services.join(', ') } }); }
+  bookStyle(ev,e){ if(e) e.stopPropagation(); this.bookFromEvent(ev); }
+  bookPkg(name){ const ev = this.build().find(e=>e.id===this.state.openId); if(!ev) return; this.setState({ booking:{ kind:name+' Package', title:'Book the '+name+' Package', sub:'Pre-filled from “'+ev.name+'”. Tell us your date to begin.', prefilled:true, from:ev.name, type:ev.type, theme:ev.theme, style:ev.theme, pkg:name+' Package', services:ev.services.join(', ') } }); }
+  CALENDLY = 'https://calendly.com/sharonrosealgara/30min';
+  openConsult(){ try{ window.open(this.CALENDLY, '_blank', 'noopener'); }catch(_){ location.href = this.CALENDLY; } this.toast('Opening our booking calendar ✦'); }
+  openQuote(){ this.setState({ booking:{ kind:'Quotation', title:'Request a Quotation', sub:'Share a few details and we’ll send a tailored quote within 24 hours.', prefilled:false, type:'', theme:'', style:'', pkg:'', services:'' } }); }
+  openChat(){ this.setState({ chatOpen:true }); }
+  openVideo(v){ this.setState({ videoOpen:true, videoMeta:v }); document.body.style.overflow='hidden'; }
+  closeVideo(){ this.setState({ videoOpen:false }); if(!this.state.openId) document.body.style.overflow=''; }
+  closeChat(){ this.setState({ chatOpen:false }); }
+  onChatInput(e){ this.setState({ chatInput:e.target.value }); }
+  onChatKey(e){ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); this.sendChat(); } }
+  chatPreset(text){ this.setState({ chatInput:text }, ()=>this.sendChat()); }
+  KB = `You are the warm, concierge-style assistant for SHAWIE Bakes & Events, a luxury full-service celebrations studio (founded 2016, 9 years, 480+ events). Founder: Sharon Rose.
+SERVICES (14): Weddings, Prenup/Engagement Photoshoots, Wedding Photography, Wedding Videography, Birthday Celebrations, Debut (18th), Baptism, Anniversary, Corporate Events, Custom Cakes, Dessert Tables, Grazing Tables, Event Styling, Floral Arrangements. Everything (cake, styling, flowers, photo & film) is in-house.
+WEDDING PACKAGES (starting prices, fully customizable): Classic ₱95,000 (signature tiered cake, dessert table, ceremony+reception styling, full-day coordination); Premium ₱165,000 (adds grazing table, floral arch, photo & video, same-day highlight reel); Luxury ₱280,000 (adds drone + same-day edit, full venue transformation, heirloom album).
+MILESTONE/CELEBRATION PACKAGES: Classic ₱48,000; Premium ₱85,000; Luxury ₱140,000 (debut/birthday/baptism/anniversary; cake, styling, dessert table, coverage).
+CUSTOM CAKES from ₱14,000; Dessert tables from ₱42,000; Prenup shoots from ₱28,000.
+BOOKING: Consultations are free via Calendly. Book 6–12 months ahead for weddings, 2–3 months for milestones. We travel out of town (travel quoted upfront). Clients can use their own suppliers or our network.
+CONTACT: Calendly booking link and email sharonrosealgara@gmail.com. Encourage booking a free consultation or requesting a quotation.
+STYLE: Reply in 1–3 short, warm sentences. Be specific with prices/services when asked. Never invent services we don't offer. If asked something you don't know (exact open dates, etc.), invite them to book a quick consultation. Use at most one ✦ flourish.`;
+  async sendChat(){
+    const text = (this.state.chatInput||'').trim();
+    if (!text || this.state.chatBusy) return;
+    const history = this.state.chatMsgs.concat([{ role:'user', text }]);
+    this.setState({ chatMsgs: history.concat([{ role:'bot', text:'…', typing:true }]), chatInput:'', chatBusy:true });
+    const convo = history.slice(-8).map(m=>(m.role==='user'?'Visitor':'Assistant')+': '+m.text).join('\n');
+    const prompt = this.KB+'\n\nConversation so far:\n'+convo+'\n\nWrite the Assistant\'s next reply only (no name prefix):';
+    let reply = '';
+    try {
+      if (window.claude && window.claude.complete) reply = await window.claude.complete(prompt);
+    } catch(_){}
+    if (!reply || !reply.trim()) reply = this.fallbackAnswer(text);
+    this.setState(s=>({ chatMsgs: s.chatMsgs.filter(m=>!m.typing).concat([{ role:'bot', text: reply.trim() }]), chatBusy:false }));
+  }
+  fallbackAnswer(q){
+    const t = q.toLowerCase();
+    if (/price|cost|how much|budget|package/.test(t)) return 'Our wedding collections start at ₱95,000 (Classic), ₱165,000 (Premium) and ₱280,000 (Luxury); milestone celebrations start at ₱48,000. Every package is fully customizable — shall I open a free consultation for you? ✦';
+    if (/book|consult|available|date|schedule/.test(t)) return 'I’d love to help you book! Tap “Book Your Date” to grab a free consultation slot. For weddings we suggest reserving 6–12 months ahead, and 2–3 months for milestones.';
+    if (/cake/.test(t)) return 'Our custom cakes start at ₱14,000 — hand-crafted tiers with sugar or fresh florals, designed around your flavor and theme. Want to see our cake gallery?';
+    if (/photo|video|film|drone/.test(t)) return 'We offer editorial photography, cinematic films, same-day edits and 4K drone coverage — available standalone or bundled into our Premium and Luxury packages. ✦';
+    if (/service|offer|do you/.test(t)) return 'We’re a full-service studio: weddings, prenup, photo & video, debuts, birthdays, baptisms, anniversaries, corporate events, custom cakes, dessert & grazing tables, styling and florals — all in-house.';
+    return 'Great question! The quickest way to get exact details is a free consultation — tap “Book Your Date,” or email us at sharonrosealgara@gmail.com and we’ll reply within 24 hours. ✦';
+  }
+  scrollToId(id){ const el=document.getElementById(id); if(el) window.scrollTo({top:el.getBoundingClientRect().top+window.pageYOffset-66,behavior:'smooth'}); }
+  EMAIL = 'sharonrosealgara@gmail.com';
+  closeBooking(){ this.setState({ booking:null }); }
+  // ▼▼▼ PASTE YOUR n8n WEBHOOK URL BETWEEN THE QUOTES ▼▼▼
+  N8N_WEBHOOK_URL = 'PASTE_N8N_WEBHOOK_TEST_URL_HERE';
+  // ▲▲▲ e.g. 'https://YOUR-SUBDOMAIN.app.n8n.cloud/webhook-test/xxxxxxxx' ▲▲▲
+  submitBooking(){
+    if(this.state.submitState==='sending') return;
+    const b = this.state.booking || {};
+    const root = document.querySelector('.drawer-b');
+    // Robust field read by data-field attribute (order-independent).
+    const get = (name)=>{ const el = root && root.querySelector('[data-field="'+name+'"]'); return el && el.value != null ? String(el.value).trim() : ''; };
+    // n8n payload — keys match the Airtable inquiry schema exactly.
+    const payload = {
+      'Client Name':      get('Client Name'),
+      'Email':            get('Email'),
+      'Phone Number':     get('Phone Number'),
+      'Facebook Profile': get('Facebook Profile'),
+      'Event Type':       get('Event Type') || (b.type||''),
+      'Event Date':       get('Event Date'),
+      'Event Time':       get('Event Time'),
+      'Venue':            get('Venue'),
+      'Number of Guests': get('Number of Guests'),
+      'Budget':           get('Budget'),
+      'Package':          get('Package') || (b.pkg||''),
+      'Event Theme':      get('Event Theme') || (b.style||''),
+      'Notes':            get('Notes')
+    };
+    // ----- validation -----
+    if(!payload['Client Name']){ this.setState({submitState:'error', errorMsg:'Please enter your name.'}); this.toast('Please enter your name'); return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload['Email'])){ this.setState({submitState:'error', errorMsg:'Please enter a valid email address.'}); this.toast('Please enter a valid email'); return; }
+    if(!payload['Event Type']){ this.setState({submitState:'error', errorMsg:'Please tell us your event type.'}); this.toast('Please add your event type'); return; }
+    // Resolve the webhook from the central config file first, then the local fallback.
+    const webhookUrl = (window.SHAWIE_CONFIG && window.SHAWIE_CONFIG.n8nWebhookUrl) || this.N8N_WEBHOOK_URL;
+    if(!webhookUrl || /PASTE_N8N/.test(webhookUrl)){
+      this.setState({submitState:'error', errorMsg:'Inquiry system not configured yet — webhook URL missing.'}); this.toast('Webhook URL not set yet — paste it in shawie-config.js'); return;
+    }
+    // ----- submit -----
+    this.setState({submitState:'sending', errorMsg:''});
+    fetch(webhookUrl, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    }).then(res=>{
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      try{ root.querySelectorAll('[data-field]').forEach(el=>{ el.value=''; }); }catch(_){}
+      // Close the drawer and show the elegant success modal.
+      this.setState({ submitState:'idle', booking:null, successModal:true, lastClientName: payload['Client Name'] });
+      this.toast('Inquiry sent ✦');
+    }).catch(()=>{
+      this.setState({submitState:'error', errorMsg:'Could not reach the server. Please try again in a moment.'});
+      this.toast('Could not send — please try again or message us on WhatsApp');
+    });
+  }
+
+  shareDo(label){ if(label==='Copy Link'){ const url = location.href.split('#')[0] + '#' + (this.state.openId||''); try{ navigator.clipboard.writeText(url); }catch(_){}; this.toast('Gallery link copied to clipboard'); } else { this.toast('Shared to '+label+' ✦'); } }
+
+  /* ===================== INTERACTIVE DEMOS ===================== */
+  DEMO_META = {
+    email:  { ico:'📧', title:'Email Automation — the 13-stage journey', sub:'Every inquiry triggers a warm, perfectly-timed sequence that nurtures, books and delights — hands-free.' },
+    rsvp:   { ico:'📨', title:'RSVP & QR Invitations', sub:'Guests RSVP from a tap; you watch the headcount, meals and check-ins update live.' },
+    crm:    { ico:'🗂', title:'CRM & Lead Pipeline', sub:'Every lead in one board — drag them from first hello to celebration day.' },
+    admin:  { ico:'📊', title:'Admin Dashboard', sub:'Revenue, bookings, pipeline and email performance — the whole business at a glance.' },
+    portal: { ico:'👤', title:'Client Portal', sub:'Where booked couples track payments, contracts, timeline and their gallery.' }
+  };
+  EMAIL_JOURNEY = [
+    { day:'Instant', trig:'Inquiry received', subj:'We’ve received your inquiry ✦', prev:'A specialist is already reviewing your date…', body:'Hi Bianca! Thank you for reaching out to SHAWIE Bakes & Events. We’ve received your inquiry and a celebration specialist is already reviewing your date. Your tailored quotation is on its way — keep an eye on your inbox.' },
+    { day:'+30 min', trig:'Auto-quotation', subj:'Your personalized quotation inside', prev:'Three collections, tailored to your day…', body:'As promised — here is your personalized quotation. We’ve outlined our Classic, Premium and Luxury collections with everything included, so you can picture your celebration clearly. Reply any time and we’ll adjust it to your vision.' },
+    { day:'+1 day', trig:'Nurture', subj:'A little inspiration for your day ✦', prev:'A lookbook of real SHAWIE celebrations…', body:'While you consider your options, here’s a lookbook of real SHAWIE weddings — palettes, cakes and tablescapes to spark ideas. Save the looks you love; we’ll recreate the feeling for you.' },
+    { day:'+3 days', trig:'Booking nudge', subj:'Let’s find your perfect date', prev:'Popular dates fill 6–12 months out…', body:'Just a gentle note — our calendar fills 6–12 months ahead for weddings. If your date matters, let’s lock in a free consultation so it stays yours. Tap below to grab a slot.' },
+    { day:'+6 days', trig:'Social proof', subj:'Why couples choose SHAWIE', prev:'480+ celebrations, 4.9★ from real clients…', body:'A quick hello and a little reassurance: 480+ celebrations, a 4.9★ average, and everything crafted in-house — cake, styling, florals, photo and film. Here’s what recent couples had to say.' },
+    { day:'On booking', trig:'Confirmation', subj:'It’s official — welcome to SHAWIE! ✦', prev:'Your date is reserved. Here’s what’s next…', body:'Welcome to the SHAWIE family! Your date is officially reserved. Your contract and reservation invoice are attached, and your dedicated planner will reach out within 24 hours to begin the fun part.' },
+    { day:'+1 day', trig:'Onboarding', subj:'Your planning timeline & checklist', prev:'A clear month-by-month roadmap…', body:'To keep everything calm and joyful, here’s your personal planning timeline and checklist — from design sessions to final headcount. Everything also lives in your Client Portal, always up to date.' },
+    { day:'−60 days', trig:'Design', subj:'Let’s finalize your design & flavors', prev:'Cake tasting, palette & styling review…', body:'We’re 60 days out! Time for the delicious part — cake tasting, palette confirmation and a styling walkthrough. Reply with your availability and we’ll set your design session.' },
+    { day:'−30 days', trig:'Logistics', subj:'Final headcount & timeline', prev:'Confirm guests, meals and run-of-show…', body:'One month to go! Please confirm your final headcount, meal choices and the run-of-show. Your RSVP dashboard already has most of it — we’ll review the details together.' },
+    { day:'−7 days', trig:'Countdown', subj:'Your celebration week is here! ✦', prev:'Everything’s ready — here’s the final plan…', body:'It’s your week! Everything is prepped and your team is briefed. Attached is your final-day timeline with arrival times and contacts. All you have to do now is get excited.' },
+    { day:'+1 day', trig:'Thank you', subj:'Thank you — highlights on the way', prev:'It was an honor. Sneak peek incoming…', body:'What a day. Thank you for trusting us with your celebration — it was an honor. Your same-day highlights are being edited now, and your full gallery will follow shortly.' },
+    { day:'+7 days', trig:'Delivery', subj:'Your gallery is ready to download ✦', prev:'248 edited photos + your highlight film…', body:'Your memories are ready! 248 edited photos and your highlight film are waiting in your Client Portal — download, share and relive the day as often as you like.' },
+    { day:'+30 days', trig:'Referral', subj:'We’d love your review (a treat on us)', prev:'Share your story, gift a friend 10% off…', body:'If you loved your experience, a short review means the world to us. As a thank-you, enjoy a complimentary celebration cake on your first anniversary — and your friends get 10% off their booking.' }
+  ];
+  CRM_STAGES = ['New Lead','Contacted','Proposal Sent','Booked','Completed'];
+  CRM_SEED = [
+    { id:1, name:'Bianca & Marco', event:'Garden Wedding · 220 pax', value:185000, stage:3, when:'Feb 14, 2026' },
+    { id:2, name:'Alyssa Tan', event:'Debut · Rose Gold', value:82000, stage:2, when:'Mar 08, 2026' },
+    { id:3, name:'Grupo Ventura', event:'Corporate Gala', value:240000, stage:1, when:'Apr 20, 2026' },
+    { id:4, name:'The Dizon Family', event:'Golden Anniversary', value:96000, stage:2, when:'May 03, 2026' },
+    { id:5, name:'Kaye & Josh', event:'Beach Wedding', value:210000, stage:0, when:'Jun 12, 2026' },
+    { id:6, name:'Baby Liam', event:'Baptism · Cloud Theme', value:54000, stage:0, when:'Feb 28, 2026' },
+    { id:7, name:'Camille R.', event:'Custom Cake Order', value:16000, stage:4, when:'Jan 22, 2026' }
+  ];
+  ADMIN = {
+    Month:   { rev:'₱642K', revN:642, book:14, leads:38, conv:'37%', bars:[42,58,51,73,64,88], barLabels:['W1','W2','W3','W4','W5','W6'], open:'71%', click:'34%', top:[['Weddings',58],['Debuts',22],['Cakes',12],['Corporate',8]] },
+    Quarter: { rev:'₱1.94M', revN:1940, book:41, leads:112, conv:'34%', bars:[520,610,588,642,701,760], barLabels:['Oct','Nov','Dec','Jan','Feb','Mar'], open:'69%', click:'31%', top:[['Weddings',54],['Debuts',24],['Cakes',13],['Corporate',9]] },
+    Year:    { rev:'₱7.8M', revN:7800, book:168, leads:459, conv:'36%', bars:[540,610,700,660,745,820], barLabels:['H1 ’24','H2 ’24','H1 ’25','H2 ’25','H1 ’26','Proj'], open:'70%', click:'32%', top:[['Weddings',56],['Debuts',22],['Cakes',13],['Corporate',9]] }
+  };
+  PORTAL_INV = [
+    { id:'res', label:'Reservation Deposit', amt:'₱30,000', due:'Paid Feb 02', paid:true },
+    { id:'sec', label:'Second Installment', amt:'₱65,000', due:'Due Apr 15', paid:false },
+    { id:'fin', label:'Final Balance', amt:'₱90,000', due:'Due 7 days before', paid:false }
+  ];
+  PORTAL_TASKS = ['Signed contract & reservation','Cake tasting & flavor lock','Palette & styling approved','Final headcount submitted','Run-of-show confirmed','Celebration day ✦'];
+
+  openDemo(k){ this.setState({ demo:k, emailStage:0, adminPeriod:'Month' }); document.body.style.overflow='hidden'; }
+  closeDemo(){ if(this._emT){ clearInterval(this._emT); this._emT=null; } this.setState({ demo:null, emailPlaying:false }); if(!this.state.openId) document.body.style.overflow=''; }
+  emailStep(i){ this.setState({ emailStage:i }); }
+  emailPlay(){
+    if(this._emT){ clearInterval(this._emT); this._emT=null; this.setState({emailPlaying:false}); return; }
+    this.setState({ emailPlaying:true, emailStage:0 });
+    this._emT=setInterval(()=>{ this.setState(s=>{ const n=s.emailStage+1; if(n>=this.EMAIL_JOURNEY.length){ clearInterval(this._emT); this._emT=null; return {emailPlaying:false}; } return {emailStage:n}; }); }, 1500);
+  }
+  rsvpField(f,v){ this.setState({ [f]:v }); }
+  rsvpSubmit(){ const n=(this.state.rsvpName||'').trim()||'Your Guest'; const yes=this.state.rsvpAttend==='yes'; const g={ name:n, attend:this.state.rsvpAttend, count: yes?(Math.max(1,+this.state.rsvpCount||1)):0, meal: yes?this.state.rsvpMeal:'—' }; try{ if(window.notifyStudio) window.notifyStudio('rsvp','New RSVP — '+n, {name:n, attending:this.state.rsvpAttend, guests:String(g.count), meal:g.meal}); }catch(_){}; this.setState(s=>({ rsvpList:[g,...s.rsvpList], rsvpName:'' })); this.toast('RSVP recorded — guest list updated ✦'); }
+  crmAdvance(id,e){ if(e) e.stopPropagation(); this.setState(s=>{ const cur = (id in s.crmStages)? s.crmStages[id] : this.CRM_SEED.find(l=>l.id===id).stage; const next=Math.min(cur+1,this.CRM_STAGES.length-1); return { crmStages:{...s.crmStages,[id]:next} }; }); }
+  crmReset(){ this.setState({ crmStages:{} }); this.toast('Pipeline reset ✦'); }
+  setPeriod(p){ this.setState({ adminPeriod:p }); }
+  portalGo(t){ this.setState({ portalTab:t }); }
+  portalPay(id){ this.setState(s=>({ portalPaid:{...s.portalPaid,[id]:true} })); this.toast('Payment received — receipt emailed ✦'); }
+  portalTask(i){ this.setState(s=>({ portalTasks:{...s.portalTasks,[i]:!s.portalTasks[i]} })); }
+  portalSign(){ this.setState({ portalSigned:true }); this.toast('Contract signed ✦'); }
+
+  _demoVals(){
+    const S=this.state, demo=S.demo, meta=this.DEMO_META[demo]||{};
+    const peso=n=>'₱'+n.toLocaleString('en-US');
+    // email
+    const journey=this.EMAIL_JOURNEY.map((s,i)=>({ ...s, num:String(i+1).padStart(2,'0'), cls:i===S.emailStage?'emItem on':(i<S.emailStage?'emItem done':'emItem'), onClick:()=>this.emailStep(i) }));
+    const emCur=this.EMAIL_JOURNEY[S.emailStage]||this.EMAIL_JOURNEY[0];
+    // rsvp
+    const guests=S.rsvpList;
+    const heads=guests.reduce((a,g)=>a+(g.attend==='yes'?g.count:0),0);
+    const yesN=guests.filter(g=>g.attend==='yes').length, noN=guests.filter(g=>g.attend==='no').length;
+    const guestRows=guests.map(g=>({ ...g, cls:g.attend==='yes'?'gYes':'gNo', mark:g.attend==='yes'?'✓':'✕', countLabel:g.attend==='yes'?('+'+g.count):'Regrets' }));
+    // crm
+    const leads=this.CRM_SEED.map(l=>({ ...l, stage:(l.id in S.crmStages)?S.crmStages[l.id]:l.stage }));
+    const kanban=this.CRM_STAGES.map((name,idx)=>{ const col=leads.filter(l=>l.stage===idx); return { name, count:col.length, value:peso(col.reduce((a,l)=>a+l.value,0)), cards:col.map(l=>({ ...l, valLabel:peso(l.value), atEnd:l.stage>=this.CRM_STAGES.length-1, notEnd:l.stage<this.CRM_STAGES.length-1, advance:(e)=>this.crmAdvance(l.id,e) })) }; });
+    // admin
+    const A=this.ADMIN[S.adminPeriod]||this.ADMIN.Month; const maxBar=Math.max(...A.bars);
+    const adminBars=A.bars.map((v,i)=>({ h:Math.round(v/maxBar*100), label:A.barLabels[i] }));
+    const adminTop=A.top.map(t=>({ name:t[0], pct:t[1] }));
+    const periods=['Month','Quarter','Year'].map(p=>({ name:p, cls:p===S.adminPeriod?'perBtn on':'perBtn', onClick:()=>this.setPeriod(p) }));
+    // portal
+    const invoices=this.PORTAL_INV.map(iv=>{ const paid=iv.paid||!!S.portalPaid[iv.id]; return { ...iv, paid, notPaid:!paid, statusCls:paid?'ivPaid':'ivDue', statusLabel:paid?'Paid':iv.due, pay:()=>this.portalPay(iv.id) }; });
+    const tasks=this.PORTAL_TASKS.map((t,i)=>{ const done=i===0?true:!!S.portalTasks[i]; return { label:t, done, cls:done?'ptask done':'ptask', onClick:()=>this.portalTask(i) }; });
+    const doneCount=tasks.filter(t=>t.done).length; const portalPct=Math.round(doneCount/tasks.length*100);
+    const portalTabs=[['overview','Overview'],['invoices','Payments'],['contract','Contract'],['timeline','Timeline'],['gallery','Gallery']].map(t=>({ key:t[0], label:t[1], cls:t[0]===S.portalTab?'ptab on':'ptab', onClick:()=>this.portalGo(t[0]) }));
+    return {
+      demoOpen:!!demo, demoIco:meta.ico, demoTitle:meta.title, demoSub:meta.sub, closeDemo:()=>this.closeDemo(),
+      emProgPct:String(Math.round((S.emailStage+1)/this.EMAIL_JOURNEY.length*100))+'%',
+      qrCells:"01110001110 10001010001 10111011101 10001000101 01110101110 00000101000 10110110111 01001000001 11101011101 00010111001 01110100011".replace(/ /g,'').split('').map(c=>c==='1'?'on':''),
+      portalUnsigned:!S.portalSigned,
+      demoIsEmail:demo==='email', demoIsRsvp:demo==='rsvp', demoIsCrm:demo==='crm', demoIsAdmin:demo==='admin', demoIsPortal:demo==='portal',
+      emJourney:journey, emCur, emStageNo:String(S.emailStage+1), emTotal:String(this.EMAIL_JOURNEY.length), emailPlaying:S.emailPlaying, emailPlayLabel:S.emailPlaying?'❚❚ Pause':'▶ Play sequence', emailPlay:()=>this.emailPlay(),
+      rsvpName:S.rsvpName, rsvpAttend:S.rsvpAttend, rsvpCount:S.rsvpCount, rsvpMeal:S.rsvpMeal,
+      rsvpYesCls:S.rsvpAttend==='yes'?'rBtn on':'rBtn', rsvpNoCls:S.rsvpAttend==='no'?'rBtn onNo':'rBtn', rsvpIsYes:S.rsvpAttend==='yes',
+      rsvpSetYes:()=>this.rsvpField('rsvpAttend','yes'), rsvpSetNo:()=>this.rsvpField('rsvpAttend','no'),
+      rsvpOnName:(e)=>this.rsvpField('rsvpName',e.target.value), rsvpOnCount:(e)=>this.rsvpField('rsvpCount',e.target.value), rsvpOnMeal:(e)=>this.rsvpField('rsvpMeal',e.target.value),
+      rsvpSubmit:()=>this.rsvpSubmit(), guestRows, rsvpHeads:String(heads), rsvpYes:String(yesN), rsvpNo:String(noN), rsvpTotal:String(guests.length),
+      kanban, crmReset:()=>this.crmReset(),
+      adminP:A, adminBars, adminTop, adminPeriods:periods,
+      portalTabs, portalInvoices:invoices, portalTasks:tasks, portalPct:String(portalPct)+'%', portalPctN:String(portalPct),
+      portalSigned:S.portalSigned, portalSign:()=>this.portalSign(),
+      portalShowOverview:S.portalTab==='overview', portalShowInv:S.portalTab==='invoices', portalShowContract:S.portalTab==='contract', portalShowTimeline:S.portalTab==='timeline', portalShowGallery:S.portalTab==='gallery'
+    };
+  }
+
+  PKGS(type){
+    const wed = [
+      { name:'Classic', price:'₱95,000', feat:['Signature tiered cake','Styled dessert table','Full-day coordination'] },
+      { name:'Premium', price:'₱165,000', feat:['Everything in Classic','Grazing table + floral arch','Photo & video coverage'] },
+      { name:'Luxury', price:'₱280,000', feat:['Everything in Premium','Drone + same-day edit','Full venue transformation'] }
+    ];
+    const milestone = [
+      { name:'Classic', price:'₱48,000', feat:['Custom themed cake','Styled dessert table','Event coordination'] },
+      { name:'Premium', price:'₱85,000', feat:['Everything in Classic','Balloon + floral styling','Photo coverage'] },
+      { name:'Luxury', price:'₱140,000', feat:['Everything in Premium','Photo booth + film','Full venue styling'] }
+    ];
+    return /Wedding|Prenup|Videograph|Photograph|Floral/.test(type) ? wed : milestone;
+  }
+
+  renderVals(){
+    const BLANK = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+    const accent = this.props.accent || '#a67c52';
+    const cols = this.props.columns || '3';
+    const colsCls = cols==='2' ? 'cols2' : cols==='4' ? 'cols4' : 'cols3';
+    const { cat, q, sort, favOnly, favs, openId, photoIdx } = this.state;
+    const all = this.build();
+
+    let list = all.slice();
+    const aiIds = this.state.aiIds;
+    if (aiIds){
+      const order = {}; aiIds.forEach((id,i)=>order[id]=i);
+      list = list.filter(e=>aiIds.includes(e.id)).sort((a,b)=>order[a.id]-order[b.id]);
+    } else {
+      if (cat !== 'All') list = list.filter(e=>e.cat===cat);
+      if (favOnly) list = list.filter(e=>favs.includes(e.id));
+      if (q.trim()){ const ids=this.localSearch(q).map(e=>e.id); list = list.filter(e=>ids.includes(e.id)); }
+    }
+    const num = (p)=>parseInt(String(p).replace(/[^0-9]/g,''))||0;
+    if (!aiIds){
+      if (sort==='Most Popular') list.sort((a,b)=>b.pop-a.pop);
+      else if (sort==='Price: Low') list.sort((a,b)=>num(a.price)-num(b.price));
+      else if (sort==='Price: High') list.sort((a,b)=>num(b.price)-num(a.price));
+      else list.sort((a,b)=>b.order-a.order);
+    }
+
+    const view = list.map(e=>({ id:e.id, name:e.name, venue:e.venue, theme:e.theme, cat:e.cat, pal:e.pal, ar:e.ar, img:e.img,
+      favCls: favs.includes(e.id)?'on':'', heart: favs.includes(e.id)?'♥':'♡',
+      onOpen:()=>this.openModal(e.id), onFav:(ev)=>this.toggleFav(e.id,ev), onBook:(ev)=>this.bookStyle(e,ev) }));
+
+    const chips = this.CATS.map(c=>({ label:c, onCls: c===cat?'on':'', onClick:()=>this.setCat(c) }));
+    const suggestions = this.SUGGEST.map(s=>({ label:s, onClick:()=>this.setState({ q:s, aiIds:null, aiSummary:'' }, ()=>{ const el=document.querySelector('.bar'); if(el) window.scrollTo({top:el.offsetTop-74,behavior:'smooth'}); }) }));
+    const sortOpts = this.SORTS.map(s=>({ v:s, label:s, sel: s===sort }));
+
+    const goCat=(c)=>{ this.setCat(c); setTimeout(()=>{const el=document.getElementById('gallery')||document.querySelector('.bar'); if(el){ const y=el.getBoundingClientRect().top + window.pageYOffset - 84; window.scrollTo({top:Math.max(0,y),behavior:'smooth'}); }},80); };
+    const SC = [
+      { ico:'❀', title:'Weddings', cat:'Weddings', desc:'Full-service wedding styling, baking and film — garden, cathedral, vineyard, beach and beyond.' },
+      { ico:'❤', title:'Prenup & Engagement', cat:'Prenup', desc:'Relaxed, candid pre-wedding shoots styled to tell your love story, anywhere it lives.' },
+      { ico:'❖', title:'Photography', cat:'Photography', desc:'Editorial, timeless coverage — from bridal portraits to golden-hour engagements.' },
+      { ico:'▶', title:'Videography', cat:'Videography', desc:'Cinematic highlight films, same-day edits and 4K drone coverage of your day.' },
+      { ico:'✦', title:'Debut & Birthdays', cat:'Debut', desc:'Milestone celebrations styled with personality — from 1st birthdays to grand 18ths.' },
+      { ico:'✿', title:'Custom Cakes', cat:'Custom Cakes', desc:'Hand-crafted tiered cakes and sugar florals, designed around your flavor and theme.' },
+      { ico:'❦', title:'Dessert & Grazing Tables', cat:'Dessert Tables', desc:'Lavish dessert spreads and abundant grazing tables styled as edible centerpieces.' },
+      { ico:'❋', title:'Event Styling', cat:'Event Styling', desc:'Cohesive tablescapes, backdrops and full venue transformations, start to finish.' },
+      { ico:'✾', title:'Floral Arrangements', cat:'Floral', desc:'Fresh florals, arches and bouquets that bring romance and color to every corner.' }
+    ];
+    const serviceCards = SC.map(s=>({ ...s, onClick:()=>goCat(s.cat) }));
+    const walkthrough=(name)=>this.toast(name+' — interactive demo available on request ✦');
+    const DC = [
+      { ico:'🤖', title:'AI Chatbot', desc:'24/7 assistant answering FAQs, packages, pricing & bookings — also for Messenger & Instagram.', badge:'Live', badgeCls:'live', cta:'Try it now →', onClick:()=>this.openChat() },
+      { ico:'🎫', title:'Booking System', desc:'Choose a service, pick a date and confirm — synced to a real Calendly calendar.', badge:'Live', badgeCls:'live', cta:'Open booking →', onClick:()=>this.openConsult() },
+      { ico:'🖼', title:'Premium Gallery', desc:'Filterable, AI-searchable portfolio with lightbox, video player & favorites.', badge:'Live', badgeCls:'live', cta:'Browse gallery →', onClick:()=>{const el=document.querySelector('.bar'); if(el) window.scrollTo({top:el.offsetTop-74,behavior:'smooth'});} },
+      { ico:'📧', title:'Email Automation', desc:'Every inquiry fires a warm, perfectly-timed 13-stage email journey — nurturing, booking and delighting hands-free.', badge:'Live', badgeCls:'live', cta:'See the journey →', onClick:()=>this.openDemo('email') },
+      { ico:'📨', title:'RSVP & QR Invites', desc:'Online RSVP, QR-code invitations, guest check-in and a live RSVP dashboard.', badge:'Live', badgeCls:'live', cta:'Try it now →', onClick:()=>this.openDemo('rsvp') },
+      { ico:'🗂', title:'CRM & Pipeline', desc:'Leads, customers, notes, tasks and a visual booking pipeline in one place.', badge:'Live', badgeCls:'live', cta:'Open the board →', onClick:()=>this.openDemo('crm') },
+      { ico:'📊', title:'Admin Dashboard', desc:'Revenue, bookings, calendar, lead pipeline and email performance at a glance.', badge:'Live', badgeCls:'live', cta:'View dashboard →', onClick:()=>this.openDemo('admin') },
+      { ico:'👤', title:'Client Portal', desc:'Clients track bookings, invoices, contracts, timelines and download galleries.', badge:'Live', badgeCls:'live', cta:'Enter portal →', onClick:()=>this.openDemo('portal') }
+    ];
+    const demoCards = DC;
+    const capChips = ['📈 Meta Ads Campaigns','📉 Analytics Dashboards','📄 Landing Pages','✉️ 13-Stage Email Journeys','🏷 White-Label Platform','📱 Instagram & Messenger Automation'];
+
+    const WP = [
+      { name:'Classic', price:'₱95,000', feat:['Signature tiered wedding cake','Styled dessert table','Ceremony + reception styling','Full-day coordination'], featCls:'', btnCls:'btn-ghost' },
+      { name:'Premium', price:'₱165,000', feat:['Everything in Classic','Grazing table + floral arch','Photo & video coverage','Same-day highlight reel'], featCls:'feat', btnCls:'btn-gold' },
+      { name:'Luxury', price:'₱280,000', feat:['Everything in Premium','Drone + same-day edit','Full venue transformation','Heirloom album + prints'], featCls:'', btnCls:'btn-ghost' }
+    ];
+    const EP = [
+      { name:'Classic', price:'₱48,000', feat:['Custom themed cake','Styled dessert table','Event coordination','2-hour photo coverage'], featCls:'', btnCls:'btn-ghost' },
+      { name:'Premium', price:'₱85,000', feat:['Everything in Classic','Balloon + floral styling','Full photo coverage','Styled backdrop'], featCls:'feat', btnCls:'btn-gold' },
+      { name:'Luxury', price:'₱140,000', feat:['Everything in Premium','Photo booth + highlight film','Full venue styling','Invitation design'], featCls:'', btnCls:'btn-ghost' }
+    ];
+
+    const b = this.state.booking;
+    const booking = b ? { ...b, pfCls: b.prefilled?'prefill':'' } : null;
+
+    const out = {
+      ...this._demoVals(),
+      accent, colsCls,
+      q, favCount: favs.length, favOnlyCls: favOnly?'on':'',
+      chips, suggestions, sortOpts,
+      serviceCards, weddingPkgs:WP, eventPkgs:EP,
+      demoCards, capChips, agencyName: this.props.agencyName || 'Sharon Rose Studio',
+      list:view, count:view.length, countLabel: view.length===1?'Celebration':'Celebrations',
+      ctxLabel: cat==='All'?'All Galleries':cat, hasResults: view.length>0, noResults: view.length===0,
+      clearFilters:()=>this.clearFilters(),
+      openConsult:()=>this.openConsult(), openQuote:()=>this.openQuote(), openChat:()=>this.openChat(),
+      navHome:()=>window.scrollTo({top:0,behavior:'smooth'}),
+      navGalleries:()=>{const el=document.querySelector('.bar');window.scrollTo({top:el?el.offsetTop-74:600,behavior:'smooth'});},
+      navServices:()=>this.scrollToId('services'),
+      navPackages:()=>this.scrollToId('packages'),
+      navAbout:()=>this.scrollToId('about'),
+      navDemo:()=>this.scrollToId('democenter'),
+      toggleFavOnly:()=>this.toggleFavOnly(), onSearch:(e)=>this.onSearch(e), onSort:(e)=>this.onSort(e),
+      onSearchKey:(e)=>this.onSearchKey(e), runAiSearch:()=>this.runAiSearch(), clearAi:()=>this.clearAi(),
+      aiBusy:this.state.aiBusy, aiIdle:!this.state.aiBusy, aiActive:!!this.state.aiIds, aiSummary:this.state.aiSummary,
+      stop:(e)=>this.stop(e),
+      showFloat: this.props.floatingBook !== false,
+      toast: this.state.toast, toastShow: !!this.state.toast,
+      chatOpen: this.state.chatOpen, chatClosed: !this.state.chatOpen,
+      chatInput: this.state.chatInput, chatBusy: this.state.chatBusy,
+      closeChat:()=>this.closeChat(), onChatInput:(e)=>this.onChatInput(e), onChatKey:(e)=>this.onChatKey(e), sendChat:()=>this.sendChat(),
+      chatThread: React.createElement('div',{style:{display:'contents'}}, this.state.chatMsgs.map((m,i)=>React.createElement('div',{key:i,className:'msg '+(m.role==='bot'?'bot':'user')+(m.typing?' typing':'')}, m.typing?'SHAWIE is typing…':m.text))),
+      chatSuggest: [
+        { label:'What are your packages?', onClick:()=>this.chatPreset('What are your wedding packages and prices?') },
+        { label:'Are you available?', onClick:()=>this.chatPreset('How do I check your availability and book a date?') },
+        { label:'Do you do custom cakes?', onClick:()=>this.chatPreset('Tell me about your custom cakes and pricing.') }
+      ],
+      lightbox: this.state.lightbox, closeLight:()=>this.closeLight(),
+      videoOpen: !!this.state.videoOpen, videoMeta: this.state.videoMeta || { type:'', title:'' },
+      closeVideo:()=>this.closeVideo(),
+      videoPlayer: this.state.videoOpen ? React.createElement('video',{ className:'vboxVideo', src:(this.state.videoMeta&&this.state.videoMeta.clip)||'assets/shawie-logo.mp4', controls:true, autoPlay:true, playsInline:true, poster:(this.state.videoMeta&&this.state.videoMeta.src)||undefined }) : null,
+      prevPhoto:(e)=>this.prevPhoto(e), nextPhoto:(e)=>this.nextPhoto(e), openLight:(e)=>this.openLight(e),
+      bookingOpen: !!b, booking, closeBooking:()=>this.closeBooking(), submitBooking:()=>this.submitBooking(),
+      submitting: this.state.submitState==='sending',
+      submitLabel: this.state.submitState==='sending' ? 'Sending…' : 'Send Request',
+      statusMsg: this.state.submitState==='success' ? 'Inquiry sent — Sharon will reply within 24 hours ✦'
+        : this.state.submitState==='error' ? (this.state.errorMsg || 'Something went wrong. Please try again or message us on WhatsApp.')
+        : 'We reply within 24 hours, always.',
+      statusCls: this.state.submitState==='success' ? 'okmsg' : this.state.submitState==='error' ? 'errmsg' : 'mute',
+      successModal: !!this.state.successModal,
+      successName: (this.state.lastClientName || '').split(' ')[0] || 'there',
+      closeSuccess: ()=>this.setState({ successModal:false }),
+      modalOpen:false,
+      m:{ img:BLANK, pal:'pal1', review:{} }, mPhoto:{ src:BLANK, label:'' },
+      mHeroImg:null, mSlideImg:null, mLboxImg:null
+    };
+
+    if (openId){
+      const ev = all.find(e=>e.id===openId);
+      if (ev){
+        const hasPhoto = !!ev.photography, hasVideo = !!ev.videos, hasCake = !!ev.cake, hasVideoSpec = !!ev.videography;
+        const hasSpecs = hasPhoto || hasVideoSpec;
+        const m = { ...ev, hasPhoto, hasVideo, hasCake, hasVideoSpec,
+          videos: ev.videos ? ev.videos.map(v=>({ ...v, onPlay:()=>this.openVideo(v) })) : ev.videos,
+          favCls: favs.includes(ev.id)?'on':'', heart: favs.includes(ev.id)?'♥':'♡',
+          onFav:(e)=>this.toggleFav(ev.id,e), onBook:(e)=>this.bookStyle(ev,e) };
+        const total = ev.photos.length;
+        const idx = ((photoIdx%total)+total)%total;
+        const thumbs = ev.photos.map((p,i)=>({ cls:'sthumb'+(i===idx?' on':''), src:p.src, onClick:()=>this.setPhoto(i) }));
+        // dynamic section numbering (01 Details, 02 Services, 03 Story, 04 Photos, 05 Video always shown)
+        let n = 5;
+        const secCake = hasCake ? String(++n).padStart(2,'0') : '';
+        const secDeco = String(++n).padStart(2,'0');
+        const secSpec = hasSpecs ? String(++n).padStart(2,'0') : '';
+        const secReview = String(++n).padStart(2,'0');
+        const secPkg = String(++n).padStart(2,'0');
+        const secRel = String(++n).padStart(2,'0');
+        const secInsp = String(++n).padStart(2,'0');
+        const secFaq = String(++n).padStart(2,'0');
+        const secShare = String(++n).padStart(2,'0');
+        const packages = this.PKGS(ev.type).map((p,i)=>({ name:p.name, price:p.price, features:p.feat,
+          featCls: i===1?'feat':'', btnCls: i===1?'btn-gold':'btn-ghost', onBook:()=>this.bookPkg(p.name) }));
+        const faqs = this.FAQ.map((f,i)=>({ q:f.q, a:f.a, cls:'faqItem'+(this.state.openFaq===i?' open':''), sign:this.state.openFaq===i?'–':'+', onClick:()=>this.toggleFaq(i) }));
+        const shareBtns = this.SHARE.map(s=>({ label:s.label, color:s.color, onClick:()=>this.shareDo(s.label) }));
+        Object.assign(out, {
+          modalOpen:true, m, mPhoto:ev.photos[idx],
+          mHeroImg: React.createElement('img',{className:'cphoto',src:ev.img,alt:ev.name}),
+          mSlideImg: React.createElement('img',{className:'cphoto',src:ev.photos[idx].src,alt:ev.photos[idx].label}),
+          mLboxImg: React.createElement('img',{className:'lboxPhoto',src:ev.photos[idx].src,alt:ev.photos[idx].label}),
+          photoLabel: String(idx+1).padStart(2,'0')+' / '+String(total).padStart(2,'0'),
+          thumbs, hasSpecs,
+          secCake, secDeco, secSpec, secReview, secPkg, secRel, secInsp, secFaq, secShare,
+          packages, faqs, shareBtns,
+          related:this.RELATED, inspiration:this.INSPIRATION,
+          closeModal:()=>this.closeModal(), onOvlClick:()=>this.onOvlClick()
+        });
+      }
+    }
+    return out;
+  }
+}
+</script>
+</body>
+</html>

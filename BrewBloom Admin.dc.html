@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700;800&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.admin{--bg:#f3ece0;--panel:#fff;--ink:#2b1c13;--mut:#7a6450;--esp:#2b1c13;--esp2:#3f2a1d;--latte:#c9915a;--caramel:#a8683a;--leaf:#6f9a3c;--data:#2a6f8a;--data2:#4d9bb5;--line:#e5d7c3;--side1:#2b1c13;--side2:#3f2a1d;--sideink:#d8c3a8;--ok:#4d8259;--warn:#c08a2e;--bad:#b5524f;display:flex;min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Jost',system-ui,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+.admin h1,.admin h2,.admin h3,.admin h4{font-family:'Bitter',Georgia,serif;font-weight:700;line-height:1.06}
+.side{width:246px;flex:none;background:linear-gradient(180deg,var(--side1),var(--side2));color:var(--sideink);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:22px 0}
+.sbrand{padding:6px 24px 20px;border-bottom:1px solid rgba(216,195,168,.16);margin-bottom:14px;display:flex;align-items:center;gap:11px}
+.sbrand .mk{width:38px;height:38px;border-radius:50%;background:var(--latte);display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
+.sbrand .bn{font-family:'Bitter',serif;font-size:16px;font-weight:800;letter-spacing:.08em;color:#fff;line-height:1}
+.sbrand .bs{font-size:8px;letter-spacing:.28em;color:var(--latte);margin-top:3px;text-transform:uppercase}
+.sgroup{padding:0 14px;margin-bottom:4px}
+.sglab{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(216,195,168,.5);padding:12px 12px 7px;font-weight:600}
+.snav{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:9px;font-size:13.5px;color:var(--sideink);cursor:pointer;transition:.16s;font-weight:500}
+.snav:hover{background:rgba(216,195,168,.1);color:#fff}
+.snav.on{background:var(--caramel);color:#fff}
+.snav .ic{width:18px;text-align:center;flex:none}
+.snav .bdg{margin-left:auto;background:var(--leaf);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px}
+.sfoot{margin-top:auto;padding:16px 22px 4px;border-top:1px solid rgba(216,195,168,.16);display:flex;align-items:center;gap:11px}
+.savatar{width:36px;height:36px;border-radius:50%;flex:none;background:var(--latte);display:flex;align-items:center;justify-content:center;font-family:'Bitter',serif;font-weight:700;color:var(--esp)}
+.sfoot .sn{font-size:12.5px;color:#fff;font-weight:600}.sfoot .sr{font-size:10.5px;color:var(--sideink)}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding:16px 32px;display:flex;align-items:center;gap:18px}
+.top .tt{font-family:'Bitter',serif;font-size:24px;font-weight:700}
+.top .tsub{font-size:12px;color:var(--mut);margin-top:1px}
+.tsearch{margin-left:auto;display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--line);border-radius:30px;padding:9px 16px;width:240px;color:var(--mut);font-size:13px}
+.tsearch input{border:none;outline:none;background:none;font-family:inherit;font-size:13px;color:var(--ink);width:100%}
+.tbtn{width:40px;height:40px;border-radius:50%;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;color:var(--ink)}
+.tbtn .dot{position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--leaf);border:1.5px solid var(--panel)}
+.content{padding:26px 32px 48px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 4px 16px rgba(43,28,19,.05)}
+.kpi .kl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:600}
+.kpi .kn{font-family:'Bitter',serif;font-size:34px;line-height:1;margin:8px 0 6px;color:var(--ink)}
+.kpi .kd{font-size:12px;font-weight:600}.kd.up{color:var(--ok)}.kd.down{color:var(--bad)}
+.grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;margin-bottom:16px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(43,28,19,.05)}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.ph h3{font-size:19px}
+.ph .pa{font-size:12px;color:var(--caramel);font-weight:600;cursor:pointer}
+.perbtns{display:flex;gap:6px}
+.perb{border:1px solid var(--line);background:var(--bg);border-radius:20px;padding:6px 13px;font-size:11px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;color:var(--mut);cursor:pointer}
+.perb.on{background:var(--esp);color:#fff;border-color:var(--esp)}
+.bars{display:flex;align-items:flex-end;gap:12px;height:170px;padding-top:10px}
+.barc{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px;height:100%}
+.barc .bar{width:100%;max-width:36px;background:linear-gradient(180deg,var(--data),var(--data2));border-radius:5px 5px 0 0}
+.barc .bl{font-size:10px;color:var(--mut)}.barc .bv{font-size:10px;color:var(--ink);font-weight:600}
+.feed{display:flex;flex-direction:column}
+.fitem{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.fitem:last-child{border-bottom:none}
+.fdot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex:none}
+.fitem .ft{font-size:13px;line-height:1.4}.fitem .fm{font-size:11px;color:var(--mut);margin-top:2px}
+table{width:100%;border-collapse:collapse}
+thead th{text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:600;padding:0 12px 12px;border-bottom:1px solid var(--line)}
+tbody td{padding:12px;border-bottom:1px solid var(--line);font-size:13px}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#faf4ea}
+.oid{font-family:'Bitter',serif;font-weight:700;color:var(--caramel)}
+.items{color:var(--mut);font-size:12px}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 11px;border-radius:20px;letter-spacing:.02em}
+.pill.ok{background:rgba(77,130,89,.14);color:var(--ok)}
+.pill.warn{background:rgba(192,138,46,.16);color:var(--warn)}
+.pill.new{background:rgba(42,111,138,.13);color:var(--data)}
+.pill.neutral{background:var(--bg);color:var(--mut)}
+.money{font-family:'Bitter',serif;font-size:16px;color:var(--caramel);font-weight:700}
+.obtn{height:32px;padding:0 13px;border-radius:7px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;cursor:pointer;border:1px solid var(--caramel);color:var(--caramel);background:var(--panel)}
+.obtn:hover{background:var(--caramel);color:#fff}
+.obtn.done{border-color:var(--ok);color:var(--ok);cursor:default}
+.mrow{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:10px}
+.mrow .em{width:44px;height:44px;border-radius:10px;background:linear-gradient(150deg,var(--esp2),var(--caramel));display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
+.mrow .mi{flex:1;min-width:0}.mrow .mn{font-size:14px;font-weight:600}.mrow .mc{font-size:11.5px;color:var(--mut);margin-top:2px}
+.mrow .mp{font-family:'Bitter',serif;font-weight:700;color:var(--caramel);font-size:16px}
+.toggle{width:44px;height:24px;border-radius:20px;background:var(--line);position:relative;cursor:pointer;flex:none;transition:.2s}
+.toggle.on{background:var(--ok)}
+.toggle .kn{position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
+.toggle.on .kn{left:22px}
+.loy{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.stamprow{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.stamprow .cn{flex:1;font-size:13.5px;font-weight:600}
+.stamps{display:flex;gap:4px}
+.stamps i{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--line);display:block}
+.stamps i.on{background:var(--caramel);border-color:var(--caramel)}
+.pay{display:flex;gap:16px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 3px 12px rgba(43,28,19,.04);margin-bottom:12px}
+.payproof{width:64px;height:64px;border-radius:9px;flex:none;background:linear-gradient(150deg,#efe2d8,#d9c3a8);display:flex;align-items:center;justify-content:center;color:var(--esp2);border:1px solid var(--line);font-family:'Bitter',serif;font-weight:700;font-size:13px}
+.payi{flex:1;min-width:0}.payi .pn{font-size:14px;font-weight:600}.payi .pmeta{font-size:11.5px;color:var(--mut);margin-top:3px}
+.payi .pref{font-size:11px;color:var(--esp2);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:2px 8px;display:inline-block;margin-top:5px}
+.payamt .money{font-size:20px}
+.payact{display:flex;flex-direction:column;gap:7px;flex:none;width:112px}
+.abtn{height:34px;border-radius:7px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;cursor:pointer;border:1px solid transparent}
+.abtn.verify{background:var(--ok);color:#fff}.abtn.reject{background:var(--panel);border:1px solid var(--line);color:var(--bad)}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:6px}
+.field input,.field select{width:100%;height:42px;border:1px solid var(--line);border-radius:8px;padding:0 13px;font-family:inherit;font-size:13.5px;color:var(--ink);background:var(--panel)}
+.settgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.savebtn{height:44px;padding:0 24px;background:var(--caramel);color:#fff;border:none;border-radius:8px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;cursor:pointer}
+.mtoast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);z-index:200;background:var(--esp);color:#fff;padding:14px 26px;border-radius:40px;font-size:13.5px;box-shadow:0 18px 44px rgba(0,0,0,.32)}
+@media(max-width:1080px){.kpis{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.loy{grid-template-columns:1fr}}
+@media(max-width:720px){.side{display:none}}
+</style>
+</helmet>
+<div class="admin" style="{{ rootStyle }}">
+<aside class="side">
+<div class="sbrand"><span class="mk">☕</span><div><div class="bn">BREWBLOOM</div><div class="bs">Admin</div></div></div>
+<div class="sgroup"><div class="sglab">Shop</div><sc-for list="{{ navOps }}" as="n" hint-placeholder-count="5"><div class="{{ n.cls }}" onClick="{{ n.go }}"><span class="ic">{{ n.ic }}</span>{{ n.label }}<sc-if value="{{ n.hasBadge }}" hint-placeholder-val="{{ false }}"><span class="bdg">{{ n.badge }}</span></sc-if></div></sc-for></div>
+<div class="sgroup"><div class="sglab">Manage</div><sc-for list="{{ navMng }}" as="n" hint-placeholder-count="2"><div class="{{ n.cls }}" onClick="{{ n.go }}"><span class="ic">{{ n.ic }}</span>{{ n.label }}</div></sc-for></div>
+<div class="sfoot"><div class="savatar">B</div><div><div class="sn">Bea Ramos</div><div class="sr">Shop Manager</div></div></div>
+</aside>
+<div class="main">
+<div class="top"><div><div class="tt">{{ viewTitle }}</div><div class="tsub">{{ viewSub }}</div></div><div class="tsearch"><span>⌕</span><input placeholder="Search orders, items, members…"></div><button class="tbtn">✉<span class="dot"></span></button><button class="tbtn" onClick="{{ goPayments }}">🔔<span class="dot"></span></button></div>
+<div class="content">
+
+<sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+<div class="kpis"><sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4"><div class="kpi"><div class="kl">{{ k.label }}</div><div class="kn">{{ k.value }}</div><div class="kd {{ k.dcls }}">{{ k.delta }}</div></div></sc-for></div>
+<div class="grid2">
+<div class="panel"><div class="ph"><h3>Sales</h3><div class="perbtns"><sc-for list="{{ periods }}" as="p" hint-placeholder-count="3"><span class="{{ p.cls }}" onClick="{{ p.go }}">{{ p.label }}</span></sc-for></div></div><div class="bars"><sc-for list="{{ salesBars }}" as="b" hint-placeholder-count="7"><div class="barc"><span class="bv">{{ b.v }}</span><div class="bar" style="height: {{ b.h }}%"></div><span class="bl">{{ b.l }}</span></div></sc-for></div></div>
+<div class="panel"><div class="ph"><h3>Live Activity</h3></div><div class="feed"><sc-for list="{{ activity }}" as="a" hint-placeholder-count="5"><div class="fitem"><span class="fdot" style="background: {{ a.color }}"></span><div><div class="ft">{{ a.text }}</div><div class="fm">{{ a.time }}</div></div></div></sc-for></div></div>
+</div>
+<div class="panel"><div class="ph"><h3>Best Sellers Today</h3><span class="pa" onClick="{{ goMenu }}">Menu →</span></div><table><thead><tr><th>Item</th><th>Category</th><th>Sold</th><th>Revenue</th></tr></thead><tbody><sc-for list="{{ bestSellers }}" as="b" hint-placeholder-count="4"><tr><td><b>{{ b.name }}</b></td><td class="items">{{ b.cat }}</td><td>{{ b.sold }}</td><td><span class="money">{{ b.rev }}</span></td></tr></sc-for></tbody></table></div>
+</sc-if>
+
+<sc-if value="{{ isOrders }}" hint-placeholder-val="{{ false }}">
+<div class="panel"><div class="ph"><h3>Live Orders</h3><span class="pill new">{{ liveCount }} in queue</span></div><table><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Type</th><th>Status</th><th></th></tr></thead><tbody><sc-for list="{{ orders }}" as="o" hint-placeholder-count="6"><tr><td><span class="oid">{{ o.id }}</span></td><td>{{ o.who }}</td><td class="items">{{ o.items }}</td><td><span class="money">{{ o.total }}</span></td><td>{{ o.type }}</td><td><span class="pill {{ o.scls }}">{{ o.status }}</span></td><td><sc-if value="{{ o.canAdvance }}" hint-placeholder-val="{{ true }}"><button class="obtn" onClick="{{ o.advance }}">{{ o.next }}</button></sc-if><sc-if value="{{ o.done }}" hint-placeholder-val="{{ false }}"><button class="obtn done">✓ Done</button></sc-if></td></tr></sc-for></tbody></table></div>
+</sc-if>
+
+<sc-if value="{{ isMenu }}" hint-placeholder-val="{{ false }}">
+<div class="panel"><div class="ph"><h3>Menu Management</h3><span class="pill neutral">{{ menuCount }} items</span></div><sc-for list="{{ menu }}" as="m" hint-placeholder-count="6"><div class="mrow"><span class="em">{{ m.emoji }}</span><div class="mi"><div class="mn">{{ m.name }}</div><div class="mc">{{ m.cat }}</div></div><span class="mp">{{ m.price }}</span><span class="pill {{ m.scls }}">{{ m.stateLabel }}</span><div class="toggle {{ m.tcls }}" onClick="{{ m.toggle }}"><span class="kn"></span></div></div></sc-for></div>
+</sc-if>
+
+<sc-if value="{{ isLoyalty }}" hint-placeholder-val="{{ false }}">
+<div class="loy"><div class="kpi"><div class="kl">Members</div><div class="kn">1,204</div><div class="kd up">▲ 38 this week</div></div><div class="kpi"><div class="kl">Free cups redeemed</div><div class="kn">86</div><div class="kd up">this month</div></div><div class="kpi"><div class="kl">Repeat rate</div><div class="kn">61%</div><div class="kd up">▲ 4%</div></div></div>
+<div class="panel"><div class="ph"><h3>Loyalty Members</h3><span class="pa">Export →</span></div><sc-for list="{{ members }}" as="m" hint-placeholder-count="5"><div class="stamprow"><span class="cn">{{ m.name }}</span><div class="stamps"><sc-for list="{{ m.stamps }}" as="s" hint-placeholder-count="10"><i class="{{ s }}"></i></sc-for></div><span class="pill {{ m.scls }}">{{ m.label }}</span></div></sc-for></div>
+</sc-if>
+
+<sc-if value="{{ isPayments }}" hint-placeholder-val="{{ false }}">
+<div class="kpis" style="grid-template-columns:repeat(3,1fr)"><div class="kpi"><div class="kl">Awaiting Verification</div><div class="kn">{{ payPending }}</div><div class="kd up">GCash</div></div><div class="kpi"><div class="kl">Verified Today</div><div class="kn">{{ payVerified }}</div><div class="kd up">₱4,120</div></div><div class="kpi"><div class="kl">Sales · Today</div><div class="kn">₱18.4K</div><div class="kd up">▲ 9%</div></div></div>
+<div class="panel"><div class="ph"><h3>GCash Verification Queue</h3><span class="pill warn">Manual review</span></div><sc-for list="{{ payQueue }}" as="p" hint-placeholder-count="3"><div class="pay"><div class="payproof">GCash</div><div class="payi"><div class="pn">{{ p.name }}</div><div class="pmeta">{{ p.forWhat }} · {{ p.when }}</div><span class="pref">Ref: {{ p.ref }}</span></div><div class="payamt"><span class="money">{{ p.amt }}</span></div><sc-if value="{{ p.pending }}" hint-placeholder-val="{{ true }}"><div class="payact"><button class="abtn verify" onClick="{{ p.verify }}">✓ Verify</button><button class="abtn reject" onClick="{{ p.reject }}">Reject</button></div></sc-if><sc-if value="{{ p.done }}" hint-placeholder-val="{{ false }}"><div class="payact"><span class="pill {{ p.rcls }}">{{ p.result }}</span></div></sc-if></div></sc-for></div>
+</sc-if>
+
+<sc-if value="{{ isSettings }}" hint-placeholder-val="{{ false }}">
+<div class="grid2" style="grid-template-columns:1fr 1fr"><div class="panel"><div class="ph"><h3>Shop Profile</h3></div><div class="field"><label>Shop name</label><input value="BrewBloom Coffee"></div><div class="field"><label>Address</label><input value="22 Lacson Street, Bacolod City"></div><div class="settgrid"><div class="field"><label>Opens</label><input value="7:00 AM"></div><div class="field"><label>Closes</label><input value="10:00 PM"></div></div><button class="savebtn" onClick="{{ save }}">Save changes</button></div>
+<div class="panel"><div class="ph"><h3>Payments &amp; Loyalty</h3></div><div class="field"><label>GCash number</label><input value="0917 •••• 3204"></div><div class="field"><label>Loyalty: free drink every</label><select><option>10 stamps</option><option>8 stamps</option><option>12 stamps</option></select></div><button class="savebtn" onClick="{{ save }}">Save changes</button></div></div>
+</sc-if>
+
+</div></div>
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}"><div class="mtoast">{{ toast }}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:860},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#a8683a&quot;,&quot;options&quot;:[&quot;#a8683a&quot;,&quot;#c9915a&quot;,&quot;#6f9a3c&quot;,&quot;#2a6f8a&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;}}">
+class Component extends DCLogic {
+  state = { view:'overview', period:'Day', orderStage:{}, pays:{}, menuState:{}, toast:'' };
+  NAV_OPS=[['overview','Overview','▦'],['orders','Live Orders','☕'],['menu','Menu','▤'],['loyalty','Loyalty','✦'],['payments','Payments','₱']];
+  NAV_MNG=[['settings','Settings','◉']];
+  TITLES={ overview:['Dashboard','Good morning, Bea — here’s the shop today'], orders:['Live Orders','Track and advance every cup in the queue'], menu:['Menu','Toggle availability and manage items'], loyalty:['Loyalty','Members, stamps and rewards'], payments:['Payments','Verify GCash proofs and track sales'], settings:['Settings','Shop, payment and loyalty configuration'] };
+  KPIS={ Day:[['Sales','₱18.4K','▲ 9%','up'],['Orders','142','▲ 18','up'],['Avg Ticket','₱130','▲ 4%','up'],['New Members','12','▲ 3','up']],
+         Week:[['Sales','₱112K','▲ 14%','up'],['Orders','918','▲ 96','up'],['Avg Ticket','₱122','▲ 2%','up'],['New Members','74','▲ 11','up']],
+         Month:[['Sales','₱468K','▲ 21%','up'],['Orders','3,840','▲ 380','up'],['Avg Ticket','₱128','▲ 5%','up'],['New Members','312','▲ 48','up']] };
+  SALES={ Day:[[55,'₱1.4K','7a'],[72,'₱1.9K','9a'],[88,'₱2.4K','11a'],[64,'₱1.7K','1p'],[78,'₱2.1K','3p'],[92,'₱2.6K','5p'],[70,'₱1.9K','7p']],
+          Week:[[60,'₱14K','Mon'],[66,'₱15K','Tue'],[72,'₱17K','Wed'],[80,'₱19K','Thu'],[95,'₱23K','Fri'],[99,'₱24K','Sat'],[84,'₱20K','Sun']],
+          Month:[[62,'₱96K','W1'],[70,'₱108K','W2'],[78,'₱120K','W3'],[88,'₱136K','W4'],[74,'₱114K','W5'],[0,'','',],[0,'','']] };
+  ACTIVITY=[['#4d8259','<b>Order #1042</b> completed — Coconut Cold Brew ×2','2 min ago'],['#2a6f8a','<b>New order #1043</b> — Salted Caramel Latte','4 min ago'],['#c9915a','<b>GCash payment</b> uploaded — ₱360','9 min ago'],['#6f9a3c','<b>Loyalty reward</b> — Ana redeemed a free cup','22 min ago'],['#4d8259','<b>New member</b> — Marco joined Rewards','40 min ago']];
+  BEST=[['Coconut Cold Brew','Cold Brew','48','₱8,880'],['Salted Caramel Latte','Espresso','39','₱6,825'],['Butter Croissant','Bakes','52','₱4,940'],['BrewBloom House Drip','Brewed','34','₱5,100']];
+  ORDERS=[
+    [1043,'Walk-in','1× Salted Caramel Latte','₱175','Dine-in',0],
+    [1044,'Ana G. (app)','2× Coconut Cold Brew','₱370','Pickup',0],
+    [1045,'Marco','1× Croissant, 1× Drip','₱245','Dine-in',1],
+    [1046,'Kaye','1× Matcha Latte','₱170','Pickup',1],
+    [1047,'Liza (app)','2× Cappuccino','₱330','Dine-in',2],
+    [1048,'Josh','1× Choco Espresso','₱180','Pickup',3]
+  ];
+  ORDER_STAGES=['New','Brewing','Ready','Completed'];
+  MENU=[
+    ['Coconut Cold Brew','Cold Brew','₱185','🥥',true],['Salted Caramel Latte','Espresso','₱175','🍮',true],
+    ['Cinnamon Cappuccino','Espresso','₱165','☕',true],['Pumpkin Spice Latte','Seasonal','₱185','🎃',false],
+    ['BrewBloom House Drip','Brewed','₱150','☕',true],['Butter Croissant','Bakes','₱95','🥐',true]
+  ];
+  MEMBERS=[['Ana Gutierrez',9,'1 to reward','warn'],['Marco Santos',5,'Halfway','new'],['Kaye Lim',10,'Reward ready','ok'],['Liza Cruz',3,'Building','neutral'],['Josh Tan',7,'Building','new']];
+  PAYS=[['Ana G.','Mobile order #1044','GC-3341-8890','₱370','3 min ago'],['Group order','Office run ×6','GC-2290-5521','₱1,120','25 min ago'],['Marco','Mobile order #1039','GC-8810-2077','₱245','1 hr ago']];
+  go(v){ this.setState({view:v}); }
+  setPeriod(p){ this.setState({period:p}); }
+  advance(id){ this.setState(s=>{ const cur=(id in s.orderStage)?s.orderStage[id]:this.ORDERS.find(o=>o[0]===id)[5]; return {orderStage:{...s.orderStage,[id]:Math.min(cur+1,this.ORDER_STAGES.length-1)}}; }); }
+  payAct(i,r){ this.setState(s=>({pays:{...s.pays,[i]:r}})); this.flash(r==='Verified'?'Payment verified ✦':'Payment rejected'); }
+  toggleItem(i,cur){ this.setState(s=>({menuState:{...s.menuState,[i]:!(i in s.menuState?s.menuState[i]:cur)}})); }
+  save(){ this.flash('Settings saved ✦'); }
+  flash(m){ if(this._t) clearTimeout(this._t); this.setState({toast:m}); this._t=setTimeout(()=>this.setState({toast:''}),1900); }
+  renderVals(){
+    const S=this.state,v=S.view;
+    const accent=this.props.accent; const rootStyle=accent?{'--caramel':accent}:{};
+    const scls=['pill new','pill warn','pill ok','pill neutral'];
+    const mkNav=(a)=>a.map(n=>({label:n[1],ic:n[2],cls:v===n[0]?'snav on':'snav',go:()=>this.go(n[0]),hasBadge:n[0]==='orders'||n[0]==='payments',badge:n[0]==='orders'?'4':'3'}));
+    const t=this.TITLES[v]||['',''];
+    const kpis=(this.KPIS[S.period]||this.KPIS.Day).map(k=>({label:k[0],value:k[1],delta:k[2],dcls:k[3]}));
+    const salesBars=(this.SALES[S.period]||this.SALES.Day).filter(b=>b[0]>0).map(b=>({h:b[0],v:b[1],l:b[2]}));
+    const periods=['Day','Week','Month'].map(p=>({label:p,cls:p===S.period?'perb on':'perb',go:()=>this.setPeriod(p)}));
+    const activity=this.ACTIVITY.map(a=>({color:a[0],text:a[1],time:a[2]}));
+    const bestSellers=this.BEST.map(b=>({name:b[0],cat:b[1],sold:b[2],rev:b[3]}));
+    const orders=this.ORDERS.map(o=>{ const st=(o[0] in S.orderStage)?S.orderStage[o[0]]:o[5]; const nextLabel=['Start →','Ready →','Complete →'][st]; return {id:'#'+o[0],who:o[1],items:o[2],total:o[3],type:o[4],status:this.ORDER_STAGES[st],scls:['new','warn','ok','neutral'][st],canAdvance:st<3,done:st>=3,next:nextLabel,advance:()=>this.advance(o[0])}; });
+    const liveCount=orders.filter(o=>!o.done).length;
+    const menu=this.MENU.map((m,i)=>{ const on=(i in S.menuState)?S.menuState[i]:m[4]; return {name:m[0],cat:m[1],price:m[2],emoji:m[3],stateLabel:on?'Available':'Sold out',scls:on?'ok':'neutral',tcls:on?'on':'',toggle:()=>this.toggleItem(i,m[4])}; });
+    const members=this.MEMBERS.map(m=>({name:m[0],stamps:Array.from({length:10},(_,i)=>i<m[1]?'on':''),label:m[2],scls:m[3]}));
+    const payQueue=this.PAYS.map((p,i)=>{ const r=S.pays[i]; return {name:p[0],forWhat:p[1],ref:p[2],amt:p[3],when:p[4],pending:!r,done:!!r,result:r||'',rcls:r==='Verified'?'ok':'bad',verify:()=>this.payAct(i,'Verified'),reject:()=>this.payAct(i,'Rejected')}; });
+    return {
+      rootStyle, navOps:mkNav(this.NAV_OPS), navMng:mkNav(this.NAV_MNG),
+      viewTitle:t[0], viewSub:t[1],
+      isOverview:v==='overview', isOrders:v==='orders', isMenu:v==='menu', isLoyalty:v==='loyalty', isPayments:v==='payments', isSettings:v==='settings',
+      kpis, salesBars, periods, activity, bestSellers,
+      orders, liveCount:String(liveCount),
+      menu, menuCount:this.MENU.length,
+      members,
+      payQueue, payPending:String(payQueue.filter(p=>p.pending).length), payVerified:String(payQueue.filter(p=>p.result==='Verified').length),
+      goMenu:()=>this.go('menu'), goPayments:()=>this.go('payments'),
+      save:()=>this.save(), toast:S.toast, toastShow:!!S.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

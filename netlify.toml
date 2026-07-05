@@ -1,0 +1,17 @@
+[build]
+  publish = "."
+
+# Static site — no build step needed. Netlify serves the files as-is.
+# Entry point is index.html, which opens the Portfolio Hub.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+
+# Optional: pretty URL for the home page
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.arch{--bg:#f2ebde;--card:#fff;--ink:#1b140d;--mut:#5f4f40;--gold:#9c6a34;--gold2:#7d5324;--champ:#c2984f;--rose:#bd6980;--line:#e2d5bf;--ok:#4d8259;--blue:#37517e;--side:#241d16;background:var(--bg);color:var(--ink);font-family:'Jost',system-ui,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;min-height:100vh}
+.arch h1,.arch h2,.arch h3,.arch h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.06}
+.mono{font-family:'JetBrains Mono',monospace}
+.top{background:linear-gradient(150deg,#241d16,#4a352a 60%,#5a4133);color:#fff;padding:40px 44px}
+.top .ey{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--champ);font-weight:600}
+.top h1{color:#fff;font-size:clamp(30px,4vw,46px);margin:8px 0 8px}
+.top p{color:rgba(255,255,255,.82);font-size:15px;max-width:70ch;line-height:1.7}
+.tabs{display:flex;gap:6px;padding:16px 44px 0;background:var(--bg);position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tab{padding:13px 20px;font-size:12.5px;letter-spacing:.05em;font-weight:600;color:var(--mut);cursor:pointer;border-bottom:2px solid transparent}
+.tab.on{color:var(--gold);border-bottom-color:var(--gold)}
+.tab:hover{color:var(--ink)}
+.wrap{padding:34px 44px 70px;max-width:1240px;margin:0 auto}
+.sechead{margin-bottom:26px}
+.sechead h2{font-size:30px}
+.sechead p{font-size:14px;color:var(--mut);margin-top:6px;max-width:74ch;line-height:1.6}
+.tier{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:8px;box-shadow:0 4px 16px rgba(43,30,15,.05)}
+.tier .tl{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px}
+.nodes{display:flex;gap:12px;flex-wrap:wrap}
+.node{flex:1;min-width:150px;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:15px 16px}
+.node .nn{font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
+.node .nt{font-size:11.5px;color:var(--mut);margin-top:4px;line-height:1.5}
+.node .chip{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--card);border:1px solid var(--line);border-radius:5px;padding:1px 7px;color:var(--gold2);margin-top:8px;display:inline-block}
+.node.acc{border-color:var(--gold);background:#fbf3ea}
+.node.dark{background:var(--side);border-color:var(--side);color:#fff}
+.node.dark .nt{color:rgba(255,255,255,.7)}.node.dark .chip{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:var(--champ)}
+.flowdown{text-align:center;color:var(--gold);font-size:20px;line-height:1;margin:2px 0}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;font-size:12px;color:var(--mut)}
+.legend .lg{display:flex;align-items:center;gap:7px}
+.legend .sw{width:14px;height:14px;border-radius:4px}
+.ergrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ent{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(43,30,15,.05)}
+.ent .eh{background:var(--side);color:#fff;padding:11px 15px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:between;gap:8px}
+.ent .eh .ec{margin-left:auto;font-size:9px;letter-spacing:.1em;color:var(--champ);text-transform:uppercase}
+.ent .row{display:flex;align-items:center;gap:8px;padding:8px 15px;border-bottom:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11.5px}
+.ent .row:last-child{border-bottom:none}
+.ent .row .k{font-size:8px;font-weight:700;padding:2px 5px;border-radius:4px;letter-spacing:.05em;flex:none;width:30px;text-align:center}
+.k.pk{background:rgba(156,106,52,.16);color:var(--gold2)}
+.k.fk{background:rgba(55,81,126,.14);color:var(--blue)}
+.k.col{background:var(--bg);color:var(--mut)}
+.ent .row .fn{color:var(--ink);font-weight:500}
+.ent .row .ft{margin-left:auto;color:var(--mut);font-size:10px}
+.rels{margin-top:20px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px}
+.rels h4{font-size:16px;margin-bottom:14px}
+.rel{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px;padding:7px 0;border-bottom:1px dashed var(--line);flex-wrap:wrap}
+.rel:last-child{border-bottom:none}
+.rel .e{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:3px 9px;color:var(--gold2);font-weight:600}
+.rel .card{color:var(--rose);font-weight:700;letter-spacing:.05em}
+.rel .d{color:var(--mut);margin-left:auto;font-family:'Jost';font-size:11.5px}
+.wf{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 4px 16px rgba(43,30,15,.05)}
+.wf .wh{display:flex;align-items:center;gap:11px;margin-bottom:18px}
+.wf .wi{width:38px;height:38px;border-radius:9px;background:#fbf3ea;border:1px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:17px;flex:none}
+.wf .wh h3{font-size:19px}.wf .wh .ws{font-size:12px;color:var(--mut)}
+.steps{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.step{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:12.5px;font-weight:600;position:relative;display:flex;flex-direction:column;gap:2px;min-width:120px}
+.step .sn{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.step .sd{font-size:10.5px;color:var(--mut);font-weight:400}
+.arrow{display:flex;align-items:center;color:var(--gold);font-size:18px;padding:0 8px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:5px 12px;color:var(--gold2)}
+.tag b{color:var(--ink)}
+.note{display:flex;gap:9px;font-size:12.5px;color:var(--mut);line-height:1.6;margin-top:16px;background:#fbf6ee;border:1px solid var(--line);border-radius:10px;padding:13px 15px}
+.note .i{color:var(--gold);flex:none}
+@media(max-width:900px){.ergrid{grid-template-columns:1fr 1fr}.nodes{flex-direction:column}}
+@media(max-width:640px){.ergrid{grid-template-columns:1fr}}
+</style>
+</helmet>
+<div class="arch">
+<div class="top"><div class="ey">System Documentation</div><h1>Shawie Platform — Architecture</h1><p>A production blueprint for the Shawie Bakes &amp; Events system: a Next.js front end on Supabase (Postgres, Auth, Storage), n8n automation, AI assistants, and manual-verified GCash/Wise payments. Below: the system architecture, relational schema, and core automation workflows.</p></div>
+<div class="tabs"><sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3"><div class="{{ t.cls }}" onClick="{{ t.go }}">{{ t.label }}</div></sc-for></div>
+<div class="wrap">
+
+<sc-if value="{{ isArch }}" hint-placeholder-val="{{ true }}">
+<div class="sechead"><h2>System Architecture</h2><p>Layered architecture — presentation, API, data, and integration tiers — designed to scale and deploy on Vercel with Supabase as the backend.</p></div>
+<div class="tier"><div class="tl">Client · Presentation</div><div class="nodes"><div class="node acc"><div class="nn">Public Site</div><div class="nt">Marketing, gallery, blog, booking — SSR/ISR for SEO</div><span class="chip">Next.js 15 · React · Tailwind</span></div><div class="node acc"><div class="nn">Client Portal</div><div class="nt">Timeline, payments, docs, gallery, messaging</div><span class="chip">App Router · RSC</span></div><div class="node acc"><div class="nn">Admin Console</div><div class="nt">Bookings, CRM, payment verification, CMS, logs</div><span class="chip">Role-gated routes</span></div></div></div>
+<div class="flowdown">↓</div>
+<div class="tier"><div class="tl">API · Application Layer</div><div class="nodes"><div class="node"><div class="nn">REST / Route Handlers</div><div class="nt">Validation (Zod), rate limiting, error handling</div></div><div class="node"><div class="nn">Supabase Edge Functions</div><div class="nt">Webhooks, payment intake, scheduled jobs</div></div><div class="node"><div class="nn">Auth Middleware</div><div class="nt">Session, RBAC, protected routes, audit hooks</div></div></div></div>
+<div class="flowdown">↓</div>
+<div class="tier"><div class="tl">Data · Supabase</div><div class="nodes"><div class="node dark"><div class="nn">PostgreSQL</div><div class="nt">Relational schema · Row-Level Security · soft deletes</div><span class="chip">RLS policies</span></div><div class="node dark"><div class="nn">Supabase Auth</div><div class="nt">Email + Google OAuth · JWT · email verification</div></div><div class="node dark"><div class="nn">Storage</div><div class="nt">Payment proofs, contracts, gallery originals</div></div></div></div>
+<div class="flowdown">↓</div>
+<div class="tier"><div class="tl">Integrations · Services</div><div class="nodes"><div class="node"><div class="nn">n8n</div><div class="nt">Workflow automation &amp; retries</div><span class="chip">self-host / cloud</span></div><div class="node"><div class="nn">OpenAI · Claude</div><div class="nt">AI concierge, lead qualification</div></div><div class="node"><div class="nn">Resend</div><div class="nt">Transactional email + journeys</div></div><div class="node"><div class="nn">Cloudinary</div><div class="nt">Media optimization &amp; CDN</div></div><div class="node"><div class="nn">GCash · Wise</div><div class="nt">Manual-verified payments</div></div></div></div>
+<div class="legend"><div class="lg"><span class="sw" style="background:#fbf3ea;border:1px solid #9c6a34"></span>Client apps</div><div class="lg"><span class="sw" style="background:#f2ebde;border:1px solid #e2d5bf"></span>Services / API</div><div class="lg"><span class="sw" style="background:#241d16"></span>Supabase core</div></div>
+</sc-if>
+
+<sc-if value="{{ isEr }}" hint-placeholder-val="{{ false }}">
+<div class="sechead"><h2>Database — Entity Relationship</h2><p>PostgreSQL schema. Every table uses UUID primary keys, <span class="mono">created_at</span> / <span class="mono">updated_at</span>, soft-delete (<span class="mono">deleted_at</span>), and RLS. <span class="mono">PK</span> primary key · <span class="mono">FK</span> foreign key.</p></div>
+<div class="ergrid"><sc-for list="{{ entities }}" as="e" hint-placeholder-count="9"><div class="ent"><div class="eh">{{ e.name }}<span class="ec">{{ e.tag }}</span></div><sc-for list="{{ e.fields }}" as="f" hint-placeholder-count="5"><div class="row"><span class="k {{ f.kk }}">{{ f.k }}</span><span class="fn">{{ f.name }}</span><span class="ft">{{ f.type }}</span></div></sc-for></div></sc-for></div>
+<div class="rels"><h4>Relationships</h4><sc-for list="{{ rels }}" as="r" hint-placeholder-count="6"><div class="rel"><span class="e">{{ r.a }}</span><span class="card">{{ r.card }}</span><span class="e">{{ r.b }}</span><span class="d">{{ r.desc }}</span></div></sc-for></div>
+</sc-if>
+
+<sc-if value="{{ isFlow }}" hint-placeholder-val="{{ false }}">
+<div class="sechead"><h2>Automation Workflows</h2><p>n8n orchestrations with retry logic, status tracking and logging — every run recorded to <span class="mono">automation_logs</span>.</p></div>
+<sc-for list="{{ flows }}" as="w" hint-placeholder-count="3"><div class="wf"><div class="wh"><span class="wi">{{ w.ic }}</span><div><h3>{{ w.title }}</h3><div class="ws">{{ w.sub }}</div></div></div><div class="steps"><sc-for list="{{ w.steps }}" as="s" hint-placeholder-count="6"><div class="step"><span class="sn">{{ s.n }}</span>{{ s.label }}<span class="sd">{{ s.d }}</span></div><sc-if value="{{ s.arrow }}" hint-placeholder-val="{{ true }}"><span class="arrow">→</span></sc-if></sc-for></div><div class="tags"><sc-for list="{{ w.tags }}" as="t" hint-placeholder-count="3"><span class="tag">{{ t }}</span></sc-for></div></div></sc-for>
+<div class="note"><span class="i">✦</span><span>Each workflow node writes a status (<span class="mono">success · retried · failed</span>) with timestamps; failures retry with backoff and alert the admin. All are visible in the Admin Console → Automation tab.</span></div>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1240,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { tab:'arch' };
+  TABS=[['arch','Architecture'],['er','Database (ER)'],['flow','Automation']];
+  ENT=[
+    ['users','auth',[['pk','id','uuid'],['col','email','text'],['col','role','enum'],['col','email_verified','bool'],['col','created_at','tstz']]],
+    ['profiles','core',[['pk','id','uuid'],['fk','user_id','→ users'],['col','full_name','text'],['col','phone','text'],['col','avatar_url','text']]],
+    ['bookings','core',[['pk','id','uuid'],['fk','client_id','→ profiles'],['col','event_type','text'],['col','event_date','date'],['col','status','enum'],['col','total','numeric']]],
+    ['payments','finance',[['pk','id','uuid'],['fk','booking_id','→ bookings'],['col','method','enum'],['col','amount','numeric'],['col','ref_no','text'],['col','proof_url','text'],['col','status','enum']]],
+    ['invoices','finance',[['pk','id','uuid'],['fk','booking_id','→ bookings'],['col','number','text'],['col','due_date','date'],['col','status','enum']]],
+    ['leads','crm',[['pk','id','uuid'],['col','name','text'],['col','source','text'],['col','stage','enum'],['col','value','numeric']]],
+    ['messages','comms',[['pk','id','uuid'],['fk','booking_id','→ bookings'],['fk','sender_id','→ users'],['col','body','text'],['col','read','bool']]],
+    ['posts','cms',[['pk','id','uuid'],['col','slug','text'],['col','title','text'],['col','category','text'],['col','published','bool']]],
+    ['automation_logs','ops',[['pk','id','uuid'],['col','workflow','text'],['col','status','enum'],['col','payload','jsonb'],['col','ran_at','tstz']]]
+  ];
+  RELS=[
+    ['users','1 : 1','profiles','each auth user has one profile'],
+    ['profiles','1 : N','bookings','a client can have many bookings'],
+    ['bookings','1 : N','payments','deposit, installments, balance'],
+    ['bookings','1 : N','invoices','issued per payment stage'],
+    ['bookings','1 : N','messages','thread per booking'],
+    ['users','1 : N','automation_logs','actor of logged events']
+  ];
+  FLOWS=[
+    ['📥','New Inquiry','Website form → nurtured lead', [['01','Inquiry','form submit'],['02','Save DB','leads + booking'],['03','Notify Admin','push + email'],['04','Confirm Email','auto-reply'],['05','Create Lead','CRM stage: New'],['06','Schedule','follow-up + calendar']], ['n8n','Resend','Supabase']],
+    ['💳','Payment Verification','GCash/Wise proof → verified revenue', [['01','Upload Proof','portal'],['02','Save DB','payments: pending'],['03','Notify Admin','review queue'],['04','Verify','manual approve'],['05','Invoice + Receipt','auto-generate'],['06','Email + Portal','status: paid']], ['Storage','n8n','Resend']],
+    ['📧','13-Stage Email Journey','Inquiry → celebration → referral', [['01','Trigger','stage rule'],['02','Personalize','merge fields'],['03','Send','Resend'],['04','Track','open/click'],['05','Log','automation_logs']], ['Resend','n8n','GA4']]
+  ];
+  go(t){ this.setState({tab:t}); }
+  renderVals(){
+    const S=this.state,t=S.tab;
+    const tabs=this.TABS.map(x=>({label:x[1],cls:t===x[0]?'tab on':'tab',go:()=>this.go(x[0])}));
+    const entities=this.ENT.map(e=>({name:e[0],tag:e[1],fields:e[2].map(f=>({kk:f[0],k:f[0].toUpperCase(),name:f[1],type:f[2]}))}));
+    const rels=this.RELS.map(r=>({a:r[0],card:r[1],b:r[2],desc:r[3]}));
+    const flows=this.FLOWS.map(w=>({ic:w[0],title:w[1],sub:w[2],steps:w[3].map((s,i)=>({n:s[0],label:s[1],d:s[2],arrow:i<w[3].length-1})),tags:w[4]}));
+    return { tabs, isArch:t==='arch', isEr:t==='er', isFlow:t==='flow', entities, rels, flows };
+  }
+}
+</script>
+</body>
+</html>

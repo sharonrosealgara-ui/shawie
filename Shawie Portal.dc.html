@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Jost:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<script src="notify.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.portal{--cream:#f4ede3;--cream2:#eadfce;--ink:#1b140d;--mut:#5f4f40;--gold:#9c6a34;--gold2:#7d5324;--champ:#c2984f;--rose:#bd6980;--line:#e2d5bf;--card:#fff;--ok:#4d8259;--warn:#c08a2e;--bad:#b5524f;background:var(--cream);color:var(--ink);font-family:'Jost',system-ui,sans-serif;font-weight:400;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;min-height:100vh}
+.portal h1,.portal h2,.portal h3,.portal h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.08;color:var(--ink)}
+.pnav{position:sticky;top:0;z-index:30;background:var(--cream);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:15px 34px}
+.pbrand{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;letter-spacing:.11em}
+.pbrand small{display:block;font-family:'Jost';font-size:8px;letter-spacing:.34em;color:var(--mut);font-weight:500;margin-top:1px}
+.pnr{display:flex;align-items:center;gap:14px}
+.pnr .who{text-align:right}.pnr .who .n{font-size:13px;font-weight:600}.pnr .who .r{font-size:10.5px;color:var(--mut)}
+.pav{width:40px;height:40px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;flex:none}
+.hero{position:relative;overflow:hidden;background:linear-gradient(150deg,#f4ddd7,#efe2d8)}
+.hero-in{max-width:1080px;margin:0 auto;padding:34px 34px 30px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.hero .greet{flex:1;min-width:260px}
+.hero .sc{font-family:'Great Vibes',cursive;font-size:26px;color:var(--gold);line-height:1}
+.hero h1{font-size:clamp(30px,4vw,46px);margin:2px 0 6px}
+.hero .ev{font-size:13.5px;color:var(--mut);letter-spacing:.02em}
+.hero .ev b{color:var(--gold2);font-weight:600}
+.count{display:flex;gap:12px}
+.cbox{background:rgba(255,255,255,.7);border:1px solid rgba(156,106,52,.2);border-radius:12px;padding:14px 18px;text-align:center;min-width:78px}
+.cbox .n{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold);line-height:1}
+.cbox .l{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 34px 60px}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:26px}
+.tab{padding:13px 17px;font-size:12.5px;letter-spacing:.04em;color:var(--mut);cursor:pointer;border-bottom:2px solid transparent;font-weight:600;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--gold);border-bottom-color:var(--gold)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 4px 16px rgba(43,30,15,.05);margin-bottom:18px}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:12px;flex-wrap:wrap}
+.ph h3{font-size:21px}
+.prog .pt{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px}
+.prog .pt b{color:var(--gold)}
+.bar{height:9px;background:var(--cream2);border-radius:6px;overflow:hidden}
+.bar .fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--champ));border-radius:6px;transition:width .5s}
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}
+.mini{background:var(--cream);border:1px solid var(--line);border-radius:11px;padding:16px}
+.mini .l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:600}
+.mini .v{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--ink);margin-top:4px}
+.mini .v.gold{color:var(--gold)}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.tl{display:flex;flex-direction:column}
+.tlrow{display:flex;gap:14px;padding-bottom:18px;position:relative}
+.tlrow:last-child{padding-bottom:0}
+.tlrow .dot{width:15px;height:15px;border-radius:50%;border:2px solid var(--line);background:var(--card);flex:none;margin-top:2px;z-index:2}
+.tlrow.done .dot{background:var(--ok);border-color:var(--ok)}
+.tlrow.now .dot{border-color:var(--gold);background:var(--gold)}
+.tlrow .line{position:absolute;left:7px;top:16px;bottom:-2px;width:2px;background:var(--line)}
+.tlrow.done .line{background:var(--ok)}
+.tlrow:last-child .line{display:none}
+.tlrow .tt{font-size:14px;font-weight:600;line-height:1.3}
+.tlrow.pending .tt{color:var(--mut);font-weight:500}
+.tlrow .td{font-size:12px;color:var(--mut);margin-top:2px}
+.tlrow .tg{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:20px;height:fit-content;flex:none}
+.tg.ok{background:rgba(77,130,89,.14);color:var(--ok)}.tg.now{background:rgba(156,106,52,.14);color:var(--gold2)}.tg.soon{background:var(--cream2);color:var(--mut)}
+.ivrow{display:flex;align-items:center;gap:14px;background:var(--cream);border:1px solid var(--line);border-radius:11px;padding:15px 17px;margin-bottom:11px}
+.ivrow .ivl{flex:1}
+.ivrow .ivn{font-size:14px;font-weight:600}
+.ivrow .ivd{font-size:11.5px;color:var(--mut);margin-top:2px}
+.ivrow .iva{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--gold);flex:none}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;letter-spacing:.03em}
+.pill.ok{background:rgba(77,130,89,.14);color:var(--ok)}
+.pill.warn{background:rgba(192,138,46,.16);color:var(--warn)}
+.pill.rev{background:rgba(156,106,52,.14);color:var(--gold2)}
+.paybtn{height:38px;padding:0 17px;border-radius:8px;background:var(--gold);color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;cursor:pointer;border:none;flex:none}
+.paybtn:hover{background:var(--gold2)}
+.mtd{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.mtd .opt{flex:1;min-width:150px;border:1.5px solid var(--line);border-radius:12px;padding:16px 18px;cursor:pointer;transition:.18s;background:var(--card)}
+.mtd .opt:hover{border-color:var(--gold)}
+.mtd .opt.on{border-color:var(--gold);background:#fbf3ea;box-shadow:0 6px 18px rgba(156,106,52,.12)}
+.mtd .opt .on1{display:flex;align-items:center;gap:10px}
+.mtd .opt .mk{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:13px;flex:none;font-family:'Cormorant Garamond',serif}
+.mk.gc{background:#0a7bd0}.mk.wz{background:#37517e}
+.mtd .opt .mn{font-size:14px;font-weight:600}
+.mtd .opt .ms{font-size:11px;color:var(--mut)}
+.paybox{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;align-items:start}
+.qrwrap{text-align:center}
+.qr{width:180px;height:180px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:0 auto 12px;box-shadow:0 6px 18px rgba(43,30,15,.08)}
+.qrg{width:100%;height:100%;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);gap:2px}
+.qrg i{border-radius:1px}.qrg i.on{background:var(--ink)}
+.acct{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.acct .ar{display:flex;justify-content:space-between;font-size:13px;padding:5px 0}
+.acct .ar .k{color:var(--mut)}.acct .ar .v{font-weight:600}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:6px}
+.field input,.field select{width:100%;height:44px;border:1px solid var(--line);border-radius:9px;padding:0 14px;font-family:inherit;font-size:14px;color:var(--ink);background:var(--card)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--gold)}
+.drop{border:2px dashed var(--gold);background:#fbf3ea;border-radius:12px;padding:22px;text-align:center;cursor:pointer;transition:.18s}
+.drop:hover{background:#f7ecdd}
+.drop.filled{border-style:solid;border-color:var(--ok);background:rgba(77,130,89,.06)}
+.drop .di{font-size:26px;margin-bottom:7px}
+.drop .dt{font-size:13px;font-weight:600;color:var(--gold2)}
+.drop.filled .dt{color:var(--ok)}
+.drop .ds{font-size:11px;color:var(--mut);margin-top:3px}
+.submit{width:100%;height:48px;background:var(--ink);color:#fff;border:none;border-radius:9px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;cursor:pointer;margin-top:4px}
+.submit:hover{background:#000}
+.submit:disabled{opacity:.45;cursor:not-allowed}
+.note{font-size:12px;color:var(--mut);line-height:1.6;margin-top:12px;display:flex;gap:8px}
+.note .i{color:var(--gold);flex:none}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.gal img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+.dlbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;flex-wrap:wrap}
+.dlbar .di2{font-size:13px;color:var(--mut)}
+.msg{display:flex;flex-direction:column;gap:12px;margin-bottom:16px;max-height:340px;overflow-y:auto;padding-right:4px}
+.mb{max-width:78%;padding:12px 15px;font-size:13.5px;line-height:1.5;border-radius:14px}
+.mb.them{background:var(--cream);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:5px}
+.mb.me{background:var(--gold);color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
+.mb .mt{font-size:10px;opacity:.7;margin-top:4px}
+.minput{display:flex;gap:10px}
+.minput input{flex:1;height:46px;border:1px solid var(--line);border-radius:24px;padding:0 18px;font-family:inherit;font-size:14px;outline:none}
+.minput input:focus{border-color:var(--gold)}
+.msend{width:46px;height:46px;border-radius:50%;background:var(--gold);color:#fff;border:none;font-size:17px;cursor:pointer;flex:none}
+.msend:hover{background:var(--gold2)}
+.doc{display:flex;align-items:center;gap:13px;background:var(--cream);border:1px solid var(--line);border-radius:11px;padding:14px 16px;margin-bottom:10px}
+.doc .dic{width:38px;height:38px;border-radius:8px;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;flex:none}
+.doc .dn{flex:1;font-size:13.5px;font-weight:600}
+.doc .dm{font-size:11px;color:var(--mut)}
+.doc .dd{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--gold);cursor:pointer}
+.doc .dd:hover{color:var(--gold2)}
+.mtoast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);z-index:200;background:var(--ink);color:#fff;padding:14px 26px;border-radius:40px;font-size:13.5px;box-shadow:0 18px 44px rgba(0,0,0,.32);animation:mt .3s ease}
+@keyframes mt{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(max-width:820px){.mgrid{grid-template-columns:1fr 1fr}.twocol{grid-template-columns:1fr}.paybox{grid-template-columns:1fr}.gal{grid-template-columns:1fr 1fr}}
+</style>
+</helmet>
+<div class="portal" style="{{ rootStyle }}">
+<div class="pnav"><div class="pbrand">SHAWIE<small>CLIENT PORTAL</small></div><div class="pnr"><div class="who"><div class="n">Bianca &amp; Marco</div><div class="r">Client #001 · Wedding</div></div><div class="pav">B</div></div></div>
+<div class="hero"><div class="hero-in"><div class="greet"><div class="sc">Welcome back,</div><h1>Bianca &amp; Marco</h1><div class="ev">Garden Wedding · <b>Feb 14, 2026</b> · The Orangery, Tagaytay</div></div><div class="count"><div class="cbox"><div class="n">{{ daysToGo }}</div><div class="l">Days to go</div></div><div class="cbox"><div class="n">{{ progressPct }}</div><div class="l">Planned</div></div></div></div></div>
+<div class="wrap">
+<div class="tabs"><sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6"><div class="{{ t.cls }}" onClick="{{ t.go }}">{{ t.label }}</div></sc-for></div>
+
+<sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+<div class="panel"><div class="prog"><div class="pt"><span>Planning progress</span><b>{{ progressPct }}</b></div><div class="bar"><div class="fill" style="width: {{ progressPct }}"></div></div></div><div class="mgrid"><div class="mini"><div class="l">Balance Due</div><div class="v gold">{{ balanceDue }}</div></div><div class="mini"><div class="l">Paid to date</div><div class="v">{{ paidToDate }}</div></div><div class="mini"><div class="l">Guests confirmed</div><div class="v">184 / 220</div></div><div class="mini"><div class="l">Next milestone</div><div class="v" style="font-size:18px">Cake tasting</div></div></div></div>
+<div class="twocol"><div class="panel"><div class="ph"><h3>Up Next</h3><span class="pa"></span></div><div class="tl"><sc-for list="{{ upNext }}" as="u" hint-placeholder-count="3"><div class="tlrow {{ u.cls }}"><span class="dot"></span><span class="line"></span><div><div class="tt">{{ u.title }}</div><div class="td">{{ u.date }}</div></div><span class="tg {{ u.tg }}">{{ u.tag }}</span></div></sc-for></div></div><div class="panel"><div class="ph"><h3>Your Team</h3></div><div class="tl"><sc-for list="{{ team }}" as="m" hint-placeholder-count="4"><div class="tlrow done"><span class="dot"></span><span class="line"></span><div><div class="tt">{{ m.name }}</div><div class="td">{{ m.role }}</div></div></div></sc-for></div></div></div>
+</sc-if>
+
+<sc-if value="{{ isTimeline }}" hint-placeholder-val="{{ false }}">
+<div class="panel"><div class="ph"><h3>Planning Timeline</h3><span class="pill rev">{{ doneCount }} of {{ totalSteps }} done</span></div><div class="tl"><sc-for list="{{ timeline }}" as="s" hint-placeholder-count="7"><div class="tlrow {{ s.cls }}"><span class="dot"></span><span class="line"></span><div><div class="tt">{{ s.title }}</div><div class="td">{{ s.date }}</div></div><span class="tg {{ s.tg }}">{{ s.tag }}</span></div></sc-for></div></div>
+</sc-if>
+
+<sc-if value="{{ isPayments }}" hint-placeholder-val="{{ false }}">
+<div class="panel"><div class="ph"><h3>Payment Schedule</h3><span class="pill warn">{{ balanceDue }} remaining</span></div><sc-for list="{{ invoices }}" as="iv" hint-placeholder-count="3"><div class="ivrow"><div class="ivl"><div class="ivn">{{ iv.label }}</div><div class="ivd">{{ iv.due }}</div></div><span class="iva">{{ iv.amt }}</span><sc-if value="{{ iv.showPill }}" hint-placeholder-val="{{ true }}"><span class="pill {{ iv.pcls }}">{{ iv.status }}</span></sc-if><sc-if value="{{ iv.showPay }}" hint-placeholder-val="{{ false }}"><button class="paybtn" onClick="{{ iv.pay }}">Pay now</button></sc-if></div></sc-for></div>
+<div class="panel"><div class="ph"><h3>Make a Payment</h3><span class="pill rev">Secure · manual verification</span></div>
+<div class="mtd"><div class="{{ gcashCls }}" onClick="{{ pickGcash }}"><div class="on1"><span class="mk gc">G</span><div><div class="mn">GCash</div><div class="ms">Scan QR or send to number</div></div></div></div><div class="{{ wiseCls }}" onClick="{{ pickWise }}"><div class="on1"><span class="mk wz">W</span><div><div class="mn">Wise</div><div class="ms">Bank transfer · multi-currency</div></div></div></div></div>
+<div class="paybox"><div class="qrwrap"><sc-if value="{{ isGcash }}" hint-placeholder-val="{{ true }}"><div class="qr"><div class="qrg"><sc-for list="{{ qrCells }}" as="c" hint-placeholder-count="121"><i class="{{ c }}"></i></sc-for></div></div><div class="acct"><div class="ar"><span class="k">GCash number</span><span class="v">0917 •••• 4821</span></div><div class="ar"><span class="k">Account name</span><span class="v">Sharon R. Algara</span></div></div></sc-if><sc-if value="{{ isWise }}" hint-placeholder-val="{{ false }}"><div class="acct" style="text-align:left;margin-top:0"><div class="ar"><span class="k">Account holder</span><span class="v">Sharon Rose Algara</span></div><div class="ar"><span class="k">Wise email</span><span class="v">sharonrose@wise.com</span></div><div class="ar"><span class="k">Currency</span><span class="v">PHP / USD / EUR</span></div><div class="ar"><span class="k">SWIFT / routing</span><span class="v">TRWIBEB1XXX</span></div></div><div class="note"><span class="i">✦</span><span>Send from your Wise account, then upload the receipt PDF and enter the transaction ID.</span></div></sc-if></div>
+<div><div class="field"><label>Paying for</label><select value="{{ payFor }}" onChange="{{ onPayFor }}"><option>Second Installment — ₱65,000</option><option>Final Balance — ₱90,000</option><option>Custom amount</option></select></div><div class="field"><label>{{ refLabel }}</label><input placeholder="{{ refPlaceholder }}" value="{{ refVal }}" onInput="{{ onRef }}"></div><div class="{{ dropCls }}" onClick="{{ fakeUpload }}"><div class="di">{{ dropIcon }}</div><div class="dt">{{ dropTitle }}</div><div class="ds">{{ dropSub }}</div></div><button class="submit" disabled="{{ submitDisabled }}" onClick="{{ submitPay }}">Submit for verification</button><div class="note"><span class="i">🔒</span><span>Your proof goes to Sharon’s admin queue — you’ll get an email + portal update once verified (usually within a few hours).</span></div></div></div></div>
+</sc-if>
+
+<sc-if value="{{ isDocs }}" hint-placeholder-val="{{ false }}">
+<div class="panel"><div class="ph"><h3>Documents &amp; Contracts</h3></div><sc-for list="{{ docs }}" as="d" hint-placeholder-count="4"><div class="doc"><span class="dic">{{ d.ic }}</span><div><div class="dn">{{ d.name }}</div><div class="dm">{{ d.meta }}</div></div><span class="dd" onClick="{{ d.action }}">{{ d.cta }}</span></div></sc-for></div>
+</sc-if>
+
+<sc-if value="{{ isGallery }}" hint-placeholder-val="{{ false }}">
+<div class="panel"><div class="ph"><h3>Your Gallery</h3><span class="pill rev">Prenup delivered</span></div><div class="gal"><sc-for list="{{ gallery }}" as="g" hint-placeholder-count="6">{{ g.img }}</sc-for></div><div class="dlbar"><div class="di2">248 edited photos · highlight film · prenup set — ready anytime.</div><button class="paybtn" onClick="{{ download }}">⬇ Download all</button></div></div>
+</sc-if>
+
+<sc-if value="{{ isMessages }}" hint-placeholder-val="{{ false }}">
+<div class="panel"><div class="ph"><h3>Messages</h3><span class="pill ok">● Sharon online</span></div><div class="msg"><sc-for list="{{ messages }}" as="m" hint-placeholder-count="4"><div class="mb {{ m.cls }}">{{ m.text }}<div class="mt">{{ m.time }}</div></div></sc-for></div><div class="minput"><input placeholder="Message your planner…" value="{{ msgInput }}" onInput="{{ onMsg }}" onKeyDown="{{ onMsgKey }}"><button class="msend" onClick="{{ sendMsg }}">➤</button></div></div>
+</sc-if>
+
+</div>
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}"><div class="mtoast">{{ toast }}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1120,&quot;height&quot;:840},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#9c6a34&quot;,&quot;options&quot;:[&quot;#9c6a34&quot;,&quot;#c2984f&quot;,&quot;#bd6980&quot;,&quot;#8a5a2a&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;}}">
+class Component extends DCLogic {
+  state = { tab:'overview', method:'gcash', payFor:'Second Installment — ₱65,000', ref:'', uploaded:false, paid:{}, messages:null, msgInput:'', toast:'' };
+
+  TABS = [['overview','Overview'],['timeline','Timeline'],['payments','Payments'],['docs','Documents'],['gallery','Gallery'],['messages','Messages']];
+  TIMELINE = [
+    ['Inquiry & consultation','Completed Jan 18, 2026','done','ok','Done'],
+    ['Contract signed & reservation','Completed Feb 02, 2026','done','ok','Done'],
+    ['Prenup photoshoot','Completed Feb 20, 2026','done','ok','Done'],
+    ['Cake tasting & flavor lock','Scheduled Mar 15, 2026','now','now','Up next'],
+    ['Palette & styling approval','Due Mar 28, 2026','pending','soon','Soon'],
+    ['Final headcount & timeline','Due Apr 20, 2026','pending','soon','Soon'],
+    ['Celebration day','Feb 14, 2026 ✦','pending','soon','The day']
+  ];
+  TEAM = [['Sharon Rose','Lead Planner & Designer'],['Chef Mika','Cake & Catering'],['Studio Lumen','Photo & Film'],['Bloom Co.','Florals & Styling']];
+  INVOICES = [
+    ['res','Reservation Deposit','Paid Feb 02, 2026','₱30,000','paid'],
+    ['sec','Second Installment','Due Apr 15, 2026','₱65,000','due'],
+    ['fin','Final Balance','Due 7 days before','₱90,000','due']
+  ];
+  DOCS = [['📄','Service Agreement','Signed · Feb 02, 2026 · PDF','Download'],['📋','Event Proposal v2','Approved · 14 pages','Download'],['🧾','Reservation Receipt','OR #2026-0012 · ₱30,000','Download'],['📑','Run-of-Show Draft','Shared · editable','Review']];
+  GAL = ['p09','p26','p10','p27','p08','p11'];
+  SEED_MSGS = [
+    ['them','Hi Bianca! Your prenup gallery is now live in the Gallery tab 💛','2 days ago'],
+    ['me','Ahh thank you Sharon! They’re stunning 😍','2 days ago'],
+    ['them','So glad you love them! Reminder — cake tasting is Mar 15, 2pm. Shall I lock it in?','1 day ago'],
+    ['me','Yes please, that works for us!','1 day ago']
+  ];
+
+  go(t){ this.setState({ tab:t }); }
+  pick(m){ this.setState({ method:m, ref:'', uploaded:false }); }
+  onRef(e){ this.setState({ ref:e.target.value }); }
+  onPayFor(e){ this.setState({ payFor:e.target.value }); }
+  fakeUpload(){ this.setState({ uploaded:true }); this.flash('Payment proof attached ✦'); }
+  submitPay(){ if(!this.state.ref || !this.state.uploaded) return; try{ if(window.notifyStudio) window.notifyStudio('payment','New payment proof — Bianca & Marco', {name:'Bianca & Marco', amount:this.state.payFor, method:this.state.method==='gcash'?'GCash':'Wise', reference:this.state.ref, forWhat:this.state.payFor}); }catch(_){}; this.setState(s=>({ paid:{...s.paid, sec:'review'}, ref:'', uploaded:false })); this.flash('Submitted — Sharon has been notified for verification ✦'); }
+  invoicePay(id){ this.setState({ tab:'payments' }); this.flash('Choose a method below to pay ✦'); }
+  download(){ this.flash('Preparing your download… ✦'); }
+  docAction(name){ this.flash(name+' — opening ✦'); }
+  onMsg(e){ this.setState({ msgInput:e.target.value }); }
+  onMsgKey(e){ if(e.key==='Enter') this.sendMsg(); }
+  sendMsg(){ const t=(this.state.msgInput||'').trim(); if(!t) return; this.setState(s=>({ messages:(s.messages||this.SEED_MSGS).concat([['me',t,'Just now']]), msgInput:'' })); this.flash('Message sent ✦'); }
+  flash(m){ if(this._t) clearTimeout(this._t); this.setState({toast:m}); this._t=setTimeout(()=>this.setState({toast:''}),2000); }
+
+  renderVals(){
+    const S=this.state, tab=S.tab;
+    const accent=this.props.accent; const rootStyle=accent?{'--gold':accent}:{};
+    const done=this.TIMELINE.filter(t=>t[2]==='done').length;
+    const progressPct=Math.round(done/this.TIMELINE.length*100)+'%';
+    const tabs=this.TABS.map(t=>({label:t[1],cls:tab===t[0]?'tab on':'tab',go:()=>this.go(t[0])}));
+    const timeline=this.TIMELINE.map(s=>({title:s[0],date:s[1],cls:s[2],tg:s[3],tag:s[4]}));
+    const upNext=timeline.filter(t=>t.cls!=='done').slice(0,3);
+    const team=this.TEAM.map(m=>({name:m[0],role:m[1]}));
+    const invoices=this.INVOICES.map(iv=>{ const rev=S.paid[iv[0]]==='review'; const paid=iv[4]==='paid'; return { label:iv[1], due:iv[2], amt:iv[3], showPill:paid||rev, status:rev?'In review':'Paid', pcls:rev?'rev':'ok', showPay:!paid&&!rev, pay:()=>this.invoicePay(iv[0]) }; });
+    const isG=S.method==='gcash';
+    const qrCells="01110001110 10001010001 10111011101 10001000101 01110101110 00000101000 10110110111 01001000001 11101011101 00010111001 01110100011".replace(/ /g,'').split('').map(c=>c==='1'?'on':'');
+    const docs=this.DOCS.map(d=>({ic:d[0],name:d[1],meta:d[2],cta:d[3],action:()=>this.docAction(d[1])}));
+    const gallery=this.GAL.map(g=>({ img:React.createElement('img',{src:'assets/photos/'+g+'.jpg',alt:'Gallery photo',loading:'lazy'}) }));
+    const messages=(S.messages||this.SEED_MSGS).map(m=>({cls:m[0]==='me'?'me':'them',text:m[1],time:m[2]}));
+    return {
+      rootStyle, daysToGo:'28', progressPct,
+      tabs, isOverview:tab==='overview', isTimeline:tab==='timeline', isPayments:tab==='payments', isDocs:tab==='docs', isGallery:tab==='gallery', isMessages:tab==='messages',
+      balanceDue:'₱155,000', paidToDate:'₱30,000',
+      upNext, team, timeline, doneCount:done, totalSteps:this.TIMELINE.length,
+      invoices,
+      gcashCls:isG?'opt on':'opt', wiseCls:isG?'opt':'opt on', pickGcash:()=>this.pick('gcash'), pickWise:()=>this.pick('wise'), isGcash:isG, isWise:!isG,
+      qrCells,
+      payFor:S.payFor, onPayFor:(e)=>this.onPayFor(e),
+      refLabel:isG?'GCash reference number':'Wise transaction ID', refPlaceholder:isG?'e.g. 8842119503':'e.g. TRANSFER-4821-QT', refVal:S.ref, onRef:(e)=>this.onRef(e),
+      dropCls:S.uploaded?'drop filled':'drop', dropIcon:S.uploaded?'✓':'⬆', dropTitle:S.uploaded?'proof-of-payment.jpg attached':(isG?'Upload GCash screenshot':'Upload Wise receipt (PDF)'), dropSub:S.uploaded?'Tap to replace':'PNG, JPG or PDF · up to 10MB',
+      fakeUpload:()=>this.fakeUpload(), submitDisabled:!(S.ref&&S.uploaded), submitPay:()=>this.submitPay(),
+      docs, gallery, download:()=>this.download(),
+      messages, msgInput:S.msgInput, onMsg:(e)=>this.onMsg(e), onMsgKey:(e)=>this.onMsgKey(e), sendMsg:()=>this.sendMsg(),
+      toast:S.toast, toastShow:!!S.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

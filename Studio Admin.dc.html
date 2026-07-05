@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.admin{--bg:#f2ebde;--panel:#fff;--ink:#1b140d;--mut:#5c4c3d;--gold:#9c6a34;--gold2:#7d5324;--champ:#c2984f;--data:#2a6f8a;--data2:#4d9bb5;--line:#e5dac5;--side1:#241d16;--side2:#3a2c22;--sideink:#cdb992;--ok:#4d8259;--warn:#c08a2e;--bad:#b5524f;--rose:#bd6980;--blue:#37517e;display:flex;min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Jost',system-ui,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+.admin h1,.admin h2,.admin h3,.admin h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.06}
+.side{width:246px;flex:none;background:linear-gradient(180deg,var(--side1),var(--side2));color:var(--sideink);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:22px 0}
+.sbrand{padding:6px 24px 20px;border-bottom:1px solid rgba(205,185,146,.16);margin-bottom:14px}
+.sbrand .bn{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;letter-spacing:.14em;color:#fff}
+.sbrand .bs{font-size:8px;letter-spacing:.3em;color:var(--champ);margin-top:3px;text-transform:uppercase}
+.sgroup{padding:0 14px;margin-bottom:4px}
+.sglab{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(205,185,146,.5);padding:12px 12px 7px;font-weight:600}
+.snav{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:9px;font-size:13.5px;color:var(--sideink);cursor:pointer;transition:.16s;font-weight:500}
+.snav:hover{background:rgba(205,185,146,.1);color:#fff}
+.snav.on{background:var(--gold);color:#fff}
+.snav .ic{width:18px;text-align:center;flex:none;opacity:.9}
+.snav .bdg{margin-left:auto;background:var(--rose);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px}
+.snav.on .bdg{background:rgba(255,255,255,.28)}
+.sfoot{margin-top:auto;padding:16px 22px 4px;border-top:1px solid rgba(205,185,146,.16);display:flex;align-items:center;gap:11px}
+.savatar{width:36px;height:36px;border-radius:50%;flex:none;overflow:hidden;background:var(--champ)}
+.savatar img{width:100%;height:100%;object-fit:cover}
+.sfoot .sn{font-size:12.5px;color:#fff;font-weight:600}.sfoot .sr{font-size:10.5px;color:var(--sideink)}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding:16px 32px;display:flex;align-items:center;gap:18px}
+.top .tt{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600}
+.top .tsub{font-size:12px;color:var(--mut);margin-top:1px}
+.tsearch{margin-left:auto;display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--line);border-radius:30px;padding:9px 16px;width:250px;color:var(--mut);font-size:13px}
+.tsearch input{border:none;outline:none;background:none;font-family:inherit;font-size:13px;color:var(--ink);width:100%}
+.tbtn{width:40px;height:40px;border-radius:50%;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;color:var(--ink)}
+.tbtn:hover{border-color:var(--gold)}
+.tbtn .dot{position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--rose);border:1.5px solid var(--panel)}
+.content{padding:26px 32px 48px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 4px 16px rgba(43,30,15,.05)}
+.kpi .kl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:600}
+.kpi .kn{font-family:'Cormorant Garamond',serif;font-size:36px;line-height:1;margin:8px 0 6px;color:var(--ink)}
+.kpi .kd{font-size:12px;font-weight:600}
+.kd.up{color:var(--ok)}.kd.down{color:var(--bad)}
+.grid2{display:grid;grid-template-columns:1.55fr 1fr;gap:16px;margin-bottom:16px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(43,30,15,.05)}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.ph h3{font-size:20px}
+.ph .pa{font-size:12px;color:var(--gold);font-weight:600;cursor:pointer}
+.perbtns{display:flex;gap:6px}
+.perb{border:1px solid var(--line);background:var(--bg);border-radius:20px;padding:6px 13px;font-size:11px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;color:var(--mut);cursor:pointer}
+.perb.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.bars{display:flex;align-items:flex-end;gap:12px;height:180px;padding-top:10px}
+.barc{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px;height:100%}
+.barc .bar{width:100%;max-width:38px;background:linear-gradient(180deg,var(--data),var(--data2));border-radius:5px 5px 0 0}
+.barc .bl{font-size:10px;color:var(--mut)}.barc .bv{font-size:10.5px;color:var(--ink);font-weight:600}
+.feed{display:flex;flex-direction:column}
+.fitem{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.fitem:last-child{border-bottom:none}
+.fdot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex:none}
+.fitem .ft{font-size:13px;color:var(--ink);line-height:1.4}
+.fitem .fm{font-size:11px;color:var(--mut);margin-top:2px}
+table{width:100%;border-collapse:collapse}
+thead th{text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:600;padding:0 12px 12px;border-bottom:1px solid var(--line)}
+tbody td{padding:13px 12px;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#faf5ec}
+.cust{display:flex;align-items:center;gap:10px}
+.cav{width:32px;height:32px;border-radius:50%;background:var(--bg);border:1px solid var(--line);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:14px;flex:none}
+.money{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--gold);font-weight:600}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 11px;border-radius:20px;letter-spacing:.02em}
+.pill.ok{background:rgba(77,130,89,.14);color:var(--ok)}
+.pill.warn{background:rgba(192,138,46,.16);color:var(--warn)}
+.pill.bad{background:rgba(181,82,79,.14);color:var(--bad)}
+.pill.info{background:rgba(156,106,52,.13);color:var(--gold2)}
+.pill.blue{background:rgba(55,81,126,.12);color:var(--blue)}
+.pill.neutral{background:var(--bg);color:var(--mut)}
+.kan{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.kcol{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:12px 10px;min-height:120px}
+.kch{display:flex;justify-content:space-between;align-items:baseline;padding:2px 4px 4px}
+.kch .kn2{font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:700}
+.kch .kc{font-size:11px;color:var(--gold);font-weight:700}
+.kcv{font-size:10px;color:var(--mut);padding:0 4px 9px}
+.kcard{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:12px;margin-bottom:8px;box-shadow:0 3px 9px rgba(43,30,15,.05)}
+.kcard .kt{font-size:13px;font-weight:600;line-height:1.2}
+.kcard .km{font-size:10.5px;color:var(--mut);margin:3px 0 8px;line-height:1.4}
+.kcard .kvl{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold)}
+.kadv{width:100%;margin-top:9px;height:30px;border-radius:6px;border:1px solid var(--gold);color:var(--gold);background:var(--panel);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;cursor:pointer}
+.kadv:hover{background:var(--gold);color:#fff}
+.kadv.done{border-color:var(--ok);color:var(--ok);cursor:default}
+.projrow{display:flex;align-items:center;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;box-shadow:0 3px 12px rgba(43,30,15,.04)}
+.projrow .pj{flex:1;min-width:0}
+.projrow .pjn{font-size:14.5px;font-weight:600}
+.projrow .pjm{font-size:11.5px;color:var(--mut);margin-top:3px}
+.prg{width:160px;flex:none}
+.prg .pt{display:flex;justify-content:space-between;font-size:11px;color:var(--mut);margin-bottom:5px}
+.prg .track{height:7px;background:var(--bg);border-radius:5px;overflow:hidden}
+.prg .fill{height:100%;background:linear-gradient(90deg,var(--data),var(--data2));border-radius:5px}
+.pay{display:flex;gap:16px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 3px 12px rgba(43,30,15,.04);margin-bottom:12px}
+.payproof{width:70px;height:70px;border-radius:9px;flex:none;background:linear-gradient(150deg,#efe2d8,#d9c3a8);display:flex;align-items:center;justify-content:center;color:var(--gold2);border:1px solid var(--line);font-family:'Cormorant Garamond',serif;font-weight:700;font-size:15px}
+.payi{flex:1;min-width:0}.payi .pn{font-size:14px;font-weight:600}.payi .pmeta{font-size:11.5px;color:var(--mut);margin-top:3px;line-height:1.5}
+.payi .pref{font-size:11px;color:var(--gold2);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:2px 8px;display:inline-block;margin-top:5px}
+.payamt{text-align:right;flex:none}.payamt .money{font-size:22px}
+.payact{display:flex;flex-direction:column;gap:7px;flex:none;width:118px}
+.abtn{height:36px;border-radius:7px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;cursor:pointer;border:1px solid transparent}
+.abtn.verify{background:var(--ok);color:#fff}.abtn.verify:hover{background:#3f6e4a}
+.abtn.reject{background:var(--panel);border-color:var(--line);color:var(--bad)}.abtn.reject:hover{border-color:var(--bad)}
+.paydone{width:118px;text-align:center;flex:none}
+.proprow{display:flex;align-items:center;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px 18px;margin-bottom:12px}
+.proprow .pp{flex:1}.proprow .ppn{font-size:14px;font-weight:600}.proprow .ppm{font-size:11.5px;color:var(--mut);margin-top:3px}
+.sendbtn{height:36px;padding:0 16px;border-radius:7px;background:var(--gold);color:#fff;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;cursor:pointer;border:none;flex:none}
+.sendbtn:hover{background:var(--gold2)}
+.sendbtn.sent{background:var(--panel);border:1px solid var(--ok);color:var(--ok);cursor:default}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:6px}
+.field input,.field select{width:100%;height:42px;border:1px solid var(--line);border-radius:8px;padding:0 13px;font-family:inherit;font-size:13.5px;color:var(--ink);background:var(--panel)}
+.field input:focus{outline:none;border-color:var(--gold)}
+.settgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.savebtn{height:44px;padding:0 24px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;cursor:pointer}
+.savebtn:hover{background:var(--gold2)}
+.mtoast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);z-index:200;background:var(--ink);color:#fff;padding:14px 26px;border-radius:40px;font-size:13.5px;box-shadow:0 18px 44px rgba(0,0,0,.32);animation:mt .3s ease}
+@keyframes mt{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(max-width:1080px){.kpis{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.kan{grid-template-columns:1fr;gap:16px}}
+@media(max-width:720px){.side{display:none}}
+</style>
+</helmet>
+<div class="admin" style="{{ rootStyle }}">
+<aside class="side">
+<div class="sbrand"><div class="bn">SHARON ROSE</div><div class="bs">Studio Console</div></div>
+<div class="sgroup"><div class="sglab">Studio</div><sc-for list="{{ navOps }}" as="n" hint-placeholder-count="5"><div class="{{ n.cls }}" onClick="{{ n.go }}"><span class="ic">{{ n.ic }}</span>{{ n.label }}<sc-if value="{{ n.hasBadge }}" hint-placeholder-val="{{ false }}"><span class="bdg">{{ n.badge }}</span></sc-if></div></sc-for></div>
+<div class="sgroup"><div class="sglab">Growth</div><sc-for list="{{ navGrow }}" as="n" hint-placeholder-count="3"><div class="{{ n.cls }}" onClick="{{ n.go }}"><span class="ic">{{ n.ic }}</span>{{ n.label }}</div></sc-for></div>
+<div class="sfoot"><div class="savatar"><img src="assets/sharon-portrait.jpg" alt="Sharon"></div><div><div class="sn">Sharon Rose</div><div class="sr">Founder · Admin</div></div></div>
+</aside>
+<div class="main">
+<div class="top"><div><div class="tt">{{ viewTitle }}</div><div class="tsub">{{ viewSub }}</div></div><div class="tsearch"><span>⌕</span><input placeholder="Search clients, projects, invoices…"></div><button class="tbtn">✉<span class="dot"></span></button><button class="tbtn" onClick="{{ goInvoices }}">🔔<span class="dot"></span></button></div>
+<div class="content">
+
+<sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+<div class="kpis"><sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4"><div class="kpi"><div class="kl">{{ k.label }}</div><div class="kn">{{ k.value }}</div><div class="kd {{ k.dcls }}">{{ k.delta }}</div></div></sc-for></div>
+<div class="grid2">
+<div class="panel"><div class="ph"><h3>Revenue</h3><div class="perbtns"><sc-for list="{{ periods }}" as="p" hint-placeholder-count="3"><span class="{{ p.cls }}" onClick="{{ p.go }}">{{ p.label }}</span></sc-for></div></div><div class="bars"><sc-for list="{{ revBars }}" as="b" hint-placeholder-count="6"><div class="barc"><span class="bv">{{ b.v }}</span><div class="bar" style="height: {{ b.h }}%"></div><span class="bl">{{ b.l }}</span></div></sc-for></div></div>
+<div class="panel"><div class="ph"><h3>Activity</h3></div><div class="feed"><sc-for list="{{ activity }}" as="a" hint-placeholder-count="5"><div class="fitem"><span class="fdot" style="background: {{ a.color }}"></span><div><div class="ft">{{ a.text }}</div><div class="fm">{{ a.time }}</div></div></div></sc-for></div></div>
+</div>
+<div class="panel"><div class="ph"><h3>Active Projects</h3><span class="pa" onClick="{{ goProjects }}">View all →</span></div><table><thead><tr><th>Client</th><th>Project</th><th>Service</th><th>Value</th><th>Status</th></tr></thead><tbody><sc-for list="{{ recentProjects }}" as="p" hint-placeholder-count="4"><tr><td><div class="cust"><span class="cav">{{ p.initial }}</span>{{ p.client }}</div></td><td>{{ p.name }}</td><td>{{ p.service }}</td><td><span class="money">{{ p.value }}</span></td><td><span class="pill {{ p.scls }}">{{ p.status }}</span></td></tr></sc-for></tbody></table></div>
+</sc-if>
+
+<sc-if value="{{ isLeads }}" hint-placeholder-val="{{ false }}">
+<div class="panel"><div class="ph"><h3>Lead Pipeline</h3><span class="pa" onClick="{{ crmReset }}">↺ Reset</span></div><div class="kan"><sc-for list="{{ kanban }}" as="c" hint-placeholder-count="5"><div class="kcol"><div class="kch"><span class="kn2">{{ c.name }}</span><span class="kc">{{ c.count }}</span></div><div class="kcv">{{ c.value }}</div><sc-for list="{{ c.cards }}" as="l" hint-placeholder-count="2"><div class="kcard"><div class="kt">{{ l.name }}</div><div class="km">{{ l.svc }} · {{ l.when }}</div><div class="kvl">{{ l.valLabel }}</div><sc-if value="{{ l.notEnd }}" hint-placeholder-val="{{ true }}"><button class="kadv" onClick="{{ l.advance }}">Advance →</button></sc-if><sc-if value="{{ l.atEnd }}" hint-placeholder-val="{{ false }}"><button class="kadv done">✓ Won</button></sc-if></div></sc-for></div></sc-for></div></div>
+</sc-if>
+
+<sc-if value="{{ isProjects }}" hint-placeholder-val="{{ false }}">
+<div class="panel"><div class="ph"><h3>All Projects</h3><span class="pill neutral">{{ projectCount }} active</span></div><sc-for list="{{ allProjects }}" as="p" hint-placeholder-count="5"><div class="projrow"><span class="cav">{{ p.initial }}</span><div class="pj"><div class="pjn">{{ p.name }}</div><div class="pjm">{{ p.client }} · {{ p.service }} · due {{ p.due }}</div></div><div class="prg"><div class="pt"><span>Progress</span><b>{{ p.pct }}</b></div><div class="track"><div class="fill" style="width: {{ p.pct }}"></div></div></div><span class="money">{{ p.value }}</span><span class="pill {{ p.scls }}">{{ p.status }}</span></div></sc-for></div>
+</sc-if>
+
+<sc-if value="{{ isInvoices }}" hint-placeholder-val="{{ false }}">
+<div class="kpis" style="grid-template-columns:repeat(3,1fr)"><div class="kpi"><div class="kl">Awaiting Verification</div><div class="kn">{{ payPending }}</div><div class="kd up">GCash · Wise · PayPal</div></div><div class="kpi"><div class="kl">Paid This Month</div><div class="kn">₱182K</div><div class="kd up">▲ 9 invoices</div></div><div class="kpi"><div class="kl">Outstanding</div><div class="kn">₱96K</div><div class="kd down">3 overdue</div></div></div>
+<div class="panel"><div class="ph"><h3>Payment Verification Queue</h3><span class="pill warn">Manual review</span></div><sc-for list="{{ payQueue }}" as="p" hint-placeholder-count="3"><div class="pay"><div class="payproof">{{ p.method }}</div><div class="payi"><div class="pn">{{ p.name }}</div><div class="pmeta">{{ p.forWhat }} · {{ p.method }} · {{ p.when }}</div><span class="pref">Ref: {{ p.ref }}</span></div><div class="payamt"><span class="money">{{ p.amt }}</span></div><sc-if value="{{ p.pending }}" hint-placeholder-val="{{ true }}"><div class="payact"><button class="abtn verify" onClick="{{ p.verify }}">✓ Verify</button><button class="abtn reject" onClick="{{ p.reject }}">Reject</button></div></sc-if><sc-if value="{{ p.done }}" hint-placeholder-val="{{ false }}"><div class="paydone"><span class="pill {{ p.rcls }}">{{ p.result }}</span></div></sc-if></div></sc-for></div>
+</sc-if>
+
+<sc-if value="{{ isProposals }}" hint-placeholder-val="{{ false }}">
+<div class="panel"><div class="ph"><h3>Proposals &amp; Quotes</h3><span class="pill info">{{ proposalOpen }} awaiting reply</span></div><sc-for list="{{ proposals }}" as="p" hint-placeholder-count="4"><div class="proprow"><span class="cav">{{ p.initial }}</span><div class="pp"><div class="ppn">{{ p.title }}</div><div class="ppm">{{ p.client }} · {{ p.value }} · {{ p.when }}</div></div><span class="pill {{ p.scls }}">{{ p.status }}</span><sc-if value="{{ p.canSend }}" hint-placeholder-val="{{ true }}"><button class="sendbtn" onClick="{{ p.send }}">Send →</button></sc-if><sc-if value="{{ p.wasSent }}" hint-placeholder-val="{{ false }}"><button class="sendbtn sent">✓ Sent</button></sc-if></div></sc-for></div>
+</sc-if>
+
+<sc-if value="{{ isSettings }}" hint-placeholder-val="{{ false }}">
+<div class="grid2" style="grid-template-columns:1fr 1fr"><div class="panel"><div class="ph"><h3>Studio Profile</h3></div><div class="field"><label>Studio name</label><input value="Sharon Rose · Digital Solutions Studio"></div><div class="field"><label>Contact email</label><input value="sharonrosealgara@gmail.com"></div><div class="settgrid"><div class="field"><label>Currency</label><select><option>PHP ₱</option><option>USD $</option></select></div><div class="field"><label>Timezone</label><select><option>Asia/Manila (GMT+8)</option></select></div></div><button class="savebtn" onClick="{{ save }}">Save changes</button></div>
+<div class="panel"><div class="ph"><h3>Payment Details</h3></div><div class="field"><label>GCash number</label><input value="0936 903 7613"></div><div class="field"><label>GCash account name</label><input value="Sharon Rose Algara"></div><div class="field"><label>Wise / PayPal</label><input value="sharonrosealgara@gmail.com"></div><button class="savebtn" onClick="{{ save }}">Save changes</button></div></div>
+</sc-if>
+
+</div></div>
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}"><div class="mtoast">{{ toast }}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:860},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#9c6a34&quot;,&quot;options&quot;:[&quot;#9c6a34&quot;,&quot;#c2984f&quot;,&quot;#bd6980&quot;,&quot;#8a5a2a&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;}}">
+class Component extends DCLogic {
+  state = { view:'overview', period:'Month', crm:{}, pays:{}, sent:{}, toast:'' };
+  NAV_OPS=[['overview','Overview','▦'],['leads','Lead Pipeline','◈'],['projects','Projects','▤'],['invoices','Invoices','₱'],['proposals','Proposals','✎']];
+  NAV_GROW=[['settings','Settings','◉']];
+  TITLES={ overview:['Dashboard','Welcome back, Sharon — your studio at a glance'], leads:['Lead Pipeline','Move prospects from inquiry to signed client'], projects:['Projects','Every active build, timeline and status'], invoices:['Invoices & Payments','Verify GCash / Wise / PayPal proofs and track revenue'], proposals:['Proposals','Quotes sent and awaiting client reply'], settings:['Settings','Studio, payment and integration configuration'] };
+  KPIS={ Month:[['Revenue','₱182K','▲ 14%','up'],['Active Projects','6','▲ 2','up'],['New Leads','11','▲ 4','up'],['Win Rate','58%','▲ 6%','up']],
+         Quarter:[['Revenue','₱498K','▲ 21%','up'],['Active Projects','9','▲ 3','up'],['New Leads','34','▲ 9','up'],['Win Rate','54%','▲ 3%','up']],
+         Year:[['Revenue','₱1.7M','▲ 28%','up'],['Active Projects','14','▲ 5','up'],['New Leads','128','▲ 31','up'],['Win Rate','56%','▲ 5%','up']] };
+  REV={ Month:[[48,'₱24K','W1'],[62,'₱31K','W2'],[54,'₱27K','W3'],[78,'₱39K','W4'],[70,'₱35K','W5'],[92,'₱46K','W6']],
+        Quarter:[[54,'₱132K','Oct'],[63,'₱154K','Nov'],[58,'₱141K','Dec'],[67,'₱163K','Jan'],[74,'₱181K','Feb'],[82,'₱201K','Mar']],
+        Year:[[50,'₱280K','H1·24'],[58,'₱330K','H2·24'],[68,'₱390K','H1·25'],[64,'₱360K','H2·25'],[76,'₱440K','H1·26'],[86,'₱500K','Proj']] };
+  ACTIVITY=[['#4d8259','<b>Payment verified</b> — Bloom Studio deposit ₱9,000','12 min ago'],['#9c6a34','<b>New lead</b> — Cafe Luna, wants a website + booking','40 min ago'],['#bd6980','<b>Proposal opened</b> — Verde Realty viewed your quote','2 hrs ago'],['#c08a2e','<b>Milestone due</b> — Mirasol Dental design review','5 hrs ago'],['#4d8259','<b>Project signed</b> — GreenLeafPH automation','yesterday']];
+  RECENT=[['B','Bloom Studio','Brand + Website','Website Development','₱18,000','In Progress','info'],['G','GreenLeafPH','Email Automation','Automation','₱10,000','In Progress','info'],['M','Mirasol Dental','Booking Website','Web + Booking','₱22,000','Design','warn'],['V','Verde Realty','AI Chatbot','AI Chatbot','₱15,000','Proposal','blue']];
+  ALLP=[['B','Bloom Studio Website','Bloom Studio','Website Development','Jul 18','₱18,000','62%','In Progress','info'],['G','GreenLeafPH Automation','GreenLeafPH','Email Automation','Jul 12','₱10,000','80%','In Progress','info'],['M','Mirasol Booking Site','Mirasol Dental','Web + Booking','Aug 03','₱22,000','35%','Design','warn'],['C','Cafe Luna Landing','Cafe Luna','Website Development','Aug 10','₱12,000','15%','Kickoff','neutral'],['K','Kaye Debut Invite','Kaye & Josh','Digital Invitation','Jul 09','₱5,000','90%','Review','info']];
+  CRM_STAGES=['New Lead','Contacted','Proposal','Negotiation','Won'];
+  CRM_SEED=[[1,'Cafe Luna','Website + Booking','Jul 02',12000,0],[2,'Verde Realty','AI Chatbot','Jun 28',15000,2],[3,'GreenLeafPH','Email Automation','Jun 20',10000,4],[4,'Mirasol Dental','Booking Website','Jun 25',22000,3],[5,'Bloom Studio','Brand + Website','Jun 15',18000,4],[6,'Nova Fitness','Complete Package','Jul 03',25000,0],[7,'Kaye & Josh','Digital Invitation','Jul 01',5000,1]];
+  PAYS=[['GreenLeafPH','Project deposit','GCash','GC-4471-2290','₱5,000','8 min ago'],['Verde Realty','50% milestone','Wise','WISE-8830-RT','₱7,500','1 hr ago'],['Bloom Studio','Final balance','PayPal','PP-2201-QX','₱9,000','3 hrs ago']];
+  PROPOSALS=[['C','Cafe Luna — Website + Booking','Cafe Luna','₱12,000','Draft','draft','Sent 0×'],['V','Verde Realty — AI Chatbot','Verde Realty','₱15,000','Viewed','info','2 days ago'],['N','Nova Fitness — Complete Package','Nova Fitness','₱25,000','Draft','draft','Just created'],['M','Mirasol — Booking Website','Mirasol Dental','₱22,000','Accepted','ok','Signed']];
+  go(v){ this.setState({view:v}); }
+  setPeriod(p){ this.setState({period:p}); }
+  crmAdvance(id){ this.setState(s=>{ const cur=(id in s.crm)?s.crm[id]:this.CRM_SEED.find(r=>r[0]===id)[5]; return {crm:{...s.crm,[id]:Math.min(cur+1,this.CRM_STAGES.length-1)}}; }); }
+  crmReset(){ this.setState({crm:{}}); this.flash('Pipeline reset'); }
+  payAct(i,res){ this.setState(s=>({pays:{...s.pays,[i]:res}})); this.flash(res==='Verified'?'Payment verified — receipt emailed ✦':'Payment marked rejected'); }
+  sendProp(i){ this.setState(s=>({sent:{...s.sent,[i]:true}})); this.flash('Proposal emailed to client ✦'); }
+  save(){ this.flash('Settings saved ✦'); }
+  flash(m){ if(this._t) clearTimeout(this._t); this.setState({toast:m}); this._t=setTimeout(()=>this.setState({toast:''}),2000); }
+  renderVals(){
+    const S=this.state,v=S.view;
+    const accent=this.props.accent; const rootStyle=accent?{'--gold':accent}:{};
+    const peso=n=>'₱'+n.toLocaleString('en-US');
+    const mkNav=(arr)=>arr.map(n=>({label:n[1],ic:n[2],cls:v===n[0]?'snav on':'snav',go:()=>this.go(n[0]),hasBadge:n[0]==='invoices',badge:'3'}));
+    const t=this.TITLES[v]||['',''];
+    const kpis=(this.KPIS[S.period]||this.KPIS.Month).map(k=>({label:k[0],value:k[1],delta:k[2],dcls:k[3]}));
+    const revBars=(this.REV[S.period]||this.REV.Month).map(b=>({h:b[0],v:b[1],l:b[2]}));
+    const periods=['Month','Quarter','Year'].map(p=>({label:p,cls:p===S.period?'perb on':'perb',go:()=>this.setPeriod(p)}));
+    const activity=this.ACTIVITY.map(a=>({color:a[0],text:a[1],time:a[2]}));
+    const recentProjects=this.RECENT.map(p=>({initial:p[0],client:p[1],name:p[2],service:p[3],value:p[4],status:p[5],scls:p[6]}));
+    const allProjects=this.ALLP.map(p=>({initial:p[0],name:p[1],client:p[2],service:p[3],due:p[4],value:p[5],pct:p[6],status:p[7],scls:p[8]}));
+    const leads=this.CRM_SEED.map(r=>({id:r[0],name:r[1],svc:r[2],when:r[3],value:r[4],stage:(r[0] in S.crm)?S.crm[r[0]]:r[5]}));
+    const kanban=this.CRM_STAGES.map((name,idx)=>{ const col=leads.filter(l=>l.stage===idx); return {name,count:col.length,value:peso(col.reduce((a,l)=>a+l.value,0)),cards:col.map(l=>({name:l.name,svc:l.svc,when:l.when,valLabel:peso(l.value),notEnd:l.stage<this.CRM_STAGES.length-1,atEnd:l.stage>=this.CRM_STAGES.length-1,advance:()=>this.crmAdvance(l.id)}))}; });
+    const payQueue=this.PAYS.map((p,i)=>{ const r=S.pays[i]; return {name:p[0],forWhat:p[1],method:p[2],ref:p[3],amt:p[4],when:p[5],pending:!r,done:!!r,result:r||'',rcls:r==='Verified'?'ok':'bad',verify:()=>this.payAct(i,'Verified'),reject:()=>this.payAct(i,'Rejected')}; });
+    const proposals=this.PROPOSALS.map((p,i)=>{ const s=S.sent[i]; const acc=p[4]==='Accepted'; return {initial:p[0],title:p[1],client:p[2],value:p[3],status:s?'Sent':p[4],scls:s?'info':p[5],when:p[6],canSend:!acc&&!s,wasSent:!!s,send:()=>this.sendProp(i)}; });
+    return {
+      rootStyle, navOps:mkNav(this.NAV_OPS), navGrow:mkNav(this.NAV_GROW),
+      viewTitle:t[0], viewSub:t[1],
+      isOverview:v==='overview', isLeads:v==='leads', isProjects:v==='projects', isInvoices:v==='invoices', isProposals:v==='proposals', isSettings:v==='settings',
+      kpis, revBars, periods, activity, recentProjects, allProjects, projectCount:this.ALLP.length,
+      kanban, crmReset:()=>this.crmReset(),
+      payQueue, payPending:String(payQueue.filter(p=>p.pending).length),
+      proposals, proposalOpen:this.PROPOSALS.filter(p=>p[4]==='Viewed'||p[4]==='Draft').length,
+      goProjects:()=>this.go('projects'), goInvoices:()=>this.go('invoices'),
+      save:()=>this.save(), toast:S.toast, toastShow:!!S.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

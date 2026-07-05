@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#f4ede3;--cream2:#eadfce;--ink:#211a13;--gold:#9c6a34;--gold2:#7d5324;--blush:#c07487;--blush2:#e6cdd4;--sage:#7f9468;--mute:#5c4c3d;--line:rgba(43,36,32,.22);--card:#fff}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',system-ui,sans-serif;font-weight:400;background:var(--cream);color:var(--ink);overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.01em;line-height:1.06}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{background:var(--cream);color:var(--ink);min-height:100vh}
+.eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;font-weight:500;color:var(--gold)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:15px 6%;background:#f4ede3;border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(43,36,32,.05)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;letter-spacing:.12em}
+.nav-logo small{display:block;font-family:'Jost';font-size:8px;letter-spacing:.36em;color:var(--mute);font-weight:400;margin-top:-3px}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);border:1px solid var(--line);padding:11px 18px;border-radius:3px;transition:.22s}
+.back:hover{border-color:var(--gold);color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:54px;padding:0 30px;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;border-radius:3px;transition:.28s;cursor:pointer;border:none}
+.btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--ink);color:var(--ink);background:none}.btn-ghost:hover{background:var(--ink);color:var(--cream)}
+.btn-lghost{border:1px solid rgba(255,255,255,.6);color:#fff;background:none}.btn-lghost:hover{background:#fff;color:var(--ink)}
+.hero{position:relative;min-height:92vh;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:150px 6% 90px;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-80px;width:520px;height:520px;background:radial-gradient(circle,rgba(201,138,153,.16),transparent 68%);pointer-events:none}
+.hero-l{position:relative;z-index:2}
+.hero-tag{display:inline-block;background:var(--blush2);color:var(--gold2);font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:8px 16px;border-radius:30px;margin-bottom:24px}
+.hero h1{font-size:clamp(38px,5.4vw,74px);letter-spacing:-.01em;margin-bottom:22px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:17px;color:var(--mute);line-height:1.85;max-width:54ch;margin-bottom:30px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:9px 16px;font-size:12px;color:#463c33;font-weight:400}
+.chip b{color:var(--gold);font-weight:600}
+.hbtns{display:flex;flex-wrap:wrap;gap:14px}
+.hero-r{position:relative;z-index:2}
+.hero-photo{position:relative;width:100%;aspect-ratio:4/5;border-radius:12px;overflow:hidden;box-shadow:0 34px 80px rgba(150,95,85,.22);border:1px solid var(--line)}
+.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-float{position:absolute;left:-26px;bottom:34px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 20px;box-shadow:0 16px 40px rgba(43,36,32,.14);z-index:3;max-width:240px}
+.hero-float .hf-t{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink)}
+.hero-float .hf-s{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.sec{position:relative;padding:96px 6%}
+.sec-cream2{background:var(--cream2)}
+.sec-ink{background:linear-gradient(150deg,#2b2420,#4a3a30);color:#fff}
+.sec-head{max-width:660px;margin:0 auto 56px;text-align:center}
+.sec-head .eyebrow{display:block;margin-bottom:14px}
+.sec-h{font-size:clamp(34px,5vw,60px)}
+.sec-head p{font-size:16px;color:var(--mute);margin-top:16px;line-height:1.85}
+.sec-ink .sec-head p{color:rgba(255,255,255,.75)}
+.need-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;max-width:1080px;margin:0 auto}
+.need{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px 26px;transition:.24s}
+.need:hover{transform:translateY(-4px);box-shadow:0 20px 46px rgba(43,36,32,.09);border-color:var(--gold)}
+.need .ic{width:48px;height:48px;border-radius:50%;background:var(--blush2);color:var(--gold2);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:15px}
+.need h3{font-size:21px;margin-bottom:6px}
+.need p{font-size:13.5px;color:#6c5b51;line-height:1.7}
+.steps{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:34px}
+.step{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 16px 44px rgba(43,36,32,.07)}
+.step.rev .step-media{order:2}
+.step-media{position:relative;aspect-ratio:924/540;min-height:100%;overflow:hidden;background:#edeaf3}
+.step-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.step-media .snum{position:absolute;top:20px;left:20px;z-index:3;width:58px;height:58px;border-radius:50%;background:rgba(43,36,32,.92);color:#e9c9a8;font-family:'Cormorant Garamond',serif;font-size:28px;display:flex;align-items:center;justify-content:center}
+.step-body{padding:44px 46px 44px 8px}
+.step.rev .step-body{padding:44px 8px 44px 46px}
+.step-body .kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:9px}
+.step-body h3{font-size:clamp(24px,3vw,33px);margin-bottom:12px}
+.step-body p{font-size:14.5px;color:#463c33;line-height:1.85;margin-bottom:16px}
+.tip{display:flex;gap:12px;background:var(--cream);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 18px}
+.tip .ti{color:var(--gold);font-size:15px;flex:none;margin-top:1px}
+.tip .tt{font-size:13px;color:#5a4f46;line-height:1.6}
+.tip .tt b{color:var(--gold2);font-weight:600}
+.pal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:1080px;margin:0 auto}
+.pal{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.24s}
+.pal:hover{transform:translateY(-4px);box-shadow:0 20px 46px rgba(43,36,32,.1)}
+.pal-sw{display:flex;height:78px}
+.pal-sw span{flex:1}
+.pal-b{padding:18px 22px}
+.pal{cursor:pointer}
+.pal-b h4{font-size:20px;margin-bottom:3px}
+.pal-b p{font-size:12px;color:var(--mute)}
+.pal-copy{display:block;margin-top:10px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);opacity:.75;transition:.2s}
+.pal:hover .pal-copy{opacity:1}
+.toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%);z-index:900;background:var(--ink);color:var(--cream);padding:14px 24px;border-radius:40px;font-size:13px;letter-spacing:.04em;box-shadow:0 14px 40px rgba(0,0,0,.28);display:flex;align-items:center;gap:10px;animation:tin .3s ease}
+.toast .td{color:#e9c9a8}
+@keyframes tin{from{opacity:0;transform:translate(-50%,14px)}to{opacity:1;transform:translate(-50%,0)}}
+.pub-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1080px;margin:0 auto}
+.pub{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:38px 34px}
+.pub .badge{display:inline-block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#e9c9a8;border:1px solid rgba(233,201,168,.4);border-radius:20px;padding:6px 13px;margin-bottom:16px}
+.pub h3{font-size:27px;color:#fff;margin-bottom:8px}
+.pub .lead{font-size:14px;color:rgba(255,255,255,.72);line-height:1.8;margin-bottom:18px}
+.pub ol{list-style:none;counter-reset:p;display:flex;flex-direction:column;gap:11px}
+.pub ol li{counter-increment:p;display:flex;gap:13px;font-size:13.5px;color:rgba(255,255,255,.82);line-height:1.6}
+.pub ol li::before{content:counter(p);flex:none;width:24px;height:24px;border-radius:50%;background:rgba(233,201,168,.16);color:#e9c9a8;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;font-family:'Jost'}
+.share{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:.85fr 1.15fr;gap:44px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:44px;box-shadow:0 16px 44px rgba(43,36,32,.08)}
+.qr{width:100%;max-width:220px;aspect-ratio:1;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 12px 30px rgba(43,36,32,.1)}
+.qr-grid{width:100%;height:100%;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);gap:2px}
+.qr-grid i{background:transparent;border-radius:1px}
+.qr-grid i.on{background:var(--ink)}
+.share h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:12px}
+.share p{font-size:14.5px;color:#5a4f46;line-height:1.85;margin-bottom:14px}
+.share ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.share li{display:flex;gap:11px;font-size:13.5px;color:#5a4f46;line-height:1.6}
+.share li::before{content:'✦';color:var(--gold);flex:none}
+.cta{text-align:center;max-width:680px;margin:0 auto}
+.cta h2{font-size:clamp(32px,4.4vw,54px);color:#fff;margin-bottom:16px}
+.cta h2 em{font-style:italic;color:#e9c9a8}
+.cta p{font-size:15px;color:rgba(255,255,255,.75);line-height:1.8;margin-bottom:30px}
+.cta .hbtns{justify-content:center}
+footer{background:#221b16;color:rgba(255,255,255,.55);padding:44px 6%;text-align:center;font-size:12.5px}
+footer a{color:#e9c9a8}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:920px){.hero{grid-template-columns:1fr;padding-top:120px;min-height:auto}.hero-r{max-width:340px}.step{grid-template-columns:1fr}.step.rev .step-media{order:0}.step-body,.step.rev .step-body{padding:32px 30px}.step-media{aspect-ratio:16/10}.pub-grid,.share{grid-template-columns:1fr}.share{padding:30px}.nav-logo small{display:none}}
+</style>
+</helmet>
+<div class="wrap">
+<nav class="nav"><a href="Portfolio.dc.html" class="nav-logo">SHARON ROSE<small>DIGITAL SOLUTIONS STUDIO</small></a><a href="Portfolio.dc.html" class="back">← Back to Portfolio</a></nav>
+
+<section class="hero"><div class="hero-l reveal"><span class="hero-tag">✦ Canva Tutorial · Step-by-Step</span><h1>How to make a digital <em>wedding website invitation</em> in Canva.</h1><p class="hero-sub">A complete, beginner-friendly walkthrough for building an interactive <em>tap-to-open envelope</em> invitation — guests tap the wax seal, the envelope opens to your photo and music, and it's share-ready on their phone. Everything here works on Canva's free plan.</p><div class="chips"><span class="chip"><b>Level</b> Beginner</span><span class="chip"><b>Time</b> ~30 min</span><span class="chip"><b>Cost</b> Free plan</span><span class="chip"><b>You'll get</b> A live link + QR</span></div><div class="hbtns"><a href="#steps" class="btn btn-gold">Start the Guide</a><a href="https://www.canva.com" target="_blank" class="btn btn-ghost">Open Canva ↗</a></div></div><div class="hero-r reveal"><div class="hero-photo"><img src="assets/photos/hero-portrait.jpg" alt="Bride in an elegant gown"></div><div class="hero-float"><div class="hf-s">The result</div><div class="hf-t">A living invitation guests love to open.</div></div></div></section>
+
+<section class="sec"><div class="sec-head reveal"><span class="eyebrow">Before You Start</span><h2 class="sec-h">What you'll need.</h2><p>Gather these first and the whole build takes about half an hour. Nothing here costs anything.</p></div><div class="need-grid reveal"><sc-for list="{{ needs }}" as="n" hint-placeholder-count="4"><div class="need"><div class="ic">{{ n.ico }}</div><h3>{{ n.title }}</h3><p>{{ n.body }}</p></div></sc-for></div></section>
+
+<section id="steps" class="sec sec-cream2"><div class="sec-head reveal"><span class="eyebrow">The Walkthrough</span><h2 class="sec-h">Twelve simple steps.</h2><p>Follow them in order — each one builds on the last, from a blank page to a published, tap-to-open envelope invitation.</p></div><div class="steps"><sc-for list="{{ steps }}" as="s" hint-placeholder-count="12"><div class="step {{ s.rev }} reveal"><div class="step-media"><img src="{{ s.img }}" loading="lazy" alt="{{ s.title }}"><div class="snum">{{ s.num }}</div></div><div class="step-body"><div class="kicker">Step {{ s.num }}</div><h3>{{ s.title }}</h3><p>{{ s.body }}</p><sc-if value="{{ s.tip }}" hint-placeholder-val="{{ true }}"><div class="tip"><span class="ti">✦</span><span class="tt"><b>Tip.</b> {{ s.tip }}</span></div></sc-if></div></div></sc-for></div></section>
+
+<section class="sec"><div class="sec-head reveal"><span class="eyebrow">Design Inspiration</span><h2 class="sec-h">Wedding palettes to borrow.</h2><p>Stuck on colors? Copy one of these into Canva's color picker for an instantly elegant, cohesive look.</p></div><div class="pal-grid reveal"><sc-for list="{{ palettes }}" as="p" hint-placeholder-count="4"><div class="pal" onClick="{{ p.copy }}" title="Click to copy these colors"><div class="pal-sw"><sc-for list="{{ p.cols }}" as="c" hint-placeholder-count="4"><span style="background: {{ c }}"></span></sc-for></div><div class="pal-b"><h4>{{ p.name }}</h4><p>{{ p.note }}</p><span class="pal-copy">⧉ Click to copy hex codes</span></div></div></sc-for></div></section>
+
+<section class="sec sec-ink"><div class="sec-head reveal"><span class="eyebrow" style="color:#e9c9a8">Go Live</span><h2 class="sec-h" style="color:#fff">Two ways to publish it.</h2><p>Once your invitation looks perfect, share it as a real link. Pick whichever route fits you — both are free.</p></div><div class="pub-grid reveal"><div class="pub"><span class="badge">Easiest</span><h3>Publish as a Canva Website</h3><p class="lead">Canva hosts it for you and gives you a free link. Republish any time and the live page updates instantly.</p><ol><li>Click <b>Share</b> → <b>Publish as website</b>.</li><li>Choose the free <b>canva.site</b> domain and type your names.</li><li>Set navigation to <b>Scroll</b> for a one-page invite, then <b>Publish</b>.</li><li>Copy your link — it's ready to send.</li></ol></div><div class="pub"><span class="badge">Your own link</span><h3>Host it free on Netlify</h3><p class="lead">Want a branded web address? Export your design and drop it onto Netlify's free tier for your own custom URL.</p><ol><li>In Canva, <b>Download</b> your pages as images (or export the site files).</li><li>Go to <b>netlify.com/drop</b> and drag your folder in.</li><li>Netlify publishes instantly on a free link you can rename.</li><li>Upgrade later to connect a custom domain like <b>yourname.com</b>.</li></ol></div></div></section>
+
+<section class="sec sec-cream2"><div class="sec-head reveal"><span class="eyebrow">Send It Out</span><h2 class="sec-h">Share your invitation.</h2></div><div class="share reveal"><div><div class="qr"><div class="qr-grid"><sc-for list="{{ qrCells }}" as="c" hint-placeholder-count="121"><i class="{{ c }}"></i></sc-for></div></div></div><div><h3>One link. Every guest.</h3><p>Your digital invitation lives at a single link — no printing, no postage, and you can update details right up to the big day.</p><ul><li>Text or email the link, or share it in your family group chat.</li><li>Turn the link into a <b style="color:var(--gold2)">QR code</b> (Canva makes one for you) and print it on your save-the-dates.</li><li>Guests tap through to RSVP, see the schedule, and find directions — all from their phone.</li><li>Need a change? Edit in Canva, republish, and everyone sees the update.</li></ul></div></div></section>
+
+<section class="sec sec-ink"><div class="cta reveal"><span class="eyebrow" style="color:#e9c9a8;display:block;margin-bottom:16px">Want it done for you?</span><h2>Prefer a custom, <em>fully-built</em> invitation?</h2><p>I design and publish complete digital wedding invitations — with RSVP, guest management and a QR code — tailored to your theme. Let's create something guests will remember.</p><div class="hbtns"><a href="https://calendly.com/sharonrosealgara/30min" target="_blank" class="btn btn-gold">Book a Free Consultation</a><a href="Portfolio.dc.html" class="btn btn-lghost">View My Work</a></div></div></section>
+
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}"><div class="toast"><span class="td">✦</span>{{ toast }}</div></sc-if>
+<footer>© 2026 Sharon Rose Algara · Digital Solutions Studio · Made with <a href="https://www.canva.com" target="_blank">Canva</a> · <a href="Portfolio.dc.html">Back to Portfolio</a></footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  needs = [
+    { ico:'✦', title:'A free Canva account', body:'Sign up at canva.com with your email or Google account — no Pro subscription required.' },
+    { ico:'❤', title:'Your details', body:'Names, wedding date, ceremony & reception times, venue name and full address.' },
+    { ico:'❖', title:'2–4 photos', body:'Engagement or prenup shots work beautifully. High-resolution images stay crisp on phones.' },
+    { ico:'✉', title:'An RSVP method', body:'A free Google Form, your email, or a phone number so guests can reply in one tap.' }
+  ];
+  steps = [
+    { num:'01', title:'Create your free Canva account', img:'assets/canva/01-step.png', body:'Go to canva.com and sign up with your email or Google account. Everything in this guide — the envelope, the tap-to-open link, music and publishing — works on Canva’s free plan, so you will not need Canva Pro.', tip:'Working on your phone? The Canva app does everything the desktop editor does.' },
+    { num:'02', title:'Start your invitation & set up pages', img:'assets/canva/02-step.png', body:'Search “Wedding Invitation” and pick a clean multi-page design. You’ll build it across a few pages: Page 1 is the closed envelope cover, Page 2 is the open-envelope reveal, and the rest hold your details.', tip:'Toggle the “Free” filter so every template and element you use stays completely free.', rev:'rev' },
+    { num:'03', title:'Set your colors & fonts', img:'assets/canva/03-step.png', body:'Give the invite its mood: a dusty-rose envelope with a deep wine wax seal feels warm and romantic. Pair an elegant script font for your names with a clean serif for the details, and apply the palette to all pages.', tip:'Stick to two fonts and three or four colors — restraint is what makes it feel elegant.' },
+    { num:'04', title:'Build Page 1 — the closed envelope', img:'assets/canva/04-step.png', body:'On Page 1, add a pink envelope as your full-page cover. Search “envelope” in Elements, drop one in, and stretch it to fill the whole page so it looks like a real sealed envelope waiting to be opened.', tip:'Match the envelope color to your palette so the cover feels custom, not stock.', rev:'rev' },
+    { num:'05', title:'Add the wax seal & your initials', img:'assets/canva/05-step.png', body:'Search “wax seal” in Elements and place a red seal in the center of the envelope. Add a small text box over it with your initials — like “R&L” — in your script font. This seal becomes the button guests tap.', tip:'Center the seal where the envelope flaps meet — it looks the most natural there.' },
+    { num:'06', title:'Add “You’re Invited!” & the prompt', img:'assets/canva/06-step.png', body:'Add a large “You’re Invited!” in your script font across the top of the envelope, then a small “Tap the wax seal to open” line with a little chevron below the seal, so guests know exactly what to do.', tip:'Make “You’re Invited!” the biggest, most beautiful element on the cover.', rev:'rev' },
+    { num:'07', title:'Build Page 2 — the open reveal', img:'assets/canva/07-step.png', body:'On Page 2, create the moment the envelope opens: an open-envelope graphic or a soft floral background with a framed space for your photo. This is the page the wax seal will link to.', tip:'Keep Page 2 calm and romantic — it is the emotional payoff of the tap.' },
+    { num:'08', title:'Add your couple photo', img:'assets/canva/08-step.png', body:'Open Uploads, add your engagement or prenup photo, and drag it into the frame on the reveal page. Double-click to reposition and zoom it so your faces sit nicely inside the frame.', tip:'Use the highest-resolution photo you have so it stays sharp on large phone screens.', rev:'rev' },
+    { num:'09', title:'Link the wax seal to Page 2', img:'assets/canva/09-step.png', body:'This is the magic. Select the wax seal, click the link icon, and under “This design” choose Page 2. Now when a guest taps the seal, the invitation opens straight to the reveal — a real interaction, not just a picture.', tip:'Test it in Preview right away — tapping the seal should jump to Page 2 every time.' },
+    { num:'10', title:'Add music that plays on the reveal', img:'assets/canva/10-step.png', body:'From Elements → Audio, pick a soft track from Canva’s free library and add it to the reveal page. Add a small music icon too, so guests see it playing, and set the audio to play across pages for a seamless moment.', tip:'Choose something gentle and instrumental — it should feel like a soundtrack, not a surprise.', rev:'rev' },
+    { num:'11', title:'Add details, schedule & RSVP', img:'assets/canva/11-step.png', body:'On the inner pages, add the essentials: ceremony and reception times, venue and full address, dress code and a short love-story line. Add an RSVP button and link it to a free Google Form so replies land in a spreadsheet.', tip:'A free Google Form drops every RSVP straight into a spreadsheet — no manual counting.' },
+    { num:'12', title:'Preview, test the tap & publish', img:'assets/canva/12-step.png', body:'Preview on your phone and walk the whole flow — tap the seal, watch it open, hear the music, check every link. Then Share → Publish as website, choose the free canva.site domain, and Publish. Send the link or a QR code.', tip:'Republish any time you edit and the live page updates instantly — no resending needed.', rev:'rev' }
+  ];
+  palettes = [
+    { name:'Dusty Rose & Wine', note:'Rose envelope · wine wax · cream', cols:['#cf7e90','#8f1c24','#f6f0e9','#e9c9a8'] },
+    { name:'Blush Romance', note:'Dusty rose · mauve · ivory', cols:['#c98a99','#a86676','#f3d9e0','#fbeef0'] },
+    { name:'Sage Garden', note:'Eucalyptus · olive · linen', cols:['#94a684','#5f7449','#dbe6cf','#eef2e8'] },
+    { name:'Champagne', note:'Gold · taupe · warm white', cols:['#c9a24b','#8a6240','#efe0c4','#f8f1e3'] }
+  ];
+  _qr = "01110001110 10001010001 10111011101 10001000101 01110101110 00000101000 10110110111 01001000001 11101011101 00010111001 01110100011";
+
+  componentDidMount(){
+    this._ro = new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }); },{threshold:0.06});
+    this._obs();
+    this._fallback = setTimeout(()=>{ document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in')); }, 800);
+  }
+  componentDidUpdate(){ this._obs(); }
+  componentWillUnmount(){ if(this._ro)this._ro.disconnect(); if(this._fallback)clearTimeout(this._fallback); }
+  _obs(){ if(this._ro) document.querySelectorAll('.reveal:not(.in)').forEach(el=>this._ro.observe(el)); }
+
+  state = { toast:'' };
+  _showToast(msg){ this.setState({toast:msg}); clearTimeout(this._tt); this._tt=setTimeout(()=>this.setState({toast:''}),2400); }
+  _copyPal(p){
+    const txt = p.cols.join('  ');
+    try{ navigator.clipboard.writeText(txt); }catch(_){}
+    this._showToast(p.name+' copied — '+txt);
+  }
+
+  renderVals(){
+    const qrCells = this._qr.replace(/ /g,'').split('').map(c=>c==='1'?'on':'');
+    const palettes = this.palettes.map(p=>({ ...p, copy:()=>this._copyPal(p) }));
+    return { needs:this.needs, steps:this.steps, palettes, qrCells, toast:this.state.toast };
+  }
+}
+</script>
+</body>
+</html>

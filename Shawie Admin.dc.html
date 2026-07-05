@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.admin{--bg:#f2ebde;--panel:#fff;--ink:#1b140d;--mut:#6b5a46;--gold:#9c6a34;--gold2:#7d5324;--champ:#c2984f;--data:#2a6f8a;--data2:#4d9bb5;--line:#e5dac5;--side1:#241d16;--side2:#3a2c22;--sideink:#cdb992;--ok:#4d8259;--warn:#c08a2e;--bad:#b5524f;--rose:#bd6980;display:flex;min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Jost',system-ui,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+.admin h1,.admin h2,.admin h3,.admin h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.06}
+.side{width:250px;flex:none;background:linear-gradient(180deg,var(--side1),var(--side2));color:var(--sideink);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:22px 0}
+.sbrand{padding:6px 24px 22px;border-bottom:1px solid rgba(205,185,146,.16);margin-bottom:14px}
+.sbrand .bn{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;letter-spacing:.12em;color:#fff}
+.sbrand .bs{font-size:8px;letter-spacing:.34em;color:var(--champ);margin-top:2px;text-transform:uppercase}
+.sgroup{padding:0 14px;margin-bottom:6px}
+.sglab{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(205,185,146,.5);padding:12px 12px 7px;font-weight:600}
+.snav{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:9px;font-size:13.5px;color:var(--sideink);cursor:pointer;transition:.16s;font-weight:500}
+.snav:hover{background:rgba(205,185,146,.1);color:#fff}
+.snav.on{background:var(--gold);color:#fff}
+.snav .ic{width:18px;height:18px;flex:none;opacity:.9}
+.snav .bdg{margin-left:auto;background:var(--rose);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px}
+.snav.on .bdg{background:rgba(255,255,255,.28)}
+.sfoot{margin-top:auto;padding:16px 22px 4px;border-top:1px solid rgba(205,185,146,.16);display:flex;align-items:center;gap:11px}
+.savatar{width:36px;height:36px;border-radius:50%;background:var(--champ);color:#241d16;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;flex:none}
+.sfoot .sn{font-size:12.5px;color:#fff;font-weight:600}.sfoot .sr{font-size:10.5px;color:var(--sideink)}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.top{position:sticky;top:0;z-index:20;background:rgba(242,235,222,.92);backdrop-filter:none;border-bottom:1px solid var(--line);padding:16px 32px;display:flex;align-items:center;gap:18px}
+.top .tt{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600}
+.top .tsub{font-size:12px;color:var(--mut);margin-top:1px}
+.tsearch{margin-left:auto;display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--line);border-radius:30px;padding:9px 16px;width:260px;color:var(--mut);font-size:13px}
+.tsearch input{border:none;outline:none;background:none;font-family:inherit;font-size:13px;color:var(--ink);width:100%}
+.tbtn{width:40px;height:40px;border-radius:50%;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;color:var(--ink)}
+.tbtn:hover{border-color:var(--gold)}
+.tbtn .dot{position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--rose);border:1.5px solid var(--panel)}
+.content{padding:26px 32px 48px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 20px;box-shadow:0 4px 16px rgba(43,30,15,.05)}
+.kpi .kl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:600}
+.kpi .kn{font-family:'Cormorant Garamond',serif;font-size:38px;line-height:1;margin:8px 0 6px;color:var(--ink)}
+.kpi .kd{font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
+.kd.up{color:var(--ok)}.kd.down{color:var(--bad)}
+.grid2{display:grid;grid-template-columns:1.55fr 1fr;gap:16px;margin-bottom:16px}
+.grid2b{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(43,30,15,.05)}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.ph h3{font-size:20px}
+.ph .pa{font-size:12px;color:var(--gold);font-weight:600;cursor:pointer}
+.perbtns{display:flex;gap:6px}
+.perb{border:1px solid var(--line);background:var(--bg);border-radius:20px;padding:6px 13px;font-size:11px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;color:var(--mut);cursor:pointer}
+.perb.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.bars{display:flex;align-items:flex-end;gap:12px;height:180px;padding-top:10px}
+.barc{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px;height:100%}
+.barc .bar{width:100%;max-width:38px;background:linear-gradient(180deg,var(--data),var(--data2));border-radius:5px 5px 0 0}
+.barc .bl{font-size:10px;color:var(--mut)}
+.barc .bv{font-size:10.5px;color:var(--ink);font-weight:600}
+.feed{display:flex;flex-direction:column;gap:2px}
+.fitem{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.fitem:last-child{border-bottom:none}
+.fdot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex:none}
+.fitem .ft{font-size:13px;color:var(--ink);line-height:1.4}
+.fitem .ft b{font-weight:600}
+.fitem .fm{font-size:11px;color:var(--mut);margin-top:2px}
+table{width:100%;border-collapse:collapse}
+thead th{text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:600;padding:0 12px 12px;border-bottom:1px solid var(--line)}
+tbody td{padding:13px 12px;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#faf5ec}
+.cust{display:flex;align-items:center;gap:10px}
+.cav{width:32px;height:32px;border-radius:50%;background:var(--bg);border:1px solid var(--line);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:14px;flex:none}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 11px;border-radius:20px;letter-spacing:.02em}
+.pill.ok{background:rgba(77,130,89,.14);color:var(--ok)}
+.pill.warn{background:rgba(192,138,46,.16);color:var(--warn)}
+.pill.bad{background:rgba(181,82,79,.14);color:var(--bad)}
+.pill.info{background:rgba(42,111,138,.13);color:var(--data)}
+.pill.neutral{background:var(--bg);color:var(--mut)}
+.money{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--gold);font-weight:600}
+.kan{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.kcol{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:12px 10px;min-height:120px}
+.kch{display:flex;justify-content:space-between;align-items:baseline;padding:2px 4px 4px}
+.kch .kn2{font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:700}
+.kch .kc{font-size:11px;color:var(--gold);font-weight:700}
+.kcv{font-size:10px;color:var(--mut);padding:0 4px 9px}
+.kcard{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:12px;margin-bottom:8px;box-shadow:0 3px 9px rgba(43,30,15,.05)}
+.kcard .kt{font-size:13px;font-weight:600;line-height:1.2}
+.kcard .km{font-size:10.5px;color:var(--mut);margin:3px 0 8px;line-height:1.4}
+.kcard .kvl{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold)}
+.kadv{width:100%;margin-top:9px;height:30px;border-radius:6px;border:1px solid var(--gold);color:var(--gold);background:var(--panel);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;cursor:pointer}
+.kadv:hover{background:var(--gold);color:#fff}
+.kadv.done{border-color:var(--ok);color:var(--ok);cursor:default}
+.payq{display:flex;flex-direction:column;gap:14px}
+.pay{display:flex;gap:16px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 3px 12px rgba(43,30,15,.04)}
+.payproof{width:76px;height:76px;border-radius:9px;flex:none;background:linear-gradient(150deg,#efe2d8,#d9c3a8);display:flex;align-items:center;justify-content:center;color:var(--gold2);font-size:11px;text-align:center;border:1px solid var(--line);overflow:hidden;position:relative}
+.payproof .gc{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:15px}
+.payi{flex:1;min-width:0}
+.payi .pn{font-size:14px;font-weight:600}
+.payi .pmeta{font-size:11.5px;color:var(--mut);margin-top:3px;line-height:1.5}
+.payi .pref{font-family:'Jost';font-size:11px;color:var(--gold2);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:2px 8px;display:inline-block;margin-top:5px}
+.payamt{text-align:right;flex:none}
+.payamt .money{font-size:22px}
+.payact{display:flex;flex-direction:column;gap:7px;flex:none;width:120px}
+.abtn{height:36px;border-radius:7px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;cursor:pointer;border:1px solid transparent;display:flex;align-items:center;justify-content:center;gap:6px}
+.abtn.verify{background:var(--ok);color:#fff}.abtn.verify:hover{background:#3f6e4a}
+.abtn.reject{background:var(--panel);border-color:var(--line);color:var(--bad)}.abtn.reject:hover{border-color:var(--bad)}
+.paydone{flex:none;width:120px;text-align:center}
+.logrow{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+.logrow:last-child{border-bottom:none}
+.logic{width:34px;height:34px;border-radius:8px;background:var(--bg);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:15px;flex:none}
+.logi{flex:1;min-width:0}
+.logi .ln{font-size:13px;font-weight:600}
+.logi .lm{font-size:11px;color:var(--mut);margin-top:2px}
+.logt{font-size:11px;color:var(--mut);flex:none;text-align:right;min-width:96px}
+.rerun{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:6px 12px;font-size:10.5px;font-weight:600;color:var(--gold2);cursor:pointer;flex:none}
+.rerun:hover{border-color:var(--gold);color:var(--gold)}
+.cmsrow{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+.cmsrow:last-child{border-bottom:none}
+.cmsthumb{width:64px;height:44px;border-radius:7px;object-fit:cover;flex:none;border:1px solid var(--line)}
+.toggle{width:44px;height:24px;border-radius:20px;background:var(--line);position:relative;cursor:pointer;flex:none;transition:.2s}
+.toggle.on{background:var(--ok)}
+.toggle .kn3{position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle.on .kn3{left:22px}
+.simple{text-align:center;padding:60px 0;color:var(--mut)}
+.simple h3{font-size:26px;color:var(--ink);margin-bottom:8px}
+.settgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:6px}
+.field input,.field select{width:100%;height:42px;border:1px solid var(--line);border-radius:8px;padding:0 13px;font-family:inherit;font-size:13.5px;color:var(--ink);background:var(--panel)}
+.field input:focus{outline:none;border-color:var(--gold)}
+.savebtn{height:44px;padding:0 24px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;cursor:pointer}
+.savebtn:hover{background:var(--gold2)}
+.mtoast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);z-index:200;background:var(--ink);color:#fff;padding:14px 26px;border-radius:40px;font-size:13.5px;box-shadow:0 18px 44px rgba(0,0,0,.32);animation:mt .3s ease}
+@keyframes mt{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+.gsvg{width:100%;height:100%;object-fit:cover}
+@media(max-width:1080px){.kpis{grid-template-columns:1fr 1fr}.grid2,.grid2b{grid-template-columns:1fr}.kan{grid-template-columns:1fr;gap:16px}}
+@media(max-width:720px){.side{display:none}}
+</style>
+<script src="shawie-config.js"></script>
+<script src="shawie-data.js"></script>
+</helmet>
+<div class="admin" style="{{ rootStyle }}">
+<aside class="side">
+<div class="sbrand"><div class="bn">SHAWIE</div><div class="bs">Admin Console</div></div>
+<div class="sgroup"><div class="sglab">Operations</div><sc-for list="{{ navOps }}" as="n" hint-placeholder-count="5"><div class="{{ n.cls }}" onClick="{{ n.go }}"><span class="ic">{{ n.ic }}</span>{{ n.label }}<sc-if value="{{ n.hasBadge }}" hint-placeholder-val="{{ false }}"><span class="bdg">{{ n.badge }}</span></sc-if></div></sc-for></div>
+<div class="sgroup"><div class="sglab">Content &amp; Growth</div><sc-for list="{{ navContent }}" as="n" hint-placeholder-count="4"><div class="{{ n.cls }}" onClick="{{ n.go }}"><span class="ic">{{ n.ic }}</span>{{ n.label }}<sc-if value="{{ n.hasBadge }}" hint-placeholder-val="{{ false }}"><span class="bdg">{{ n.badge }}</span></sc-if></div></sc-for></div>
+<div class="sfoot"><div class="savatar">S</div><div><div class="sn">Sharon Rose</div><div class="sr">Owner · Admin</div></div></div>
+</aside>
+<div class="main">
+<div class="top"><div><div class="tt">{{ viewTitle }}</div><div class="tsub">{{ viewSub }}</div></div><div class="tsearch"><span>⌕</span><input placeholder="Search bookings, clients, invoices…"></div><button class="tbtn">✉<span class="dot"></span></button><button class="tbtn" onClick="{{ goPayments }}">🔔<span class="dot"></span></button></div>
+<div class="content">
+
+<sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+<div class="kpis"><sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4"><div class="kpi"><div class="kl">{{ k.label }}</div><div class="kn">{{ k.value }}</div><div class="kd {{ k.dcls }}">{{ k.delta }}</div></div></sc-for></div>
+<div class="grid2">
+<div class="panel"><div class="ph"><h3>Revenue</h3><div class="perbtns"><sc-for list="{{ periods }}" as="p" hint-placeholder-count="3"><span class="{{ p.cls }}" onClick="{{ p.go }}">{{ p.label }}</span></sc-for></div></div><div class="bars"><sc-for list="{{ revBars }}" as="b" hint-placeholder-count="6"><div class="barc"><span class="bv">{{ b.v }}</span><div class="bar" style="height: {{ b.h }}%"></div><span class="bl">{{ b.l }}</span></div></sc-for></div></div>
+<div class="panel"><div class="ph"><h3>Activity</h3><span class="pa" onClick="{{ goAutomation }}">Automation →</span></div><div class="feed"><sc-for list="{{ activity }}" as="a" hint-placeholder-count="5"><div class="fitem"><span class="fdot" style="background: {{ a.color }}"></span><div><div class="ft">{{ a.text }}</div><div class="fm">{{ a.time }}</div></div></div></sc-for></div></div>
+</div>
+<div class="panel"><div class="ph"><h3>Recent Bookings</h3><span class="pa" onClick="{{ goBookings }}">View all →</span></div><table><thead><tr><th>Client</th><th>Event</th><th>Date</th><th>Value</th><th>Status</th></tr></thead><tbody><sc-for list="{{ recentBookings }}" as="b" hint-placeholder-count="5"><tr><td><div class="cust"><span class="cav">{{ b.initial }}</span>{{ b.name }}</div></td><td>{{ b.event }}</td><td>{{ b.date }}</td><td><span class="money">{{ b.value }}</span></td><td><span class="pill {{ b.scls }}">{{ b.status }}</span></td></tr></sc-for></tbody></table></div>
+</sc-if>
+
+<sc-if value="{{ isBookings }}" hint-placeholder-val="{{ false }}">
+<div class="panel"><div class="ph"><h3>All Bookings</h3><span class="pill neutral">{{ bookingsCount }} total</span></div><table><thead><tr><th>Client</th><th>Event</th><th>Date</th><th>Guests</th><th>Value</th><th>Payment</th><th>Status</th></tr></thead><tbody><sc-for list="{{ allBookings }}" as="b" hint-placeholder-count="7"><tr><td><div class="cust"><span class="cav">{{ b.initial }}</span>{{ b.name }}</div></td><td>{{ b.event }}</td><td>{{ b.date }}</td><td>{{ b.guests }}</td><td><span class="money">{{ b.value }}</span></td><td><span class="pill {{ b.pcls }}">{{ b.pay }}</span></td><td><span class="pill {{ b.scls }}">{{ b.status }}</span></td></tr></sc-for></tbody></table></div>
+</sc-if>
+
+<sc-if value="{{ isCrm }}" hint-placeholder-val="{{ false }}">
+<div class="panel"><div class="ph"><h3>Lead Pipeline</h3><span class="pa" onClick="{{ crmReset }}">↺ Reset</span></div><div class="kan"><sc-for list="{{ kanban }}" as="c" hint-placeholder-count="5"><div class="kcol"><div class="kch"><span class="kn2">{{ c.name }}</span><span class="kc">{{ c.count }}</span></div><div class="kcv">{{ c.value }}</div><sc-for list="{{ c.cards }}" as="l" hint-placeholder-count="2"><div class="kcard"><div class="kt">{{ l.name }}</div><div class="km">{{ l.event }} · {{ l.when }}</div><div class="kvl">{{ l.valLabel }}</div><sc-if value="{{ l.notEnd }}" hint-placeholder-val="{{ true }}"><button class="kadv" onClick="{{ l.advance }}">Advance →</button></sc-if><sc-if value="{{ l.atEnd }}" hint-placeholder-val="{{ false }}"><button class="kadv done">✓ Won</button></sc-if></div></sc-for></div></sc-for></div></div>
+</sc-if>
+
+<sc-if value="{{ isPayments }}" hint-placeholder-val="{{ false }}">
+<div class="kpis" style="grid-template-columns:repeat(3,1fr)"><div class="kpi"><div class="kl">Awaiting Verification</div><div class="kn">{{ payPending }}</div><div class="kd up">GCash · Wise</div></div><div class="kpi"><div class="kl">Verified Today</div><div class="kn">{{ payVerified }}</div><div class="kd up">₱{{ payVerifiedAmt }}</div></div><div class="kpi"><div class="kl">Collected · Month</div><div class="kn">₱642K</div><div class="kd up">▲ 12% vs last</div></div></div>
+<div class="panel"><div class="ph"><h3>Payment Verification Queue</h3><span class="pill warn">Manual review</span></div><div class="payq"><sc-for list="{{ payQueue }}" as="p" hint-placeholder-count="4"><div class="pay"><div class="payproof"><span class="gc">{{ p.method }}</span></div><div class="payi"><div class="pn">{{ p.name }}</div><div class="pmeta">{{ p.forWhat }} · {{ p.method }} · {{ p.when }}</div><span class="pref">Ref: {{ p.ref }}</span></div><div class="payamt"><span class="money">{{ p.amt }}</span></div><sc-if value="{{ p.pending }}" hint-placeholder-val="{{ true }}"><div class="payact"><button class="abtn verify" onClick="{{ p.verify }}">✓ Verify</button><button class="abtn reject" onClick="{{ p.reject }}">Reject</button></div></sc-if><sc-if value="{{ p.done }}" hint-placeholder-val="{{ false }}"><div class="paydone"><span class="pill {{ p.rcls }}">{{ p.result }}</span></div></sc-if></div></sc-for></div></div>
+</sc-if>
+
+<sc-if value="{{ isAutomation }}" hint-placeholder-val="{{ false }}">
+<div class="grid2b" style="margin-bottom:16px"><div class="kpi"><div class="kl">Workflows Active</div><div class="kn">9</div><div class="kd up">n8n · all healthy</div></div><div class="kpi"><div class="kl">Runs · 24h</div><div class="kn">247</div><div class="kd up">98.4% success</div></div></div>
+<div class="panel"><div class="ph"><h3>Automation Logs</h3><span class="pill ok">● Live</span></div><sc-for list="{{ logs }}" as="l" hint-placeholder-count="6"><div class="logrow"><div class="logic">{{ l.ic }}</div><div class="logi"><div class="ln">{{ l.name }}</div><div class="lm">{{ l.detail }}</div></div><span class="pill {{ l.scls }}">{{ l.status }}</span><div class="logt">{{ l.time }}</div><button class="rerun" onClick="{{ l.rerun }}">Re-run</button></div></sc-for></div>
+</sc-if>
+
+<sc-if value="{{ isCms }}" hint-placeholder-val="{{ false }}">
+<div class="panel"><div class="ph"><h3>Blog / Journal CMS</h3><span class="pill info">{{ cmsPublished }} published</span></div><sc-for list="{{ posts }}" as="p" hint-placeholder-count="5"><div class="cmsrow">{{ p.thumb }}<div class="logi"><div class="ln">{{ p.title }}</div><div class="lm">{{ p.cat }} · {{ p.date }} · {{ p.read }}</div></div><span class="pill {{ p.scls }}">{{ p.state }}</span><div class="toggle {{ p.tcls }}" onClick="{{ p.toggle }}"><span class="kn3"></span></div></div></sc-for></div>
+</sc-if>
+
+<sc-if value="{{ isSettings }}" hint-placeholder-val="{{ false }}">
+<div class="grid2b"><div class="panel"><div class="ph"><h3>Business Profile</h3></div><div class="field"><label>Business name</label><input value="Shawie Bakes & Events"></div><div class="field"><label>Contact email</label><input value="hello@shawie.events"></div><div class="settgrid"><div class="field"><label>Currency</label><select><option>PHP ₱</option><option>USD $</option></select></div><div class="field"><label>Timezone</label><select><option>Asia/Manila (GMT+8)</option></select></div></div><button class="savebtn" onClick="{{ save }}">Save changes</button></div>
+<div class="panel"><div class="ph"><h3>Payment Details</h3></div><div class="field"><label>GCash number</label><input value="0917 •••• 4821"></div><div class="field"><label>GCash account name</label><input value="Sharon R. Algara"></div><div class="field"><label>Wise account</label><input value="sharonrose@wise.com"></div><button class="savebtn" onClick="{{ save }}">Save changes</button></div></div>
+</sc-if>
+
+</div></div>
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}"><div class="mtoast">{{ toast }}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:860},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#9c6a34&quot;,&quot;options&quot;:[&quot;#9c6a34&quot;,&quot;#c2984f&quot;,&quot;#bd6980&quot;,&quot;#8a5a2a&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;}}">
+class Component extends DCLogic {
+  state = { view:'overview', period:'Month', crm:{}, pays:{}, postState:{}, toast:'', liveLeads:null };
+
+  NAV_OPS = [ ['overview','Overview','▦'], ['bookings','Bookings','▤'], ['crm','CRM Pipeline','◈'], ['payments','Payments','₱'], ['automation','Automation','⚙'] ];
+  NAV_CONTENT = [ ['cms','Blog CMS','✎'], ['gallery','Gallery','▧'], ['newsletter','Newsletter','✉'], ['settings','Settings','◉'] ];
+  TITLES = { overview:['Dashboard','Welcome back, Sharon — here’s today at a glance'], bookings:['Bookings','Every event, deposit and status in one place'], crm:['CRM Pipeline','Drag leads from first hello to celebration day'], payments:['Payments','Verify GCash & Wise proofs and track revenue'], automation:['Automation','n8n workflow health and run history'], cms:['Blog CMS','Publish and manage Journal articles'], gallery:['Gallery',''], newsletter:['Newsletter',''], settings:['Settings','Business, payment and integration configuration'] };
+
+  KPIS = { Month:[['Revenue','₱642K','▲ 12.4%','up'],['Bookings','14','▲ 3','up'],['New Leads','38','▲ 9','up'],['Conversion','37%','▼ 2%','down']],
+           Quarter:[['Revenue','₱1.94M','▲ 18%','up'],['Bookings','41','▲ 7','up'],['New Leads','112','▲ 24','up'],['Conversion','34%','▲ 1%','up']],
+           Year:[['Revenue','₱7.8M','▲ 22%','up'],['Bookings','168','▲ 31','up'],['New Leads','459','▲ 86','up'],['Conversion','36%','▲ 3%','up']] };
+  REV = { Month:[[42,'₱280K','W1'],[58,'₱388K','W2'],[51,'₱341K','W3'],[73,'₱489K','W4'],[64,'₱428K','W5'],[88,'₱589K','W6']],
+          Quarter:[[52,'₱520K','Oct'],[61,'₱610K','Nov'],[59,'₱588K','Dec'],[64,'₱642K','Jan'],[70,'₱701K','Feb'],[76,'₱760K','Mar']],
+          Year:[[54,'₱1.2M','H1·24'],[61,'₱1.4M','H2·24'],[70,'₱1.7M','H1·25'],[66,'₱1.6M','H2·25'],[74,'₱1.9M','H1·26'],[82,'₱2.1M','Proj']] };
+  ACTIVITY = [ ['#4d8259','<b>Payment verified</b> — Bianca &amp; Marco reservation ₱30,000','8 min ago'], ['#9c6a34','<b>New inquiry</b> — Kaye &amp; Josh, Beach Wedding','32 min ago'], ['#bd6980','<b>RSVP milestone</b> — Dizon Anniversary hit 120 guests','1 hr ago'], ['#c08a2e','<b>Email sent</b> — Stage 4 booking nudge to 3 leads','2 hrs ago'], ['#4d8259','<b>Booking confirmed</b> — Alyssa Tan Debut','4 hrs ago'] ];
+  RECENT = [ ['B','Bianca & Marco','Garden Wedding','Feb 14, 2026','₱185,000','Confirmed','ok'], ['A','Alyssa Tan','Debut · Rose Gold','Mar 08, 2026','₱82,000','Confirmed','ok'], ['G','Grupo Ventura','Corporate Gala','Apr 20, 2026','₱240,000','Proposal','warn'], ['K','Kaye & Josh','Beach Wedding','Jun 12, 2026','₱210,000','New Lead','info'], ['D','Dizon Family','Golden Anniversary','May 03, 2026','₱96,000','Deposit','warn'] ];
+  ALLB = [ ['B','Bianca & Marco','Garden Wedding','Feb 14, 2026','220','₱185,000','Paid 50%','warn','Confirmed','ok'], ['A','Alyssa Tan','Debut · Rose Gold','Mar 08, 2026','120','₱82,000','Paid','ok','Confirmed','ok'], ['G','Grupo Ventura','Corporate Gala','Apr 20, 2026','300','₱240,000','Unpaid','bad','Proposal','warn'], ['K','Kaye & Josh','Beach Wedding','Jun 12, 2026','80','₱210,000','—','neutral','New Lead','info'], ['D','Dizon Family','Golden Anniversary','May 03, 2026','150','₱96,000','Deposit','warn','Confirmed','ok'], ['C','Camille R.','Custom Cake','Jan 22, 2026','—','₱16,000','Paid','ok','Completed','neutral'], ['L','Baby Liam','Baptism · Cloud','Feb 28, 2026','60','₱54,000','Deposit','warn','Confirmed','ok'] ];
+  CRM_STAGES = ['New Lead','Contacted','Proposal','Booked','Won'];
+  CRM_SEED = [ [1,'Bianca & Marco','Garden Wedding','Feb 14',185000,3],[2,'Alyssa Tan','Debut',82000,2],[3,'Grupo Ventura','Corporate Gala',240000,1],[4,'Dizon Family','Anniversary',96000,2],[5,'Kaye & Josh','Beach Wedding',210000,0],[6,'Baby Liam','Baptism',54000,0],[7,'Camille R.','Custom Cake',16000,4] ];
+  PAYS = [ ['Bianca & Marco','Reservation deposit','GCash','GC-8842-1195','₱30,000','2 min ago'], ['Dizon Family','2nd installment','Wise','WISE-5521-QT','₱48,000','18 min ago'], ['Alyssa Tan','Full balance','GCash','GC-7731-0042','₱41,000','1 hr ago'], ['Grupo Ventura','Reservation deposit','Wise','WISE-9930-LP','₱72,000','3 hrs ago'] ];
+  LOGS = [ ['📥','Inquiry → CRM + Confirmation','Kaye & Josh · lead created, welcome email sent','Success','ok','2 min ago'], ['💳','Payment verified → Invoice','Bianca deposit · receipt + portal update','Success','ok','9 min ago'], ['📧','Email Journey · Stage 4','Booking nudge → 3 recipients','Success','ok','2 hrs ago'], ['📅','Calendar sync','Dizon design session → Google Calendar','Success','ok','5 hrs ago'], ['⭐','Review request','Camille R. · post-event email','Retried 1×','warn','yesterday'], ['📤','Newsletter dispatch','Monthly journal → 1,204 subscribers','Success','ok','2 days ago'] ];
+  POSTS = [ ['Top Wedding Cake Trends This Year','Luxury Cakes','Jun 25','8 min','https://images.pexels.com/photos/1702373/pexels-photo-1702373.jpeg?auto=compress&cs=tinysrgb&w=200',true], ['How to Choose Your Wedding Photographer','Photography','Jun 20','10 min','https://images.pexels.com/photos/3379934/pexels-photo-3379934.jpeg?auto=compress&cs=tinysrgb&w=200',true], ['Wedding Budget Guide','Budget','Jun 15','7 min','https://images.pexels.com/photos/6694543/pexels-photo-6694543.jpeg?auto=compress&cs=tinysrgb&w=200',true], ['10 Birthday Themes Everyone Loves','Birthday','Jun 10','6 min','https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=200',false], ['Best Wedding Venues in the Philippines','Venues','May 22','11 min','https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=200',true] ];
+
+  go(v){ this.setState({ view:v }); }
+  setPeriod(p){ this.setState({ period:p }); }
+  crmAdvance(id){ this.setState(s=>{ const cur=(id in s.crm)?s.crm[id]:this.CRM_SEED.find(r=>r[0]===id)[5]; return { crm:{...s.crm,[id]:Math.min(cur+1,this.CRM_STAGES.length-1)} }; }); }
+  crmReset(){ this.setState({ crm:{} }); this.flash('Pipeline reset'); }
+  payAct(i,res){ this.setState(s=>({ pays:{...s.pays,[i]:res} })); this.flash(res==='Verified'?'Payment verified — receipt emailed ✦':'Payment marked rejected'); }
+  togglePost(i,cur){ this.setState(s=>({ postState:{...s.postState,[i]: !(i in s.postState? s.postState[i]: cur)} })); }
+  save(){ this.flash('Settings saved ✦'); }
+  flash(m){ if(this._t) clearTimeout(this._t); this.setState({toast:m}); this._t=setTimeout(()=>this.setState({toast:''}),2000); }
+
+  // Phase 3: pull real inquiries from n8n/Airtable if an endpoint is configured
+  // (shawie-config.js → endpoints.inquiries). Silently falls back to demo data.
+  componentDidMount(){
+    try {
+      if (window.ShawieData && typeof window.ShawieData.getInquiries === 'function') {
+        window.ShawieData.getInquiries().then((rows)=>{
+          if (rows && rows.length) this.setState({ liveLeads: rows });
+        }).catch(()=>{});
+      }
+    } catch(_){}
+  }
+
+  renderVals(){
+    const S=this.state, v=S.view;
+    const accent=this.props.accent; const rootStyle=accent?{'--gold':accent}:{};
+    const peso=n=>'₱'+n.toLocaleString('en-US');
+    const mkNav=(arr)=>arr.map(n=>({ label:n[1], ic:n[2], cls:v===n[0]?'snav on':'snav', go:()=>this.go(n[0]), hasBadge:n[0]==='payments', badge:'4' }));
+    const t=this.TITLES[v]||['',''];
+    const kpis=(this.KPIS[S.period]||this.KPIS.Month).map(k=>({label:k[0],value:k[1],delta:k[2],dcls:k[3]}));
+    const revBars=(this.REV[S.period]||this.REV.Month).map(b=>({h:b[0],v:b[1],l:b[2]}));
+    const periods=['Month','Quarter','Year'].map(p=>({label:p,cls:p===S.period?'perb on':'perb',go:()=>this.setPeriod(p)}));
+    const activity=this.ACTIVITY.map(a=>({color:a[0],text:a[1],time:a[2]}));
+    const recentBookings=this.RECENT.map(b=>({initial:b[0],name:b[1],event:b[2],date:b[3],value:b[4],status:b[5],scls:b[6]}));
+    const allBookings=this.ALLB.map(b=>({initial:b[0],name:b[1],event:b[2],date:b[3],guests:b[4],value:b[5],pay:b[6],pcls:b[7],status:b[8],scls:b[9]}));
+    const demoLeads=this.CRM_SEED.map(r=>({id:r[0],name:r[1],event:r[2],when:r[3],value:r[4],stage:(r[0] in S.crm)?S.crm[r[0]]:r[5]}));
+    // Live Airtable leads when available, else demo. S.crm keeps drag-to-stage working for both.
+    const leads=(S.liveLeads && S.liveLeads.length)
+      ? S.liveLeads.map(l=>({...l, stage:(l.id in S.crm)?S.crm[l.id]:l.stage}))
+      : demoLeads;
+    const kanban=this.CRM_STAGES.map((name,idx)=>{ const col=leads.filter(l=>l.stage===idx); return { name, count:col.length, value:peso(col.reduce((a,l)=>a+l.value,0)), cards:col.map(l=>({name:l.name,event:l.event,when:l.when,valLabel:peso(l.value),notEnd:l.stage<this.CRM_STAGES.length-1,atEnd:l.stage>=this.CRM_STAGES.length-1,advance:()=>this.crmAdvance(l.id)})) }; });
+    const payQueue=this.PAYS.map((p,i)=>{ const r=S.pays[i]; return { name:p[0],forWhat:p[1],method:p[2],ref:p[3],amt:p[4],when:p[5], pending:!r, done:!!r, result:r||'', rcls:r==='Verified'?'ok':'bad', verify:()=>this.payAct(i,'Verified'), reject:()=>this.payAct(i,'Rejected') }; });
+    const payPending=payQueue.filter(p=>p.pending).length;
+    const payVerified=payQueue.filter(p=>p.result==='Verified').length;
+    const logs=this.LOGS.map(l=>({ic:l[0],name:l[1],detail:l[2],status:l[3],scls:l[4],time:l[5],rerun:()=>this.flash('Workflow re-queued ✦')}));
+    const posts=this.POSTS.map((p,i)=>{ const pub=(i in S.postState)?S.postState[i]:p[6]; return {title:p[0],cat:p[1],date:p[2],read:p[3],img:p[4], thumb:React.createElement('img',{className:'cmsthumb',src:p[4],alt:p[0]}), state:pub?'Published':'Draft', scls:pub?'ok':'neutral', tcls:pub?'on':'', toggle:()=>this.togglePost(i,p[6])}; });
+    return {
+      rootStyle,
+      navOps:mkNav(this.NAV_OPS), navContent:mkNav(this.NAV_CONTENT),
+      viewTitle:t[0], viewSub:t[1],
+      isOverview:v==='overview', isBookings:v==='bookings', isCrm:v==='crm', isPayments:v==='payments', isAutomation:v==='automation', isCms:v==='cms', isSettings:v==='settings',
+      kpis, revBars, periods, activity, recentBookings, allBookings, bookingsCount:this.ALLB.length,
+      kanban, crmReset:()=>this.crmReset(),
+      payQueue, payPending:String(payPending), payVerified:String(payVerified), payVerifiedAmt:'89,000',
+      logs, posts, cmsPublished:posts.filter(p=>p.state==='Published').length,
+      goBookings:()=>this.go('bookings'), goPayments:()=>this.go('payments'), goAutomation:()=>this.go('automation'),
+      save:()=>this.save(), toast:S.toast, toastShow:!!S.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

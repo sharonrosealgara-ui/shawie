@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.lum{--bg:#f3f7f8;--panel:#fff;--ink:#132a2e;--mut:#5a7377;--teal:#0e8f9a;--teal2:#0a7079;--mint:#d6ede e;--sky:#e6f2f3;--gold:#d8a24a;--line:#dce8e9;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;min-height:100vh}
+.lum h1,.lum h2,.lum h3,.lum h4{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.08;color:var(--ink)}
+.lum img{display:block;max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+.ey{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--teal)}
+.nav{position:sticky;top:0;z-index:40;background:rgba(243,247,248,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:15px 40px}
+.brand{display:flex;align-items:center;gap:11px;cursor:pointer}
+.brand .mk{width:40px;height:40px;border-radius:12px;background:linear-gradient(140deg,var(--teal),var(--teal2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;flex:none}
+.brand .bt{font-family:'Fraunces',serif;font-weight:700;font-size:19px;letter-spacing:.01em;color:var(--ink);line-height:1}
+.brand .bt small{display:block;font-family:'Inter';font-size:8.5px;letter-spacing:.28em;color:var(--teal);font-weight:600;margin-top:3px;text-transform:uppercase}
+.nlinks{display:flex;align-items:center;gap:26px}
+.nlink{font-size:13.5px;font-weight:500;color:var(--ink);cursor:pointer;transition:.18s}
+.nlink:hover{color:var(--teal)}
+.nbtn{background:var(--teal);color:#fff;border:none;font-family:inherit;font-size:13px;font-weight:600;padding:11px 20px;border-radius:9px;cursor:pointer;transition:.18s}
+.nbtn:hover{background:var(--teal2)}
+.hero{position:relative;overflow:hidden}
+.hero-in{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;min-height:540px;padding:36px 0}
+.hero .tag{display:inline-flex;align-items:center;gap:8px;background:var(--sky);color:var(--teal2);font-size:12px;font-weight:600;padding:7px 14px;border-radius:30px;margin-bottom:22px}
+.hero h1{font-size:clamp(40px,5.4vw,66px);letter-spacing:-.015em;margin-bottom:20px}
+.hero h1 em{font-style:italic;color:var(--teal)}
+.hero p{font-size:17.5px;color:var(--mut);max-width:52ch;margin-bottom:30px}
+.hbtns{display:flex;flex-wrap:wrap;gap:13px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:54px;padding:0 28px;font-size:14px;font-weight:600;border-radius:10px;cursor:pointer;border:none;transition:.2s;font-family:inherit;text-decoration:none}
+.btn-teal{background:var(--teal);color:#fff}.btn-teal:hover{background:var(--teal2);transform:translateY(-2px)}
+.btn-out{background:#fff;border:1px solid var(--line);color:var(--ink)}.btn-out:hover{border-color:var(--teal);color:var(--teal)}
+.hero-badges{display:flex;gap:26px;margin-top:34px}
+.hbadge .n{font-family:'Fraunces',serif;font-size:26px;font-weight:700;color:var(--teal)}
+.hbadge .l{font-size:12.5px;color:var(--mut)}
+.hero-art{position:relative;aspect-ratio:1/1;border-radius:24px;overflow:hidden;background:linear-gradient(150deg,var(--teal),var(--teal2));box-shadow:0 30px 70px rgba(14,143,154,.28)}
+.hero-art img{width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;opacity:.85}
+.hero-art .card{position:absolute;background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 14px 34px rgba(19,42,46,.18);display:flex;align-items:center;gap:11px}
+.hero-art .c1{top:22px;left:22px}
+.hero-art .c2{bottom:22px;right:22px}
+.hero-art .ci{width:38px;height:38px;border-radius:10px;background:var(--sky);display:flex;align-items:center;justify-content:center;font-size:19px;flex:none}
+.hero-art .ct{font-size:13px;font-weight:700;color:var(--ink);line-height:1.2}
+.hero-art .cs{font-size:11px;color:var(--mut)}
+.strip{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.strip-in{display:flex;justify-content:space-around;flex-wrap:wrap;gap:16px;padding:20px 40px;text-align:center}
+.strip .si{font-size:13.5px;color:var(--mut);display:flex;align-items:center;gap:9px}
+.strip .si b{color:var(--ink)}
+.sec{padding:76px 0}
+.sec-head{text-align:center;max-width:620px;margin:0 auto 48px}
+.sec-head .ey{display:block;margin-bottom:12px}
+.sec-head h2{font-size:clamp(30px,4vw,46px)}
+.sec-head p{font-size:16px;color:var(--mut);margin-top:12px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px 26px;transition:.24s;cursor:default}
+.svc:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(19,42,46,.1);border-color:transparent}
+.svc .ic{width:52px;height:52px;border-radius:14px;background:var(--sky);display:flex;align-items:center;justify-content:center;font-size:25px;margin-bottom:18px}
+.svc h3{font-size:20px;margin-bottom:9px}
+.svc p{font-size:13.5px;color:var(--mut);margin-bottom:14px}
+.svc .price{font-size:13px;font-weight:600;color:var(--teal)}
+.docs{background:var(--panel)}
+.doc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.doc{text-align:center}
+.doc .ph{aspect-ratio:1/1;border-radius:18px;overflow:hidden;margin-bottom:16px;background:linear-gradient(150deg,var(--sky),var(--mint));position:relative}
+.doc .ph img{width:100%;height:100%;object-fit:cover}
+.doc h4{font-size:19px;margin-bottom:3px}
+.doc .role{font-size:13px;color:var(--teal);font-weight:600}
+.doc .bio{font-size:13px;color:var(--mut);margin-top:8px}
+/* booking */
+.book{background:linear-gradient(160deg,#0c3236,#0e4247);color:#eaf6f6}
+.book .sec-head h2{color:#fff}
+.book .sec-head p{color:#a9cccd}
+.book .ey{color:#5fd0d8}
+.bgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;background:var(--panel);border-radius:22px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.3)}
+.bform{padding:38px 36px}
+.bform h3{font-size:23px;margin-bottom:6px}
+.bform .sub{font-size:14px;color:var(--mut);margin-bottom:24px}
+.brow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--ink);margin-bottom:7px}
+.field input,.field select{width:100%;height:48px;border:1px solid var(--line);border-radius:10px;padding:0 14px;font-family:inherit;font-size:14px;color:var(--ink);background:var(--bg);transition:.16s}
+.field input:focus,.field select:focus{outline:none;border-color:var(--teal);background:#fff;box-shadow:0 0 0 3px rgba(14,143,154,.12)}
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.chip{border:1px solid var(--line);background:var(--bg);border-radius:9px;padding:9px 14px;font-size:13px;font-weight:500;color:var(--mut);cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--teal)}
+.chip.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.slot{border:1px solid var(--line);background:var(--bg);border-radius:9px;padding:10px 0;text-align:center;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;transition:.15s}
+.slot:hover{border-color:var(--teal)}
+.slot.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+.slot.off{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+.bsubmit{width:100%;height:54px;background:var(--teal);color:#fff;border:none;border-radius:11px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-top:6px;transition:.18s}
+.bsubmit:hover{background:var(--teal2)}
+.bsummary{background:linear-gradient(160deg,var(--sky),var(--mint));padding:38px 34px;display:flex;flex-direction:column}
+.bsummary h4{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal2);margin-bottom:20px}
+.srow{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid rgba(14,143,154,.16);font-size:14px}
+.srow .k{color:var(--mut)}.srow .v{font-weight:600;color:var(--ink);text-align:right}
+.bconf{margin-top:auto;background:#fff;border-radius:14px;padding:18px;text-align:center}
+.bconf .em{font-size:34px}
+.bconf .t{font-family:'Fraunces',serif;font-size:18px;font-weight:700;margin:6px 0 4px}
+.bconf .d{font-size:13px;color:var(--mut)}
+.foot{background:#0c2427;color:#9fc0c2;padding:52px 0 30px}
+.foot-in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;border-bottom:1px solid rgba(159,192,194,.18);padding-bottom:28px;margin-bottom:20px}
+.foot .fb{font-family:'Fraunces',serif;font-weight:700;font-size:19px;color:#fff}
+.foot p{font-size:13px;line-height:1.9}
+.foot a{color:#5fd0d8;text-decoration:none}
+.foot .cols{display:flex;gap:56px}
+.foot h5{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#cfe4e5;margin-bottom:12px}
+.foot .cols div a{display:block;margin-bottom:8px;color:#9fc0c2}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);z-index:200;background:var(--ink);color:#fff;padding:14px 26px;border-radius:40px;font-size:14px;box-shadow:0 18px 44px rgba(0,0,0,.3);animation:tin .3s ease}
+@keyframes tin{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(max-width:900px){.hero-in,.bgrid{grid-template-columns:1fr}.hero-art{max-width:420px}.svc-grid,.doc-grid{grid-template-columns:1fr 1fr}.nlinks .nlink{display:none}}
+@media(max-width:600px){.svc-grid,.doc-grid,.brow,.slots{grid-template-columns:1fr 1fr}}
+</style>
+</helmet>
+<div class="lum">
+<nav class="nav"><div class="brand" onClick="{{ goTop }}"><div class="mk">✦</div><div class="bt">Lumina<small>Dental Studio</small></div></div><div class="nlinks"><a class="nlink" onClick="{{ toServices }}">Services</a><a class="nlink" onClick="{{ toTeam }}">Our Dentists</a><a class="nlink" onClick="{{ toBook }}">Book</a><button class="nbtn" onClick="{{ toBook }}">Book Appointment</button></div></nav>
+
+<section class="hero"><div class="wrap hero-in"><div><span class="tag">🦷 Now accepting new patients</span><h1>A brighter smile, <em>gently</em> done.</h1><p>Modern, painless dentistry in the heart of the city — from routine cleanings to full smile makeovers, with same-week appointments and transparent pricing.</p><div class="hbtns"><button class="btn btn-teal" onClick="{{ toBook }}">Book an appointment</button><button class="btn btn-out" onClick="{{ toServices }}">Explore services</button></div><div class="hero-badges"><div class="hbadge"><div class="n">12k+</div><div class="l">Happy patients</div></div><div class="hbadge"><div class="n">4.9★</div><div class="l">Google rating</div></div><div class="hbadge"><div class="n">15 yrs</div><div class="l">Trusted care</div></div></div></div><div class="hero-art"><img src="https://images.pexels.com/photos/3845810/pexels-photo-3845810.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Dental care"><div class="card c1"><span class="ci">🦷</span><div><div class="ct">Painless care</div><div class="cs">Sedation available</div></div></div><div class="card c2"><span class="ci">📅</span><div><div class="ct">Same-week slots</div><div class="cs">Open Mon–Sat</div></div></div></div></div></section>
+
+<div class="strip"><div class="wrap"><div class="strip-in"><div class="si">🛡️ <b>Sterilized</b> &amp; safe</div><div class="si">💳 <b>GCash</b> &amp; insurance</div><div class="si">🚗 <b>Free parking</b> on-site</div><div class="si">👶 <b>Family</b> &amp; kids friendly</div></div></div></div>
+
+<section class="sec" id="services"><div class="wrap"><div class="sec-head"><span class="ey">What We Offer</span><h2>Comprehensive dental care</h2><p>Every treatment delivered with modern equipment and a gentle touch.</p></div><div class="svc-grid"><sc-for list="{{ services }}" as="s" hint-placeholder-count="6"><div class="svc"><div class="ic">{{ s.icon }}</div><h3>{{ s.name }}</h3><p>{{ s.desc }}</p><div class="price">{{ s.price }}</div></div></sc-for></div></div></section>
+
+<section class="sec docs" id="team"><div class="wrap"><div class="sec-head"><span class="ey">Meet the Team</span><h2>Your caring dentists</h2></div><div class="doc-grid"><sc-for list="{{ dentists }}" as="d" hint-placeholder-count="3"><div class="doc"><div class="ph"><img src="{{ d.img }}" alt="{{ d.name }}"></div><h4>{{ d.name }}</h4><div class="role">{{ d.role }}</div><div class="bio">{{ d.bio }}</div></div></sc-for></div></div></section>
+
+<section class="sec book" id="book"><div class="wrap"><div class="sec-head"><span class="ey">Book Online</span><h2>Reserve your visit</h2><p>Pick a service, date and time — we’ll confirm by text within the hour.</p></div><div class="bgrid"><div class="bform"><h3>Appointment details</h3><div class="sub">All fields help us prepare for your visit.</div><div class="brow"><div class="field"><label>Full name</label><input value="{{ fName }}" onInput="{{ onName }}" placeholder="Juan Dela Cruz"></div><div class="field"><label>Mobile number</label><input value="{{ fPhone }}" onInput="{{ onPhone }}" placeholder="0917 000 0000"></div></div><div class="field"><label>Service</label><div class="chips"><sc-for list="{{ svcChips }}" as="c" hint-placeholder-count="4"><span class="{{ c.cls }}" onClick="{{ c.pick }}">{{ c.name }}</span></sc-for></div></div><div class="brow"><div class="field"><label>Preferred date</label><input type="date" value="{{ fDate }}" onInput="{{ onDate }}"></div><div class="field"><label>Dentist</label><select onChange="{{ onDentist }}"><sc-for list="{{ dentistOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}" selected="{{ o.sel }}">{{ o.label }}</option></sc-for></select></div></div><div class="field"><label>Time slot</label><div class="slots"><sc-for list="{{ slots }}" as="t" hint-placeholder-count="8"><span class="{{ t.cls }}" onClick="{{ t.pick }}">{{ t.label }}</span></sc-for></div></div><button class="bsubmit" onClick="{{ submit }}">Confirm appointment</button></div><div class="bsummary"><h4>Your booking</h4><div class="srow"><span class="k">Patient</span><span class="v">{{ sumName }}</span></div><div class="srow"><span class="k">Service</span><span class="v">{{ sumService }}</span></div><div class="srow"><span class="k">Dentist</span><span class="v">{{ sumDentist }}</span></div><div class="srow"><span class="k">Date</span><span class="v">{{ sumDate }}</span></div><div class="srow"><span class="k">Time</span><span class="v">{{ sumTime }}</span></div><sc-if value="{{ confirmed }}" hint-placeholder-val="{{ false }}"><div class="bconf"><div class="em">✅</div><div class="t">Appointment requested!</div><div class="d">{{ confMsg }}</div></div></sc-if><sc-if value="{{ notConfirmed }}" hint-placeholder-val="{{ true }}"><div class="bconf"><div class="em">🦷</div><div class="t">Ready when you are</div><div class="d">Complete the form to reserve your slot.</div></div></sc-if></div></div></div></section>
+
+<footer class="foot"><div class="wrap"><div class="foot-in"><div><div class="fb">✦ Lumina Dental Studio</div><p>A brighter smile, gently done.<br>22 Wellness Ave, Makati City · <a>+63 917 000 0000</a><br><a>hello@luminadental.ph</a></p></div><div class="cols"><div><h5>Hours</h5><div><a>Mon–Fri · 9AM–7PM</a><a>Saturday · 9AM–4PM</a><a>Sunday · Closed</a></div></div><div><h5>Care</h5><div><a onClick="{{ toServices }}">Services</a><a onClick="{{ toTeam }}">Dentists</a><a onClick="{{ toBook }}">Book online</a></div></div></div></div><p style="font-size:12px">© 2026 Lumina Dental Studio · Site &amp; brand by Sharon Rose · Digital Solutions Studio</p></div></footer>
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}"><div class="toast">{{ toast }}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { name:'', phone:'', service:'Cleaning & Check-up', date:'', dentist:'Dr. Elena Cruz', time:'', confirmed:false, toast:'' };
+  SERVICES=[
+    { icon:'🪥', name:'Cleaning & Check-up', desc:'Routine scaling, polishing and a full oral health exam.', price:'from ₱800' },
+    { icon:'✨', name:'Teeth Whitening', desc:'In-clinic whitening for a brighter smile in one visit.', price:'from ₱6,000' },
+    { icon:'🦷', name:'Braces & Aligners', desc:'Metal, ceramic and clear aligner options for all ages.', price:'from ₱35,000' },
+    { icon:'🔧', name:'Fillings & Root Canal', desc:'Painless restorative care to save and repair teeth.', price:'from ₱1,500' },
+    { icon:'👑', name:'Crowns & Veneers', desc:'Custom porcelain crowns and veneers for a natural look.', price:'from ₱12,000' },
+    { icon:'🌱', name:'Dental Implants', desc:'Permanent titanium implants that look and feel real.', price:'from ₱45,000' }
+  ];
+  DENTISTS=[
+    { name:'Dr. Elena Cruz', role:'Lead Dentist · DMD', bio:'15 years in cosmetic & restorative dentistry.', img:'https://images.pexels.com/photos/5214995/pexels-photo-5214995.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name:'Dr. Marco Reyes', role:'Orthodontist', bio:'Braces & clear-aligner specialist for teens and adults.', img:'https://images.pexels.com/photos/6812540/pexels-photo-6812540.jpeg?auto=compress&cs=tinysrgb&w=600' },
+    { name:'Dr. Aivy Santos', role:'Pediatric Dentist', bio:'Gentle, playful care that kids actually look forward to.', img:'https://images.pexels.com/photos/4270371/pexels-photo-4270371.jpeg?auto=compress&cs=tinysrgb&w=600' }
+  ];
+  SLOTS=['9:00','10:00','11:00','1:00','2:00','3:00','4:00','5:00'];
+  OFF=['11:00','3:00'];
+  scrollTo(id){ try{ const el=document.getElementById(id); if(el) window.scrollTo({top:el.offsetTop-64,behavior:'smooth'}); }catch(_){} }
+  pickSvc(n){ this.setState({service:n,confirmed:false}); }
+  pickTime(t){ if(this.OFF.indexOf(t)>=0) return; this.setState({time:t,confirmed:false}); }
+  submit(){ const s=this.state; if(!s.name||!s.phone||!s.time||!s.date){ this.flash('Please complete name, phone, date and time'); return; } this.setState({confirmed:true}); this.flash('Appointment requested — we’ll text to confirm ✦'); if(window.notifyStudio){ try{ window.notifyStudio('lumina-appointment','New Lumina Dental appointment — '+s.name,{name:s.name,phone:s.phone,service:s.service,dentist:s.dentist,date:s.date,time:s.time}); }catch(_){} } }
+  flash(m){ if(this._t) clearTimeout(this._t); this.setState({toast:m}); this._t=setTimeout(()=>this.setState({toast:''}),2200); }
+  renderVals(){
+    const S=this.state;
+    return {
+      goTop:()=>{try{window.scrollTo({top:0,behavior:'smooth'})}catch(_){}}, toServices:()=>this.scrollTo('services'), toTeam:()=>this.scrollTo('team'), toBook:()=>this.scrollTo('book'),
+      services:this.SERVICES, dentists:this.DENTISTS,
+      svcChips:this.SERVICES.map(s=>({name:s.name,cls:s.name===S.service?'chip on':'chip',pick:()=>this.pickSvc(s.name)})),
+      dentistOpts:this.DENTISTS.map(d=>({v:d.name,label:d.name+' · '+d.role.split(' · ')[0],sel:d.name===S.dentist})),
+      slots:this.SLOTS.map(t=>{ const off=this.OFF.indexOf(t)>=0; return {label:(parseInt(t)<8?t+' PM':t+' AM').replace(':00',':00'),cls:off?'slot off':(t===S.time?'slot on':'slot'),pick:()=>this.pickTime(t)}; }),
+      fName:S.name, fPhone:S.phone, fDate:S.date,
+      onName:(e)=>this.setState({name:e.target.value}), onPhone:(e)=>this.setState({phone:e.target.value}), onDate:(e)=>this.setState({date:e.target.value,confirmed:false}), onDentist:(e)=>this.setState({dentist:e.target.value,confirmed:false}),
+      submit:()=>this.submit(),
+      sumName:S.name||'—', sumService:S.service, sumDentist:S.dentist, sumDate:S.date||'—', sumTime:S.time?((parseInt(S.time)<8?S.time+' PM':S.time+' AM')):'—',
+      confirmed:S.confirmed, notConfirmed:!S.confirmed, confMsg:'We’ll text '+(S.phone||'you')+' to confirm your '+S.date+' visit.',
+      toast:S.toast, toastShow:!!S.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

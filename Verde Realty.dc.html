@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="notify.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.vr{--bg:#f6f5f1;--panel:#fff;--ink:#1a2420;--mut:#5f6b64;--green:#1f4d3a;--green2:#2c6b4f;--gold:#b08d४9;--sand:#e8e3d8;--line:#e2e0d7;--data:#2c6b4f;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;min-height:100vh}
+.vr{--gold:#b08d49}
+.vr h1,.vr h2,.vr h3,.vr h4{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.05;letter-spacing:-.01em}
+.vr img{display:block;max-width:100%}
+.nav{position:sticky;top:0;z-index:40;background:rgba(246,245,241,.92);backdrop-filter:saturate(1.4) blur(0px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:16px 44px}
+.brand{display:flex;align-items:center;gap:11px;cursor:pointer}
+.brand .mk{width:38px;height:38px;border-radius:10px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-size:20px;flex:none}
+.brand .bt{font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:var(--ink);line-height:1}
+.brand .bt small{display:block;font-family:'Inter';font-size:8px;letter-spacing:.28em;color:var(--gold);font-weight:600;margin-top:3px;text-transform:uppercase}
+.nlinks{display:flex;align-items:center;gap:28px}
+.nlink{font-size:13px;font-weight:500;color:var(--ink);cursor:pointer}
+.nlink:hover{color:var(--green2)}
+.ncta{background:var(--green);color:#fff;font-size:13px;font-weight:600;padding:11px 20px;border-radius:8px;cursor:pointer}
+.ncta:hover{background:var(--green2)}
+.hero{position:relative;padding:72px 44px 60px;max-width:1280px;margin:0 auto}
+.hero h1{font-size:clamp(40px,6vw,74px);line-height:1;margin-bottom:20px;max-width:16ch}
+.hero h1 em{font-style:italic;color:var(--green2)}
+.hero p{font-size:18px;color:var(--mut);max-width:52ch;line-height:1.7;margin-bottom:32px}
+.searchbar{display:flex;gap:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:8px;max-width:820px;box-shadow:0 12px 40px rgba(26,36,32,.08);flex-wrap:wrap}
+.sf{flex:1;min-width:150px;padding:10px 16px;border-right:1px solid var(--line)}
+.sf:last-of-type{border-right:none}
+.sf label{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:4px}
+.sf select,.sf input{border:none;outline:none;background:none;font-family:inherit;font-size:14px;color:var(--ink);font-weight:500;width:100%}
+.searchbtn{background:var(--green);color:#fff;border:none;border-radius:10px;padding:0 26px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;margin:4px}
+.searchbtn:hover{background:var(--green2)}
+.stripe{display:flex;gap:44px;flex-wrap:wrap;margin-top:36px}
+.stat .n{font-family:'Fraunces',serif;font-size:34px;color:var(--green2)}
+.stat .l{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-top:2px}
+.listings{max-width:1280px;margin:0 auto;padding:20px 44px 80px}
+.lhead{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:16px}
+.lhead h2{font-size:32px}
+.lhead .cnt{font-size:13px;color:var(--mut);margin-top:4px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.fchip{background:var(--panel);border:1px solid var(--line);color:var(--mut);font-size:13px;font-weight:500;padding:9px 16px;border-radius:30px;cursor:pointer;transition:.15s}
+.fchip:hover{border-color:var(--green2);color:var(--green2)}
+.fchip.on{background:var(--green);color:#fff;border-color:var(--green)}
+.sortsel{margin-left:auto;border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:9px 14px;font-family:inherit;font-size:13px;color:var(--ink);cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.prop{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .28s,box-shadow .28s;box-shadow:0 4px 18px rgba(26,36,32,.05)}
+.prop:hover{transform:translateY(-5px);box-shadow:0 24px 54px rgba(26,36,32,.14)}
+.prop .pimg{position:relative;height:210px;overflow:hidden}
+.prop .pimg img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.prop:hover .pimg img{transform:scale(1.05)}
+.prop .tag{position:absolute;top:14px;left:14px;background:rgba(26,36,32,.82);color:#fff;font-size:11px;font-weight:600;letter-spacing:.04em;padding:6px 12px;border-radius:20px}
+.prop .tag.sale{background:var(--green)}
+.prop .fav{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);border:none;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.prop .fav:hover{transform:scale(1.1)}
+.prop .fav.on{color:#d05a54}
+.prop .pb{padding:18px 20px 20px}
+.prop .price{font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:var(--green2)}
+.prop h3{font-size:17px;font-family:'Inter';font-weight:600;margin:6px 0 4px}
+.prop .addr{font-size:13px;color:var(--mut);display:flex;align-items:center;gap:5px}
+.prop .specs{display:flex;gap:16px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+.prop .specs b{color:var(--ink);font-weight:600}
+.empty{text-align:center;padding:70px 0;color:var(--mut)}
+.empty h3{font-family:'Fraunces';font-size:24px;color:var(--ink);margin-bottom:6px}
+.foot{background:var(--green);color:#cfe0d6;padding:52px 44px 34px;text-align:center}
+.foot .fb{font-family:'Fraunces',serif;font-size:24px;color:#fff;font-weight:600;margin-bottom:8px}
+.foot p{font-size:13px;line-height:1.8}
+.ovl{position:fixed;inset:0;z-index:90;background:rgba(20,28,24,.66);display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:40px 20px;opacity:0;pointer-events:none;transition:.25s}
+.ovl.open{opacity:1;pointer-events:auto}
+.modal{background:var(--panel);border-radius:20px;max-width:860px;width:100%;overflow:hidden;box-shadow:0 50px 130px rgba(0,0,0,.5);position:relative}
+.mclose{position:absolute;top:16px;right:16px;z-index:5;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.94);border:none;font-size:18px;cursor:pointer}
+.mimg{height:340px;position:relative;overflow:hidden}
+.mimg img{width:100%;height:100%;object-fit:cover}
+.mimg .tag{position:absolute;top:18px;left:18px;background:var(--green);color:#fff;font-size:12px;font-weight:600;padding:7px 14px;border-radius:20px}
+.mbody{padding:28px 34px 34px}
+.mbody .price{font-family:'Fraunces',serif;font-size:34px;font-weight:600;color:var(--green2)}
+.mbody h2{font-size:26px;font-family:'Inter';font-weight:700;margin:6px 0 4px}
+.mbody .addr{font-size:14px;color:var(--mut);margin-bottom:20px}
+.mspecs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.mspec{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:15px;text-align:center}
+.mspec .v{font-family:'Fraunces',serif;font-size:22px;color:var(--ink)}
+.mspec .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-top:3px}
+.mbody p.desc{font-size:14.5px;color:var(--mut);line-height:1.75;margin-bottom:18px}
+.mmeta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.mmeta .mm{font-size:12.5px;color:var(--mut);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 13px}
+.mmeta .mm b{color:var(--ink);font-weight:600;margin-right:5px}
+.mbody .fh{font-family:'Inter';font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:9px 18px;margin-bottom:24px}
+.feat{font-size:13.5px;color:var(--mut);display:flex;align-items:center;gap:8px}
+.feat::first-letter{color:var(--green2)}
+@media(max-width:600px){.feats{grid-template-columns:1fr}}
+.mactions{display:flex;gap:12px;flex-wrap:wrap}
+.mbtn{flex:1;min-width:180px;height:52px;border-radius:10px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:8px}
+.mbtn.primary{background:var(--green);color:#fff}.mbtn.primary:hover{background:var(--green2)}
+.mbtn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--ink)}.mbtn.ghost:hover{border-color:var(--green2)}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);z-index:200;background:var(--ink);color:#fff;padding:14px 26px;border-radius:40px;font-size:13.5px;box-shadow:0 18px 44px rgba(0,0,0,.32)}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}.mspecs{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.nlinks .nlink{display:none}}
+</style>
+</helmet>
+<div class="vr">
+<nav class="nav"><div class="brand" onClick="{{ goTop }}"><span class="mk">V</span><div class="bt">Verde Realty<small>Fine Homes</small></div></div><div class="nlinks"><a class="nlink" onClick="{{ toListings }}">Listings</a><a class="nlink" onClick="{{ toListings }}">Buy</a><a class="nlink" onClick="{{ toListings }}">Rent</a><a class="nlink" onClick="{{ showFavs }}">Saved ({{ favCount }})</a><button class="ncta" onClick="{{ contact }}">List with us</button></div></nav>
+
+<section class="hero"><h1>Find a home that <em>grows</em> with you.</h1><p>Curated fine homes and investment properties across the Philippines — from beachfront villas to city penthouses.</p>
+<div class="searchbar"><div class="sf"><label>Location</label><select value="{{ fLoc }}" onChange="{{ onLoc }}"><option>Any location</option><option>Metro Manila</option><option>Tagaytay</option><option>Cebu</option><option>Bacolod</option><option>Palawan</option></select></div><div class="sf"><label>Type</label><select value="{{ fType }}" onChange="{{ onType }}"><option>Any type</option><option>House</option><option>Condo</option><option>Villa</option><option>Lot</option></select></div><div class="sf"><label>Max price</label><select value="{{ fPrice }}" onChange="{{ onPrice }}"><option>Any price</option><option>Under ₱5M</option><option>₱5M–₱15M</option><option>₱15M–₱30M</option><option>₱30M+</option></select></div><button class="searchbtn" onClick="{{ toListings }}">Search</button></div>
+<div class="stripe"><div class="stat"><div class="n">{{ totalCount }}</div><div class="l">Active listings</div></div><div class="stat"><div class="n">₱8.4B</div><div class="l">Property sold</div></div><div class="stat"><div class="n">1,240+</div><div class="l">Happy families</div></div><div class="stat"><div class="n">15</div><div class="l">Years of trust</div></div></div>
+</section>
+
+<section class="listings" id="listings"><div class="lhead"><div><h2>{{ headTitle }}</h2><div class="cnt">{{ resultCount }} properties</div></div><div class="filters"><sc-for list="{{ chips }}" as="c" hint-placeholder-count="5"><span class="{{ c.cls }}" onClick="{{ c.pick }}">{{ c.label }}</span></sc-for><select class="sortsel" value="{{ sort }}" onChange="{{ onSort }}"><option>Featured</option><option>Price: Low to High</option><option>Price: High to Low</option><option>Newest</option></select></div></div>
+<sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}"><div class="grid"><sc-for list="{{ properties }}" as="p" hint-placeholder-count="6"><div class="prop" onClick="{{ p.open }}"><div class="pimg">{{ p.imgEl }}<span class="tag {{ p.tagCls }}">{{ p.tag }}</span><button class="fav {{ p.favCls }}" onClick="{{ p.toggleFav }}">♥</button></div><div class="pb"><div class="price">{{ p.price }}</div><h3>{{ p.title }}</h3><div class="addr">📍 {{ p.addr }}</div><div class="specs"><span><b>{{ p.beds }}</b> beds</span><span><b>{{ p.baths }}</b> baths</span><span><b>{{ p.area }}</b> m²</span></div></div></div></sc-for></div></sc-if>
+<sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}"><div class="empty"><h3>No properties match those filters</h3><p>Try widening your search or clearing filters.</p></div></sc-if>
+</section>
+
+<footer class="foot"><div class="fb">Verde Realty</div><p>Fine Homes &amp; Investment Properties · Philippines<br>hello@verderealty.ph · +63 917 555 0142<br><br>© 2026 Verde Realty · Site &amp; brand by Sharon Rose · Digital Solutions Studio</p></footer>
+
+<div class="ovl {{ ovlCls }}" onClick="{{ closeModal }}"><sc-if value="{{ hasOpen }}" hint-placeholder-val="{{ false }}"><div class="modal" onClick="{{ stop }}"><button class="mclose" onClick="{{ closeModal }}">✕</button><div class="mimg">{{ open.imgEl }}<span class="tag">{{ open.tag }}</span></div><div class="mbody"><div class="price">{{ open.price }}</div><h2>{{ open.title }}</h2><div class="addr">📍 {{ open.addr }}</div><div class="mspecs"><div class="mspec"><div class="v">{{ open.beds }}</div><div class="k">Bedrooms</div></div><div class="mspec"><div class="v">{{ open.baths }}</div><div class="k">Bathrooms</div></div><div class="mspec"><div class="v">{{ open.area }}</div><div class="k">Floor m²</div></div><div class="mspec"><div class="v">{{ open.parking }}</div><div class="k">Parking</div></div></div><p class="desc">{{ open.desc }}</p><div class="mmeta"><span class="mm"><b>Type</b> {{ open.cat }}</span><span class="mm"><b>Status</b> {{ open.status }}</span><span class="mm"><b>Built</b> {{ open.yearLabel }}</span></div><h4 class="fh">Features &amp; Amenities</h4><div class="feats"><sc-for list="{{ open.features }}" as="f" hint-placeholder-count="8"><span class="feat">✓ {{ f }}</span></sc-for></div><div class="mactions"><button class="mbtn primary" onClick="{{ book }}">📅 Schedule a viewing</button><button class="mbtn ghost" onClick="{{ open.toggleFav }}">{{ open.favLabel }}</button></div></div></div></sc-if></div>
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}"><div class="toast">{{ toast }}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:900},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#1f4d3a&quot;,&quot;options&quot;:[&quot;#1f4d3a&quot;,&quot;#2c6b4f&quot;,&quot;#b08d49&quot;,&quot;#2a6f8a&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;}}">
+class Component extends DCLogic {
+  state = { cat:'All', sort:'Featured', favs:{}, open:null, favView:false, fLoc:'Any location', fType:'Any type', fPrice:'Any price', toast:'' };
+  PROPS=[
+    { id:1, title:'Palm Grove Villa', addr:'Tagaytay Highlands', price:28500000, cat:'Villa', tag:'For Sale', beds:5, baths:4, area:420, parking:3, year:2021, status:'Ready for occupancy', img:'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800', desc:'A serene hillside villa with panoramic ridge views, an infinity pool, and floor-to-ceiling glass opening onto landscaped gardens. Fully furnished with imported finishes.', features:['Infinity pool','Ridge & garden views','Fully furnished','Smart-home system','Landscaped garden','3-car garage','24/7 gated security','Backup generator'] },
+    { id:2, title:'Skyline Penthouse', addr:'BGC, Taguig', price:42000000, cat:'Condo', tag:'For Sale', beds:3, baths:3, area:260, parking:2, year:2023, status:'Ready for occupancy', img:'https://images.pexels.com/photos/1918291/pexels-photo-1918291.jpeg?auto=compress&cs=tinysrgb&w=800', desc:'A dual-level penthouse in the heart of BGC with a private roof deck, smart-home automation, and unobstructed skyline views across the metro.', features:['Private roof deck','Skyline views','Smart-home automation','Infinity pool access','Fitness center & spa','Concierge service','2 parking slots','Pet-friendly building'] },
+    { id:3, title:'Coral Bay House', addr:'Mactan, Cebu', price:19800000, cat:'House', tag:'For Sale', beds:4, baths:3, area:310, parking:2, year:2020, status:'Ready for occupancy', img:'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800', desc:'Beachfront modern home steps from the water, with an open-plan living area, chef’s kitchen, and a covered lanai built for coastal living.', features:['Beachfront access','Covered lanai','Chef’s kitchen','Open-plan living','Outdoor shower','Solar panels','Boat mooring','Gated community'] },
+    { id:4, title:'Garden Terraces Condo', addr:'Ortigas Center', price:8900000, cat:'Condo', tag:'For Rent', beds:2, baths:2, area:95, parking:1, year:2022, status:'Available now', img:'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800', desc:'A bright two-bedroom unit with a landscaped balcony, resort-style amenities, and easy access to business and lifestyle hubs.', features:['Landscaped balcony','Lap pool & sundeck','Gym & yoga studio','Function rooms','Children’s play area','1 parking slot','24/7 security','Near MRT & malls'] },
+    { id:5, title:'Heritage Lot', addr:'Silay, Bacolod', price:4200000, cat:'Lot', tag:'For Sale', beds:0, baths:0, area:600, parking:0, year:null, status:'Titled & ready to build', img:'https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=800', desc:'A prime 600 m² corner lot in a gated heritage community — ready to build your dream home, with utilities on-site.', features:['600 m² corner lot','Clean title (TCT)','Utilities on-site','Wide frontage road','Gated subdivision','Flood-free elevation','Near heritage district','Flexible build terms'] },
+    { id:6, title:'Cliffside Retreat', addr:'El Nido, Palawan', price:36000000, cat:'Villa', tag:'For Sale', beds:4, baths:4, area:380, parking:2, year:2022, status:'Ready for occupancy', img:'https://images.pexels.com/photos/32870/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800', desc:'An architect-designed clifftop villa overlooking the lagoon, with cantilevered terraces, a natural-stone pool, and total privacy.', features:['Clifftop lagoon views','Natural-stone pool','Cantilevered terraces','Architect-designed','Total privacy','Off-grid solar','Rainwater harvesting','Private access road'] },
+    { id:7, title:'Urban Loft', addr:'Makati CBD', price:12500000, cat:'Condo', tag:'For Sale', beds:1, baths:1, area:78, parking:1, year:2019, status:'Ready for occupancy', img:'https://images.pexels.com/photos/2029667/pexels-photo-2029667.jpeg?auto=compress&cs=tinysrgb&w=800', desc:'A double-height industrial loft with exposed concrete, mezzanine bedroom, and walkable access to Makati’s best dining.', features:['Double-height ceilings','Mezzanine bedroom','Exposed-concrete finish','Rooftop lounge','Co-working lobby','1 parking slot','Walkable to dining','High-speed fiber ready'] },
+    { id:8, title:'Maple Family Home', addr:'Alabang, Muntinlupa', price:16700000, cat:'House', tag:'For Sale', beds:4, baths:3, area:280, parking:2, year:2018, status:'Ready for occupancy', img:'https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg?auto=compress&cs=tinysrgb&w=800', desc:'A warm family home in a quiet village with a large garden, open kitchen, and a flexible bonus room ideal for a home office.', features:['Large private garden','Open kitchen','Bonus / home-office room','2-car garage','Quiet village setting','Near top schools','Clubhouse & pool access','24/7 village security'] },
+    { id:9, title:'Lakeview Cottage', addr:'Tagaytay Ridge', price:9500000, cat:'House', tag:'For Rent', beds:3, baths:2, area:180, parking:2, year:2020, status:'Available now', img:'https://images.pexels.com/photos/1974596/pexels-photo-1974596.jpeg?auto=compress&cs=tinysrgb&w=800', desc:'A cozy cottage with a stone fireplace, wraparound deck, and uninterrupted views of Taal Lake — perfect as a weekend escape.', features:['Taal Lake views','Stone fireplace','Wraparound deck','Fully furnished','Cool ridge climate','Pet-friendly','Weekend-rental ready','Secure parking'] }
+  ];
+  CATS=['All','House','Condo','Villa','Lot'];
+  peso(n){ return n>=1000000 ? '₱'+(n/1000000).toFixed(n%1000000?1:0)+'M' : '₱'+n.toLocaleString(); }
+  setCat(c){ this.setState({cat:c,favView:false}); }
+  onSort(e){ this.setState({sort:e.target.value}); }
+  onLoc(e){ this.setState({fLoc:e.target.value}); }
+  onType(e){ this.setState({fType:e.target.value,cat:'All'}); }
+  onPrice(e){ this.setState({fPrice:e.target.value}); }
+  toggleFav(id,e){ if(e&&e.stopPropagation) e.stopPropagation(); this.setState(s=>{ const f={...s.favs}; if(f[id]){delete f[id]; this.flash('Removed from saved');} else {f[id]=true; this.flash('Saved to your list ♥');} return {favs:f}; }); }
+  openProp(id){ this.setState({open:id}); try{document.body.style.overflow='hidden';}catch(_){} }
+  closeModal(){ this.setState({open:null}); try{document.body.style.overflow='';}catch(_){} }
+  showFavs(){ this.setState({favView:true,cat:'All'}); this.toListings(); }
+  toListings(){ try{ const el=document.getElementById('listings'); if(el) window.scrollTo({top:el.getBoundingClientRect().top+window.pageYOffset-70,behavior:'smooth'}); }catch(_){} }
+  contact(){ this.flash('Opening our listing form ✦'); }
+  book(){ const op=this.PROPS.find(p=>p.id===this.state.open)||{}; try{ if(window.notifyStudio) window.notifyStudio('viewing','New viewing request — '+(op.title||''), {property:op.title||'', price:op.price?this.peso(op.price):'', location:op.addr||''}); }catch(_){}; this.flash('Viewing requested — an agent will confirm by email ✦'); }
+  flash(m){ if(this._t) clearTimeout(this._t); this.setState({toast:m}); this._t=setTimeout(()=>this.setState({toast:''}),1900); }
+  priceMax(label){ return {'Under ₱5M':5000000,'₱5M–₱15M':15000000,'₱15M–₱30M':30000000,'₱30M+':1e12,'Any price':1e12}[label]||1e12; }
+  priceMin(label){ return {'₱5M–₱15M':5000000,'₱15M–₱30M':15000000,'₱30M+':30000000}[label]||0; }
+  renderVals(){
+    const S=this.state;
+    const accent=this.props.accent; const rootStyle=accent?{'--green':accent}:{};
+    let list=this.PROPS.slice();
+    if(S.favView) list=list.filter(p=>S.favs[p.id]);
+    if(S.cat!=='All') list=list.filter(p=>p.cat===S.cat);
+    if(S.fType!=='Any type') list=list.filter(p=>p.cat===S.fType);
+    if(S.fLoc!=='Any location') list=list.filter(p=>p.addr.includes(S.fLoc.replace('Metro Manila','')) || S.fLoc==='Metro Manila' && /Makati|BGC|Taguig|Ortigas|Alabang|Muntinlupa/.test(p.addr));
+    if(S.fPrice!=='Any price'){ const mx=this.priceMax(S.fPrice), mn=this.priceMin(S.fPrice); list=list.filter(p=>p.price<=mx&&p.price>=mn); }
+    if(S.sort==='Price: Low to High') list.sort((a,b)=>a.price-b.price);
+    else if(S.sort==='Price: High to Low') list.sort((a,b)=>b.price-a.price);
+    else if(S.sort==='Newest') list.sort((a,b)=>b.id-a.id);
+    const properties=list.map(p=>({ ...p, price:this.peso(p.price), imgEl:React.createElement('img',{src:p.img,alt:p.title,loading:'lazy'}), tagCls:p.tag==='For Sale'?'sale':'', favCls:S.favs[p.id]?'on':'', open:()=>this.openProp(p.id), toggleFav:(e)=>this.toggleFav(p.id,e) }));
+    const chips=this.CATS.map(c=>({label:c,cls:(!S.favView&&S.cat===c)?'fchip on':'fchip',pick:()=>this.setCat(c)}));
+    const favCount=Object.keys(S.favs).length;
+    const op=this.PROPS.find(p=>p.id===S.open);
+    const open=op?{ ...op, price:this.peso(op.price), imgEl:React.createElement('img',{src:op.img,alt:op.title}), yearLabel:op.year?String(op.year):'—', favLabel:S.favs[op.id]?'♥ Saved':'♡ Save property', toggleFav:(e)=>this.toggleFav(op.id,e) }:null;
+    return {
+      rootStyle,
+      totalCount:String(this.PROPS.length), favCount:String(favCount),
+      headTitle:S.favView?'Your Saved Homes':'Featured Listings', resultCount:String(properties.length),
+      chips, sort:S.sort, onSort:(e)=>this.onSort(e),
+      fLoc:S.fLoc, fType:S.fType, fPrice:S.fPrice, onLoc:(e)=>this.onLoc(e), onType:(e)=>this.onType(e), onPrice:(e)=>this.onPrice(e),
+      properties, hasResults:properties.length>0, noResults:properties.length===0,
+      hasOpen:!!open, open, ovlCls:S.open?'open':'', closeModal:()=>this.closeModal(), stop:(e)=>{if(e&&e.stopPropagation)e.stopPropagation();},
+      goTop:()=>{try{window.scrollTo({top:0,behavior:'smooth'})}catch(_){}}, toListings:()=>this.toListings(), showFavs:()=>this.showFavs(), contact:()=>this.contact(), book:()=>this.book(),
+      toast:S.toast, toastShow:!!S.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

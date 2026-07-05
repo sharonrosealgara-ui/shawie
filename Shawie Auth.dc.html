@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Jost:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.auth{--cream:#f4ede3;--ink:#1b140d;--mut:#5f4f40;--gold:#9c6a34;--gold2:#7d5324;--champ:#c2984f;--line:#e2d5bf;--card:#fff;--ok:#4d8259;background:var(--cream);color:var(--ink);font-family:'Jost',system-ui,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr}
+.auth h1,.auth h2,.auth h3{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.03;letter-spacing:-.015em;color:var(--ink)}
+.brandside{position:relative;overflow:hidden;background:linear-gradient(155deg,#211a13,#3f2f24 52%,#5a4133);color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:54px 54px 46px}
+.brandside::before{content:'';position:absolute;top:-120px;right:-90px;width:460px;height:460px;background:radial-gradient(circle,rgba(189,105,128,.32),transparent 68%)}
+.brandside::after{content:'';position:absolute;bottom:-140px;left:-70px;width:420px;height:420px;background:radial-gradient(circle,rgba(201,152,79,.28),transparent 70%)}
+.bs-top{position:relative;z-index:2}
+.bs-logo{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:700;letter-spacing:.2em}
+.bs-logo small{display:block;font-family:'Jost';font-size:8.5px;letter-spacing:.36em;color:var(--champ);font-weight:500;margin-top:2px}
+.bs-mid{position:relative;z-index:2}
+.bs-mid .sc{font-family:'Great Vibes',cursive;font-size:40px;color:var(--champ);line-height:1;margin-bottom:2px}
+.bs-mid h2{color:#fff;font-size:clamp(34px,3.8vw,52px);margin:2px 0 18px;line-height:1.02;max-width:13ch}
+.bs-mid p{color:rgba(255,255,255,.78);font-size:15px;line-height:1.75;max-width:34ch}
+.bs-bottom{position:relative;z-index:2}
+.bs-feat{display:flex;flex-direction:column;gap:0;margin-bottom:28px}
+.bs-feat .f{display:flex;align-items:center;gap:13px;font-size:13.5px;color:rgba(255,255,255,.88);padding:12px 0;border-top:1px solid rgba(255,255,255,.1)}
+.bs-feat .f:last-child{border-bottom:1px solid rgba(255,255,255,.1)}
+.bs-feat .fi{width:32px;height:32px;border-radius:9px;background:rgba(201,152,79,.18);color:var(--champ);display:flex;align-items:center;justify-content:center;font-size:14px;flex:none}
+.bs-quote p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;line-height:1.5;color:rgba(255,255,255,.92)}
+.bs-quote .qa{display:flex;align-items:center;gap:11px;margin-top:14px}
+.bs-quote .qav{width:36px;height:36px;border-radius:50%;background:var(--champ);color:#211a13;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:16px;flex:none}
+.bs-quote .qn{font-size:12.5px;color:#fff;font-weight:600}
+.bs-quote .qr{font-size:10.5px;letter-spacing:.06em;color:rgba(255,255,255,.6)}
+.formside{display:flex;align-items:center;justify-content:center;padding:46px 40px;background:radial-gradient(120% 90% at 100% 0%,#f8f0e3,var(--cream))}
+.fcard{width:100%;max-width:412px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:40px 38px;box-shadow:0 30px 72px rgba(43,30,15,.1)}
+.fmode{display:flex;background:#efe4d3;border-radius:30px;padding:4px;margin-bottom:28px;width:100%}
+.fmode button{flex:1;border:none;background:none;font-family:inherit;font-size:12.5px;letter-spacing:.04em;font-weight:600;color:var(--mut);padding:11px 20px;border-radius:30px;cursor:pointer;transition:.2s}
+.fmode button.on{background:var(--card);color:var(--ink);box-shadow:0 2px 10px rgba(43,30,15,.12)}
+.feyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
+.fcard h1{font-size:clamp(30px,3.6vw,40px);margin-bottom:8px}
+.fsub{font-size:14px;color:var(--mut);line-height:1.65;margin-bottom:26px}
+.gbtn{width:100%;height:52px;border:1px solid var(--line);border-radius:11px;background:#fff;display:flex;align-items:center;justify-content:center;gap:11px;font-family:inherit;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;transition:.18s;margin-bottom:20px}
+.gbtn:hover{border-color:var(--gold);background:#fbf6ee}
+.gbtn .g{width:20px;height:20px;flex:none}
+.divider{display:flex;align-items:center;gap:14px;color:var(--mut);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--line)}
+.field{margin-bottom:15px}
+.field label{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:700;margin-bottom:8px}
+.field input{width:100%;height:50px;border:1px solid var(--line);border-radius:11px;padding:0 16px;font-family:inherit;font-size:14.5px;color:var(--ink);background:#fdfbf7;transition:.18s}
+.field input::placeholder{color:#b6a68f}
+.field input:focus{outline:none;border-color:var(--gold);background:#fff;box-shadow:0 0 0 3px rgba(156,106,52,.14)}
+.frow{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.checkbox{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--mut);cursor:pointer}
+.checkbox .bx{width:18px;height:18px;border:1.5px solid var(--line);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff}
+.checkbox.on .bx{background:var(--gold);border-color:var(--gold)}
+.flink{font-size:13px;color:var(--gold);font-weight:600;cursor:pointer;background:none;border:none;font-family:inherit}
+.flink:hover{color:var(--gold2)}
+.submit{width:100%;height:52px;background:var(--gold);color:#fff;border:none;border-radius:11px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:.2s;box-shadow:0 8px 20px rgba(156,106,52,.24)}
+.submit:hover{background:var(--gold2);box-shadow:0 12px 26px rgba(156,106,52,.3)}
+.foot{text-align:center;font-size:13.5px;color:var(--mut);margin-top:22px}
+.foot button{background:none;border:none;font-family:inherit;font-size:13.5px;color:var(--gold);font-weight:600;cursor:pointer}
+.foot button:hover{color:var(--gold2)}
+.sent{text-align:center;padding:12px 0}
+.sent .ic{width:74px;height:74px;border-radius:50%;background:rgba(77,130,89,.12);color:var(--ok);display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 20px}
+.sent h1{margin-bottom:10px}
+.sent p{font-size:14px;color:var(--mut);line-height:1.7;margin-bottom:8px}
+.sent p b{color:var(--ink)}
+.adminwrap{border:1px solid var(--line);border-radius:12px;background:#faf5ec;padding:14px 16px;display:flex;align-items:center;gap:11px;margin-bottom:22px}
+.adminwrap .ai{width:34px;height:34px;border-radius:8px;background:var(--ink);color:var(--champ);display:flex;align-items:center;justify-content:center;font-size:15px;flex:none}
+.adminwrap .at{font-size:13px;font-weight:600}.adminwrap .as{font-size:11.5px;color:var(--mut)}
+.legal{font-size:11.5px;color:var(--mut);line-height:1.6;text-align:center;margin-top:18px}
+.legal a{color:var(--gold);cursor:pointer}
+.mtoast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);z-index:200;background:var(--ink);color:#fff;padding:14px 26px;border-radius:40px;font-size:13.5px;box-shadow:0 18px 44px rgba(0,0,0,.32);animation:mt .3s ease}
+@keyframes mt{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+.welcome{text-align:center}.wava{width:82px;height:82px;border-radius:50%;margin:0 auto 18px;overflow:hidden;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;box-shadow:0 10px 26px rgba(156,106,52,.3)}.wava img{width:100%;height:100%;object-fit:cover}.asbtn{display:flex;align-items:center;justify-content:center;text-decoration:none;margin-top:4px}
+@media(max-width:860px){.auth{grid-template-columns:1fr}.brandside{display:none}.formside{padding:30px 18px}.fcard{padding:32px 26px;box-shadow:0 16px 44px rgba(43,30,15,.1)}}
+</style>
+</helmet>
+<div class="auth" style="{{ rootStyle }}">
+<div class="brandside"><div class="bs-top"><div class="bs-logo">SHAWIE<small>BAKES &amp; EVENTS</small></div></div><div class="bs-mid"><div class="sc">Your celebration,</div><h2>beautifully in hand.</h2><p>Sign in to track your booking, timeline, payments and gallery — all in one private portal.</p></div><div class="bs-bottom"><div class="bs-feat"><div class="f"><span class="fi">◈</span>Live planning timeline &amp; milestones</div><div class="f"><span class="fi">₱</span>Secure GCash &amp; Wise payments</div><div class="f"><span class="fi">▧</span>Your photo &amp; video galleries</div><div class="f"><span class="fi">✉</span>Message your planner anytime</div></div><div class="bs-quote"><p>“Everything for our wedding lived in one place — payments, timeline, photos. It felt effortless.”</p><div class="qa"><span class="qav">B</span><div><div class="qn">Bianca &amp; Marco</div><div class="qr">Garden Wedding · 2026</div></div></div></div></div></div>
+<div class="formside"><div class="fcard">
+
+<sc-if value="{{ isClientMode }}" hint-placeholder-val="{{ true }}"><div class="fmode"><button class="{{ signinCls }}" onClick="{{ toSignin }}">Sign in</button><button class="{{ signupCls }}" onClick="{{ toSignup }}">Create account</button></div></sc-if>
+
+<sc-if value="{{ isSignin }}" hint-placeholder-val="{{ true }}">
+<div class="feyebrow">Client Portal</div><h1>Welcome back</h1><p class="fsub">Sign in to access your celebration dashboard.</p>
+<button class="gbtn" onClick="{{ google }}"><span class="g">{{ gIcon }}</span>Continue with Google</button>
+<div class="divider">or</div>
+<div class="field"><label>Email</label><input type="email" placeholder="you@email.com" value="{{ siEmail }}" onInput="{{ onSiEmail }}"></div>
+<div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div>
+<div class="frow"><div class="{{ rememberCls }}" onClick="{{ toggleRemember }}"><span class="bx">✓</span>Remember me</div><button class="flink" onClick="{{ toForgot }}">Forgot password?</button></div>
+<button class="submit" onClick="{{ doSignin }}">Sign in</button>
+<div class="foot">New here? <button onClick="{{ toSignup }}">Create an account</button></div>
+<div class="legal">Are you the studio owner? <a onClick="{{ toAdmin }}">Admin sign in →</a></div>
+</sc-if>
+
+<sc-if value="{{ isSignup }}" hint-placeholder-val="{{ false }}">
+<div class="feyebrow">Client Portal</div><h1>Create your account</h1><p class="fsub">Booked with Shawie? Set up your portal in a minute.</p>
+<button class="gbtn" onClick="{{ google }}"><span class="g">{{ gIcon }}</span>Sign up with Google</button>
+<div class="divider">or</div>
+<div class="field"><label>Full name</label><input placeholder="Bianca Reyes" value="{{ suName }}" onInput="{{ onSuName }}"></div>
+<div class="field"><label>Email</label><input type="email" placeholder="you@email.com" value="{{ suEmail }}" onInput="{{ onSuEmail }}"></div>
+<div class="field"><label>Password</label><input type="password" placeholder="Create a password"></div>
+<button class="submit" onClick="{{ doSignup }}">Create account</button>
+<div class="legal">By continuing you agree to our <a onClick="{{ noop }}">Terms</a> &amp; <a onClick="{{ noop }}">Privacy Policy</a>.</div>
+</sc-if>
+
+<sc-if value="{{ isForgot }}" hint-placeholder-val="{{ false }}">
+<div class="feyebrow">Reset password</div><h1>Forgot password?</h1><p class="fsub">Enter your email and we’ll send a secure reset link.</p>
+<div class="field"><label>Email</label><input type="email" placeholder="you@email.com" value="{{ fpEmail }}" onInput="{{ onFpEmail }}"></div>
+<button class="submit" onClick="{{ doForgot }}">Send reset link</button>
+<div class="foot"><button onClick="{{ toSignin }}">← Back to sign in</button></div>
+</sc-if>
+
+<sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
+<div class="sent"><div class="ic">✉</div><h1>Check your inbox</h1><p>We’ve sent a secure link to <b>you@email.com</b>.</p><p>It expires in 30 minutes. Don’t see it? Check spam or resend below.</p><button class="submit" style="margin-top:16px" onClick="{{ resend }}">Resend email</button><div class="foot"><button onClick="{{ toSignin }}">← Back to sign in</button></div></div>
+</sc-if>
+
+<sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
+<div class="adminwrap"><span class="ai">◉</span><div><div class="at">Admin Console</div><div class="as">Restricted — staff access only</div></div></div>
+<h1>Admin sign in</h1><p class="fsub">Authorized staff access to the Shawie operations console.</p>
+<div class="field"><label>Work email</label><input type="email" placeholder="you@shawie.events"></div>
+<div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div>
+<div class="frow"><div class="{{ rememberCls }}" onClick="{{ toggleRemember }}"><span class="bx">✓</span>Trust this device</div><button class="flink" onClick="{{ toForgot }}">Forgot?</button></div>
+<button class="submit" style="background:var(--ink)" onClick="{{ doAdmin }}">Enter console</button>
+<div class="legal">🔒 Protected by 2-factor authentication &amp; audit logging.</div>
+<div class="foot"><button onClick="{{ toSignin }}">← Client sign in</button></div>
+</sc-if>
+
+<sc-if value="{{ isWelcome }}" hint-placeholder-val="{{ false }}"><div class="welcome"><div class="wava">{{ userAvatar }}</div><div class="feyebrow">Signed in</div><h1>Welcome, {{ userName }}</h1><p class="fsub">You’re signed in as {{ userEmail }} — your celebration dashboard is ready.</p><a class="submit asbtn" href="Shawie Portal.dc.html">Enter your portal →</a><div class="foot"><button onClick="{{ signOut }}">Not you? Sign out</button></div></div></sc-if>
+</div></div>
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}"><div class="mtoast">{{ toast }}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1080,&quot;height&quot;:720},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#9c6a34&quot;,&quot;options&quot;:[&quot;#9c6a34&quot;,&quot;#c2984f&quot;,&quot;#bd6980&quot;,&quot;#8a5a2a&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;}}">
+class Component extends DCLogic {
+  state = { mode:'signin', remember:true, toast:'', suName:'', suEmail:'', fpEmail:'', siEmail:'', user:null };
+  OWNER_EMAIL = 'sharonrosealgara@gmail.com';
+  // Paste your Google OAuth Client ID (…apps.googleusercontent.com) to enable real Google sign-in on your deployed domain.
+  GOOGLE_CLIENT_ID = '';
+  GICON = React.createElement('svg',{viewBox:'0 0 48 48',width:20,height:20},
+    React.createElement('path',{fill:'#EA4335',d:'M24 9.5c3.5 0 6.6 1.2 9 3.6l6.8-6.8C35.6 2.4 30.1 0 24 0 14.6 0 6.4 5.4 2.6 13.2l7.9 6.1C12.3 13.3 17.6 9.5 24 9.5z'}),
+    React.createElement('path',{fill:'#4285F4',d:'M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.1 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.5z'}),
+    React.createElement('path',{fill:'#FBBC05',d:'M10.5 28.3c-.5-1.4-.8-2.9-.8-4.3s.3-3 .8-4.3l-7.9-6.1C1 16.7 0 20.2 0 24s1 7.3 2.6 10.4l7.9-6.1z'}),
+    React.createElement('path',{fill:'#34A853',d:'M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.4-4.6 2.2-7.9 2.2-6.4 0-11.7-3.8-13.5-9.3l-7.9 6.1C6.4 42.6 14.6 48 24 48z'}));
+  go(m){ this.setState({ mode:m }); }
+  flash(m){ if(this._t) clearTimeout(this._t); this.setState({toast:m}); this._t=setTimeout(()=>this.setState({toast:''}),2100); }
+  googleClick(){ const id=this.GOOGLE_CLIENT_ID; const g=window.google&&window.google.accounts&&window.google.accounts.id; if(id&&g){ try{ if(!this._gInit){ g.initialize({client_id:id, callback:(r)=>this.onGoogle(r)}); this._gInit=true; } g.prompt(); return; }catch(_){} } this.demoGoogle(); }
+  decodeJwt(t){ try{ const b=t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'); return JSON.parse(decodeURIComponent(atob(b).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''))); }catch(_){ return {}; } }
+  onGoogle(resp){ const p=this.decodeJwt((resp&&resp.credential)||''); this.setState({ user:{ name:p.name||'Google User', email:p.email||'', picture:p.picture||'' }, mode:'welcome' }); }
+  demoGoogle(){ this.setState({ user:{ name:'Bianca Reyes', email:'bianca.reyes@gmail.com', picture:'' }, mode:'welcome' }); }
+  signin(){ const e=(this.state.siEmail||'').trim(); const nm=e?e.split('@')[0].replace(/[._-]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase()):'Welcome'; this.setState({ user:{ name:nm||'Welcome', email:e||'you@email.com', picture:'' }, mode:'welcome' }); }
+  signOut(){ this.setState({ user:null, mode:'signin', siEmail:'' }); }
+  mailTo(subject, body){ try{ window.location.href = 'mailto:'+this.OWNER_EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); }catch(_){} }
+  // Netlify Forms submission (works once deployed on Netlify); mailto fallback everywhere else.
+  submitForm(formName, data, subject, body){
+    const enc = Object.keys(data).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(data[k])).join('&');
+    const onNetlify = /netlify\.app$/.test(location.hostname) || (location.hostname && location.hostname!=='localhost' && location.protocol.indexOf('http')===0);
+    if(onNetlify){
+      fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:'form-name='+encodeURIComponent(formName)+'&'+enc })
+        .catch(()=>this.mailTo(subject, body));
+    } else { this.mailTo(subject, body); }
+  }
+  signup(){ const n=(this.state.suName||'').trim()||'New client', e=(this.state.suEmail||'').trim()||'(no email given)';
+    this.submitForm('shawie-signup', {name:n, email:e}, 'New Shawie Portal Sign-up — '+n, 'Hi Sharon,\n\nA new client just created a Shawie portal account:\n\nName: '+n+'\nEmail: '+e+'\n\n— Shawie Bakes & Events sign-up form');
+    this.flash('Account created — Sharon has been notified ✦'); this.setState({suName:'',suEmail:''}); }
+  forgot(){ const e=(this.state.fpEmail||'').trim()||'(no email given)';
+    this.submitForm('password-reset', {email:e}, 'Password reset request — Shawie Portal', 'Hi Sharon,\n\nA client requested a password reset for:\n\nEmail: '+e+'\n\n— Shawie Bakes & Events reset form'); this.go('sent'); }
+  renderVals(){
+    const S=this.state, m=S.mode;
+    const accent=this.props.accent; const rootStyle=accent?{'--gold':accent}:{};
+    const u=S.user||{}; const uname=u.name||'there';
+    const userAvatar = u.picture ? React.createElement('img',{src:u.picture,alt:uname}) : (u.name? u.name.charAt(0).toUpperCase() : 'S');
+    return {
+      rootStyle, gIcon:this.GICON,
+      isClientMode:(m==='signin'||m==='signup'),
+      isSignin:m==='signin', isSignup:m==='signup', isForgot:m==='forgot', isSent:m==='sent', isAdmin:m==='admin', isWelcome:m==='welcome',
+      userName:uname, userEmail:u.email||'', userAvatar, signOut:()=>this.signOut(),
+      siEmail:S.siEmail, onSiEmail:(e)=>this.setState({siEmail:e.target.value}),
+      signinCls:m==='signin'?'on':'', signupCls:m==='signup'?'on':'',
+      rememberCls:S.remember?'checkbox on':'checkbox', toggleRemember:()=>this.setState(s=>({remember:!s.remember})),
+      toSignin:()=>this.go('signin'), toSignup:()=>this.go('signup'), toForgot:()=>this.go('forgot'), toAdmin:()=>this.go('admin'),
+      google:()=>this.googleClick(),
+      suName:S.suName, suEmail:S.suEmail, fpEmail:S.fpEmail,
+      onSuName:(e)=>this.setState({suName:e.target.value}), onSuEmail:(e)=>this.setState({suEmail:e.target.value}), onFpEmail:(e)=>this.setState({fpEmail:e.target.value}),
+      doSignin:()=>this.signin(), doSignup:()=>this.signup(),
+      doForgot:()=>this.forgot(), resend:()=>this.flash('Reset email re-sent ✦'),
+      doAdmin:()=>this.flash('Verifying 2FA… entering console ✦'), noop:()=>this.flash('Opening…'),
+      toast:S.toast, toastShow:!!S.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

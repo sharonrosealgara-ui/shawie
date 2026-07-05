@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4ede3;color:#211a13;font-family:'Jost',system-ui,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+.serif{font-family:'Cormorant Garamond',Georgia,serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.wrap{max-width:1180px;margin:0 auto;padding:0 30px}
+.aa{min-height:100vh;background:#f4ede3}
+a{color:inherit;text-decoration:none}
+/* nav */
+.nav{position:sticky;top:0;z-index:60;background:rgba(244,237,227,.82);backdrop-filter:blur(14px);border-bottom:1px solid #e2d5c2}
+.nav-in{height:66px}
+.brand{line-height:1}
+.brand b{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:.14em}
+.brand small{display:block;font-size:8.5px;letter-spacing:.36em;color:#8a7b6e;margin-top:3px;font-weight:400}
+.nlinks a{font-size:13px;color:#5a4d40;transition:.16s}
+.nlinks a:hover{color:#9c6a34}
+.back{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:#9c6a34;font-weight:500}
+.pill-ai{display:inline-flex;align-items:center;gap:7px;background:#211a13;color:#f4ede3;font-size:12px;font-weight:500;padding:9px 16px;border-radius:30px}
+.dot{width:7px;height:7px;border-radius:50%;background:#7bd88f;box-shadow:0 0 0 0 rgba(123,216,143,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(123,216,143,.55)}70%{box-shadow:0 0 0 8px rgba(123,216,143,0)}100%{box-shadow:0 0 0 0 rgba(123,216,143,0)}}
+/* hero */
+.hero{padding:76px 0 34px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#9c6a34;font-weight:600;margin-bottom:22px}
+.eyebrow .ln{width:30px;height:1px;background:#c9a878}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,6vw,78px);font-weight:600;line-height:1.02;letter-spacing:-.01em;max-width:14ch}
+.hero h1 em{font-style:italic;color:#9c6a34}
+.hero p{font-size:18px;line-height:1.6;color:#5a4d40;max-width:56ch;margin-top:24px}
+.hstats{display:flex;gap:44px;margin-top:40px;flex-wrap:wrap}
+.hstat .n{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:#211a13;line-height:1}
+.hstat .n span{color:#bd6980}
+.hstat .l{font-size:12.5px;color:#8a7b6e;margin-top:6px;letter-spacing:.02em}
+/* section frame */
+.sec{padding:60px 0}
+.sec-cream2{background:#eadfce}
+.sec-dark{background:#211a13;color:#f2e9dc}
+.sec-head{max-width:640px;margin-bottom:40px}
+.sec-head .ey{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:#9c6a34;font-weight:600}
+.sec-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,46px);font-weight:600;line-height:1.08;margin-top:12px;letter-spacing:-.01em}
+.sec-dark .sec-head h2{color:#f6efe3}
+.sec-head p{font-size:16px;color:#6a5d4f;margin-top:14px;line-height:1.55}
+.sec-dark .sec-head p{color:#c3b6a4}
+/* pipeline */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;align-items:stretch;position:relative}
+.pnode{background:#2c2318;border:1px solid #3d3225;border-radius:16px;padding:22px 20px;margin:0 12px;position:relative;transition:.35s;text-align:left}
+.pnode.on{border-color:#c9a878;background:#37291a;box-shadow:0 0 0 1px #c9a878,0 18px 40px rgba(0,0,0,.34);transform:translateY(-4px)}
+.pnode .pk{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#a9917a;font-weight:600}
+.pnode .pi{width:44px;height:44px;border-radius:12px;background:#453623;display:flex;align-items:center;justify-content:center;font-size:22px;margin:14px 0 12px;transition:.35s}
+.pnode.on .pi{background:#9c6a34}
+.pnode h4{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:#f6efe3}
+.pnode p{font-size:12.5px;color:#b6a691;margin-top:6px;line-height:1.45}
+.parrow{position:absolute;top:50%;right:-7px;transform:translateY(-50%);z-index:3;width:26px;height:26px;border-radius:50%;background:#9c6a34;color:#211a13;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.tag-b{display:inline-block;background:#453623;color:#e9c9a8;font-size:10.5px;padding:3px 9px;border-radius:20px;margin-top:12px;font-family:'JetBrains Mono',monospace}
+/* demo */
+.demo{display:grid;grid-template-columns:1fr 1.35fr;gap:0;background:#fff;border:1px solid #e2d5c2;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(60,40,20,.1)}
+.demo-l{padding:32px 30px;background:#faf5ec;border-right:1px solid #ecdfcd}
+.demo-l h3{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600}
+.demo-l .sub{font-size:13.5px;color:#6a5d4f;margin-top:8px;line-height:1.5}
+.dlab{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#9c6a34;font-weight:600;margin:26px 0 11px}
+.samples{display:flex;flex-direction:column;gap:9px}
+.samp{text-align:left;background:#fff;border:1px solid #e6d8c4;border-radius:11px;padding:12px 14px;font-family:inherit;font-size:13px;color:#3d3327;cursor:pointer;transition:.16s;line-height:1.4}
+.samp:hover{border-color:#c9a878;background:#fffdf9}
+.samp.sel{border-color:#9c6a34;background:#fbf1e3;box-shadow:0 0 0 1px #9c6a34}
+.samp b{display:block;font-family:'Jost';font-weight:600;font-size:12px;color:#8a6a3a;margin-bottom:3px;letter-spacing:.02em}
+.runbtn{width:100%;margin-top:22px;height:52px;border:none;border-radius:12px;background:#211a13;color:#f4ede3;font-family:inherit;font-size:14.5px;font-weight:600;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:10px}
+.runbtn:hover{background:#9c6a34}
+.runbtn:disabled{opacity:.5;cursor:default}
+.spin{width:15px;height:15px;border:2px solid rgba(244,237,227,.35);border-top-color:#f4ede3;border-radius:50%;animation:sp 0.8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+/* airtable grid */
+.demo-r{padding:0;background:#fff;display:flex;flex-direction:column;min-width:0}
+.grid-top{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid #eee3d4;background:#fbf7f0}
+.grid-top .gt{display:flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#7a6a56}
+.grid-top .gt .sq{width:15px;height:15px;border-radius:4px;background:#f2c94c}
+.gcount{font-size:11.5px;color:#9a8b78}
+.tscroll{overflow:auto;flex:1;max-height:430px}
+table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:640px}
+thead th{position:sticky;top:0;background:#f6f0e6;text-align:left;padding:10px 14px;font-weight:600;color:#8a7963;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid #eaddcb;white-space:nowrap}
+tbody td{padding:12px 14px;border-bottom:1px solid #f2ebe0;vertical-align:top;color:#3d3327}
+tbody tr.fresh{animation:drop .5s ease}
+@keyframes drop{from{background:#fbeede;opacity:.2;transform:translateY(-6px)}to{background:transparent;opacity:1;transform:none}}
+.rname{font-weight:600;color:#211a13;white-space:nowrap}
+.rmsg{color:#6a5d4f;max-width:230px;line-height:1.4}
+.sel-tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap}
+.aiflag{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:#9c6a34;font-family:'JetBrains Mono',monospace;margin-top:6px}
+.empty{padding:40px;text-align:center;color:#a89a86;font-size:13px}
+/* use cases */
+.uc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.uc{background:#fff;border:1px solid #e6d8c4;border-radius:16px;padding:26px 24px;transition:.2s}
+.uc:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(60,40,20,.1);border-color:#d8c3a4}
+.uc .ui{width:46px;height:46px;border-radius:12px;background:#f6ead9;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
+.uc h4{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600}
+.uc p{font-size:13.5px;color:#6a5d4f;margin-top:8px;line-height:1.5}
+.uc .base{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9c6a34;display:flex;align-items:center;gap:6px}
+/* stack strip */
+.strip{background:#eadfce;border-top:1px solid #e0d3bf;border-bottom:1px solid #e0d3bf}
+.strip-in{display:flex;flex-wrap:wrap;gap:12px 10px;justify-content:center;padding:26px 30px}
+.chipx{background:#fff;border:1px solid #e2d5c2;color:#5a4d40;font-size:12.5px;padding:8px 15px;border-radius:24px;font-weight:500}
+.chipx.hot{background:#211a13;color:#f4ede3;border-color:#211a13}
+/* cta */
+.cta{background:#211a13;color:#f4ede3;text-align:center;padding:76px 0}
+.cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4.4vw,54px);font-weight:600;line-height:1.06}
+.cta p{color:#c3b6a4;font-size:16.5px;margin:18px auto 0;max-width:48ch;line-height:1.55}
+.cbtns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.cbtn{height:54px;padding:0 30px;border-radius:12px;font-size:14.5px;font-weight:600;display:inline-flex;align-items:center;gap:9px;cursor:pointer;transition:.2s}
+.cbtn.g{background:#9c6a34;color:#fff}.cbtn.g:hover{background:#b07d42;transform:translateY(-2px)}
+.cbtn.o{background:transparent;border:1px solid #4a4032;color:#f4ede3}.cbtn.o:hover{border-color:#9c6a34;color:#e9c9a8}
+/* foot */
+.foot{background:#1a140e;color:#9a8b78;text-align:center;padding:30px;font-size:12.5px}
+.foot b{color:#e9c9a8}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:200;background:#211a13;color:#f4ede3;padding:13px 26px;border-radius:40px;font-size:13.5px;box-shadow:0 18px 44px rgba(0,0,0,.28);animation:tin .3s ease}
+@keyframes tin{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(max-width:920px){.flow{grid-template-columns:1fr 1fr;gap:14px 0}.demo{grid-template-columns:1fr}.uc-grid{grid-template-columns:1fr 1fr}.nlinks{display:none}.demo-l{border-right:none;border-bottom:1px solid #ecdfcd}}
+@media(max-width:600px){.flow{grid-template-columns:1fr}.uc-grid{grid-template-columns:1fr}.parrow{display:none}.hstats{gap:26px}}
+</style>
+</helmet>
+<div class="aa">
+<nav class="nav"><div class="wrap nav-in fx ac jb"><a class="brand" href="Portfolio Hub.dc.html"><b>SHARON ROSE</b><small>DIGITAL SOLUTIONS STUDIO</small></a><div class="nlinks fx ac gap24"><a onClick="{{ toFlow }}">How it works</a><a onClick="{{ toDemo }}">Live demo</a><a onClick="{{ toUses }}">Templates</a></div><a class="back" href="Portfolio Hub.dc.html">← All work</a></div></nav>
+
+<section class="hero"><div class="wrap"><span class="eyebrow"><span class="ln"></span>AI Automation · Airtable</span><h1>Your business, <em>running itself.</em></h1><p>I turn Airtable into a smart operations brain — every inquiry, order and lead flows in, an AI step reads it, sorts it and drafts the reply, and the right action fires automatically. No more copy-paste. No more dropped leads.</p><div class="hstats"><div class="hstat"><div class="n">14<span>+</span></div><div class="l">Automations shipped</div></div><div class="hstat"><div class="n">3,200<span>+</span></div><div class="l">Records auto-handled</div></div><div class="hstat"><div class="n">18<span>hrs</span></div><div class="l">Saved / week / client</div></div><div class="hstat"><div class="n">&lt;30<span>s</span></div><div class="l">Inquiry → response</div></div></div></div></section>
+
+<section class="sec sec-dark" id="flow"><div class="wrap"><div class="sec-head"><span class="ey">The pipeline</span><h2>From raw inquiry to done — in four steps</h2><p>Every automation follows the same shape. Watch it light up as the demo below runs.</p></div>
+<div class="flow"><sc-for list="{{ pipeline }}" as="n" hint-placeholder-count="4"><div class="{{ n.cls }}"><div class="pk">{{ n.k }}</div><div class="pi">{{ n.ic }}</div><h4>{{ n.title }}</h4><p>{{ n.desc }}</p><span class="tag-b">{{ n.tech }}</span><sc-if value="{{ n.arrow }}" hint-placeholder-val="{{ false }}"><span class="parrow">→</span></sc-if></div></sc-for></div>
+</div></section>
+
+<section class="sec" id="demo"><div class="wrap"><div class="sec-head"><span class="ey">Live demo</span><h2>Send an inquiry. Watch the AI handle it.</h2><p>Pick a message a customer might send, run the automation, and see it land in the Airtable base — already categorised, prioritised and answered.</p></div>
+<div class="demo">
+<div class="demo-l"><h3 class="serif">Incoming message</h3><div class="sub">Choose one, then run the automation.</div><div class="dlab">Sample inquiries</div><div class="samples"><sc-for list="{{ samples }}" as="s" hint-placeholder-count="4"><button class="{{ s.cls }}" onClick="{{ s.pick }}"><b>{{ s.who }}</b>{{ s.text }}</button></sc-for></div><button class="runbtn" onClick="{{ run }}" disabled="{{ runDisabled }}"><sc-if value="{{ running }}" hint-placeholder-val="{{ false }}"><span class="spin"></span></sc-if>{{ runLabel }}</button></div>
+<div class="demo-r"><div class="grid-top"><div class="gt"><span class="sq"></span>Inquiries · Airtable base</div><span class="gcount">{{ count }} records</span></div><div class="tscroll"><table><thead><tr><th>Name</th><th>Message</th><th>Category</th><th>Priority</th><th>Sentiment</th><th>AI reply</th><th>Status</th></tr></thead><tbody><sc-for list="{{ records }}" as="r" hint-placeholder-count="4"><tr class="{{ r.rowcls }}"><td class="rname">{{ r.name }}</td><td class="rmsg">{{ r.msg }}</td><td><span class="sel-tag" style="{{ r.catStyle }}">{{ r.cat }}</span></td><td><span class="sel-tag" style="{{ r.priStyle }}">{{ r.pri }}</span></td><td><span class="sel-tag" style="{{ r.senStyle }}">{{ r.sen }}</span><div class="aiflag">✦ AI</div></td><td class="rmsg">{{ r.reply }}</td><td><span class="sel-tag" style="{{ r.stStyle }}">{{ r.status }}</span></td></tr></sc-for></tbody></table></div></div>
+</div></div></section>
+
+<section class="strip"><div class="strip-in"><sc-for list="{{ stack }}" as="s" hint-placeholder-count="8"><span class="{{ s.cls }}">{{ s.label }}</span></sc-for></div></section>
+
+<section class="sec sec-cream2" id="uses"><div class="wrap"><div class="sec-head"><span class="ey">Ready-to-deploy</span><h2>Automation templates I build on Airtable</h2><p>Each is a real base plus the AI + automation layer, tuned to your business.</p></div>
+<div class="uc-grid"><sc-for list="{{ cases }}" as="c" hint-placeholder-count="6"><div class="uc"><div class="ui">{{ c.ic }}</div><h4>{{ c.title }}</h4><p>{{ c.desc }}</p><div class="base">▦ {{ c.base }}</div></div></sc-for></div>
+</div></section>
+
+<section class="cta"><div class="wrap"><h2 class="serif">Let's automate the busywork.</h2><p>Tell me the task you keep doing by hand — I'll show you the Airtable + AI system that does it for you, on autopilot.</p><div class="cbtns"><a class="cbtn g" href="https://wa.me/639369037613?text=Hi%20Sharon%2C%20I%27d%20like%20an%20Airtable%20AI%20automation" target="_blank">Message on WhatsApp</a><a class="cbtn o" onClick="{{ book }}">Book a 30-min call</a></div></div></section>
+
+<footer class="foot">Airtable AI Automation · <b>Sharon Rose — Digital Solutions Studio</b> · © 2026 · Web · AI · Automation</footer>
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}"><div class="toast">{{ toast }}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { step:-1, running:false, sel:0, toast:'', records:[
+    { name:'Andrea Lim', msg:'Hi! Do you have a package for a 150-pax wedding this December?', cat:'Events', pri:'High', sen:'Excited', reply:'Hi Andrea! Yes — our December wedding package covers 150 guests. Sending details + a booking link now. 💛', status:'Replied' },
+    { name:'Marco Tan', msg:'Can you build a website for my coffee shop? Budget around 15k.', cat:'Web Design', pri:'Medium', sen:'Interested', reply:'Hi Marco! A café site fits your ₱15k budget. Here is what is included + next steps.', status:'Replied' },
+    { name:'Joy Reyes', msg:'I need help automating my email follow-ups asap.', cat:'Automation', pri:'High', sen:'Interested', reply:'Hi Joy! I can set up an automated follow-up sequence this week. Quick call to scope it?', status:'Replied' }
+  ] };
+  PIPE = [
+    { k:'01 · Trigger', ic:'📩', title:'Inquiry lands', desc:'A form, DM, email or order hits the base as a new record.', tech:'webhook', arrow:true },
+    { k:'02 · Store', ic:'▦', title:'Airtable base', desc:'Captured, deduped and structured — one row, every field.', tech:'Airtable', arrow:true },
+    { k:'03 · Think', ic:'✦', title:'AI reads it', desc:'Category, priority, sentiment and a drafted reply — in seconds.', tech:'Claude / GPT', arrow:true },
+    { k:'04 · Act', ic:'⚡', title:'Action fires', desc:'Auto-reply sent, team notified, CRM stage moved — hands-free.', tech:'automation', arrow:false }
+  ];
+  SAMPLES = [
+    { who:'Bianca · Instagram DM', text:'Do you make custom birthday cakes? Need one by tomorrow!!' },
+    { who:'Kenji · Website form', text:'Interested in a full business package — website + AI chatbot.' },
+    { who:'Rina · Email', text:'I was double-charged on my last invoice and I am upset.' },
+    { who:'Paolo · Messenger', text:'How much for a wedding invitation website?' }
+  ];
+  STACK = [['Airtable',1],['Claude',1],['OpenAI',1],['n8n',0],['Make',0],['Zapier',0],['Webhooks',0],['Resend',0],['Gmail API',0],['Slack',0]];
+  CASES = [
+    { ic:'🎯', title:'Lead Intake & Scoring', desc:'Every inquiry captured, AI-scored hot/warm/cold and routed — nothing slips.', base:'Leads · Contacts · Activity' },
+    { ic:'📅', title:'Content Calendar', desc:'Ideas in, AI drafts captions and hashtags, approvals and scheduling tracked.', base:'Posts · Assets · Channels' },
+    { ic:'🧾', title:'Invoice Follow-ups', desc:'Unpaid invoices auto-chase on a polite schedule until they clear.', base:'Invoices · Clients · Reminders' },
+    { ic:'📦', title:'Order & Inventory', desc:'Orders flow in, stock decrements, low-stock alerts fire to your inbox.', base:'Orders · Products · Alerts' },
+    { ic:'⭐', title:'Review Requests', desc:'After delivery, AI sends a tailored review ask and logs every response.', base:'Jobs · Reviews · Sentiment' },
+    { ic:'🤝', title:'Client Onboarding', desc:'New client → base populated, welcome pack sent, tasks auto-created.', base:'Clients · Tasks · Docs' }
+  ];
+  SEL = {
+    Events:'background:#fbe8ef;color:#a23f68', 'Web Design':'background:#e7effb;color:#2d6cb5', Automation:'background:#efe8fb;color:#6a4fb0', Billing:'background:#fdeede;color:#b06a2a', General:'background:#efeae2;color:#6a5d4f',
+    High:'background:#fde3e0;color:#b23b32', Medium:'background:#fdf1dc;color:#a9791f', Normal:'background:#e6f2e8;color:#3f8a53',
+    Excited:'background:#fbeef4;color:#b0547e', Interested:'background:#e9f1e9;color:#4f8a5f', 'Needs care':'background:#fde6e2;color:#b2453a',
+    Replied:'background:#e5f2e8;color:#3f8a53', Processing:'background:#fdf1dc;color:#a9791f'
+  };
+  st(v){ return this.SEL[v] || this.SEL.General; }
+  flash(m){ if(this._t) clearTimeout(this._t); this.setState({toast:m}); this._t=setTimeout(()=>this.setState({toast:''}),2400); }
+  scrollTo(id){ try{ const el=document.getElementById(id); if(el) window.scrollTo({top:el.offsetTop-60,behavior:'smooth'}); }catch(_){} }
+  classify(text){
+    const t=text.toLowerCase();
+    let cat='General';
+    if(/wedding|invitation|event|pax|guest/.test(t)) cat='Events';
+    else if(/cake|birthday|bake|pastr/.test(t)) cat='Events';
+    else if(/website|site|web|landing|coffee shop|shop/.test(t)) cat='Web Design';
+    else if(/automat|chatbot|ai|follow.?up|workflow/.test(t)) cat='Automation';
+    else if(/invoice|charge|refund|payment|billed|charged/.test(t)) cat='Billing';
+    let pri='Normal';
+    if(/asap|tomorrow|urgent|today|now|!!|upset|angry/.test(t)) pri='High';
+    else if(/budget|package|interested|quote|how much|price/.test(t)) pri='Medium';
+    let sen='Interested';
+    if(/upset|angry|double.?charged|refund|disappointed|wrong/.test(t)) sen='Needs care';
+    else if(/!!|excited|love|can.?t wait|amazing/.test(t)) sen='Excited';
+    const first=(text.match(/\b([A-Z][a-z]+)\b/)||[])[1];
+    let reply;
+    if(cat==='Billing') reply='So sorry about that! I am reviewing your invoice now and will fix any error within the hour. 🙏';
+    else if(cat==='Events') reply='Hi! Yes we can help with that — sending package options and available dates right away. 💛';
+    else if(cat==='Web Design') reply='Hi! Happy to build that for you — here is what is included and a quick next step.';
+    else if(cat==='Automation') reply='Hi! I can set that automation up for you this week — a short call to scope it?';
+    else reply='Hi! Thanks for reaching out — I will get back to you with details shortly. 💛';
+    return { cat, pri, sen, reply };
+  }
+  run(){
+    if(this.state.running) return;
+    const s=this.SAMPLES[this.state.sel];
+    const who=s.who.split(' · ')[0];
+    this.setState({ running:true, step:0 });
+    const steps=[0,1,2,3];
+    let i=0;
+    const tick=()=>{
+      this.setState({ step:steps[i] });
+      i++;
+      if(i<steps.length){ this._s=setTimeout(tick,620); }
+      else {
+        this._s=setTimeout(()=>{
+          const ai=this.classify(s.text);
+          const rec={ name:who, msg:s.text, cat:ai.cat, pri:ai.pri, sen:ai.sen, reply:ai.reply, status:'Replied', fresh:true };
+          this.setState(st=>({ records:[rec, ...st.records.map(r=>({...r,fresh:false}))], running:false, step:-1 }));
+          this.flash('✦ AI handled it — record added & reply drafted');
+        },560);
+      }
+    };
+    tick();
+  }
+  componentWillUnmount(){ clearTimeout(this._s); clearTimeout(this._t); }
+  renderVals(){
+    const step=this.state.step;
+    return {
+      toFlow:()=>this.scrollTo('flow'), toDemo:()=>this.scrollTo('demo'), toUses:()=>this.scrollTo('uses'),
+      book:()=>{ try{ window.open('https://calendly.com/sharonrosealgara/30min','_blank'); }catch(_){ window.location.href='https://calendly.com/sharonrosealgara/30min'; } },
+      run:()=>this.run(),
+      pipeline:this.PIPE.map((n,i)=>({ ...n, cls:'pnode'+(step===i?' on':'') })),
+      samples:this.SAMPLES.map((s,i)=>({ who:s.who, text:s.text, cls:'samp'+(this.state.sel===i?' sel':''), pick:()=>{ if(!this.state.running) this.setState({sel:i}); } })),
+      running:this.state.running, runDisabled:this.state.running,
+      runLabel:this.state.running?'Running automation…':'▶  Run automation',
+      records:this.state.records.map(r=>({ name:r.name, msg:r.msg, cat:r.cat, pri:r.pri, sen:r.sen, reply:r.reply, status:r.status, rowcls:r.fresh?'fresh':'', catStyle:this.st(r.cat), priStyle:this.st(r.pri), senStyle:this.st(r.sen), stStyle:this.st(r.status) })),
+      count:this.state.records.length,
+      stack:this.STACK.map(([label,hot])=>({ label, cls:'chipx'+(hot?' hot':'') })),
+      cases:this.CASES,
+      toast:this.state.toast, toastShow:!!this.state.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

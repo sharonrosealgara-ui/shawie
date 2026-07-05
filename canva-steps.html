@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canva step frames</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:924px;height:540px;overflow:hidden;background:#edeaf3}
+body{font-family:'Jost',system-ui,sans-serif}
+.stage{width:924px;height:540px;position:relative;overflow:hidden;background:#edeaf3}
+/* window chrome */
+.top{height:52px;background:#fff;border-bottom:1px solid #e7e3ef;display:flex;align-items:center;justify-content:space-between;padding:0 18px}
+.top-l{display:flex;align-items:center;gap:16px}
+.dots{display:flex;gap:7px}.dots i{width:12px;height:12px;border-radius:50%;display:block}
+.dots i:nth-child(1){background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
+.brandmark{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:#7d2ae8;letter-spacing:.02em}
+.brandmark .cd{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#7d2ae8,#00c4cc);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px}
+.menu{display:flex;gap:16px;font-size:12.5px;color:#4a4458;font-weight:500}
+.fname{font-size:12.5px;color:#6a6478}
+.share{background:#7d2ae8;color:#fff;font-size:12.5px;font-weight:600;padding:8px 16px;border-radius:7px}
+.body{position:absolute;top:52px;left:0;right:0;bottom:0;display:flex}
+/* left rail */
+.rail{width:82px;background:#fff;border-right:1px solid #ece7f4;display:flex;flex-direction:column;padding:8px 0}
+.tool{display:flex;flex-direction:column;align-items:center;gap:4px;padding:11px 0;color:#4a4458;font-size:10px;font-weight:500;position:relative}
+.tool .ti{width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.tool.on{background:#f2ecfd;color:#7d2ae8}
+.tool.on::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:3px;background:#7d2ae8;border-radius:0 3px 3px 0}
+/* context panel */
+.panel{width:300px;background:#fbfaff;border-right:1px solid #ece7f4;padding:18px 16px;overflow:hidden}
+.panel h4{font-size:14px;font-weight:600;color:#2b2540;margin-bottom:12px}
+.lbl2{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#9a93ad;font-weight:600;margin:14px 0 8px}
+.hint{margin-top:14px;font-size:11px;color:#9a93ad;line-height:1.6}
+.search-in{display:flex;align-items:center;gap:8px;background:#f0ecf8;border:1.5px solid #7d2ae8;border-radius:9px;padding:10px 12px;font-size:13px;color:#2b2540;margin-bottom:14px}
+.search-in .cur{width:1.5px;height:15px;background:#2b2540;margin-left:1px}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pthumb{aspect-ratio:3/4;border-radius:7px;overflow:hidden;position:relative;border:2px solid transparent}
+.pthumb img{width:100%;height:100%;object-fit:cover}
+.pthumb.sel{border-color:#7d2ae8;box-shadow:0 0 0 3px rgba(125,42,232,.18)}
+.pthumb .free{position:absolute;top:5px;left:5px;background:rgba(0,0,0,.6);color:#fff;font-size:8px;padding:2px 6px;border-radius:20px;letter-spacing:.05em}
+.elgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.elt{aspect-ratio:4/3;border-radius:8px;background:#f2ecfd;display:flex;align-items:center;justify-content:center;position:relative;border:2px solid transparent}
+.elt.sel{border-color:#7d2ae8;box-shadow:0 0 0 3px rgba(125,42,232,.18)}
+.el-env{width:52px;height:36px;border-radius:3px;background:#d98a9c;position:relative;box-shadow:0 3px 7px rgba(120,40,60,.25)}
+.el-env::before{content:'';position:absolute;top:0;left:0;width:100%;height:60%;background:#c37286;clip-path:polygon(0 0,100% 0,50% 100%)}
+.el-seal{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 40% 33%,#c5363f,#8f1c24 66%);box-shadow:inset 0 -3px 6px rgba(60,5,10,.5),inset 0 2px 4px rgba(255,215,215,.3)}
+.swrow{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.sw{width:38px;height:38px;border-radius:8px;border:2px solid #fff;box-shadow:0 0 0 1px #e2ddee}
+.sw.pick{box-shadow:0 0 0 2px #7d2ae8}
+.fontrow{display:flex;flex-direction:column;gap:8px}
+.frow{background:#fff;border:1px solid #ece7f4;border-radius:8px;padding:11px 13px;font-size:16px;color:#2b2540}
+.frow.pick{border-color:#7d2ae8;background:#f7f2fe}
+.frow small{display:block;font-family:'Jost';font-size:9px;color:#9a93ad;letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
+.upgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.upthumb{aspect-ratio:1;border-radius:7px;overflow:hidden}
+.upthumb img{width:100%;height:100%;object-fit:cover}
+.updrop{border:2px dashed #c3b7e0;border-radius:9px;padding:16px;text-align:center;font-size:11px;color:#7d2ae8;margin-bottom:12px;background:#f7f2fe}
+.dlg{background:#fff;border:1px solid #ece7f4;border-radius:10px;padding:14px}
+.dlg .lbl{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#9a93ad;margin-bottom:6px;font-weight:600}
+.dlg .field{display:flex;align-items:center;gap:6px;border:1.5px solid #7d2ae8;border-radius:8px;padding:9px 11px;font-size:12px;color:#2b2540;margin-bottom:12px;white-space:nowrap}
+.dlg .go{background:#7d2ae8;color:#fff;text-align:center;font-size:12px;font-weight:600;padding:10px;border-radius:8px}
+.optrow{display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #ece7f4;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2b2540}
+.opt .oi{width:30px;height:30px;border-radius:7px;background:#f2ecfd;color:#7d2ae8;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none}
+.opt.pick{border-color:#7d2ae8;background:#f7f2fe}
+.pagelist{display:flex;flex-direction:column;gap:8px}
+.prow{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid #ece7f4;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2b2540}
+.prow.pick{border-color:#7d2ae8;background:#f7f2fe;font-weight:600}
+.prow .pn{width:22px;height:22px;border-radius:5px;background:#f2ecfd;color:#7d2ae8;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex:none}
+.prow .ck{margin-left:auto;color:#7d2ae8;font-weight:700}
+/* canvas */
+.canvas{flex:1;position:relative;display:flex;align-items:center;justify-content:center;background:
+  linear-gradient(45deg,#e4dff0 25%,transparent 25%,transparent 75%,#e4dff0 75%),
+  linear-gradient(45deg,#e4dff0 25%,#edeaf3 25%,#edeaf3 75%,#e4dff0 75%);
+  background-size:26px 26px;background-position:0 0,13px 13px}
+.zoom{position:absolute;bottom:14px;right:16px;background:#fff;border:1px solid #e7e3ef;border-radius:8px;padding:7px 12px;font-size:11px;color:#6a6478;display:flex;gap:10px;align-items:center}
+/* ENVELOPE (closed cover) */
+.env{width:302px;height:432px;position:relative;border-radius:9px;overflow:hidden;background:#cf7e90;box-shadow:0 24px 54px rgba(120,40,60,.34)}
+.env .flap{position:absolute;top:0;left:-3%;width:106%;height:60%;background:#c37286;clip-path:polygon(0 0,100% 0,50% 100%)}
+.env .pocket{position:absolute;bottom:0;left:-3%;width:106%;height:56%;background:#d98a9c;clip-path:polygon(0 100%,50% 0,100% 100%)}
+.env .invited{position:absolute;top:30px;left:0;right:0;text-align:center;font-family:'Great Vibes',cursive;font-size:47px;color:#2a1216;z-index:5;line-height:1}
+.env .seal{position:absolute;left:50%;top:53%;transform:translate(-50%,-50%);width:106px;height:106px;border-radius:50%;background:radial-gradient(circle at 40% 33%,#c5363f,#8f1c24 66%,#6c141b);box-shadow:0 10px 20px rgba(90,10,20,.45),inset 0 3px 8px rgba(255,215,215,.32),inset 0 -7px 13px rgba(60,5,10,.5);display:flex;align-items:center;justify-content:center;z-index:6}
+.env .seal span{font-family:'Great Vibes',cursive;font-size:37px;color:#f1d9db;text-shadow:0 1px 2px rgba(70,8,12,.6);line-height:1;padding-bottom:3px;border-bottom:1px solid rgba(241,217,219,.45)}
+.env .tapline{position:absolute;bottom:24px;left:0;right:0;text-align:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-style:italic;font-size:16px;color:#6e2534;z-index:5;letter-spacing:.02em}
+.env .tapline .chev{display:block;font-size:15px;margin-bottom:1px}
+/* REVEAL (open envelope, page 2) */
+.reveal{width:394px;height:252px;position:relative;border-radius:9px;overflow:hidden;box-shadow:0 24px 54px rgba(120,40,60,.34)}
+.reveal .fl{position:absolute;inset:0}
+.reveal .fl img{width:100%;height:100%;object-fit:cover}
+.reveal .rov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,20,25,.1),rgba(40,20,25,.34))}
+.reveal .frame{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:198px;height:152px;border:5px solid #efe6da;border-radius:3px;box-shadow:0 14px 30px rgba(50,25,35,.4);overflow:hidden;background:#fff}
+.reveal .frame img{width:100%;height:100%;object-fit:cover}
+.reveal .music{position:absolute;top:12px;right:12px;display:flex;align-items:center;gap:8px;background:rgba(43,20,24,.82);color:#f1d9db;border-radius:30px;padding:7px 13px 7px 12px;font-family:'Jost';font-size:11px;font-weight:500;backdrop-filter:blur(4px);z-index:3}
+.reveal .music .mi{color:#e9c9a8;font-size:13px}
+.reveal .music .eq{display:flex;align-items:flex-end;gap:2px;height:13px;margin-left:2px}
+.reveal .music .eq i{width:3px;background:#e9c9a8;border-radius:2px}
+.reveal .music .eq i:nth-child(1){height:6px}.reveal .music .eq i:nth-child(2){height:12px}.reveal .music .eq i:nth-child(3){height:8px}.reveal .music .eq i:nth-child(4){height:11px}
+.reveal .musicbtn{position:absolute;bottom:12px;left:12px;width:40px;height:40px;border-radius:50%;background:rgba(43,20,24,.85);color:#e9c9a8;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 6px 16px rgba(40,10,15,.4);z-index:3}
+/* INNER details page */
+.card{width:300px;height:432px;background:#f8efef;border-radius:9px;box-shadow:0 22px 50px rgba(120,40,60,.28);position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:22px 24px;text-align:center}
+.card .mono{width:46px;height:46px;border-radius:50%;border:1.5px solid #a67c52;color:#a67c52;font-family:'Great Vibes',cursive;font-size:22px;display:flex;align-items:center;justify-content:center;margin-bottom:9px}
+.card .pre{font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:#8a7b6e;margin-bottom:7px}
+.card .names{font-family:'Great Vibes',cursive;font-size:34px;line-height:1.05;color:#2b2420;margin-bottom:6px}
+.card .names em{font-style:normal;color:#a67c52;font-size:20px;margin:0 5px}
+.card .date{font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:#a67c52;margin-bottom:11px;font-family:'Jost'}
+.card .photo{width:100%;flex:1;border-radius:3px;overflow:hidden;position:relative;margin-bottom:14px}
+.card .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card .lines{width:100%;display:flex;flex-direction:column;gap:6px;font-family:'Jost'}
+.card .li{display:flex;justify-content:space-between;gap:10px;font-size:9.5px;color:#5a4f46;border-bottom:1px solid rgba(43,36,32,.1);padding-bottom:5px}
+.card .li b{color:#2b2420;font-weight:600;text-align:right}
+.card .rsvpbtn{margin-top:12px;background:#a67c52;color:#fff;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:11px 26px;border-radius:3px}
+/* phone */
+.phone{width:228px;height:466px;background:#2b2540;border-radius:30px;padding:9px;box-shadow:0 24px 60px rgba(40,25,60,.34);position:relative}
+.phone .scr{width:100%;height:100%;background:#f6f0e9;border-radius:24px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
+.phone .notch{position:absolute;top:13px;left:50%;transform:translateX(-50%);width:70px;height:5px;background:rgba(255,255,255,.4);border-radius:3px;z-index:5}
+.phone .env{width:186px;height:270px;border-radius:6px;box-shadow:0 14px 30px rgba(120,40,60,.3)}
+.phone .env .invited{top:18px;font-size:29px}
+.phone .env .seal{width:66px;height:66px;top:53%}
+.phone .env .seal span{font-size:23px}
+.phone .env .tapline{bottom:15px;font-size:10px}
+/* selection box */
+.selbox{position:absolute;border:2px solid #7d2ae8;pointer-events:none;z-index:10;border-radius:2px}
+.selbox .h{position:absolute;width:10px;height:10px;background:#fff;border:1.5px solid #7d2ae8;border-radius:50%}
+.selbox .h.tl{top:-5px;left:-5px}.selbox .h.tr{top:-5px;right:-5px}.selbox .h.bl{bottom:-5px;left:-5px}.selbox .h.br{bottom:-5px;right:-5px}
+/* callout */
+.callout{position:absolute;z-index:30;max-width:258px;background:#2b2540;color:#fff;border-radius:12px;padding:15px 18px;box-shadow:0 16px 40px rgba(40,25,60,.34)}
+.callout .cn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#e9c9a8;color:#2b2540;font-weight:700;font-size:13px;margin-bottom:8px;font-family:'Cormorant Garamond',serif}
+.callout .ct{font-size:13.5px;line-height:1.5;font-weight:400}
+.callout .ct b{color:#e9c9a8;font-weight:600}
+.cursor{position:absolute;z-index:40;font-size:26px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
+/* account */
+.account{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f2ecfd,#e6f7f8)}
+.acard{width:360px;background:#fff;border-radius:16px;box-shadow:0 24px 60px rgba(60,40,80,.2);padding:34px 34px 30px;text-align:center}
+.acard .cd{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#7d2ae8,#00c4cc);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;margin:0 auto 16px}
+.acard h3{font-family:'Jost';font-size:21px;font-weight:600;color:#2b2540;margin-bottom:20px}
+.acard .btn2{display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #e2ddee;border-radius:9px;padding:12px;font-size:13px;color:#2b2540;margin-bottom:10px;font-weight:500}
+.acard .btn2.p{background:#7d2ae8;color:#fff;border-color:#7d2ae8}
+.acard small{font-size:11px;color:#9a93ad;display:block;margin-top:10px}
+.qr{width:120px;height:120px;background:#fff;padding:9px;border-radius:10px;box-shadow:0 8px 22px rgba(60,40,80,.16)}
+.qrg{width:100%;height:100%;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);gap:1.5px}
+.qrg i{border-radius:1px}.qrg i.on{background:#2b2540}
+.urlbar{display:inline-flex;align-items:center;gap:8px;background:#f2ecfd;border-radius:20px;padding:8px 15px;font-size:12px;color:#7d2ae8;font-weight:600}
+</style>
+</head>
+<body>
+<div class="stage" id="stage"></div>
+<script>
+const RAIL=[['Templates','▦'],['Elements','◈'],['Text','T'],['Brand','◎'],['Uploads','↥'],['Projects','▤'],['Apps','⊞']];
+const PH='assets/photos/';
+function railHTML(on){return `<div class="rail">`+RAIL.map(r=>`<div class="tool ${r[0]===on?'on':''}"><div class="ti">${r[1]}</div>${r[0]}</div>`).join('')+`</div>`;}
+function envelope(o={}){
+  o=Object.assign({seal:true,invited:true,tap:true,initials:'R&L'},o);
+  return `<div class="env" id="env"><div class="flap"></div><div class="pocket"></div>${o.invited?`<div class="invited">You're Invited!</div>`:''}${o.seal?`<div class="seal"><span>${o.initials}</span></div>`:''}${o.tap?`<div class="tapline"><span class="chev">⌃</span>Tap the wax seal to open</div>`:''}</div>`;
+}
+function reveal(){
+  return `<div class="reveal"><div class="fl"><img src="${PH}p26.jpg"></div><div class="rov"></div><div class="frame"><img src="${PH}p09.jpg"></div><div class="music"><span class="mi">♪</span>Now playing · A Thousand Years<span class="eq"><i></i><i></i><i></i><i></i></span></div><div class="musicbtn">♪</div></div>`;
+}
+function inner(){
+  return `<div class="card"><div class="mono">R&L</div><div class="pre">Together with their families</div><div class="names">Ra-ah<em>&</em>Leonel</div><div class="date">Saturday · 14 February 2026</div><div class="photo"><img src="${PH}p10.jpg"></div><div class="lines"><div class="li"><span>Ceremony</span><b>3:00 PM · Garden Chapel</b></div><div class="li"><span>Reception</span><b>5:30 PM · The Orangery</b></div><div class="li"><span>Dress code</span><b>Garden formal</b></div></div><div class="rsvpbtn">RSVP</div></div>`;
+}
+function callout(n,txt,pos){return `<div class="callout" style="${pos}"><div class="cn">${n}</div><div class="ct">${txt}</div></div>`;}
+function frame(cfg){
+  return `<div class="top"><div class="top-l"><div class="dots"><i></i><i></i><i></i></div><div class="brandmark"><span class="cd">✦</span>Canva</div><div class="menu"><span>File</span><span>Resize</span><span>Editing</span></div></div><div style="display:flex;align-items:center;gap:16px"><span class="fname">Ra-ah &amp; Leonel — Wedding Invitation</span><span class="share">Share</span></div></div>
+  <div class="body">${railHTML(cfg.on)}${cfg.panel||''}<div class="canvas">${cfg.canvas||envelope()}${cfg.selbox||''}${cfg.cursor||''}<div class="zoom">— 68% +</div></div>${cfg.callout||''}</div>`;
+}
+function qrCells(){const s="01110001110 10001010001 10111011101 10001000101 01110101110 00000101000 10110110111 01001000001 11101011101 00010111001 01110100011".replace(/ /g,'');return s.split('').map(c=>`<i class="${c==='1'?'on':''}"></i>`).join('');}
+const elt=(inner,sel)=>`<div class="elt ${sel?'sel':''}">${inner}</div>`;
+
+const STEPS={
+1:()=>`<div class="top"><div class="top-l"><div class="dots"><i></i><i></i><i></i></div><div class="brandmark"><span class="cd">✦</span>Canva</div></div><span class="share">Sign up</span></div><div class="body" style="padding:0"><div class="account"><div class="acard"><div class="cd">✦</div><h3>Create your free account</h3><div class="btn2 p">Continue with Google</div><div class="btn2">Continue with email</div><small>Free forever · No card required</small></div></div>${callout(1,'Go to <b>canva.com</b> and sign up free — this whole interactive invite works on the free plan.','left:40px;top:30px')}</div>`,
+
+2:()=>frame({on:'Templates',panel:`<div class="panel"><h4>Search templates</h4><div class="search-in">⌕ Wedding Invitation<span class="cur"></span></div><div class="pgrid"><div class="pthumb sel"><span class="free">FREE</span><img src="${PH}p08.jpg"></div><div class="pthumb"><span class="free">FREE</span><img src="${PH}p26.jpg"></div><div class="pthumb"><span class="free">FREE</span><img src="${PH}p09.jpg"></div><div class="pthumb"><span class="free">FREE</span><img src="${PH}p27.jpg"></div></div></div>`,callout:callout(2,'Search <b>“Wedding Invitation”</b> and pick a multi-page design — you’ll turn it into a tap-to-open envelope.','right:34px;top:26px')}),
+
+3:()=>frame({on:'Brand',panel:`<div class="panel"><h4>Colors</h4><div class="swrow"><span class="sw pick" style="background:#cf7e90"></span><span class="sw" style="background:#8f1c24"></span><span class="sw" style="background:#e9c9a8"></span><span class="sw" style="background:#f8efef"></span><span class="sw" style="background:#2a1216"></span></div><h4>Fonts</h4><div class="fontrow"><div class="frow pick" style="font-family:'Great Vibes',cursive;font-size:24px">Ra-ah &amp; Leonel<small>Names · script</small></div><div class="frow" style="font-family:'Cormorant Garamond',serif">Cormorant<small>Details · serif</small></div></div></div>`,callout:callout(3,'Set your palette — <b>dusty rose + wine</b> — and pair a <b>script</b> font with an elegant serif.','right:34px;top:26px')}),
+
+4:()=>frame({on:'Elements',panel:`<div class="panel"><h4>Elements</h4><div class="search-in">⌕ Pink envelope<span class="cur"></span></div><div class="elgrid">${elt('<span class="el-env"></span>',true)}${elt('<span class="el-env" style="background:#e0a9b5"></span>')}${elt('<span class="el-env" style="background:#caa0a8"></span>')}${elt('<span class="el-env" style="background:#d98a9c"></span>')}</div></div>`,canvas:envelope({seal:false,invited:false,tap:false}),selbox:`<div class="selbox" style="left:calc(50% - 154px);top:26px;width:308px;height:438px"><span class="h tl"></span><span class="h tr"></span><span class="h bl"></span><span class="h br"></span></div>`,callout:callout(4,'On <b>Page 1</b>, add a pink <b>envelope</b> as your full-page cover.','right:34px;bottom:28px')}),
+
+5:()=>frame({on:'Elements',panel:`<div class="panel"><h4>Elements</h4><div class="search-in">⌕ Wax seal<span class="cur"></span></div><div class="elgrid">${elt('<span class="el-seal"></span>',true)}${elt('<span class="el-seal" style="filter:hue-rotate(15deg)"></span>')}${elt('<span class="el-seal" style="filter:brightness(.85)"></span>')}${elt('<span class="el-seal" style="filter:hue-rotate(-12deg)"></span>')}</div></div>`,canvas:envelope({invited:false,tap:false}),selbox:`<div class="selbox" style="left:calc(50% - 58px);top:196px;width:116px;height:116px"><span class="h tl"></span><span class="h tr"></span><span class="h bl"></span><span class="h br"></span></div>`,callout:callout(5,'Add a red <b>wax seal</b> and type your <b>initials</b> on it.','right:34px;top:26px')}),
+
+6:()=>frame({on:'Text',canvas:envelope(),selbox:`<div class="selbox" style="left:calc(50% - 130px);top:60px;width:260px;height:58px"><span class="h tl"></span><span class="h tr"></span><span class="h bl"></span><span class="h br"></span></div>`,callout:callout(6,'Add <b>“You’re Invited!”</b> at the top and <b>“Tap the wax seal to open”</b> below the seal.','left:36px;top:30px')}),
+
+7:()=>frame({on:'Elements',panel:`<div class="panel"><h4>Elements</h4><div class="search-in">⌕ Open envelope<span class="cur"></span></div><div class="elgrid">${elt('<span class="el-env" style="transform:rotate(180deg)"></span>',true)}${elt('<span class="el-env" style="transform:rotate(180deg);background:#e0a9b5"></span>')}<div class="elt"><img src="${PH}p27.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:6px"></div><div class="elt"><img src="${PH}p26.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:6px"></div></div><div class="hint">Add this as <b>Page 2</b> — the page the seal will open to.</div></div>`,canvas:reveal(),callout:callout(7,'On <b>Page 2</b>, build the <b>open-envelope reveal</b> with a frame for your photo.','right:34px;top:26px')}),
+
+8:()=>frame({on:'Uploads',panel:`<div class="panel"><h4>Uploads</h4><div class="updrop">↥ Upload your photos</div><div class="upgrid"><div class="upthumb"><img src="${PH}p09.jpg"></div><div class="upthumb"><img src="${PH}p10.jpg"></div><div class="upthumb"><img src="${PH}p11.jpg"></div><div class="upthumb"><img src="${PH}p27.jpg"></div></div></div>`,canvas:reveal(),cursor:`<div class="cursor" style="left:calc(50% - 20px);top:220px">🖐</div>`,callout:callout(8,'Upload your <b>couple photo</b> and drop it into the reveal frame.','right:34px;bottom:28px')}),
+
+9:()=>frame({on:'Elements',panel:`<div class="panel"><h4>Add link</h4><div class="search-in">🔗 Search or paste a link<span class="cur"></span></div><div class="lbl2">This design</div><div class="pagelist"><div class="prow"><span class="pn">1</span>Cover — Envelope</div><div class="prow pick"><span class="pn">2</span>Open — Reveal<span class="ck">✓</span></div><div class="prow"><span class="pn">3</span>Our Story</div></div><div class="hint">Linking the seal to <b>Page 2</b> makes it tappable — guests tap to open.</div></div>`,canvas:envelope(),selbox:`<div class="selbox" style="left:calc(50% - 58px);top:196px;width:116px;height:116px"><span class="h tl"></span><span class="h tr"></span><span class="h bl"></span><span class="h br"></span></div>`,callout:callout(9,'Select the <b>wax seal</b> → <b>Link</b> → <b>Page 2</b>. Now tapping it opens the invite.','right:34px;top:150px')}),
+
+10:()=>frame({on:'Elements',panel:`<div class="panel"><h4>Audio · Free</h4><div class="optrow"><div class="opt pick"><span class="oi">♪</span>A Thousand Years · soft piano</div><div class="opt"><span class="oi">♪</span>Canon in D · strings</div><div class="opt"><span class="oi">♪</span>Perfect · acoustic</div></div><div class="hint">Drag a track on, then set it to <b>play across all pages</b>.</div></div>`,canvas:reveal(),callout:callout(10,'Add a song from Canva’s <b>free audio</b> so <b>music plays</b> the moment the envelope opens.','right:34px;top:26px')}),
+
+11:()=>frame({on:'Text',panel:`<div class="panel"><h4>Link RSVP button</h4><div class="dlg"><div class="lbl">Paste your form link</div><div class="field">🔗 forms.gle/our-rsvp<span class="cur" style="width:1.5px;height:14px;background:#2b2540"></span></div><div class="go">Apply link</div></div><div class="hint">Add times, venue, dress code and a Google Form for RSVPs.</div></div>`,canvas:inner(),selbox:`<div class="selbox" style="left:calc(50% - 60px);bottom:36px;width:120px;height:40px"><span class="h tl"></span><span class="h tr"></span><span class="h bl"></span><span class="h br"></span></div>`,callout:callout(11,'Add your <b>details, schedule &amp; an RSVP</b> button on the inner pages.','right:34px;top:120px')}),
+
+12:()=>frame({on:'Templates',panel:`<div class="panel"><h4>Publish as website</h4><div class="dlg"><div class="lbl">Free domain</div><div class="field" style="border-color:#e2ddee">ra-ah-and-leonel<b style="color:#7d2ae8">.canva.site</b></div><div class="go">Publish</div></div><div style="margin-top:16px;text-align:center"><div class="qr" style="margin:0 auto 10px"><div class="qrg">${qrCells()}</div></div><div class="urlbar">🔗 Copy link</div></div></div>`,canvas:`<div class="phone"><span class="notch"></span><div class="scr">${envelope()}</div></div>`,callout:callout(12,'<b>Preview</b> and test the tap on your phone, then <b>Publish</b> and share the link or QR.','right:34px;top:20px')})
+};
+function show(n){document.getElementById('stage').innerHTML=STEPS[n]();}
+window.show=show;
+show(1);
+</script>
+</body>
+</html>
