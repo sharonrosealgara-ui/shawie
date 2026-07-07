@@ -100,12 +100,12 @@ export const SEED_BILLS: Bill[] = [
 ];
 
 export const SEED_EXPENSES: Expense[] = [
-  { id: generateId(), description: "Groceries", category: "Needs", amount: 850, date: new Date().toISOString(), status: "paid", recurring: false },
-  { id: generateId(), description: "Coffee with friends", category: "Wants", amount: 250, date: new Date().toISOString(), status: "paid", recurring: false },
+  { id: generateId(), description: "Groceries", category: "Needs", amount: 850, date: "2026-07-01T09:00:00.000Z", status: "paid", recurring: false },
+  { id: generateId(), description: "Coffee with friends", category: "Wants", amount: 250, date: "2026-07-03T14:00:00.000Z", status: "paid", recurring: false },
 ];
 
 export const SEED_JOB_APPLICATIONS: JobApplication[] = [
-  { id: generateId(), company: "Acme Corp", role: "Frontend Developer", status: "interviewing", appliedDate: new Date().toISOString() },
+  { id: generateId(), company: "Acme Corp", role: "Frontend Developer", status: "interviewing", appliedDate: "2026-06-20T09:00:00.000Z" },
 ];
 export const SEED_INTERVIEWS: Interview[] = [];
 export const SEED_CLIENTS: Client[] = [
@@ -113,7 +113,7 @@ export const SEED_CLIENTS: Client[] = [
 ];
 export const SEED_CERTIFICATES: Certificate[] = [];
 export const SEED_RESUMES: ResumeVersion[] = [
-  { id: generateId(), name: "General Resume v1", updatedDate: new Date().toISOString() },
+  { id: generateId(), name: "General Resume v1", updatedDate: "2026-06-15T09:00:00.000Z" },
 ];
 export const SEED_CAREER_GOALS: CareerGoal[] = [
   { id: generateId(), title: "Land a remote developer role", progress: 40, done: false },
