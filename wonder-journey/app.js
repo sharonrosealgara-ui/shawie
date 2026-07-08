@@ -25,6 +25,7 @@ const DEFAULT_STATE = {
   faith: true,            // show Bible / faith content
   theme: "light",
   prayerLeaderIndex: 0,   // whose turn to lead prayer (index into family)
+  teacherMode: false,     // teacher extras (lesson timer + answer key); family view stays clean
 };
 
 let S = loadState();
@@ -245,6 +246,7 @@ function openAdventure(id) {
   const a = ADVENTURES.find(x => x.id === id);
   const idx = ADVENTURES.findIndex(x => x.id === id);
   if (!isUnlocked(idx)) return;
+  stopTimer(); lessonSeconds = 0; // fresh lesson timer
   quizState = { adv: a, answers: {}, submitted: false };
   const hue = ["#0e7c86", "#e5674f", "#3f9d54", "#7a5cc4", "#f4a821"][idx % 5];
   const sections = a.sections.filter(s => !(s.faith && !S.faith));
@@ -256,6 +258,7 @@ function openAdventure(id) {
         <p>${esc(a.subtitle)}</p>
         <div class="big">${a.emoji}</div>
       </div>
+      ${teacherToolbar()}
 
       <div class="section-title"><span class="em">📚</span> Let's Learn Together</div>
       ${sections.map((s, i) => `
@@ -267,6 +270,7 @@ function openAdventure(id) {
         </div>`).join("")}
 
       <div class="section-title"><span class="em">🏆</span> Adventure Quiz</div>
+      ${S.teacherMode ? `<div class="card no-print" style="padding:12px 16px;margin-bottom:12px;font-size:13px;border:1px dashed color-mix(in srgb,var(--grape) 40%,transparent)"><b>🔑 Answer key (teacher only):</b> ${a.quiz.map((q, i) => `Q${i + 1} → ${esc(q.a[q.correct])}`).join(" · ")}</div>` : ""}
       <div class="card quiz" id="quizCard">${renderQuiz(a)}</div>
 
       <div class="section-title"><span class="em">📝</span> Family Reflection</div>
@@ -277,6 +281,7 @@ function openAdventure(id) {
         <button class="btn btn-ghost" onclick="saveReflections('${a.id}')">💾 Save Our Answers</button>
       </div>
     </div>`;
+  if (S.teacherMode) { updateTimerLabel(); updateTimerBtn(); }
   window.scrollTo(0, 0);
 }
 
@@ -643,6 +648,14 @@ function viewSettings() {
       </div>
 
       <div class="card" style="padding:22px;margin-top:16px">
+        <h3 style="margin-bottom:6px">👩‍🏫 Teacher Tools</h3>
+        <div class="toggle-row">
+          <div class="t-txt"><b>Teacher Mode</b><small>Adds a lesson timer & quiz answer key inside adventures. Turn OFF for the family's clean view.</small></div>
+          <div class="sw ${S.teacherMode ? "on" : ""}" onclick="toggleTeacher(this)"></div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:22px;margin-top:16px">
         <h3 style="margin-bottom:6px">🙏 Faith Content</h3>
         <div class="toggle-row">
           <div class="t-txt"><b>Include Bible stories & Christian character</b><small>Turn off to hide all faith-based lessons (for other families).</small></div>
@@ -673,6 +686,7 @@ window.saveFamily = () => {
 function pickColor() { const c = ["#0e7c86", "#e5674f", "#3f9d54", "#7a5cc4", "#f4a821", "#12a3af"]; return c[Math.floor(Math.random() * c.length)]; }
 
 window.toggleFaith = (sw) => { S.faith = !S.faith; sw.classList.toggle("on", S.faith); save(); };
+window.toggleTeacher = (sw) => { S.teacherMode = !S.teacherMode; sw.classList.toggle("on", S.teacherMode); save(); };
 
 window.exportData = () => {
   const blob = new Blob([JSON.stringify(S, null, 2)], { type: "application/json" });
@@ -707,6 +721,35 @@ document.addEventListener("fullscreenchange", () => {
   fsBtn.title = document.fullscreenElement ? "Exit full screen" : "Full screen (present in classroom)";
 });
 
+/* ---------- teacher mode: lesson timer ---------- */
+let lessonSeconds = 0, lessonRunning = false, lessonTick = null;
+const fmtTime = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
+function updateTimerLabel() { const e = document.getElementById("lessonTime"); if (e) e.textContent = fmtTime(lessonSeconds); }
+function updateTimerBtn() { const e = document.getElementById("timerBtn"); if (e) e.textContent = lessonRunning ? "⏸ Pause" : "▶ Start"; }
+function stopTimer() { lessonRunning = false; clearInterval(lessonTick); }
+window.timerToggle = () => {
+  lessonRunning = !lessonRunning; clearInterval(lessonTick);
+  if (lessonRunning) lessonTick = setInterval(() => { lessonSeconds++; updateTimerLabel(); }, 1000);
+  updateTimerBtn();
+};
+window.timerReset = () => { lessonRunning = false; clearInterval(lessonTick); lessonSeconds = 0; updateTimerLabel(); updateTimerBtn(); };
+
+function teacherToolbar() {
+  if (!S.teacherMode) return "";
+  return `
+    <div class="card no-print" style="padding:16px;margin-top:12px;border:1px solid color-mix(in srgb,var(--grape) 35%,transparent);background:color-mix(in srgb,var(--grape) 8%,transparent)">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span class="tag" style="background:var(--grape);color:#fff">👩‍🏫 Teacher Mode</span>
+        <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
+          <span id="lessonTime" style="font-family:ui-monospace,monospace;font-size:22px;font-weight:800;font-variant-numeric:tabular-nums">00:00</span>
+          <button class="btn btn-ghost" style="padding:8px 14px" id="timerBtn" onclick="timerToggle()">▶ Start</button>
+          <button class="btn btn-ghost" style="padding:8px 14px" onclick="timerReset()">Reset</button>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--ink-soft);margin-top:10px">💡 <b>Teacher tip:</b> Expand each subject card as you teach, pause for the “Try it” activities, and let a different child answer each quiz question. The timer & answer key show <b>only in Teacher Mode</b> — the family sees the clean view.</p>
+    </div>`;
+}
+
 /* ---------- theme ---------- */
 function applyTheme() { document.body.classList.toggle("dark", S.theme === "dark"); }
 $("#themeBtn").addEventListener("click", () => { S.theme = S.theme === "dark" ? "light" : "dark"; save(); applyTheme(); renderTop(); });
@@ -714,6 +757,7 @@ $("#themeBtn").addEventListener("click", () => { S.theme = S.theme === "dark" ? 
 /* ---------- router ---------- */
 const VIEWS = { home: viewHome, blessings: viewBlessings, map: viewMap, passport: viewPassport, badges: viewBadges, tree: viewTree, cookbook: viewCookbook, storybook: viewStorybook, family: viewFamily, settings: viewSettings };
 function go(view) {
+  stopTimer();
   (VIEWS[view] || viewHome)();
   document.querySelectorAll(".nav-item").forEach(n => n.classList.toggle("active", n.dataset.view === view));
   closeNav();
