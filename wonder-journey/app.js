@@ -504,6 +504,20 @@ window.resetAll = () => {
   }
 };
 
+/* ---------- full screen (classroom present mode) ---------- */
+const fsBtn = $("#fsBtn");
+fsBtn.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    (document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen || (() => {})).call(document.documentElement);
+  } else {
+    (document.exitFullscreen || document.webkitExitFullscreen || (() => {})).call(document);
+  }
+});
+document.addEventListener("fullscreenchange", () => {
+  fsBtn.textContent = document.fullscreenElement ? "🡿" : "⛶";
+  fsBtn.title = document.fullscreenElement ? "Exit full screen" : "Full screen (present in classroom)";
+});
+
 /* ---------- theme ---------- */
 function applyTheme() { document.body.classList.toggle("dark", S.theme === "dark"); }
 $("#themeBtn").addEventListener("click", () => { S.theme = S.theme === "dark" ? "light" : "dark"; save(); applyTheme(); renderTop(); });
