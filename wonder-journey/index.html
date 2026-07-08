@@ -203,6 +203,14 @@ a{color:var(--ocean);text-decoration:none}
 .empty{text-align:center;padding:50px 20px;color:var(--ink-soft)}
 .empty .em{font-size:52px;opacity:.5}
 
+@media print{
+  .sidebar,.topbar,.backdrop,.no-print,.modal-bg{display:none !important}
+  .main{display:block}
+  body{background:#fff;color:#000}
+  .view{padding:0;max-width:none;animation:none}
+  .story-page{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #ccc}
+  .story-hero{box-shadow:none;border:1px solid #ccc}
+}
 @media(max-width:860px){
   .sidebar{position:fixed;left:0;top:0;z-index:60;transform:translateX(-100%);transition:.25s;box-shadow:var(--shadow-lg)}
   .sidebar.open{transform:none}
@@ -228,6 +236,7 @@ a{color:var(--ocean);text-decoration:none}
     <button class="nav-item" data-view="badges"><span class="ic">🏅</span> Badges</button>
     <button class="nav-item" data-view="tree"><span class="ic">🌳</span> Adventure Tree</button>
     <button class="nav-item" data-view="cookbook"><span class="ic">🍳</span> Family Cookbook</button>
+    <button class="nav-item" data-view="storybook"><span class="ic">📖</span> Family Storybook</button>
     <button class="nav-item" data-view="family"><span class="ic">👨‍👩‍👧‍👦</span> Our Family</button>
     <button class="nav-item" data-view="settings"><span class="ic">⚙️</span> Settings</button>
     <div class="nav-spacer"></div>

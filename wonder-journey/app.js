@@ -533,6 +533,73 @@ function viewCookbook() {
     </div>`;
 }
 
+/* ---------- family storybook ---------- */
+function storyPage(a, i) {
+  const refl = (S.reflections[a.id] || []);
+  const date = S.completed[a.id]?.date || "";
+  const subs = [...new Set(a.sections.filter(s => !(s.faith && !S.faith)).map(s => s.subject.split(/[—-]/)[0].trim()))];
+  const answered = a.reflect.map((q, qi) => ({ q, ans: (refl[qi] || "").trim() })).filter(r => r.ans);
+  return `
+    <div class="card story-page" style="padding:24px;margin-bottom:18px">
+      <div style="display:flex;align-items:flex-start;gap:16px">
+        <div style="font-size:46px;line-height:1">${a.emoji}</div>
+        <div style="flex:1;min-width:0">
+          <span class="tag">Chapter ${i + 1}${date ? " · " + esc(date) : ""}</span>
+          <h2 style="font-size:22px;margin:6px 0 2px">${esc(a.title)}</h2>
+          <div style="color:var(--ink-soft);font-size:13px">${esc(a.region)} · 💛 We learned <b>${esc(a.value)}</b></div>
+        </div>
+        <div style="text-align:center;flex-shrink:0">
+          <div style="width:66px;height:66px;border-radius:16px;border:3px solid var(--coral);display:grid;place-items:center;font-size:34px;background:color-mix(in srgb,var(--coral) 8%,var(--card))">${a.stamp.emoji}</div>
+          <small style="font-size:11px;font-weight:800;color:var(--ink-soft)">${esc(a.stamp.name)}</small>
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <h3 style="font-size:14px;margin-bottom:6px">🌈 What we explored</h3>
+        <div class="tags">${subs.map(s => `<span class="tag">${esc(s)}</span>`).join("")}</div>
+      </div>
+      ${answered.length ? `
+      <div style="margin-top:16px">
+        <h3 style="font-size:14px;margin-bottom:6px">📝 In our own words</h3>
+        ${answered.map(r => `<div class="callout" style="margin:8px 0"><b style="display:block;font-size:12.5px;color:var(--ink-soft);margin-bottom:2px">${esc(r.q)}</b>${esc(r.ans)}</div>`).join("")}
+      </div>` : ""}
+    </div>`;
+}
+
+function viewStorybook() {
+  const done = ADVENTURES.filter(a => isDone(a.id));
+  const famName = S.family[0]?.name ? S.family.map(f => f.name).slice(0, 2).join(" & ") : "Our";
+  const grats = [];
+  Object.keys(S.blessings).sort().forEach(k => (S.blessings[k].gratitude || []).forEach(g => grats.push(g)));
+
+  root().innerHTML = `
+    <div class="view">
+      <div class="hero story-hero">
+        <h1>📖 The ${esc(famName)} Family Storybook</h1>
+        <p>A keepsake of every adventure we've taken together on our Wonder Journey through the Philippines 🇵🇭.</p>
+        <div class="no-print" style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+          <button class="btn btn-ghost" onclick="go('map')">Add more chapters 🗺️</button>
+        </div>
+      </div>
+
+      ${done.length
+        ? done.map((a, i) => storyPage(a, i)).join("")
+        : `<div class="card empty"><div class="em">📖</div><p>Your storybook is waiting for its first chapter.<br/>Finish an adventure and it will appear here automatically!</p>
+           <button class="btn btn-primary no-print" style="margin-top:12px" onclick="go('map')">Start an Adventure 🗺️</button></div>`}
+
+      ${grats.length ? `
+      <div class="card story-page" style="padding:24px;margin-bottom:18px">
+        <h2 style="font-size:20px">💛 Our Gratitude Memories</h2>
+        <p style="color:var(--ink-soft);font-size:13px;margin-top:2px">Little things our family was thankful for along the way.</p>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px">
+          ${grats.slice(-16).map(g => `<div class="callout" style="margin:0;display:flex;gap:10px;align-items:center"><span class="tag" style="background:color-mix(in srgb,var(--sun) 22%,transparent);color:var(--ink)">${esc(g.name)}</span><span>${esc(g.text)}</span></div>`).join("")}
+        </div>
+      </div>` : ""}
+
+      ${done.length ? `<p class="no-print" style="text-align:center;color:var(--ink-soft);font-size:13px;margin-top:10px">Tip: “Print / Save as PDF” makes a beautiful keepsake you can keep or print. 📚</p>` : ""}
+    </div>`;
+}
+
 /* ---------- family ---------- */
 function viewFamily() {
   root().innerHTML = `
@@ -645,7 +712,7 @@ function applyTheme() { document.body.classList.toggle("dark", S.theme === "dark
 $("#themeBtn").addEventListener("click", () => { S.theme = S.theme === "dark" ? "light" : "dark"; save(); applyTheme(); renderTop(); });
 
 /* ---------- router ---------- */
-const VIEWS = { home: viewHome, blessings: viewBlessings, map: viewMap, passport: viewPassport, badges: viewBadges, tree: viewTree, cookbook: viewCookbook, family: viewFamily, settings: viewSettings };
+const VIEWS = { home: viewHome, blessings: viewBlessings, map: viewMap, passport: viewPassport, badges: viewBadges, tree: viewTree, cookbook: viewCookbook, storybook: viewStorybook, family: viewFamily, settings: viewSettings };
 function go(view) {
   (VIEWS[view] || viewHome)();
   document.querySelectorAll(".nav-item").forEach(n => n.classList.toggle("active", n.dataset.view === view));
