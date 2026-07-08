@@ -76,6 +76,7 @@ function checkAutoBadges(newlyEarned) {
   const grant = (id) => { const b = awardBadge(id); if (b) newlyEarned.push(b); };
   if (doneCount >= 1) grant("first-steps");
   if (doneCount >= 3) grant("streak-3");
+  if (doneCount >= 7) grant("streak-7");
   // bible-explorer: 3 completed adventures that had a faith section (all our first 5 do)
   const faithDone = ADVENTURES.filter(a => isDone(a.id) && a.sections.some(s => s.faith)).length;
   if (S.faith && faithDone >= 3) grant("bible-explorer");
