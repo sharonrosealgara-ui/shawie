@@ -12,6 +12,7 @@ const DEFAULT_STATE = {
   badges: [],             // [badgeId]
   stamps: [],             // [adventureId]
   reflections: {},        // { adventureId: [answers] }
+  blessings: {},          // { "YYYY-MM-DD": { gratitude:[{id,name,text}], prayed:bool } }
   family: [
     { name: "Shaun", role: "Dad", emoji: "👨", color: "#0e7c86" },
     { name: "Taylor", role: "Mom", emoji: "👩", color: "#e5674f" },
@@ -40,6 +41,7 @@ function save() { localStorage.setItem(STORE_KEY, JSON.stringify(S)); }
 const $ = (s, r = document) => r.querySelector(s);
 const el = (html) => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstElementChild; };
 const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
 function levelInfo() {
   let cur = LEVELS[0], next = null;
@@ -332,6 +334,105 @@ window.saveReflections = (id, silent) => {
   }
 };
 
+/* ---------- morning blessings ---------- */
+const GRATITUDE_PROMPTS = [
+  "What is one thing you're thankful for today?",
+  "Who made you smile recently?",
+  "What is something beautiful you saw?",
+  "What is a gift in our family you're grateful for?",
+  "What good thing happened yesterday?",
+  "What is something you're excited about today?",
+  "Who can you thank today?",
+];
+const PRAYER_PROMPTS = [
+  "Thank You, God, for our family and this brand-new day. 🙏",
+  "Lord, help us learn, be kind, and love each other today.",
+  "Thank You for our home, our food, and time together.",
+  "God, give us joyful hearts and gentle words today.",
+  "Thank You for the world You made — let us explore it with wonder.",
+  "Lord, watch over each of us today and fill us with kindness.",
+  "Thank You for second chances and for Your love that never ends.",
+];
+const todayKey = () => new Date().toISOString().slice(0, 10);
+const prettyToday = () => new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+const dayIndex = () => Math.floor(new Date().setHours(0, 0, 0, 0) / 86400000);
+
+function viewBlessings() {
+  const key = todayKey();
+  const today = S.blessings[key] || { gratitude: [], prayed: false };
+  const gPrompt = GRATITUDE_PROMPTS[dayIndex() % GRATITUDE_PROMPTS.length];
+  const pPrompt = PRAYER_PROMPTS[dayIndex() % PRAYER_PROMPTS.length];
+  const mornings = Object.keys(S.blessings).filter(k => (S.blessings[k].gratitude || []).length || S.blessings[k].prayed).length;
+  const opts = ["Whole Family", ...S.family.map(f => f.name)];
+
+  root().innerHTML = `
+    <div class="view">
+      <div class="hero" style="padding:26px">
+        <h1>🌅 Good Morning, Explorers!</h1>
+        <p>${prettyToday()} — let's begin today with grateful hearts before our adventure.</p>
+      </div>
+
+      <div class="section-title"><span class="em">💛</span> Today's Gratitude</div>
+      <div class="card" style="padding:22px">
+        <p style="font-weight:800;margin-bottom:12px">${esc(gPrompt)}</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <select id="gName" class="fld" style="max-width:170px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit">
+            ${opts.map(o => `<option>${esc(o)}</option>`).join("")}
+          </select>
+          <input id="gText" placeholder="I'm thankful for..." style="flex:1;min-width:180px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit"
+            onkeydown="if(event.key==='Enter')addGratitude()"/>
+          <button class="btn btn-sun" onclick="addGratitude()">Add 💛</button>
+        </div>
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:10px">
+          ${today.gratitude.length ? today.gratitude.map(g => `
+            <div class="callout" style="display:flex;align-items:center;gap:10px;margin:0">
+              <span class="tag" style="background:color-mix(in srgb,var(--sun) 22%,transparent);color:var(--ink)">${esc(g.name)}</span>
+              <span style="flex:1">${esc(g.text)}</span>
+              <button class="del" style="color:var(--coral);font-size:18px;background:none;border:none;cursor:pointer" onclick="removeGratitude('${g.id}')" title="Remove">✕</button>
+            </div>`).join("")
+          : `<p style="color:var(--ink-soft)">No gratitude added yet today — go first! 🌟</p>`}
+        </div>
+      </div>
+
+      ${S.faith ? `
+      <div class="section-title"><span class="em">🙏</span> Morning Prayer</div>
+      <div class="card" style="padding:22px">
+        <div class="callout faith" style="font-size:16px;margin:0 0 14px">${esc(pPrompt)}</div>
+        <div class="toggle-row" style="margin:0">
+          <div class="t-txt"><b>We prayed together today</b><small>Check this after your family prayer time.</small></div>
+          <div class="sw ${today.prayed ? "on" : ""}" onclick="togglePrayed()"></div>
+        </div>
+      </div>` : ""}
+
+      <div class="section-title"><span class="em">🌱</span> Our Gratitude Garden</div>
+      <div class="card stat" style="padding:20px">
+        <span class="lbl">Mornings recorded together</span>
+        <span class="val">${mornings} ${mornings === 1 ? "day" : "days"} 🌻</span>
+        <p style="color:var(--ink-soft);font-size:13px;margin-top:6px">Every grateful morning plants a flower in your family's garden.</p>
+      </div>
+
+      <div style="margin-top:18px">
+        <button class="btn btn-primary" onclick="go('map')">Now, on to today's Adventure! 🗺️</button>
+      </div>
+    </div>`;
+}
+
+function ensureToday() {
+  const key = todayKey();
+  if (!S.blessings[key]) S.blessings[key] = { gratitude: [], prayed: false };
+  return S.blessings[key];
+}
+window.addGratitude = () => {
+  const name = $("#gName").value, text = $("#gText").value.trim();
+  if (!text) { $("#gText").focus(); return; }
+  ensureToday().gratitude.push({ id: uid(), name, text });
+  save(); viewBlessings();
+};
+window.removeGratitude = (id) => {
+  const t = ensureToday(); t.gratitude = t.gratitude.filter(g => g.id !== id); save(); viewBlessings();
+};
+window.togglePrayed = () => { const t = ensureToday(); t.prayed = !t.prayed; save(); viewBlessings(); };
+
 /* ---------- passport ---------- */
 function viewPassport() {
   root().innerHTML = `
@@ -527,7 +628,7 @@ function applyTheme() { document.body.classList.toggle("dark", S.theme === "dark
 $("#themeBtn").addEventListener("click", () => { S.theme = S.theme === "dark" ? "light" : "dark"; save(); applyTheme(); renderTop(); });
 
 /* ---------- router ---------- */
-const VIEWS = { home: viewHome, map: viewMap, passport: viewPassport, badges: viewBadges, tree: viewTree, cookbook: viewCookbook, family: viewFamily, settings: viewSettings };
+const VIEWS = { home: viewHome, blessings: viewBlessings, map: viewMap, passport: viewPassport, badges: viewBadges, tree: viewTree, cookbook: viewCookbook, family: viewFamily, settings: viewSettings };
 function go(view) {
   (VIEWS[view] || viewHome)();
   document.querySelectorAll(".nav-item").forEach(n => n.classList.toggle("active", n.dataset.view === view));
