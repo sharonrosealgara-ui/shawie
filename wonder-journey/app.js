@@ -15,7 +15,11 @@ const DEFAULT_STATE = {
   family: [
     { name: "Shaun", role: "Dad", emoji: "👨", color: "#0e7c86" },
     { name: "Taylor", role: "Mom", emoji: "👩", color: "#e5674f" },
-    { name: "Kiddo", role: "Explorer", emoji: "🧒", color: "#3f9d54" },
+    { name: "Grandma", role: "Grandma", emoji: "👵", color: "#7a5cc4" },
+    { name: "Rylee", role: "Explorer", emoji: "🧒", color: "#3f9d54" },
+    { name: "Ezra", role: "Explorer", emoji: "🧒", color: "#f4a821" },
+    { name: "Asa", role: "Explorer", emoji: "🧒", color: "#12a3af" },
+    { name: "Selah", role: "Explorer", emoji: "🧒", color: "#bd6980" },
   ],
   faith: true,            // show Bible / faith content
   theme: "light",
