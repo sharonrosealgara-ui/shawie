@@ -24,6 +24,7 @@ const DEFAULT_STATE = {
   ],
   faith: true,            // show Bible / faith content
   theme: "light",
+  prayerLeaderIndex: 0,   // whose turn to lead prayer (index into family)
 };
 
 let S = loadState();
@@ -32,7 +33,12 @@ function loadState() {
   try {
     const raw = localStorage.getItem(STORE_KEY);
     if (!raw) return structuredClone(DEFAULT_STATE);
-    return Object.assign(structuredClone(DEFAULT_STATE), JSON.parse(raw));
+    const s = Object.assign(structuredClone(DEFAULT_STATE), JSON.parse(raw));
+    // One-time safe upgrade: replace the old placeholder roster with the real family.
+    if (Array.isArray(s.family) && s.family.some(f => f.name === "Kiddo")) {
+      s.family = structuredClone(DEFAULT_STATE.family);
+    }
+    return s;
   } catch (e) { return structuredClone(DEFAULT_STATE); }
 }
 function save() { localStorage.setItem(STORE_KEY, JSON.stringify(S)); }
@@ -364,6 +370,7 @@ function viewBlessings() {
   const pPrompt = PRAYER_PROMPTS[dayIndex() % PRAYER_PROMPTS.length];
   const mornings = Object.keys(S.blessings).filter(k => (S.blessings[k].gratitude || []).length || S.blessings[k].prayed).length;
   const opts = ["Whole Family", ...S.family.map(f => f.name)];
+  const leader = S.family.length ? S.family[S.prayerLeaderIndex % S.family.length] : null;
 
   root().innerHTML = `
     <div class="view">
@@ -397,6 +404,15 @@ function viewBlessings() {
       ${S.faith ? `
       <div class="section-title"><span class="em">🙏</span> Morning Prayer</div>
       <div class="card" style="padding:22px">
+        ${leader ? `
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;background:color-mix(in srgb,var(--grape) 12%,transparent);border:1px solid color-mix(in srgb,var(--grape) 30%,transparent);margin-bottom:14px">
+          <div class="av" style="width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:26px;color:#fff;background:${esc(leader.color)};flex-shrink:0">${esc(leader.emoji)}</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)">Today's Prayer Leader</div>
+            <div style="font-size:20px;font-weight:800;font-family:'Baloo 2',sans-serif">${esc(leader.name)} 🙏</div>
+          </div>
+          <button class="btn btn-ghost" onclick="nextPrayerLeader()">Pass to next →</button>
+        </div>` : ""}
         <div class="callout faith" style="font-size:16px;margin:0 0 14px">${esc(pPrompt)}</div>
         <div class="toggle-row" style="margin:0">
           <div class="t-txt"><b>We prayed together today</b><small>Check this after your family prayer time.</small></div>
@@ -432,6 +448,7 @@ window.removeGratitude = (id) => {
   const t = ensureToday(); t.gratitude = t.gratitude.filter(g => g.id !== id); save(); viewBlessings();
 };
 window.togglePrayed = () => { const t = ensureToday(); t.prayed = !t.prayed; save(); viewBlessings(); };
+window.nextPrayerLeader = () => { if (S.family.length) { S.prayerLeaderIndex = (S.prayerLeaderIndex + 1) % S.family.length; save(); viewBlessings(); } };
 
 /* ---------- passport ---------- */
 function viewPassport() {
