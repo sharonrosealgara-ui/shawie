@@ -39,7 +39,7 @@
 | Teacher Portal | `████████████████░░░░` | 80% | ✅ Live (visual Lesson Builder pending) |
 | Family Storybook | `██████████████████░░` | 90% | ✅ Live |
 | Quiz Engine | `██████████████░░░░░░` | 70% | 🟡 Multiple-choice live; alt types pending |
-| Family Cookbook | `██████████████░░░░░░` | 70% | 🟡 Recipe cards live |
+| Cooking Academy · Cookbook | `███████████████░░░░░` | 78% | ✅ Studio lessons + keepsake cookbook; more recipes & theater-mode pending |
 | Media Library | `███████████░░░░░░░░░` | 55% | 🟡 Manifest 100%; asset files pending licensing |
 | Curriculum | `████████░░░░░░░░░░░░` | 38% | 🟡 72 scheduled; 10 authored & aligned to canonical map ids (ADR-010) |
 | Deployment | `█████████████░░░░░░░` | 65% | 🟡 Vercel config + docs; domain pending |

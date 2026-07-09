@@ -23,7 +23,7 @@ _Last updated: 2026-07-09 · Autonomous Build Session_
 | 10 | Adventure Builder | `███░░░░░░░` 30% |
 | 11 | Quiz Engine | `█████████░` 90% |
 | 12 | Family Storybook | `██████████` 100% |
-| 13 | Family Cookbook | `████████░░` 80% |
+| 13 | Family Cookbook · Cooking Academy | `█████████░` 88% |
 | 14 | Passport | `██████████` 100% |
 | 15 | Badges | `██████████` 100% |
 | 16 | Adventure Tree | `██████████` 100% |

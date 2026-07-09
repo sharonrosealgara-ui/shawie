@@ -30,7 +30,13 @@ const DEFAULT_STATE = {
   prayerLeaderIndex: 0,   // whose turn to lead prayer (index into family)
   teacherMode: false,     // teacher extras (lesson timer + answer key); family view stays clean
   mascot: true,           // show Sinag the mascot guide in cinematic mode
+  cookbookEntries: [],    // Cooking Academy keepsakes: { recipeId, name, emoji, date, participants, rating, favorite, gratitude, notes, region, badge, xp }
 };
+
+// Merge Cooking Academy badges into the badge set (recipes.js loads first).
+if (typeof COOKING_BADGES !== "undefined" && typeof BADGES !== "undefined") {
+  COOKING_BADGES.forEach(b => { if (!BADGES.some(x => x.id === b.id)) BADGES.push(b); });
+}
 
 let S = loadState();
 
@@ -1557,22 +1563,237 @@ function copyAfterClass() {
 }
 window.copyAfterClass = copyAfterClass;
 
+/* ============================================================
+   🍳 COOKING ACADEMY (Family Cooking Academy feature)
+   A complete educational cooking experience: each recipe is a full
+   studio lesson (story · region + real map · language EN/Tag/Hil ·
+   tools · safety · ingredients · steps · math · science · nutrition ·
+   per-child activities · family challenge · quiz). Completing a recipe
+   auto-generates a Family Cookbook keepsake entry and awards a cooking
+   badge + XP. Integrates with Theme/Media/Badges/Cookbook/Parent tools.
+   ============================================================ */
+const recipeById = (id) => (typeof RECIPES !== "undefined" ? RECIPES.find(r => r.id === id) : null);
+const recipeDone = (id) => (S.cookbookEntries || []).some(e => e.recipeId === id);
+function diffStars(n) { return "★★★".slice(0, n) + "☆☆☆".slice(0, 3 - n); }
+
+function viewCooking() {
+  const cats = ["Dessert", "Snack", "Main Dish", "Refreshment"];
+  const cooked = (S.cookbookEntries || []).length;
+  const byCat = c => RECIPES.filter(r => r.category === c);
+  const card = r => `<div class="recipe-card ${recipeDone(r.id) ? "done" : ""}" onclick="openRecipe('${r.id}')">
+      <div class="rc-emoji">${r.emoji}</div>
+      <div class="rc-body">
+        <h3>${esc(r.name)}</h3>
+        <div class="rc-meta">📍 ${esc(r.region.split(" · ")[0].split(" (")[0])}</div>
+        <div class="rc-meta">🔥 <span class="rc-diff">${diffStars(r.difficulty)}</span> · ⏱️ ${esc(r.time)}</div>
+      </div>
+      ${recipeDone(r.id) ? `<div class="rc-done">Cooked ✓</div>` : `<div class="rc-go">Enter Kitchen →</div>`}
+    </div>`;
+  root().innerHTML = `
+    <div class="view cooking-view">
+      <div class="cooking-hero">
+        <div class="ch-emoji">👨‍🍳</div>
+        <div>
+          <h1 style="font-size:28px;margin:0">Wonder Journey Cooking Academy</h1>
+          <p style="margin:6px 0 0;color:var(--ink-soft)">Real Filipino recipes as full adventures — cook together, learn language, math, science & culture, and fill your Family Cookbook. 🍚</p>
+        </div>
+      </div>
+      <div class="callout" style="margin:14px 0 18px">🍴 <b>${cooked}</b> recipe${cooked === 1 ? "" : "s"} cooked so far. Every finished dish becomes a keepsake page in your <a href="#" onclick="go('cookbook');return false" style="color:#0e7c86;font-weight:800">Family Cookbook</a>!</div>
+      ${cats.map(c => byCat(c).length ? `<div class="section-title"><span class="em">${c === "Dessert" ? "🍮" : c === "Snack" ? "🍢" : c === "Main Dish" ? "🍗" : "🍧"}</span> ${c}s</div>
+        <div class="recipe-grid">${byCat(c).map(card).join("")}</div>` : "").join("")}
+    </div>`;
+}
+
+let _cookScore = {};
+function openRecipe(id) {
+  const r = recipeById(id); if (!r) return;
+  _cookScore[id] = { correct: 0, answered: 0 };
+  const langRows = r.language.map(l => `<tr><td>${esc(l.en)}</td><td><b>${esc(l.tl)}</b></td><td><b>${esc(l.hil)}</b></td></tr>`).join("");
+  const kids = (typeof CHILD_PROFILES !== "undefined" ? CHILD_PROFILES : []).map(c => r.activities[c.name]
+    ? `<div class="kid-card" style="--kc:${c.color}"><div class="kid-top"><span class="kid-ic">${c.icon}</span><div><b>${esc(c.name)}</b><small>${esc(c.tag)}</small></div></div><p>${esc(r.activities[c.name])}</p></div>` : "").join("");
+  const quiz = r.quiz.map((q, qi) => `<div class="cook-q"><p class="cq-q">${qi + 1}. ${esc(q.q)}</p><div class="cq-opts">${q.a.map((opt, oi) => `<button class="cq-opt" data-r="${id}" data-q="${qi}" onclick="cookAnswer('${id}',${qi},${oi},${q.correct})">${esc(opt)}</button>`).join("")}</div></div>`).join("");
+  const steps = r.steps.map((s, i) => `<li><span class="step-n">${i + 1}</span>${esc(s)}</li>`).join("");
+  root().innerHTML = `
+    <div class="view recipe-lesson">
+      <button class="btn btn-ghost" style="margin-bottom:10px" onclick="go('cooking')">← Back to the Academy</button>
+      <div class="studio-board">
+        <div class="sb-emoji">${r.emoji}</div>
+        <div>
+          <div class="kicker">🍳 Cooking Studio · ${esc(r.category)}</div>
+          <h1 style="margin:2px 0;font-size:26px">${esc(r.name)}</h1>
+          <div class="sb-meta">📍 ${esc(r.region)} · 🔥 ${diffStars(r.difficulty)} · ⏱️ ${esc(r.time)}</div>
+        </div>
+      </div>
+
+      <div class="cook-cols">
+        <div class="cook-main">
+          <div class="studio-card">${typeof mediaFigure === "function" ? mediaFigure(r.media.finished) : ""}
+            <p class="lead" style="margin-top:10px">${esc(r.story)}</p>
+            <p style="color:var(--ink-soft)"><b>History:</b> ${esc(r.history)}</p>
+            <div class="callout" style="margin-top:8px">💡 <b>Fun fact:</b> ${esc(r.funFact)}</div>
+          </div>
+
+          <div class="studio-card"><h3>🗺️ Where It's From</h3>
+            <p style="color:var(--ink-soft)">This dish is enjoyed in <b>${esc(r.region)}</b>. Find it on the real map of the Philippines!</p>
+            ${typeof phPostcard === "function" ? phPostcard() : ""}
+          </div>
+
+          <div class="studio-card"><h3>🗣️ Kitchen Words (English · Tagalog · Hiligaynon)</h3>
+            <table class="lang-table"><thead><tr><th>English</th><th>Tagalog</th><th>Hiligaynon</th></tr></thead><tbody>${langRows}</tbody></table>
+          </div>
+
+          <div class="studio-card"><h3>🧺 Ingredients</h3>
+            <ul class="ingredient-list">${r.ingredients.map(i => `<li>${esc(i)}</li>`).join("")}</ul>
+            ${typeof mediaFigure === "function" ? mediaFigure(r.media.ingredients) : ""}
+          </div>
+
+          <div class="studio-card"><h3>🔪 Kitchen Tools & Safety</h3>
+            <ul>${r.tools.map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+            <div class="safety-card">🦺 <b>Kitchen safety:</b> ${esc(r.safety)}</div>
+          </div>
+
+          <div class="studio-card"><h3>👩‍🍳 Let's Cook — Steps</h3>
+            <ol class="step-list">${steps}</ol>
+          </div>
+
+          <div class="studio-card learn-trio">
+            <div><h4>➕ Math</h4><p>${esc(r.math)}</p></div>
+            <div><h4>🔬 Science</h4><p>${esc(r.science)}</p></div>
+            <div><h4>🥗 Nutrition</h4><p>${esc(r.nutrition)}</p></div>
+          </div>
+
+          <div class="studio-card"><h3>🌟 Explore It Your Way</h3>
+            <div class="kids-grid">${kids}</div>
+          </div>
+
+          <div class="studio-card"><h3>❤️ Family Challenge</h3>
+            <p>${esc(r.challenge)}</p>
+          </div>
+
+          <div class="studio-card"><h3>🏆 Kitchen Quiz</h3>
+            ${quiz}
+            <div id="cq-score-${id}" class="cq-score"></div>
+          </div>
+
+          <div class="cook-finish">
+            <button class="btn btn-primary" style="font-size:18px;padding:14px 22px" onclick="openCookComplete('${id}')">🍽️ We Cooked It!</button>
+            <p style="color:var(--ink-soft);font-size:13px;margin-top:6px">Finishing adds a keepsake page to your Family Cookbook and earns the ${esc((BADGES.find(b => b.id === r.badge) || {}).emoji || "🍳")} <b>${esc((BADGES.find(b => b.id === r.badge) || {}).name || "cooking")}</b> badge.</p>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  window.scrollTo(0, 0);
+}
+window.openRecipe = openRecipe;
+
+function cookAnswer(id, qi, oi, correct) {
+  const btns = document.querySelectorAll(`.cq-opt[data-r="${id}"][data-q="${qi}"]`);
+  if (btns[0] && btns[0].closest(".cq-opts").classList.contains("locked")) return;
+  btns.forEach((b, i) => { b.disabled = true; if (i === correct) b.classList.add("correct"); });
+  if (oi !== correct) btns[oi].classList.add("wrong");
+  btns[0].closest(".cq-opts").classList.add("locked");
+  const sc = _cookScore[id]; sc.answered++; if (oi === correct) sc.correct++;
+  if (typeof sfxDing === "function" && oi === correct) try { sfxDing(); } catch (e) {}
+  const r = recipeById(id);
+  if (sc.answered === r.quiz.length) {
+    const el = document.getElementById("cq-score-" + id);
+    if (el) el.innerHTML = `🌟 You got <b>${sc.correct}/${r.quiz.length}</b>! ${sc.correct === r.quiz.length ? "Perfect, chef!" : "Great cooking knowledge!"}`;
+  }
+}
+window.cookAnswer = cookAnswer;
+
+let _cookRating = 0;
+function openCookComplete(id) {
+  const r = recipeById(id); if (!r) return;
+  _cookRating = 5;
+  const kids = S.family.map((f, i) => `<label class="who-chip"><input type="checkbox" data-who="${esc(f.name)}" ${f.level || ["Teacher", "Mom", "Dad", "Grandma"].includes(f.role) ? "checked" : ""}/> ${f.emoji} ${esc(f.name)}</label>`).join("");
+  $("#modalBox").innerHTML = `
+    <div class="burst">${r.emoji}</div>
+    <h2>You Cooked ${esc(r.name)}!</h2>
+    <p style="color:var(--ink-soft);margin:2px 0 10px">Add it to your Family Cookbook keepsake.</p>
+    <div class="cc-field"><label>Family rating</label><div class="star-row" id="starRow">${[1, 2, 3, 4, 5].map(n => `<span class="star on" data-n="${n}" onclick="setCookRating(${n})">★</span>`).join("")}</div></div>
+    <div class="cc-field"><label>❤️ Favorite part</label><input id="ccFav" placeholder="e.g., mixing the layers!" /></div>
+    <div class="cc-field"><label>🙏 We're thankful for…</label><input id="ccGrat" placeholder="e.g., sweet mangoes to share" /></div>
+    <div class="cc-field"><label>👨‍🍳 Who cooked?</label><div class="who-row">${kids}</div></div>
+    <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="finishRecipe('${id}')">📖 Save to Family Cookbook</button>
+    <button class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="closeModal()">Not yet</button>`;
+  $("#modalBg").classList.add("show");
+}
+window.openCookComplete = openCookComplete;
+function setCookRating(n) {
+  _cookRating = n;
+  document.querySelectorAll("#starRow .star").forEach((s, i) => s.classList.toggle("on", i < n));
+}
+window.setCookRating = setCookRating;
+
+function finishRecipe(id) {
+  const r = recipeById(id); if (!r) return;
+  const participants = [...document.querySelectorAll('.who-row input:checked')].map(c => c.dataset.who);
+  const entry = {
+    recipeId: id, name: r.name, emoji: r.emoji, region: r.region,
+    date: new Date().toISOString().slice(0, 10),
+    participants, rating: _cookRating || 5,
+    favorite: ($("#ccFav") && $("#ccFav").value.trim()) || "",
+    gratitude: ($("#ccGrat") && $("#ccGrat").value.trim()) || "",
+    notes: "", badge: r.badge, stamp: r.stamp, xp: r.xp,
+  };
+  const firstTime = !recipeDone(id);
+  if (!S.cookbookEntries) S.cookbookEntries = [];
+  const existing = S.cookbookEntries.findIndex(e => e.recipeId === id);
+  if (existing > -1) S.cookbookEntries[existing] = entry; else S.cookbookEntries.push(entry);
+  const newly = [];
+  if (firstTime) {
+    S.xp += r.xp;
+    const b = awardBadge(r.badge); if (b) newly.push(b);
+    const jc = awardBadge("junior-chef"); if (jc) newly.push(jc);
+    if (S.cookbookEntries.length >= 5) { const fe = awardBadge("food-explorer"); if (fe) newly.push(fe); }
+  }
+  save(); renderTop();
+  confettiBurst(); if (typeof sfxCelebrate === "function") try { sfxCelebrate(); } catch (e) {}
+  $("#modalBox").innerHTML = `
+    <div class="burst">🎉</div>
+    <h2>Saved to the Cookbook!</h2>
+    <p>${esc(r.name)} is now a keepsake page. ${firstTime ? `+${r.xp} XP` : "Updated!"}</p>
+    ${newly.length ? `<div class="reward-row">${newly.map(b => `<div class="reward">${b.emoji} ${esc(b.name)}</div>`).join("")}</div>` : ""}
+    <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="closeModal();go('cookbook')">📖 See our Cookbook</button>
+    <button class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="closeModal();go('cooking')">Cook another 🍳</button>`;
+}
+window.finishRecipe = finishRecipe;
+
 /* ---------- cookbook ---------- */
 function viewCookbook() {
+  const entries = (S.cookbookEntries || []).slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  const stars = n => "★★★★★".slice(0, n) + "☆☆☆☆☆".slice(0, 5 - n);
+  const page = e => {
+    const r = recipeById(e.recipeId) || {};
+    return `<div class="cookbook-page">
+      <div class="cbp-tape"></div>
+      <div class="cbp-head"><span class="cbp-emoji">${e.emoji || "🍽️"}</span><div><h3>${esc(e.name)}</h3><div class="cbp-meta">📅 ${esc(e.date)} · 📍 ${esc((e.region || "").split(" · ")[0])}</div></div><div class="cbp-rating" title="Family rating">${stars(e.rating || 5)}</div></div>
+      ${typeof mediaFigure === "function" && r.media ? `<div class="cbp-photo">${mediaFigure(r.media.finished)}</div>` : ""}
+      ${e.participants && e.participants.length ? `<div class="cbp-row"><b>👨‍🍳 Cooked by:</b> ${esc(e.participants.join(", "))}</div>` : ""}
+      ${e.favorite ? `<div class="cbp-row"><b>❤️ Favorite part:</b> ${esc(e.favorite)}</div>` : ""}
+      ${e.gratitude ? `<div class="cbp-row"><b>🙏 Thankful for:</b> ${esc(e.gratitude)}</div>` : ""}
+      <div class="cbp-badges">${e.badge && BADGES.find(b => b.id === e.badge) ? `<span class="cbp-chip">${BADGES.find(b => b.id === e.badge).emoji} ${esc(BADGES.find(b => b.id === e.badge).name)}</span>` : ""}${e.stamp ? `<span class="cbp-chip">${e.stamp.emoji} ${esc(e.stamp.name)}</span>` : ""}<span class="cbp-chip">⭐ +${e.xp || 0} XP</span></div>
+    </div>`;
+  };
   root().innerHTML = `
     <div class="view">
-      <h1 style="font-size:26px">🍳 Family Cookbook</h1>
-      <p style="color:var(--ink-soft);margin:6px 0 20px">Filipino dishes we're learning to make together. Cook one, then add your family rating!</p>
+      <h1 style="font-size:26px">📖 Family Cookbook</h1>
+      <p style="color:var(--ink-soft);margin:6px 0 16px">Your growing keepsake of dishes you've cooked together. Each page is a memory. 💛</p>
+      ${entries.length ? `<div class="section-title"><span class="em">📖</span> Our Keepsake Pages (${entries.length})</div>
+        <div class="cookbook-grid">${entries.map(page).join("")}</div>` : `<div class="card empty" style="text-align:center"><div class="em">📖</div><p>Your cookbook is ready for its first memory! Cook a recipe in the Cooking Academy and it becomes a beautiful keepsake page here.</p><button class="btn btn-primary" style="margin-top:12px" onclick="go('cooking')">👨‍🍳 Open the Cooking Academy</button></div>`}
+
+      <div class="section-title" style="margin-top:24px"><span class="em">👨‍🍳</span> Recipes to Cook</div>
       <div class="grid g-auto">
-        ${COOKBOOK.map(r => `
-          <div class="card" style="padding:20px">
-            <div style="font-size:40px">${r.emoji}</div>
-            <h3 style="margin-top:8px">${esc(r.name)}</h3>
-            <div class="tag" style="margin:6px 0">${esc(r.tag)}</div>
-            <p style="color:var(--ink-soft);font-size:14px">${esc(r.note)}</p>
+        ${RECIPES.map(r => `
+          <div class="card" style="padding:18px;cursor:pointer" onclick="openRecipe('${r.id}')">
+            <div style="font-size:38px">${r.emoji}</div>
+            <h3 style="margin-top:6px">${esc(r.name)}</h3>
+            <div class="tag" style="margin:6px 0">${esc(r.category)} · ${diffStars(r.difficulty)}</div>
+            <p style="color:var(--ink-soft);font-size:13px">📍 ${esc(r.region.split(" · ")[0].split(" (")[0])}${recipeDone(r.id) ? " · <b style='color:#0e9c86'>cooked ✓</b>" : ""}</p>
           </div>`).join("")}
       </div>
-      <div class="callout" style="margin-top:20px">👩‍🍳 <b>Tip:</b> Complete the "Kitchen Adventure" on the map to cook Champorado step by step!</div>
+      <div class="callout" style="margin-top:18px">👩‍🍳 <b>Tip:</b> Open the <a href="#" onclick="go('cooking');return false" style="color:#0e7c86;font-weight:800">Cooking Academy</a> for the full studio experience — language, map, science, and a family challenge with every dish!</div>
     </div>`;
 }
 
@@ -1804,7 +2025,7 @@ function applyTheme() { document.body.classList.toggle("dark", S.theme === "dark
 $("#themeBtn").addEventListener("click", () => { S.theme = S.theme === "dark" ? "light" : "dark"; save(); applyTheme(); renderTop(); });
 
 /* ---------- router ---------- */
-const VIEWS = { home: viewHome, blessings: viewBlessings, map: viewMap, passport: viewPassport, badges: viewBadges, celebrations: viewCelebrations, tree: viewTree, cookbook: viewCookbook, storybook: viewStorybook, teacher: viewTeacher, parent: viewParent, family: viewFamily, settings: viewSettings };
+const VIEWS = { home: viewHome, blessings: viewBlessings, map: viewMap, passport: viewPassport, badges: viewBadges, celebrations: viewCelebrations, tree: viewTree, cooking: viewCooking, cookbook: viewCookbook, storybook: viewStorybook, teacher: viewTeacher, parent: viewParent, family: viewFamily, settings: viewSettings };
 function go(view) {
   stopTimer();
   (VIEWS[view] || viewHome)();

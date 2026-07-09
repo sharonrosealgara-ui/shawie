@@ -34,6 +34,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.21.0] — 2026-07-09 · 🍳 Cooking Academy (core)
+
+- `Added` **Wonder Journey Cooking Academy** — a new sidebar module where each recipe is a full studio lesson, not a recipe card. `recipes.js` holds a modular `RECIPES` data model (extensible to more dishes and future world cuisines with no code changes) + 9 cooking badges.
+- `Added` **Studio recipe lesson** (`openRecipe`) — wooden studio board, movie-style story + history + fun fact, **real Philippines map** geography, **language table (English · Tagalog · Hiligaynon)**, ingredients + real-media placeholders, kitchen tools & **safety card**, numbered cooking steps, **math · science · nutrition** cards, **per-child activities**, a **family challenge**, and a playful **kitchen quiz** with instant feedback.
+- `Added` **Completion pipeline** (`finishRecipe`) — a rating/favorite/gratitude/participants modal → confetti celebration, cooking **badge** + **XP**, and an **auto-generated Family Cookbook keepsake page**.
+- `Changed` **Family Cookbook** rebuilt as a **keepsake album** — each cooked recipe becomes a taped scrapbook page (photo, date, who cooked, rating, favorite part, gratitude, badge, stamp, XP), plus a recipe library.
+- `Added` 5 recipes (Mango Graham Float · Banana Cue · Puto · Chicken Adobo · Halo-Halo); dish media placeholders in the manifest; `docs/16_COOKING_ACADEMY.md`.
+- `Docs` Roadmap for the module: more recipes, Cooking Theater scene-mode + themed kitchens/mascots, Little Chef Passport, Grandma's Recipe Box, Family Heritage Wall, photo upload.
+
+---
+
 ## [0.20.0] — 2026-07-09 · Unit 3 complete (Family, Values & Community)
 
 - `Added` **Unit 3 fully authored** — five new interactive adventures (a14–a18), Village & Values theme:

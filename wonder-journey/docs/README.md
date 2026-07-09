@@ -22,6 +22,7 @@ lower number wins, and `00` (the Constitution) always wins.
 | 13 | [Deployment Guide](13_DEPLOYMENT_GUIDE.md) | Deployment strategy, environments, checklists |
 | 14 | [Brand Guidelines](14_BRAND_GUIDELINES.md) | Brand identity, voice, palette, mascots |
 | 15 | [Animation System](15_ANIMATION_SYSTEM.md) | Motion language, timing, transitions, reduced-motion |
+| 16 | [Cooking Academy](16_COOKING_ACADEMY.md) | Cooking module architecture, recipes, roadmap |
 
 **Also see:** [PROGRESS.md](../PROGRESS.md) (live build tracker) ·
 [CHANGELOG.md](../CHANGELOG.md) · [CONTRIBUTING.md](../CONTRIBUTING.md) ·

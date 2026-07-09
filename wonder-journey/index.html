@@ -423,6 +423,71 @@ a{color:var(--ocean);text-decoration:none}
 .prep-chips{display:flex;flex-wrap:wrap;gap:8px}
 .prep-chip{background:#eef7f4;border:1.5px solid #bcd8cf;border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;color:#2f6b5c}
 .ac-summary{white-space:pre-wrap;font-family:ui-monospace,monospace;font-size:12.5px;background:rgba(0,0,0,.03);border-radius:10px;padding:12px 14px;color:var(--ink,#4a3c28);max-height:280px;overflow:auto}
+/* Cooking Academy */
+.cooking-hero{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,#fff2dc,#ffe4c0);border:2px solid #f0c890;border-radius:18px;padding:18px 20px;box-shadow:0 8px 20px rgba(180,120,40,.14)}
+.cooking-hero .ch-emoji{font-size:52px;filter:drop-shadow(0 3px 5px rgba(0,0,0,.18))}
+.recipe-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.recipe-card{position:relative;display:flex;gap:12px;align-items:center;background:var(--card,#fff);border:2px solid rgba(0,0,0,.07);border-radius:16px;padding:14px;cursor:pointer;box-shadow:0 5px 14px rgba(0,0,0,.08);transition:transform .15s,box-shadow .15s}
+.recipe-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.14)}
+.recipe-card.done{border-color:#9fdcc9;background:linear-gradient(180deg,#f4fbf8,#eaf7f1)}
+.recipe-card .rc-emoji{font-size:40px;flex:0 0 auto}
+.recipe-card .rc-body{flex:1;min-width:0}
+.recipe-card h3{margin:0 0 4px;font-size:16px}
+.recipe-card .rc-meta{font-size:12.5px;color:var(--ink-soft,#7a6a55)}
+.recipe-card .rc-diff{color:#e5674f;letter-spacing:1px}
+.recipe-card .rc-go{font-size:12px;font-weight:800;color:#c8763a}
+.recipe-card .rc-done{font-size:12px;font-weight:800;color:#0e9c86}
+/* Studio lesson */
+.studio-board{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,#8a5a34,#6e4626);color:#fff8ec;border-radius:16px;padding:16px 20px;box-shadow:0 10px 24px rgba(90,50,20,.3);background-image:linear-gradient(135deg,rgba(255,255,255,.06),transparent),repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 14px)}
+.studio-board .sb-emoji{font-size:50px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.3))}
+.studio-board .kicker{color:#ffd89a}
+.studio-board .sb-meta{font-size:13px;opacity:.9;margin-top:2px}
+.cook-cols{margin-top:16px}
+.studio-card{background:var(--card,#fff);border:2px solid rgba(0,0,0,.06);border-radius:16px;padding:16px 18px;margin-top:14px;box-shadow:0 5px 14px rgba(0,0,0,.07)}
+.studio-card h3{margin:0 0 8px;font-family:'Baloo 2',sans-serif;color:var(--ink,#3a2c18)}
+.studio-card h4{margin:0 0 4px;font-size:14px}
+.lang-table{width:100%;border-collapse:collapse;font-size:14px}
+.lang-table th{text-align:left;background:#f4ead6;padding:7px 10px;color:#7a5a2c}
+.lang-table td{padding:7px 10px;border-bottom:1px solid rgba(0,0,0,.06)}
+.lang-table tbody tr:nth-child(even){background:rgba(0,0,0,.02)}
+.ingredient-list li,.step-list li{margin:5px 0}
+.step-list{list-style:none;padding:0;counter-reset:step}
+.step-list li{display:flex;gap:10px;align-items:flex-start;margin:8px 0}
+.step-list .step-n{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:#e5674f;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px}
+.safety-card{margin-top:8px;background:#fff3e0;border:1px dashed #f0a860;border-radius:10px;padding:8px 12px;font-size:14px;color:#8a5a2c}
+.learn-trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.learn-trio>div{background:rgba(0,0,0,.03);border-radius:12px;padding:10px 12px}
+.learn-trio p{margin:0;font-size:13.5px;color:var(--ink-soft,#5a4a35)}
+.cook-q{margin:10px 0}
+.cq-q{font-weight:700;margin:0 0 6px}
+.cq-opts{display:flex;gap:8px;flex-wrap:wrap}
+.cq-opt{border:2px solid #e6d5b8;background:#fff;border-radius:12px;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+.cq-opt:hover:not(:disabled){background:#fff6e6}
+.cq-opt.correct{background:#dff3ea;border-color:#0e9c86;color:#0b7a68}
+.cq-opt.wrong{background:#fde8e4;border-color:#e5674f;color:#c0442e}
+.cq-score{margin-top:8px;font-size:15px;font-weight:700;color:#0e7c86}
+.cook-finish{text-align:center;margin:22px 0 8px}
+/* completion modal fields */
+.cc-field{text-align:left;margin:10px 0}
+.cc-field label{display:block;font-size:13px;font-weight:700;color:var(--ink-soft,#7a6a55);margin-bottom:4px}
+.cc-field input{width:100%;padding:9px 12px;border:2px solid #e6d5b8;border-radius:10px;font-family:inherit;font-size:14px}
+.star-row{font-size:28px;letter-spacing:4px;cursor:pointer;color:#ddd}
+.star-row .star.on{color:#f4b400}
+.who-row{display:flex;flex-wrap:wrap;gap:8px}
+.who-chip{display:inline-flex;align-items:center;gap:5px;background:#f4ead6;border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer}
+/* Cookbook keepsake pages */
+.cookbook-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.cookbook-page{position:relative;background:linear-gradient(180deg,#fffdf7,#fdf3e2);border:1px solid #e8d6b6;border-radius:14px;padding:16px;box-shadow:0 6px 16px rgba(120,90,40,.14)}
+.cookbook-page .cbp-tape{position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-2deg);width:70px;height:18px;background:rgba(230,200,140,.6);border:1px solid rgba(200,160,90,.4)}
+.cbp-head{display:flex;align-items:center;gap:10px}
+.cbp-emoji{font-size:34px}
+.cbp-head h3{margin:0;font-size:16px}
+.cbp-meta{font-size:12px;color:var(--ink-soft,#8a7a60)}
+.cbp-rating{margin-left:auto;color:#f4b400;font-size:14px;letter-spacing:1px}
+.cbp-photo{margin:10px 0}
+.cbp-row{font-size:13.5px;color:var(--ink,#4a3c28);margin:4px 0}
+.cbp-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cbp-chip{background:#fff;border:1.5px solid #ecd9b0;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700;color:#7a5a2c}
 /* Certificates */
 #certOverlay{position:fixed;inset:0;z-index:9998;display:none;flex-direction:column;align-items:center;justify-content:flex-start;gap:16px;padding:24px;overflow:auto;background:rgba(30,40,35,.72);backdrop-filter:blur(3px)}
 #certOverlay.show{display:flex}
@@ -500,6 +565,7 @@ body.cert-open{overflow:hidden}
     <button class="nav-item" data-view="badges"><span class="ic">🏅</span> Badges</button>
     <button class="nav-item" data-view="celebrations"><span class="ic">🎉</span> Celebrations</button>
     <button class="nav-item" data-view="tree"><span class="ic">🌳</span> Adventure Tree</button>
+    <button class="nav-item" data-view="cooking"><span class="ic">👨‍🍳</span> Cooking Academy</button>
     <button class="nav-item" data-view="cookbook"><span class="ic">🍳</span> Family Cookbook</button>
     <button class="nav-item" data-view="storybook"><span class="ic">📖</span> Family Storybook</button>
     <div class="nav-group">For Grown-ups</div>
@@ -537,6 +603,7 @@ body.cert-open{overflow:hidden}
 <script src="curriculum.js"></script>
 <script src="curriculum-map.js"></script>
 <script src="media-manifest.js"></script>
+<script src="recipes.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
