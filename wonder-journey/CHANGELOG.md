@@ -34,6 +34,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.10.1] — 2026-07-08 · Real Educational Media System
+
+- `Added` **`MEDIA_POLICY.md`** — authentic photos/maps first for real places, animals, food & culture; original illustrations only for mascots/UI/decor/Bible narrative; quality, licensing, and no-hotlinking rules.
+- `Added` **`media-manifest.js`** — registry & sourcing checklist of the authentic images the curriculum needs (maps, landmarks, animals, food, culture) with `alt`, `caption`, `credit`, `license`, local `file` path, and per-adventure mapping.
+- `Added` **Resilient `mediaFigure()` component** — lazy-loaded local/cloud images with alt text, caption & credit; on failure it shows a graceful placeholder (family view stays clean) with teacher guidance in Teacher Mode. No hotlinking.
+- `Docs` Real photos require sourcing/licensing (dropped into `assets/media/` or a cloud bucket); figures activate automatically once files are present.
+
+---
+
 ## [0.10.0] — 2026-07-08 · Presentation Design Engine + Real Philippines Map
 
 - `Added` **Presentation Design Engine** — one Wonder Journey identity (storybook paper, signpost, mascot, colored text) with a **per-adventure theme** that sets the sky, floating decorations and ground: Island, Geography, Ocean, Volcano, Rice Terrace, Cooking, Wildlife, Festival, Historical, Village & Bible Lands. Each adventure auto-selects its theme (explicit map + keyword inference), so **future adventures theme themselves** with no redesign.

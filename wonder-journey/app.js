@@ -673,6 +673,22 @@ function mascotHTML(sc) {
   return `<div class="mascot"><div class="mascot-face ${m.state}">${MASCOT.face}</div><div class="mascot-bubble" id="mascotBubble">${esc(m.text)}</div></div>`;
 }
 
+/* Resilient educational media component (see MEDIA_POLICY.md).
+   Loads a local/cloud image with alt text + caption + credit; on error it shows a
+   graceful placeholder, plus teacher guidance only in Teacher Mode. Never hotlinks. */
+function mediaFigure(id) {
+  const m = (typeof MEDIA !== "undefined") ? MEDIA[id] : null;
+  if (!m) return "";
+  const cap = m.caption ? `<figcaption>${esc(m.caption)}${m.credit ? ` <span class="credit">— ${esc(m.credit)}</span>` : ""}</figcaption>` : "";
+  const note = S.teacherMode ? `<div class="wj-teachernote">📷 Teacher: add a licensed image at <b>${esc(m.file)}</b> (${esc(m.sourceHint || "verify license")}).</div>` : "";
+  return `<figure class="wj-figure">
+    <img src="${esc(m.file)}" alt="${esc(m.alt || m.subject || "")}" loading="lazy"
+      onerror="this.closest('.wj-figure').classList.add('missing')" />
+    <div class="wj-figure-fallback"><span class="fb-emoji">🖼️</span><b>${esc(m.subject || "Photo")}</b><small>${esc(m.alt || "")}</small></div>
+    ${cap}${note}
+  </figure>`;
+}
+
 function phMapSVG() {
   // Stylized-accurate vector of the Philippines (correct island set & positions).
   return `<svg viewBox="0 0 240 360" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" aria-label="Map of the Philippines">

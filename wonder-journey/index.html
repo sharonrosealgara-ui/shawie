@@ -338,6 +338,17 @@ a{color:var(--ocean);text-decoration:none}
 .cine-top .cine-btn.xbtn{background:linear-gradient(180deg,#f7b733,#e8902b);border-color:#e8902b}
 .title-spark{color:#ffca4b}
 
+/* resilient educational media (see MEDIA_POLICY.md) */
+.wj-figure{margin:14px 0 0;position:relative}
+.wj-figure img{display:block;width:100%;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,.18)}
+.wj-figure-fallback{display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;background:#eef7f4;border:2px dashed #bcd8cf;border-radius:14px;padding:20px;color:#3a5;min-height:120px}
+.wj-figure-fallback .fb-emoji{font-size:34px}.wj-figure-fallback b{color:#2b5}.wj-figure-fallback small{color:#6b8}
+.wj-figure.missing img{display:none}
+.wj-figure.missing .wj-figure-fallback{display:flex}
+.wj-figure figcaption{font-size:13px;color:#5a4420;margin-top:6px;text-align:center}
+.wj-figure figcaption .credit{opacity:.7}
+.wj-teachernote{font-size:12px;color:#8a5a2c;margin-top:4px;text-align:center;font-style:italic}
+
 /* ===== Mascot guide (Sinag) ===== */
 .mascot{position:absolute;left:22px;bottom:92px;z-index:3;display:flex;align-items:flex-end;gap:10px;max-width:min(62vw,380px)}
 .mascot-face{font-size:clamp(46px,7vw,74px);filter:drop-shadow(0 6px 12px rgba(0,0,0,.35));animation:mascotIdle 3.2s ease-in-out infinite;transform-origin:bottom center;cursor:default}
@@ -417,6 +428,7 @@ a{color:var(--ocean);text-decoration:none}
 <div id="cinema"></div>
 
 <script src="curriculum.js"></script>
+<script src="media-manifest.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
