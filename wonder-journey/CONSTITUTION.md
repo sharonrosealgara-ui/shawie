@@ -1,237 +1,189 @@
-# 🌏 The Wonder Journey Constitution
+# 🌴 Wonder Journey OS — Project Constitution
 
-**Version 1.0**
+- **Version:** 1.0
+- **Status:** Active
+- **Priority:** Highest
+- **Owner:** Sharon Rose Algara
 
 > This document is the **highest authority** of the Wonder Journey project.
->
-> Whenever there is a conflict between — new feature ideas · UI decisions ·
-> curriculum decisions · lesson content · coding decisions · design choices —
-> **this document always wins.**
->
-> Wonder Journey must always protect this vision.
+> Every design, engineering, curriculum, content, and feature decision must
+> support the vision below. Whenever anything conflicts with this document,
+> **this document wins.** If something does not contribute to joyful family
+> learning, it does not belong in Wonder Journey.
 
 ---
 
-## Mission
+## Our Promise
 
-Wonder Journey exists to create **joyful family learning experiences.**
+Wonder Journey is **not** a Learning Management System.
+It is **not** a dashboard. It is **not** an online classroom.
+It is **not** presentation software.
 
-- It is **not** an online school.
-- It is **not** an LMS.
-- It is **not** educational software.
-
-It is an **interactive family adventure.**
-
-- Children should feel like they entered another world.
-- Parents should feel involved.
-- Learning should become one of the happiest memories of childhood.
+Wonder Journey is an **immersive family learning adventure** designed to create
+lifelong memories through exploration, storytelling, creativity, culture, faith,
+and shared experiences.
 
 ---
 
-## Who This Is Built For
+## Our Mission
 
-This curriculum is custom-designed for:
+To help families discover the beauty of God's creation, the richness of Filipino
+culture, strong family values, and academic excellence through immersive
+adventures that children will remember for the rest of their lives.
+
+Learning should feel like: **exploring · discovering · cooking · creating ·
+building · playing · wondering · reflecting · celebrating.**
+
+> Never like completing worksheets.
+
+---
+
+## Our Vision
+
+Wonder Journey should become **the world's most beautiful family learning platform.**
+
+- Children should say: *"I can't wait for today's adventure."*
+- Parents should say: *"We're making memories together."*
+- Teachers should say: *"I've never taught this way before."*
+
+---
+
+## Our Core Philosophy
+
+- We do not teach subjects. **We tell stories.**
+- We do not teach information. **We create experiences.**
+- We do not build lessons. **We build adventures.**
+- We do not build software. **We build memories.**
+
+---
+
+## Product Principles
+
+### Principle 1 — Family First
+Every lesson is designed for family participation. Parents are partners in
+learning. Grandparents are welcome. Siblings learn together. Learning is shared.
+
+### Principle 2 — Adventure Before Instruction
+Children explore before they memorize. Curiosity comes before explanation.
+Discovery comes before definition. Questions come before answers.
+
+### Principle 3 — Story Before Content
+Every lesson begins with a story. Every topic becomes an adventure. Children
+emotionally connect before they academically analyze.
+
+### Principle 4 — Learn by Doing
+Children should **cook, build, draw, paint, craft, move, explore, experiment, and
+discuss** — rather than simply watch.
+
+### Principle 5 — Real World First
+Whenever possible, use **authentic educational media**: real maps · real volcanoes
+· real wildlife · real foods · real festivals · real historical locations · real
+artifacts. Original Wonder Journey illustrations are reserved for **UI, mascots,
+decorations, storybook elements, fantasy scenes, and Bible narrative
+illustrations.** **Never replace real educational content with fictional artwork.**
+*(Enforced by [`REAL_MEDIA_POLICY.md`](REAL_MEDIA_POLICY.md), `media-manifest.js`, and the resilient `mediaFigure()` component.)*
+
+### Principle 6 — Joy Before Perfection
+Children should enjoy learning. Wonder Journey is not designed around grades — it
+is designed around **curiosity.**
+
+### Principle 7 — Beauty Matters
+Beauty improves learning. Every screen should feel handcrafted. Every interaction
+should feel intentional. Every lesson should feel worthy of becoming a printed
+children's book.
+
+### Principle 8 — Every Lesson Is Cinematic
+Never build slides. Never build dashboards. Never build scrolling lessons. Build
+**cinematic adventures** — Disney storytelling · Pixar · interactive museums ·
+Canva Presentation Mode · National Geographic Kids.
+
+### Principle 9 — Respect Childhood
+Never overwhelm children. Use **large typography, beautiful illustrations, real
+photography, minimal text, clear interactions, warm colors, gentle animation, slow
+pacing, and wonder.** Children deserve beautiful educational experiences.
+
+---
+
+## Our Family
+
+Wonder Journey Version 1 is designed specifically for:
 
 **Shaun · Taylor · Grandma · Rylee · Ezra · Asa · Selah**
 
-Every lesson should remember this family. **Never generate generic lessons.**
+Every lesson should remember this family. *(Future versions may support additional
+families through personalization.)*
 
 ---
 
-## The Parents' Requests
+## Family Requirements
 
-The family's goals always come first. **Priority order:**
+The curriculum follows the parents' priorities, in order:
 
-1. **Philippine Language** — Tagalog · Hiligaynon · conversation · songs · games ·
-   vocabulary · role play
-2. **Philippine Culture** — traditions · family life · hospitality · music · dance ·
-   transportation · community · daily life
-3. **Family Values** — respect · kindness · responsibility · helping others · faith ·
-   service · love · gratitude
-4. **Cooking** — real recipes · real ingredients · measurements · kitchen skills ·
-   nutrition · family cooking
-5. **Philippine Geography** — real maps · Luzon · Visayas · Mindanao · volcanoes ·
-   mountains · beaches · animals · cities · culture
-6. **Academics** — English · reading · writing · grammar · vocabulary · spelling ·
-   basic math · times tables · science · study skills
+1. **Filipino Language** — Tagalog · Hiligaynon · conversation · songs · games · vocabulary
+2. **Philippine Culture** — traditions · daily life · family · hospitality · music · dance · community
+3. **Filipino Family Values** — respect · love · helping others · kindness · faith · responsibility · gratitude · service
+4. **Cooking Together** — real recipes · real ingredients · measurements · kitchen safety · family cooking · recipe collection
+5. **Philippine Geography** — maps · Luzon · Visayas · Mindanao · mountains · volcanoes · beaches · wildlife · cities · culture
+6. **Academics** — English · reading · writing · grammar · spelling · math · times tables · science · study skills
 
-> These subjects should **naturally grow from the family's interests** rather than
-> feeling disconnected.
+> Academics should **naturally emerge through adventures** rather than feeling disconnected.
 
 ---
 
 ## Christian Foundation
 
-**Include:** Bible stories · history of Jesus · character lessons · prayer · gratitude ·
-reflection · Fruit of the Spirit · Armor of God · missionary journeys · Bible geography ·
-Bible timeline.
+Wonder Journey supports Christian family learning.
 
-**Keep everything:** hopeful · age-appropriate · respectful · non-graphic.
+**Include:** Bible stories · history of Jesus · character lessons · prayer ·
+reflection · gratitude · Bible geography · Bible timeline · missionary journeys ·
+Fruit of the Spirit · Armor of God · hope · kindness · forgiveness · respect.
 
-> **Do not assume Christmas or Easter activities.** Respect the family's preference to
-> remember Jesus through the biblical **Feast Days** they shared. Design all
-> holiday-related content so it is **configurable.**
+**Keep content:** hopeful · age-appropriate · respectful · non-graphic.
+
+> **Do not assume Christmas or Easter activities.** Respect the family's preference
+> to remember Jesus through the biblical **Feast Days**: **Passover, Unleavened
+> Bread, Firstfruits, Pentecost, Feast of Trumpets, Day of Atonement, and Feast of
+> Tabernacles.** All holiday-related content **must be configurable.**
 
 ---
 
-## The Children
+## Child Personalization
+
+Wonder Journey personalizes activities. Every Adventure contains **shared family
+activities plus optional personalized extension activities.**
 
 | Child | Loves |
 |---|---|
-| **Rylee** | Creative · animals · crafts · nature · sewing · embroidery · knitting · hands-on learning |
-| **Ezra** | Builder · history · cooking · miniatures · woodworking · LEGO · engineering |
-| **Asa** | Engineering · outdoor learning · building · animals · mechanics · experiments · hands-on learning |
-| **Selah** | Drawing · miniature worlds · cooking · baking · art · creative play |
+| **🎨 Rylee** | Creative · animals · crafts · embroidery · knitting · nature · hands-on learning |
+| **🔨 Ezra** | Builder · history · LEGO · miniatures · cooking · woodworking · engineering |
+| **⚙️ Asa** | Outdoor learning · mechanics · building · animals · engineering · hands-on projects · curiosity |
+| **🏘️ Selah** | Drawing · miniature worlds · cooking · baking · art · creative play |
+
+*(Implemented by the Personalization Engine — the "Explore It Your Way" scene in every adventure.)*
 
 ---
 
-## Personalization Engine
+## Experience Standards
 
-Every Adventure should include:
+Every Adventure should include: **Story · Exploration · Real Maps · Real
+Photography · Language · Math · Science · Culture · Cooking · Bible · Hands-on
+Activity · Quiz · Reflection · Celebration · Family Challenge · Passport Stamp ·
+Badge · Memory.**
 
-- A **shared family activity**, **plus**
-- Optional **personalized activities** for Rylee, Ezra, Asa, and Selah.
-
-> Everyone learns together. Everyone experiences learning differently.
-
----
-
-## The Curriculum
-
-**One continuous story.**
-
-`July → August → September → October → November → December`
-
-Every Adventure connects to previous Adventures. **Never create isolated lessons.**
+> No lesson should feel repetitive.
 
 ---
 
-## Wonder Journey Design
+## Quality Standard
 
-Wonder Journey should **never** look like: Google Classroom · PowerPoint · Moodle ·
-Canvas · corporate software · an educational dashboard.
+Before approving any feature, ask:
 
-Instead think: **Disney · Pixar · National Geographic Kids · an interactive children's
-museum · an adventure journal · a travel scrapbook · a storybook · a passport.**
-
-> Every page should feel magical.
-
----
-
-## Presentation System
-
-Every lesson is a **cinematic adventure** — not slides, not cards, not scrolling.
-
-Presentation should feel like: Canva Presentation Mode · Disney storytelling · an
-interactive movie. **Children should watch scenes unfold.**
-
----
-
-## Real Educational Media Policy
-
-Whenever teaching something that **exists in the real world**, use **authentic
-educational media** whenever available:
-
-> Real Philippine maps · satellite maps · volcanoes · mountains · animals · beaches ·
-> food · festivals · cooking ingredients · historical places · cultural artifacts ·
-> plants · landscapes.
-
-Original Wonder Journey **illustrations** should be used **only** for: mascots ·
-decorations · passport · stickers · UI · storybook elements · Bible narrative scenes ·
-fantasy adventure scenes.
-
-> **Never replace real educational content with fictional artwork.**
-> *(Implemented via [`REAL_MEDIA_POLICY.md`](REAL_MEDIA_POLICY.md), `media-manifest.js`,
-> and the resilient `mediaFigure()` component.)*
-
----
-
-## Theme Engine
-
-Every lesson **automatically** chooses its visual theme — Ocean · Volcano · Forest ·
-Rice Terraces · Kitchen · Festival · Bible Lands · Museum · Rainforest · Wildlife ·
-Science · Space. **The classroom transforms.**
-
----
-
-## Scene Engine
-
-Every Adventure **automatically** chooses the appropriate scenes — Movie Intro ·
-Storybook · Explorer · Interactive Map · Discovery · Cooking · Bible · Science · Game ·
-Quiz · Reflection · Celebration.
-
----
-
-## Map Experience
-
-Whenever geography is taught, **always use real maps.**
-
-`World → Asia → Philippines → Luzon → Visayas → Mindanao → Province → City → Destination`
-
-> Maps should support **exploration**, not just display information.
-
----
-
-## Animation
-
-Every lesson should feel alive — clouds · leaves · birds · butterflies · ocean ·
-sunlight · fireflies · sparkles · passport stamps · compass · treasure chest ·
-cooking steam. **Meaningful animation only.**
-
----
-
-## Sound
-
-Optional — ocean · forest · cooking · festival · reflection · adventure theme ·
-correct answer · badge · passport stamp. **Mute always available.**
-
----
-
-## Lesson Structure
-
-`Movie Intro → Welcome → Mission → Story → Exploration → Language → Math → Science →
-Culture → Bible → Cooking / Hands-on Activity → Game → Quiz → Reflection →
-Family Challenge → Passport → Badge → Celebration → Next Adventure Preview`
-
----
-
-## Family Learning
-
-Every Adventure should include opportunities to: **talk · cook · pray · read · build ·
-draw · play · celebrate — together.**
-
-> Wonder Journey is designed for **family participation.**
-
----
-
-## Parent Experience
-
-Parents should receive: lesson preview · materials needed · ingredient list · craft
-supplies · learning objectives · after-class summary · photos · progress · suggested
-family activities · certificates.
-
----
-
-## Celebrations
-
-Wonder Journey celebrates: birthdays · milestones · achievements · passport stamps ·
-adventure tree · certificates · cooking memories · photo memories · graduation.
-
-> Celebrations should feel **joyful and memorable.**
-
----
-
-## The Final Question
-
-Before approving any lesson, ask:
-
-- Would this make **Shaun and Taylor** smile?
-- Would **Rylee** enjoy it?
-- Would **Ezra** want to build something?
-- Would **Asa** want to explore it?
-- Would **Selah** want to draw it?
-- Would **Grandma** enjoy joining?
-- Would the family want **another Adventure tomorrow?**
+- Does this make children **curious**?
+- Does this strengthen **family relationships**?
+- Does this encourage **creativity**?
+- Does this inspire **exploration**?
+- Does this support **Shaun and Taylor's goals**?
+- Would the children **ask to do another adventure**?
 
 **If the answer is NO — redesign it.**
 
@@ -239,10 +191,10 @@ Before approving any lesson, ask:
 
 ## The Wonder Journey Promise
 
-> We are not building lessons.
-> **We are building childhood memories.**
+> We are not building software.
+> **We are building a childhood.**
 >
-> Every completed Adventure should leave this family saying:
-> ***"That was our favorite class yet."***
+> Every adventure should become a treasured family memory.
 >
-> That is the standard every feature must achieve.
+> That is the standard every line of code, every illustration, every animation,
+> every lesson, and every interaction must achieve.

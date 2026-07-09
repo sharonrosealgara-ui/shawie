@@ -44,7 +44,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ## [0.11.1] — 2026-07-09 · The Wonder Journey Constitution
 
-- `Added` **`CONSTITUTION.md` (v1.0)** — the project's **highest-authority** document. It codifies the mission (joyful family learning, not an LMS), who it's built for (the Ferrell family by name), the parents' priority order (Philippine language → culture → values → cooking → geography → academics), the Christian foundation (Feast-Day-respectful, holiday content configurable), each child's interests, and the standards for design, presentation, real media, themes, scenes, maps, animation, sound, lesson structure, family participation, parent experience, and celebrations — ending with the *Final Question* and the *Wonder Journey Promise*. **When any decision conflicts with the Constitution, the Constitution wins.**
+- `Added` **`CONSTITUTION.md` (v1.0)** — the project's **highest-authority** document (Owner: Sharon Rose Algara). It codifies the Promise, Mission, Vision & Core Philosophy; **9 Product Principles**; who it's built for (the family by name); the parents' priority order (Filipino language → culture → values → cooking → geography → academics); the Christian foundation — **Feast-Day-respectful** with the seven biblical Feasts named (Passover, Unleavened Bread, Firstfruits, Pentecost, Trumpets, Atonement, Tabernacles) and all holiday content **configurable**; per-child personalization; Experience Standards; and the Quality Standard's *Final Question* → *"We are not building software. We are building a childhood."* **When any decision conflicts with the Constitution, the Constitution wins.**
 - `Documentation` `README.md` and `CONTRIBUTING.md` now point to the Constitution as the top authority.
 
 ---
