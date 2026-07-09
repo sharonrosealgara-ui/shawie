@@ -194,14 +194,27 @@ function viewHome() {
 
       ${(() => {
         const ub = upcomingBirthdays();
-        if (!ub.length) return "";
-        const soon = ub.slice(0, 3);
         const label = (d) => d === 0 ? "🎉 Today!" : d === 1 ? "Tomorrow" : `in ${d} days`;
+        if (!ub.length) {
+          // Always show the section so the family can find & set up birthdays.
+          return `
+          <div class="section-title"><span class="em">🎂</span> Celebrations &amp; Birthdays</div>
+          <div class="card empty" style="text-align:center">
+            <div class="em">🎂</div>
+            <p>Add each explorer's birthday and Wonder Journey will celebrate them with confetti and a warm birthday surprise on their special day.</p>
+            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px">
+              <button class="btn btn-primary" onclick="go('settings')">🎂 Add Birthdays</button>
+              <button class="btn btn-ghost" onclick="previewBirthday()">✨ Preview a Celebration</button>
+            </div>
+          </div>`;
+        }
+        const soon = ub.slice(0, 3);
         return `
-        <div class="section-title"><span class="em">🎂</span> Upcoming Birthdays</div>
+        <div class="section-title"><span class="em">🎂</span> Celebrations &amp; Birthdays</div>
         <div class="grid g-auto">
           ${soon.map(u => `<div class="card stat" style="padding:16px"><span class="em">${u.emoji}</span><span class="lbl">${esc(u.name)}</span><span class="val" style="font-size:18px">${label(u.days)}</span><p style="color:var(--ink-soft);font-size:12px;margin-top:2px">${u.next.toLocaleDateString(undefined, { month: "long", day: "numeric" })}</p></div>`).join("")}
-        </div>`;
+        </div>
+        <div style="text-align:center;margin-top:10px"><button class="btn btn-ghost" onclick="go('settings')">🎂 Manage birthdays</button></div>`;
       })()}
 
       <div class="section-title"><span class="em">🎯</span> ${next ? "Up Next" : "You did it!"}</div>
@@ -527,6 +540,12 @@ function birthdayModal(names) {
     <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="closeModal()">Hooray! 🥳</button>`;
   $("#modalBg").classList.add("show");
 }
+function previewBirthday() {
+  // Let the family see the birthday celebration even before any date is set.
+  const kids = S.family.filter(f => f.level).map(f => f.name);
+  birthdayModal(kids.length ? [kids[0]] : ["Explorer"]);
+}
+window.previewBirthday = previewBirthday;
 function checkBirthdays() {
   const key = todayKey(), md = key.slice(5);
   const shown = (S.birthdayShown && S.birthdayShown[key]) || [];
@@ -1200,8 +1219,8 @@ function viewSettings() {
     <div class="view">
       <h1 style="font-size:26px">⚙️ Settings</h1>
       <div class="card" style="padding:22px;margin-top:16px">
-        <h3 style="margin-bottom:6px">👨‍👩‍👧‍👦 Family Members</h3>
-        <p style="color:var(--ink-soft);font-size:14px;margin-bottom:10px">Add each child and grown-up. Pick any emoji as an avatar.</p>
+        <h3 style="margin-bottom:6px">👨‍👩‍👧‍👦 Family Members &amp; 🎂 Birthdays</h3>
+        <p style="color:var(--ink-soft);font-size:14px;margin-bottom:10px">Add each child and grown-up, pick an emoji avatar, and set each person's <b>🎂 birthday</b> (the date box) — Wonder Journey will celebrate them with confetti on their special day.</p>
         <div id="famList">
           ${S.family.map((f, i) => `
             <div class="fam-editor">

@@ -34,6 +34,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.12.1] — 2026-07-09 · Celebrations & Birthdays always visible
+
+- `Fixed` The **Birthday Celebration section** was hidden whenever no birthdays were set (and none are set by default), so it couldn't be found. Home Base now **always shows a "🎂 Celebrations & Birthdays" section**: when birthdays exist it lists the next ones with a *Manage birthdays* link; when none are set it shows a warm empty state with **🎂 Add Birthdays** (jumps to Settings) and **✨ Preview a Celebration** (shows the confetti birthday surprise right away).
+- `Added` `previewBirthday()` — lets the family see the birthday celebration before any date is entered.
+- `Improved` Settings now clearly labels the birthday field (*"Family Members & 🎂 Birthdays"*) with guidance that setting a birthday triggers a confetti celebration on the day.
+
+---
+
 ## [0.12.0] — 2026-07-09 · Personalization Engine (one adventure, four ways)
 
 - `Added` **Personalization Engine** — a permanent, automatic feature (Constitution §Personalization Engine). Every adventure now includes an **"Explore It Your Way"** scene with an optional activity tuned to each child: **🎨 Rylee** (artist & animal-lover), **🔨 Ezra** (builder & historian), **⚙️ Asa** (engineer & explorer), **🏘️ Selah** (artist & mini-world maker). Everyone learns the same topic — each experiences it their own way.
