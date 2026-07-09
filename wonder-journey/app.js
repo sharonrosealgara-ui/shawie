@@ -632,6 +632,102 @@ function decorHTML(theme) {
   return h;
 }
 
+/* ============================================================
+   PERSONALIZATION ENGINE (Constitution §Personalization Engine)
+   Every Adventure teaches the SAME topic, but each child gets an optional
+   activity tuned to how THEY love to learn. Automatic for all 72 adventures:
+   we read the adventure's theme (themeFor) and pick each child's on-theme
+   activity, falling back to a topic-aware default for any new theme.
+   ============================================================ */
+const CHILD_PROFILES = [
+  { name: "Rylee", icon: "🎨", tag: "Artist & animal-lover", color: "#3f9d54" },
+  { name: "Ezra",  icon: "🔨", tag: "Builder & historian",   color: "#f4a821" },
+  { name: "Asa",   icon: "⚙️", tag: "Engineer & explorer",   color: "#12a3af" },
+  { name: "Selah", icon: "🏘️", tag: "Artist & mini-world maker", color: "#bd6980" },
+];
+const PERSONALIZE = {
+  island: {
+    Rylee: "Draw a map of your dream island and the animals that live on it.",
+    Ezra:  "Build a 3-D island from cardboard — give it mountains and a harbor.",
+    Asa:   "Float paper boats in water and test which island-hopping design sails best.",
+    Selah: "Make a tiny island world in a tray: sand, blue-paper sea and mini boats.",
+  },
+  geography: {
+    Rylee: "Draw and decorate your own map of the Philippines with colorful borders.",
+    Ezra:  "Build the three island groups — Luzon, Visayas, Mindanao — from salt dough.",
+    Asa:   "Make a working compass with a magnet and needle, then map your house.",
+    Selah: "Create a miniature map-table with tiny landmarks you can move around.",
+  },
+  ocean: {
+    Rylee: "Draw a coral reef bursting with your favorite sea creatures.",
+    Ezra:  "Build an underwater diorama in a shoebox with layers of the sea.",
+    Asa:   "Experiment with 'float or sink' using shells, toys and salty water.",
+    Selah: "Make a mini aquarium in a jar with paper fish and blue water.",
+  },
+  volcano: {
+    Rylee: "Draw the birds, eagles and plants that live around a volcano.",
+    Ezra:  "Build a volcano model from clay or paper-mâché.",
+    Asa:   "Engineer a baking-soda-and-vinegar eruption and time the 'lava'.",
+    Selah: "Create a tiny volcano village with little houses, fields and animals.",
+  },
+  terraces: {
+    Rylee: "Draw the rice terraces at sunrise with birds and butterflies.",
+    Ezra:  "Build model rice terraces from stacked cardboard steps.",
+    Asa:   "Plant a seed in a cup and measure how much it grows each day.",
+    Selah: "Make a miniature farm with tiny rice fields and a carabao.",
+  },
+  cooking: {
+    Rylee: "Draw and label the ingredients, then decorate the finished dish.",
+    Ezra:  "Help measure and cook the recipe — you're the head chef today.",
+    Asa:   "Turn cooking into science: watch what heat and mixing do to the food.",
+    Selah: "Bake or plate a mini version and arrange it beautifully for the family.",
+  },
+  wildlife: {
+    Rylee: "Draw or sew a soft version of today's animal.",
+    Ezra:  "Build the animal's habitat as a small diorama.",
+    Asa:   "Go outside, observe real animals or bugs, and record what they do.",
+    Selah: "Make a miniature forest home for tiny animal figures.",
+  },
+  festival: {
+    Rylee: "Design and craft a festival costume or headdress.",
+    Ezra:  "Build a parade float or a simple instrument that really makes sound.",
+    Asa:   "Engineer a moving decoration or a lantern that lights up.",
+    Selah: "Create a miniature festival street with tiny lanterns and dancers.",
+  },
+  history: {
+    Rylee: "Draw a portrait of today's hero and a banner of their words.",
+    Ezra:  "Build a stand-up timeline with a card for each event.",
+    Asa:   "Make a model of a landmark or invention from the story.",
+    Selah: "Create a tiny museum scene about the hero or event.",
+  },
+  village: {
+    Rylee: "Draw a picture that shows today's value in your own family.",
+    Ezra:  "Build something useful for the home as an act of service.",
+    Asa:   "Invent a 'helping machine' or plan a way to help a neighbor.",
+    Selah: "Make a miniature home scene showing the family caring for each other.",
+  },
+  bible: {
+    Rylee: "Draw a scene from today's Bible story.",
+    Ezra:  "Build a model from the story — an ark, a tent, or a city wall.",
+    Asa:   "Map the journey in the story and mark each place.",
+    Selah: "Create a miniature Bible-lands scene with tiny figures.",
+  },
+};
+const PERSONALIZE_DEFAULT = {
+  Rylee: t => `Draw or make a craft about ${t}.`,
+  Ezra:  t => `Build a model or diorama about ${t}.`,
+  Asa:   t => `Design a hands-on experiment or build about ${t}.`,
+  Selah: t => `Create a miniature scene about ${t}.`,
+};
+function personalActivities(a) {
+  const th = themeFor(a).id;
+  const topic = String(a.title || "today's adventure").replace(/^[^:]*:\s*/, "").toLowerCase();
+  return CHILD_PROFILES.map(c => ({
+    ...c,
+    text: (PERSONALIZE[th] && PERSONALIZE[th][c.name]) || PERSONALIZE_DEFAULT[c.name](topic),
+  }));
+}
+
 function buildScenes(a) {
   const secs = a.sections.filter(s => !(s.faith && !S.faith));
   const scenes = [{ type: "intro" }, { type: "map" }];
@@ -640,13 +736,14 @@ function buildScenes(a) {
   if (media.length) scenes.push({ type: "gallery", ids: media });
   secs.forEach(s => scenes.push({ type: "learn", s }));
   if (typeof LEVEL_MISSIONS !== "undefined" && LEVEL_MISSIONS[a.id]) scenes.push({ type: "missions" });
+  scenes.push({ type: "yourway" }); // Personalization Engine — optional per-child activities
   a.quiz.forEach((q, qi) => scenes.push({ type: "quiz", qi }));
   scenes.push({ type: "reflect" }, { type: "ending" });
   return scenes;
 }
 
 function sceneLabel(sc, i, n) {
-  const names = { intro: "Welcome", map: "Travel Mode", gallery: "Real Photos", learn: "Discover", missions: "Missions", quiz: "Quiz", reflect: "Reflection", ending: "Adventure Complete" };
+  const names = { intro: "Welcome", map: "Travel Mode", gallery: "Real Photos", learn: "Discover", missions: "Missions", yourway: "Explore It Your Way", quiz: "Quiz", reflect: "Reflection", ending: "Adventure Complete" };
   return `${names[sc.type] || "Scene"} · ${i + 1} / ${n}`;
 }
 
@@ -663,6 +760,7 @@ function mascotLine(sc) {
     case "intro": return { state: "wave", text: `Mabuhay! I'm ${MASCOT.name}, your sunny guide. Let's explore together! ☀️` };
     case "map": return { state: "point", text: "Tap each island group to discover its animals, food and culture!" };
     case "gallery": return { state: "point", text: "These are real photos and maps — let's look closely! 📸" };
+    case "yourway": return { state: "wave", text: "Everyone learns the same adventure — your own way! Pick your activity. 🌟" };
     case "learn": { const tips = ["Ooh, great listening!", "You're learning so much!", "Let's discover this together!", "Wonderful — keep going!"]; return { state: "idle", text: tips[Math.floor(Math.random() * tips.length)] }; }
     case "missions": return { state: "idle", text: "Everyone has a mission — pick the one that's just right for you!" };
     case "quiz": return { state: "idle", text: "You can do it! Take your time and think it through. 🤔" };
@@ -811,6 +909,21 @@ function renderScene(sc) {
         <span class="signpost">🎯 Missions</span>
         <h2 class="title">🎯 A Mission for Everyone</h2>
         ${LEVEL_TIERS.map(t => `<div class="paper-tier"><b>${t.emoji} ${t.name} · ${t.age}</b><ul>${m[t.key].map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}
+      </div></div>
+    </div>`;
+  }
+  if (sc.type === "yourway") {
+    const cards = personalActivities(a).map(c => `
+      <div class="kid-card" style="--kc:${c.color}">
+        <div class="kid-top"><span class="kid-ic">${c.icon}</span><div><b>${esc(c.name)}</b><small>${esc(c.tag)}</small></div></div>
+        <p>${esc(c.text)}</p>
+      </div>`).join("");
+    return `<div class="scene scene-lesson">
+      <div class="paper"><div class="paper-inner">
+        <span class="signpost">🌟 Explore It Your Way</span>
+        <h2 class="title">🌟 One Adventure, Four Ways! <span class="title-spark">✨</span></h2>
+        <p class="lead" style="font-size:15px;margin:2px 0 6px">Everyone learns the same topic — each of you gets an activity made for how <b>you</b> love to learn. Pick yours (or try a sibling's)!</p>
+        <div class="kids-grid">${cards}</div>
       </div></div>
     </div>`;
   }

@@ -34,6 +34,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.12.0] — 2026-07-09 · Personalization Engine (one adventure, four ways)
+
+- `Added` **Personalization Engine** — a permanent, automatic feature (Constitution §Personalization Engine). Every adventure now includes an **"Explore It Your Way"** scene with an optional activity tuned to each child: **🎨 Rylee** (artist & animal-lover), **🔨 Ezra** (builder & historian), **⚙️ Asa** (engineer & explorer), **🏘️ Selah** (artist & mini-world maker). Everyone learns the same topic — each experiences it their own way.
+- `Added` **Theme-aware activity library** — activities are chosen from the adventure's auto-selected theme (volcano, ocean, cooking, festival, wildlife, terraces, history, village, Bible lands, geography, island), so all **72 adventures** get on-topic, interest-matched activities with no per-lesson authoring. New/unknown themes fall back to a topic-aware default per child. *(Example — Volcanoes: Rylee draws volcano wildlife · Ezra builds a volcano model · Asa engineers a baking-soda eruption · Selah makes a mini volcano village.)*
+- `Added` Warm color-coded child cards (`.kids-grid` / `.kid-card`) in the cinematic player, each with the child's icon, interest tag and activity.
+
+---
+
 ## [0.11.1] — 2026-07-09 · The Wonder Journey Constitution
 
 - `Added` **`CONSTITUTION.md` (v1.0)** — the project's **highest-authority** document. It codifies the mission (joyful family learning, not an LMS), who it's built for (the Ferrell family by name), the parents' priority order (Philippine language → culture → values → cooking → geography → academics), the Christian foundation (Feast-Day-respectful, holiday content configurable), each child's interests, and the standards for design, presentation, real media, themes, scenes, maps, animation, sound, lesson structure, family participation, parent experience, and celebrations — ending with the *Final Question* and the *Wonder Journey Promise*. **When any decision conflicts with the Constitution, the Constitution wins.**
