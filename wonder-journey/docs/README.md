@@ -15,6 +15,7 @@ lower number wins, and `00` (the Constitution) always wins.
 | 06 | [Architecture](06_ARCHITECTURE.md) | Technical design of the app |
 | 07 | [Roadmap](07_ROADMAP.md) | 20-phase build plan & status |
 | 08 | [Decisions](08_DECISIONS.md) | Architecture Decision Records (ADRs) |
+| 09 | [Build Status](09_BUILD_STATUS.md) | Official status dashboard (the heartbeat) |
 
 **Also see:** [PROGRESS.md](../PROGRESS.md) (live build tracker) ·
 [CHANGELOG.md](../CHANGELOG.md) · [CONTRIBUTING.md](../CONTRIBUTING.md) ·
