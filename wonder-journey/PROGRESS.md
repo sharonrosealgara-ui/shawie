@@ -37,7 +37,7 @@ _Last updated: 2026-07-09 · Autonomous Build Session_
 ## Content Completion (World 1 — Philippines)
 
 - **Adventures scheduled (map + metadata):** 72 / 72 `██████████`
-- **Adventures with full interactive content:** 10 / 72 `█░░░░░░░░░`
+- **Adventures with full interactive content:** 11 / 72 `██░░░░░░░░`
 - **Media manifest coverage:** 72 / 72 `██████████` (66 curated assets, files pending licensing)
 - **Real licensed asset files present:** 0 / 66 `░░░░░░░░░░` (awaiting upload — placeholders live)
 

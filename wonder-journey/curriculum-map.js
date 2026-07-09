@@ -61,7 +61,7 @@ const CURRICULUM_MAP = {
         "math": "Counting & patterns (8 rays, 3 stars)",
         "english": "Color & noun vocabulary",
         "bible": "God's promises kept",
-        "built": false
+        "built": true
       },
       {
         "n": 4,

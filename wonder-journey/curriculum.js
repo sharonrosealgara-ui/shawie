@@ -172,6 +172,74 @@ const ADVENTURES = [
     reflect: ["Which island would you visit first?", "What new direction word did you learn?"],
   },
   {
+    id: "a3",
+    emoji: "🇵🇭",
+    title: "The Filipino Flag & National Symbols",
+    region: "National Identity",
+    subtitle: "Discover the colors of the flag, the eight-rayed sun, and the plants and animals that stand for the Philippines.",
+    value: "Respect",
+    badge: "island-hopper",
+    stamp: { emoji: "🇵🇭", name: "Flag Day" },
+    xp: 150,
+    sections: [
+      { icon: "🌅", subject: "Story: A Flag Wakes Up", html:
+        `<p>Early one morning, a family raises a folded cloth up a tall pole. As the wind catches it, <b>blue, red, white, gold</b> unfold against the sky — the <b>flag of the Philippines</b>! 🇵🇭</p>
+         <p>Every color and shape has a <b>meaning</b>. Let's discover them together, like reading a secret code of the country. 🔍</p>` },
+      { icon: "🎨", subject: "The Flag's Colors", html:
+        `<div class="wordbank">
+           <div class="word">🔵 <b>Blue</b> — peace, truth & justice</div>
+           <div class="word">🔴 <b>Red</b> — courage & bravery</div>
+           <div class="word">⚪ <b>White triangle</b> — equality & freedom for all</div>
+           <div class="word">🌟 <b>Gold sun</b> — freedom, with <b>8 rays</b> for the first 8 provinces</div>
+           <div class="word">⭐ <b>3 stars</b> — Luzon, Visayas & Mindanao</div>
+         </div>
+         <div class="tryit">🖐️ Wave your hand like a flag. Can you count to <b>8</b> for the sun's rays?</div>` },
+      { icon: "🌸", subject: "National Symbols", html:
+        `<div class="wordbank">
+           <div class="word">🌸 <b>Sampaguita</b> — national flower (sweet & white)</div>
+           <div class="word">🌳 <b>Narra</b> — national tree (strong & tall)</div>
+           <div class="word">🦅 <b>Philippine Eagle</b> — national bird</div>
+           <div class="word">🐃 <b>Carabao</b> — national animal (the farmer's friend)</div>
+         </div>` },
+      { icon: "➕", subject: "Math: Count & Group", html:
+        `<p><b>The sun has 8 rays.</b> Let's play with 8!</p>
+         <ul><li>8 rays shared by 2 kids to color = <b>4 each</b> (8 ÷ 2).</li>
+         <li>The flag has <b>3 stars</b>. If each star had 5 points, that's <b>3 × 5 = 15</b> points!</li></ul>` },
+      { icon: "🗣️", subject: "Tagalog", html:
+        `<div class="wordbank">
+           <div class="word"><b>Watawat</b> — Flag</div>
+           <div class="word"><b>Araw</b> — Sun</div>
+           <div class="word"><b>Bituin</b> — Star</div>
+           <div class="word"><b>Bulaklak</b> — Flower</div>
+         </div>
+         <div class="tryit">🗨️ Try a sentence: "Ang <b>watawat</b> ay may <b>araw</b> at tatlong <b>bituin</b>." (The flag has a sun and three stars.)</div>` },
+      { icon: "🗣️", subject: "Hiligaynon", html:
+        `<div class="wordbank">
+           <div class="word"><b>Hayahay / Bandera</b> — Flag</div>
+           <div class="word"><b>Adlaw</b> — Sun</div>
+           <div class="word"><b>Bituon</b> — Star</div>
+           <div class="word"><b>Bulak</b> — Flower</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>God keeps His promises (Genesis 9).</b> After the great flood, God set a <b>rainbow</b> in the sky as a sign of His promise to Noah and to all the earth. A sign can carry a big, hopeful meaning — just like the colors of a flag.</p>
+         <div class="callout faith">💜 Just as the rainbow reminds us of God's faithful promise, symbols remind us of what we love and hope for.</div>` },
+      { icon: "📖", subject: "English — Describing Words", html:
+        `<div class="tryit">✏️ <b>Adjectives!</b> Fill the blank out loud: "The flag is ______ and ______." (Try: bright, brave, beautiful, proud.)</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>If our family made a little flag, what colors and symbols would we choose, and why?</li>
+         <li>What is one thing about our family we would be proud to put on it?</li></ul>` },
+      { icon: "🤝", subject: "Character: Respect", value: true, html:
+        `<div class="callout char">🌟 <b>Respect</b> means honoring what is important to others. When the flag is raised, Filipinos stand still and quiet to show respect. Let's show respect to people, too — by listening well today. 🙌</div>` },
+    ],
+    quiz: [
+      { q: "How many rays does the sun on the flag have?", a: ["6", "8", "10"], correct: 1 },
+      { q: "The 3 stars stand for Luzon, Visayas, and…", a: ["Manila", "Mindanao", "Cebu"], correct: 1 },
+      { q: "The national FLOWER of the Philippines is the…", a: ["sampaguita", "rose", "gumamela"], correct: 0 },
+      { q: "When the flag is raised, showing respect means we…", a: ["run around", "stand still & quiet", "keep talking"], correct: 1 },
+    ],
+    reflect: ["Which national symbol is your favorite, and why?", "How did you show respect today?"],
+  },
+  {
     id: "a7",
     emoji: "🍫",
     title: "Kitchen Adventure: Let's Make Champorado",
@@ -661,6 +729,11 @@ const LEVEL_MISSIONS = {
     explorer: ["Point north, south, east, west in the room.", "Match each island group to top / middle / bottom.", "Trace the 3 island groups on a map."],
     adventurer: ["Use the map scale to estimate the Manila–Cebu distance.", "Write the Tagalog direction words; use one in a sentence.", "List one island in each group."],
     trailblazer: ["Plan a pretend island-hopping trip across all 3 groups in order.", "Explain how the Chocolate Hills formed, in your own words.", "Compare two islands — how are they different?"],
+  },
+  a3: {
+    explorer: ["Color a flag and count the sun's 8 rays out loud.", "Match each symbol to its name (flower, tree, bird, animal).", "Stand tall and quiet, like showing respect to the flag."],
+    adventurer: ["Draw the flag and label each color's meaning.", "Solve: share the 8 rays between 2 people (8 ÷ 2).", "Write one sentence using the Tagalog word ‘watawat’."],
+    trailblazer: ["Design a family flag and explain what every symbol means.", "Research why the sun has 8 rays; share it with the family.", "Explain how a rainbow (Genesis 9) is like a flag — a sign with meaning."],
   },
   a7: {
     explorer: ["Help pour and stir (with an adult).", "Count the ingredients out loud.", "Serve your bowl and say “Masarap!”"],

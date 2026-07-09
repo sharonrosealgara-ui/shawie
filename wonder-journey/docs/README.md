@@ -21,6 +21,7 @@ lower number wins, and `00` (the Constitution) always wins.
 | 12 | [Testing & QA Guide](12_TESTING_GUIDE.md) | Quality assurance standards |
 | 13 | [Deployment Guide](13_DEPLOYMENT_GUIDE.md) | Deployment strategy, environments, checklists |
 | 14 | [Brand Guidelines](14_BRAND_GUIDELINES.md) | Brand identity, voice, palette, mascots |
+| 15 | [Animation System](15_ANIMATION_SYSTEM.md) | Motion language, timing, transitions, reduced-motion |
 
 **Also see:** [PROGRESS.md](../PROGRESS.md) (live build tracker) ·
 [CHANGELOG.md](../CHANGELOG.md) · [CONTRIBUTING.md](../CONTRIBUTING.md) ·

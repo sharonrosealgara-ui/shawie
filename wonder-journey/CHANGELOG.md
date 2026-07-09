@@ -34,6 +34,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.17.0] — 2026-07-09 · New adventure a3 + Animation System doc
+
+- `Added` **Adventure a3 — "The Filipino Flag & National Symbols"** (Unit 1, Fri Jul 10), fully authored per the Content Style Guide: story hook, flag colors & 8-ray sun, national symbols (sampaguita · narra · eagle · carabao), math (counting/grouping with 8), Tagalog & Hiligaynon in context, a Bible connection (God's promise / the rainbow, Genesis 9), English adjectives, family discussion, the value of **Respect**, a 4-question game quiz, reflection, and 3-tier level missions. Uses the Theme & Scene engines and the aligned flag/sampaguita/narra real-media gallery. Now **11 of 72 adventures fully interactive.**
+- `Documentation` `docs/15_ANIMATION_SYSTEM.md` — motion language, timing tiers, transitions, per-feature motion, reduced-motion & performance rules.
+
+---
+
 ## [0.16.0] — 2026-07-09 · Curriculum id alignment (single canonical schedule)
 
 - `Changed` **Re-slotted the 10 fully-authored adventures onto their canonical 72-map ids** (ADR-010, Option A): Champorado a3→**a7**, Bayanihan a4→**a13**, Fiesta a5→**a19**, Volcanoes a6→**a25**, Animals a7→**a31**, Rice Terraces a8→**a37**, Ocean a9→**a43**, Heroes a10→**a49** (a1/a2 unchanged). The Adventure Theater and Teacher Portal now agree, and the theme engine, level missions, and **real-media manifest all align with what actually plays** (e.g., a7 Champorado shows champorado media).
