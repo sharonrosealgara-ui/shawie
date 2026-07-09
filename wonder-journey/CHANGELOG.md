@@ -34,6 +34,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.15.0] — 2026-07-09 · Certificates + milestone celebrations
+
+- `Added` **Printable certificates** — an elegant, print/PDF-ready certificate (double-gold border, globe seal, family explorers' names, achievement, live stats, dated signature). Two kinds: **Adventure Journey** (always available) and **World 1 Champions** (unlocks at all 72). Available from the Celebrations page; dedicated print stylesheet renders just the certificate in landscape.
+- `Added` **Milestone celebration pop-ups** — confetti + a warm modal when the family crosses 1 · 3 · 7 · 12 · 24 · 36 · 72 adventures, each shown once (tracked in `milestonesShown`), with a shortcut to claim the matching certificate. Fires on return-to-view after completions.
+- `Added` `MILESTONES`, `pendingMilestone()`, `checkMilestones()`, `openCertificate()`, `familyExplorers()`.
+
+---
+
 ## [0.14.0] — 2026-07-09 · Teacher Portal + Parent Dashboard (grown-up tools)
 
 - `Added` **👩‍🏫 Teacher Portal** — a plannable view of **all 72 adventures**, grouped by unit with a "coming up next" section. Each lesson is an expandable plan generated from the curriculum map: objective; woven subjects (Language · Math · Science & Culture · Bible · Value); **materials & ingredient lists** (theme-based + specific kits like champorado ingredients, build-a-volcano, plant-a-seed, parol craft); personalized per-child activities; a **📋 Copy lesson plan** button; and an *Open Adventure* shortcut for fully interactive lessons.

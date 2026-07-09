@@ -7,6 +7,7 @@ lower number wins, and `00` (the Constitution) always wins.
 |---|---|---|
 | 00 | [Constitution](../CONSTITUTION.md) | Highest authority — mission, principles, family, Christian foundation |
 | 01 | [Design Bible](01_DESIGN_BIBLE.md) | Complete visual identity |
+| 01A | [UI Component Library](01A_UI_COMPONENT_LIBRARY.md) | Reusable component catalogue & status |
 | 02 | [Experience Engine](02_EXPERIENCE_ENGINE.md) | Theater · Theme Engine · Scene Engine · pedagogy |
 | 03 | [Curriculum Bible](03_CURRICULUM_BIBLE.md) | Curriculum structure, July–December 2026 |
 | 04 | [Family Requirements](04_FAMILY_REQUIREMENTS.md) | The family & parents' priorities |

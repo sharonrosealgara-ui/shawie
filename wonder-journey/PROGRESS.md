@@ -46,14 +46,15 @@ _Last updated: 2026-07-09 · Autonomous Build Session_
 ## This Session
 
 **Completed today**
-- Documentation foundation: `docs/` source-of-truth set (index + Architecture + Roadmap + Decisions), permanent progress tracker.
-- **Teacher Portal** — week-by-week schedule, per-lesson plans (objectives across Language/Math/Science/Culture/Bible/Value), materials & ingredient lists, teacher notes, copy-ready lesson summary.
-- **Parent Dashboard** — at-a-glance progress, upcoming lessons preview, materials-to-prepare list, copy-ready after-class summary.
-- Certificates — printable "Adventure Completed" & milestone awards.
+- Documentation foundation: `docs/` source-of-truth set (index, Design Bible, UI Component Library, Experience Engine, Curriculum Bible, Family Requirements, Architecture, Roadmap, Decisions) + permanent progress tracker.
+- **Teacher Portal** — schedule for all 72 adventures, per-lesson plans (objectives across Language/Math/Science/Culture/Bible/Value), materials & ingredient lists, copy-ready lesson summary.
+- **Parent Dashboard** — at-a-glance progress ring, upcoming lessons preview, materials-to-prepare list, copy-ready after-class summary.
+- **Certificates** — printable/PDF Adventure Journey & World 1 Champions awards.
+- **Milestone pop-ups** — confetti celebrations at 1/3/7/12/24/36/72 adventures.
 
 **Current task:** See git log for the latest commit.
 
-**Next task:** Continue Curriculum Framework (Phase 9) — author full interactive content unit by unit (Unit 3 onward).
+**Next task:** Continue Curriculum Framework (Phase 9) — author full interactive content unit by unit (Unit 3 onward); migrate to the six-mascot cast (Design Bible).
 
 **Known issues**
 - Real photo/map files not yet uploaded — the resilient media system shows honest placeholders until licensed assets are dropped into `assets/`.

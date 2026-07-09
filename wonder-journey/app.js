@@ -14,6 +14,7 @@ const DEFAULT_STATE = {
   reflections: {},        // { adventureId: [answers] }
   blessings: {},          // { "YYYY-MM-DD": { gratitude:[{id,name,text}], prayed:bool } }
   birthdayShown: {},      // { "YYYY-MM-DD": [names already celebrated today] }
+  milestonesShown: {},    // { "3": true } milestones already celebrated with a pop-up
   family: [
     { name: "Shaun", role: "Dad", emoji: "👨", color: "#0e7c86" },
     { name: "Taylor", role: "Mom", emoji: "👩", color: "#e5674f" },
@@ -121,10 +122,86 @@ function awardCompletion(adv, score, total) {
   save(); renderTop();
   return { gained, newly, firstTime };
 }
+/* Family milestone thresholds — celebrated once with a confetti pop-up. */
+const MILESTONES = [
+  { need: 1, emoji: "👣", title: "First Adventure!", line: "You've begun your Wonder Journey together." },
+  { need: 3, emoji: "⚡", title: "3 Adventures!", line: "You're on a roll — look at you go!" },
+  { need: 7, emoji: "🚀", title: "7 Adventures!", line: "A whole week of wonder. Blast off!" },
+  { need: 12, emoji: "🌸", title: "12 Adventures!", line: "Two units explored — beautiful work, team." },
+  { need: 24, emoji: "🏝️", title: "24 Adventures!", line: "A third of the journey — amazing!" },
+  { need: 36, emoji: "⛰️", title: "Halfway There!", line: "Halfway across the Philippines together." },
+  { need: 72, emoji: "🏆", title: "World 1 Champions!", line: "You explored the whole Philippines. Incredible!" },
+];
+function pendingMilestone() {
+  const done = Object.keys(S.completed).length;
+  return MILESTONES.find(m => done >= m.need && !(S.milestonesShown && S.milestonesShown[m.need]));
+}
+function checkMilestones() {
+  const m = pendingMilestone();
+  if (!m) return;
+  if (!S.milestonesShown) S.milestonesShown = {};
+  S.milestonesShown[m.need] = true;
+  save();
+  const canCert = m.need >= 3;
+  $("#modalBox").innerHTML = `
+    <div class="burst">${m.emoji}</div>
+    <h2>${esc(m.title)}</h2>
+    <p style="font-size:16px">${esc(m.line)}</p>
+    <div class="reward-row"><div class="reward">🎯 ${Object.keys(S.completed).length} adventures</div><div class="reward">⭐ ${S.xp} XP</div></div>
+    ${canCert ? `<button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="closeModal();openCertificate('milestone',${m.need})">🎖️ Get your certificate</button>` : ""}
+    <button class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="closeModal()">Hooray! 🎉</button>`;
+  confettiBurst();
+  $("#modalBg").classList.add("show");
+}
 function completeAdventure(adv, score, total) {
   const r = awardCompletion(adv, score, total);
   celebrate(adv, score, total, r.gained, r.newly, r.firstTime);
 }
+
+/* ---------- certificates (printable) ---------- */
+function familyExplorers() {
+  const kids = S.family.filter(f => f.level).map(f => f.name);
+  return kids.length ? kids : S.family.map(f => f.name);
+}
+function openCertificate(type, arg) {
+  const done = Object.keys(S.completed).length;
+  let heading, sub;
+  if (type === "world" || (type === "milestone" && Number(arg) >= 72)) { heading = "World 1 Champions"; sub = "for exploring the entire Philippines — all 72 adventures"; }
+  else if (type === "milestone") { const m = MILESTONES.find(x => x.need == arg) || {}; heading = m.title ? m.title.replace(/!$/, "") : `${arg} Adventures`; sub = `for completing ${arg} wonderful adventures together`; }
+  else { heading = "Adventure Journey"; sub = `for completing ${done} adventure${done !== 1 ? "s" : ""} on the Wonder Journey`; }
+  const names = familyExplorers().join("  ·  ");
+  const today = new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+  let ov = document.getElementById("certOverlay");
+  if (!ov) { ov = document.createElement("div"); ov.id = "certOverlay"; document.body.appendChild(ov); }
+  ov.innerHTML = `
+    <div class="cert-actions no-print">
+      <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save PDF</button>
+      <button class="btn btn-ghost" onclick="closeCertificate()">Close</button>
+    </div>
+    <div class="cert" id="certPrint">
+      <div class="cert-inner">
+        <div class="cert-seal">🌏</div>
+        <div class="cert-kicker">Wonder Journey OS · World 1 — The Philippines</div>
+        <h1 class="cert-heading">Certificate of ${esc(heading)}</h1>
+        <p class="cert-present">This certificate is joyfully presented to</p>
+        <p class="cert-names">${esc(names)}</p>
+        <p class="cert-sub">${esc(sub)}</p>
+        <div class="cert-stats">
+          <span>🎯 ${done} adventures</span><span>⭐ ${S.xp} XP</span><span>🏅 ${S.badges.length} badges</span><span>🛂 ${S.stamps.length} stamps</span>
+        </div>
+        <div class="cert-foot">
+          <div class="cert-sign"><span>${esc(today)}</span><small>Date</small></div>
+          <div class="cert-ribbon">🎖️</div>
+          <div class="cert-sign"><span style="font-family:'Baloo 2',cursive">Wonder Journey</span><small>Family Learning OS</small></div>
+        </div>
+      </div>
+    </div>`;
+  ov.classList.add("show");
+  document.body.classList.add("cert-open");
+}
+function closeCertificate() { const ov = document.getElementById("certOverlay"); if (ov) ov.classList.remove("show"); document.body.classList.remove("cert-open"); }
+window.openCertificate = openCertificate;
+window.closeCertificate = closeCertificate;
 
 /* ---------- celebration modal ---------- */
 function celebrate(adv, score, total, gained, badges, firstTime) {
@@ -1193,6 +1270,17 @@ function viewCelebrations() {
           <div class="tl-body"><div class="tl-top"><b>${esc(e.title)}</b><span class="tl-date">${e.date ? new Date(e.date + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) : ""}</span></div>${e.detail ? `<small>${esc(e.detail)}</small>` : ""}</div>
         </div>`).join("")}
       </div>` : `<div class="card empty" style="text-align:center"><div class="em">🗺️</div><p>Your memory timeline begins with your first adventure. Finish one to plant your first memory!</p><button class="btn btn-primary" style="margin-top:12px" onclick="go('map')">Start an Adventure 🗺️</button></div>`}
+
+      <div class="section-title" style="margin-top:22px"><span class="em">🎖️</span> Certificates</div>
+      <div class="card" style="padding:18px">
+        <p style="color:var(--ink-soft);margin:0 0 12px">Celebrate the journey with a beautiful certificate you can print or save as a PDF.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="openCertificate('journey')">🏅 Adventure Journey Certificate</button>
+          ${done >= 72
+            ? `<button class="btn btn-ocean" onclick="openCertificate('world')">🏆 World 1 Champions Certificate</button>`
+            : `<button class="btn btn-ghost" disabled title="Finish all 72 adventures to unlock">🏆 World 1 Champions (${done}/72)</button>`}
+        </div>
+      </div>
     </div>`;
 }
 
@@ -1697,6 +1785,7 @@ function go(view) {
   document.querySelectorAll(".nav-item").forEach(n => n.classList.toggle("active", n.dataset.view === view));
   closeNav();
   window.scrollTo(0, 0);
+  if (pendingMilestone()) setTimeout(checkMilestones, 450);
 }
 window.go = go;
 window.openAdventure = openAdventure;
