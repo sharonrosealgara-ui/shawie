@@ -1106,6 +1106,96 @@ function viewTree() {
     </div>`;
 }
 
+/* ---------- celebrations (birthdays · milestones · memory timeline) ---------- */
+function memoryTimeline() {
+  const events = [];
+  const advById = {};
+  if (typeof ADVENTURES !== "undefined") ADVENTURES.forEach(a => advById[a.id] = a);
+  // Completed adventures
+  Object.keys(S.completed).forEach(id => {
+    const c = S.completed[id], a = advById[id];
+    if (!c || !a) return;
+    events.push({ date: c.date || "", icon: a.emoji || "🎯", kind: "Adventure",
+      title: `Finished “${a.title}”`, detail: (c.total ? `Quiz ${c.score}/${c.total}` : "") });
+  });
+  // Morning blessings (gratitude)
+  Object.keys(S.blessings || {}).forEach(d => {
+    const b = S.blessings[d]; if (!b) return;
+    const g = (b.gratitude || []).length;
+    const bits = [];
+    if (g) bits.push(`${g} gratitude note${g > 1 ? "s" : ""}`);
+    if (b.prayed) bits.push("prayer together");
+    if (bits.length) events.push({ date: d, icon: "🌅", kind: "Blessing", title: "Morning Blessings", detail: bits.join(" · ") });
+  });
+  // Birthdays celebrated
+  Object.keys(S.birthdayShown || {}).forEach(d => {
+    const names = S.birthdayShown[d]; if (!names || !names.length) return;
+    events.push({ date: d, icon: "🎂", kind: "Birthday", title: `${names.join(" & ")}'s Birthday`, detail: "Celebrated together 🎉" });
+  });
+  return events.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+}
+function viewCelebrations() {
+  const ub = upcomingBirthdays();
+  const label = (d) => d === 0 ? "🎉 Today!" : d === 1 ? "Tomorrow" : `in ${d} days`;
+  const done = Object.keys(S.completed).length, total = ADVENTURES.length;
+  const earned = BADGES.filter(b => S.badges.includes(b.id));
+  // Milestone ladder
+  const milestones = [
+    { need: 1, icon: "👣", label: "First adventure" },
+    { need: 3, icon: "⚡", label: "3 adventures" },
+    { need: 7, icon: "🚀", label: "7 adventures" },
+    { need: 12, icon: "🌸", label: "12 adventures" },
+    { need: total, icon: "🏆", label: "All of World 1" },
+  ];
+  const nextMile = milestones.find(m => done < m.need);
+  const tl = memoryTimeline();
+
+  const bdaySection = ub.length
+    ? `<div class="grid g-auto">
+        ${ub.slice(0, 6).map(u => `<div class="card stat" style="padding:16px"><span class="em">${u.emoji}</span><span class="lbl">${esc(u.name)}</span><span class="val" style="font-size:18px">${label(u.days)}</span><p style="color:var(--ink-soft);font-size:12px;margin-top:2px">${u.next.toLocaleDateString(undefined, { month: "long", day: "numeric" })}</p></div>`).join("")}
+      </div>
+      <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-ghost" onclick="go('settings')">🎂 Manage birthdays</button><button class="btn btn-ghost" onclick="previewBirthday()">✨ Preview celebration</button></div>`
+    : `<div class="card empty" style="text-align:center">
+        <div class="em">🎂</div>
+        <p>Add each explorer's birthday and Wonder Journey will celebrate them with confetti and a warm surprise on their special day.</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px">
+          <button class="btn btn-primary" onclick="go('settings')">🎂 Add Birthdays</button>
+          <button class="btn btn-ghost" onclick="previewBirthday()">✨ Preview a Celebration</button>
+        </div>
+      </div>`;
+
+  root().innerHTML = `
+    <div class="view">
+      <h1 style="font-size:26px">🎉 Celebrations</h1>
+      <p style="color:var(--ink-soft);margin:6px 0 18px">Every birthday, milestone and memory our family makes together.</p>
+
+      <div class="section-title"><span class="em">🎂</span> Birthdays</div>
+      ${bdaySection}
+
+      <div class="section-title" style="margin-top:22px"><span class="em">🏆</span> Milestones &amp; Achievements</div>
+      <div class="grid g-auto">
+        ${stat("Adventures", `${done} / ${total}`, "🧭")}
+        ${stat("Total XP", S.xp, "⭐")}
+        ${stat("Passport Stamps", S.stamps.length, "🛂")}
+        ${stat("Badges", `${S.badges.length} / ${BADGES.length}`, "🏅")}
+      </div>
+      <div class="mile-track">
+        ${milestones.map(m => `<div class="mile ${done >= m.need ? "on" : ""}"><span class="mile-ic">${m.icon}</span><small>${esc(m.label)}</small></div>`).join("")}
+      </div>
+      ${nextMile ? `<p style="color:var(--ink-soft);text-align:center;margin:4px 0 0">Next milestone: <b>${nextMile.icon} ${esc(nextMile.label)}</b> — ${nextMile.need - done} to go!</p>`
+        : `<p style="color:var(--ink-soft);text-align:center;margin:4px 0 0">🏆 Every milestone reached — what a family!</p>`}
+      ${earned.length ? `<div class="badge-strip">${earned.map(b => `<div class="badge-chip" title="${esc(b.desc)}"><span>${b.emoji}</span>${esc(b.name)}</div>`).join("")}</div>` : ""}
+
+      <div class="section-title" style="margin-top:22px"><span class="em">📖</span> Memory Timeline</div>
+      ${tl.length ? `<div class="timeline">
+        ${tl.map(e => `<div class="tl-item">
+          <div class="tl-dot">${e.icon}</div>
+          <div class="tl-body"><div class="tl-top"><b>${esc(e.title)}</b><span class="tl-date">${e.date ? new Date(e.date + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) : ""}</span></div>${e.detail ? `<small>${esc(e.detail)}</small>` : ""}</div>
+        </div>`).join("")}
+      </div>` : `<div class="card empty" style="text-align:center"><div class="em">🗺️</div><p>Your memory timeline begins with your first adventure. Finish one to plant your first memory!</p><button class="btn btn-primary" style="margin-top:12px" onclick="go('map')">Start an Adventure 🗺️</button></div>`}
+    </div>`;
+}
+
 /* ---------- cookbook ---------- */
 function viewCookbook() {
   root().innerHTML = `
@@ -1353,7 +1443,7 @@ function applyTheme() { document.body.classList.toggle("dark", S.theme === "dark
 $("#themeBtn").addEventListener("click", () => { S.theme = S.theme === "dark" ? "light" : "dark"; save(); applyTheme(); renderTop(); });
 
 /* ---------- router ---------- */
-const VIEWS = { home: viewHome, blessings: viewBlessings, map: viewMap, passport: viewPassport, badges: viewBadges, tree: viewTree, cookbook: viewCookbook, storybook: viewStorybook, family: viewFamily, settings: viewSettings };
+const VIEWS = { home: viewHome, blessings: viewBlessings, map: viewMap, passport: viewPassport, badges: viewBadges, celebrations: viewCelebrations, tree: viewTree, cookbook: viewCookbook, storybook: viewStorybook, family: viewFamily, settings: viewSettings };
 function go(view) {
   stopTimer();
   (VIEWS[view] || viewHome)();

@@ -34,6 +34,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.13.0] — 2026-07-09 · Celebrations page (birthdays · milestones · memory timeline)
+
+- `Added` **Dedicated "🎉 Celebrations" page** in the sidebar — a single home for everything the family celebrates (Constitution §Celebrations):
+  - **🎂 Birthdays** — upcoming birthdays with days-to-go, plus *Add / Manage* and *Preview a Celebration* actions.
+  - **🏆 Milestones & Achievements** — live stats (adventures, XP, stamps, badges), a lit-up **milestone ladder** (1 → 3 → 7 → 12 → all of World 1) with a "next milestone" nudge, and an **earned-badge strip**.
+  - **📖 Memory Timeline** — an automatic, date-sorted history that weaves together completed adventures (with quiz scores), morning blessings (gratitude + prayer), and birthdays celebrated — the family's growing story in one place.
+- `Added` `memoryTimeline()` builds the timeline from existing saved data (completions carry dates; blessings & birthdays are keyed by date) — no new tracking needed.
+
+---
+
 ## [0.12.1] — 2026-07-09 · Celebrations & Birthdays always visible
 
 - `Fixed` The **Birthday Celebration section** was hidden whenever no birthdays were set (and none are set by default), so it couldn't be found. Home Base now **always shows a "🎂 Celebrations & Birthdays" section**: when birthdays exist it lists the next ones with a *Manage birthdays* link; when none are set it shows a warm empty state with **🎂 Add Birthdays** (jumps to Settings) and **✨ Preview a Celebration** (shows the confetti birthday surprise right away).
