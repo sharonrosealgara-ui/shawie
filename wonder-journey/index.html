@@ -268,6 +268,21 @@ a{color:var(--ocean);text-decoration:none}
   .isle{opacity:1}
 }
 
+/* ===== Mascot guide (Sinag) ===== */
+.mascot{position:absolute;left:22px;bottom:92px;z-index:3;display:flex;align-items:flex-end;gap:10px;max-width:min(62vw,380px)}
+.mascot-face{font-size:clamp(46px,7vw,74px);filter:drop-shadow(0 6px 12px rgba(0,0,0,.35));animation:mascotIdle 3.2s ease-in-out infinite;transform-origin:bottom center;cursor:default}
+.mascot-face.wave{animation:mascotWave 1.3s ease-in-out}
+.mascot-face.cheer{animation:mascotCheer .7s ease}
+.mascot-face.point{animation:mascotPoint 1.4s ease-in-out infinite}
+@keyframes mascotIdle{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(-3deg)}}
+@keyframes mascotWave{0%,100%{transform:rotate(0)}25%{transform:rotate(15deg)}50%{transform:rotate(-8deg)}75%{transform:rotate(11deg)}}
+@keyframes mascotCheer{0%{transform:scale(1)}40%{transform:scale(1.3) translateY(-14px)}100%{transform:scale(1)}}
+@keyframes mascotPoint{0%,100%{transform:translateX(0)}50%{transform:translateX(9px)}}
+.mascot-bubble{background:rgba(255,255,255,.96);color:#08131a;border-radius:18px 18px 18px 4px;padding:10px 14px;font-weight:700;font-size:15px;line-height:1.35;box-shadow:0 8px 20px rgba(0,0,0,.25);animation:bubbleIn .4s;max-width:290px}
+@keyframes bubbleIn{from{opacity:0;transform:translateY(10px) scale(.92)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.mascot-face{animation:none !important}}
+@media(max-width:640px){.mascot{left:10px;bottom:86px;max-width:74vw}.mascot-bubble{font-size:13px;max-width:210px}}
+
 @media print{
   .sidebar,.topbar,.backdrop,.no-print,.modal-bg{display:none !important}
   .main{display:block}

@@ -34,6 +34,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.9.1] — 2026-07-08 · Sinag the Mascot Guide
+
+- `Added` **Sinag ☀️** — a friendly mascot guide in Cinematic Mode who waves hello, points at the map, encourages during the quiz, cheers correct answers, and celebrates at the ending (animated, with per-scene speech).
+- `Added` Settings toggle **Mascot Guide (Sinag)** — on by default, can be turned off.
+- `Accessibility` Mascot animations respect `prefers-reduced-motion`.
+
+---
+
 ## [0.9.0] — 2026-07-08 · Cinematic Adventure Theater
 
 **Summary:** Adventures can now play as an immersive, animated, scene-based story —

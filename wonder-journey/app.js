@@ -27,6 +27,7 @@ const DEFAULT_STATE = {
   theme: "light",
   prayerLeaderIndex: 0,   // whose turn to lead prayer (index into family)
   teacherMode: false,     // teacher extras (lesson timer + answer key); family view stays clean
+  mascot: true,           // show Sinag the mascot guide in cinematic mode
 };
 
 let S = loadState();
@@ -610,6 +611,25 @@ function cineAmbient() {
   return h;
 }
 
+const MASCOT = { name: "Sinag", face: "🌞" };
+function mascotLine(sc) {
+  switch (sc.type) {
+    case "intro": return { state: "wave", text: `Mabuhay! I'm ${MASCOT.name}, your sunny guide. Let's explore together! ☀️` };
+    case "map": return { state: "point", text: "Tap each island group to discover its animals, food and culture!" };
+    case "learn": { const tips = ["Ooh, great listening!", "You're learning so much!", "Let's discover this together!", "Wonderful — keep going!"]; return { state: "idle", text: tips[Math.floor(Math.random() * tips.length)] }; }
+    case "missions": return { state: "idle", text: "Everyone has a mission — pick the one that's just right for you!" };
+    case "quiz": return { state: "idle", text: "You can do it! Take your time and think it through. 🤔" };
+    case "reflect": return { state: "idle", text: "I love hearing your ideas — talk it over as a family! 💬" };
+    case "ending": return { state: "cheer", text: "Hooray! What a wonderful adventure! I'm so proud of you! 🎉" };
+    default: return { state: "idle", text: "Let's go!" };
+  }
+}
+function mascotHTML(sc) {
+  if (!S.mascot) return "";
+  const m = mascotLine(sc);
+  return `<div class="mascot"><div class="mascot-face ${m.state}">${MASCOT.face}</div><div class="mascot-bubble" id="mascotBubble">${esc(m.text)}</div></div>`;
+}
+
 function renderScene(sc) {
   const a = cine.a;
   if (sc.type === "intro") {
@@ -694,6 +714,7 @@ function renderCine() {
       <button class="cine-btn" onclick="closeCinema()" title="Exit theater">✕</button>
     </div>
     <div class="cine-stage">${renderScene(sc)}</div>
+    ${mascotHTML(sc)}
     <div class="cine-controls">
       <button class="cine-btn" onclick="cinePrev()" ${i === 0 ? "disabled" : ""} title="Back">‹</button>
       <div class="cine-dots">${scenes.map((s, k) => `<span class="cine-dot ${k === i ? "on" : k < i ? "done" : ""}"></span>`).join("")}</div>
@@ -725,6 +746,9 @@ window.cineAnswer = (qi, oi) => {
   const q = cine.a.quiz[qi];
   if (oi === q.correct) { cine.score++; sfxCorrect(); } else sfxWrong();
   document.querySelectorAll(".cine-opt").forEach(b => { const o = +b.dataset.o; if (o === q.correct) b.classList.add("correct"); else if (o === oi) b.classList.add("wrong"); });
+  const face = document.querySelector(".mascot-face"), bubble = document.getElementById("mascotBubble");
+  if (bubble) bubble.textContent = oi === q.correct ? "Yes! That's right! ⭐" : "Good try! Let's learn it together. 💛";
+  if (face && oi === q.correct) face.className = "mascot-face cheer";
   setTimeout(() => { if (cine) cineNext(); }, 1300);
 };
 document.addEventListener("keydown", (e) => {
@@ -933,6 +957,10 @@ function viewSettings() {
           <div class="t-txt"><b>Teacher Mode</b><small>Adds a lesson timer & quiz answer key inside adventures. Turn OFF for the family's clean view.</small></div>
           <div class="sw ${S.teacherMode ? "on" : ""}" onclick="toggleTeacher(this)"></div>
         </div>
+        <div class="toggle-row">
+          <div class="t-txt"><b>Mascot Guide (Sinag ☀️)</b><small>Shows a friendly guide who cheers the children on in Cinematic Mode.</small></div>
+          <div class="sw ${S.mascot ? "on" : ""}" onclick="toggleMascot(this)"></div>
+        </div>
       </div>
 
       <div class="card" style="padding:22px;margin-top:16px">
@@ -972,6 +1000,7 @@ function pickColor() { const c = ["#0e7c86", "#e5674f", "#3f9d54", "#7a5cc4", "#
 
 window.toggleFaith = (sw) => { S.faith = !S.faith; sw.classList.toggle("on", S.faith); save(); };
 window.toggleTeacher = (sw) => { S.teacherMode = !S.teacherMode; sw.classList.toggle("on", S.teacherMode); save(); };
+window.toggleMascot = (sw) => { S.mascot = !S.mascot; sw.classList.toggle("on", S.mascot); save(); };
 
 window.exportData = () => {
   const blob = new Blob([JSON.stringify(S, null, 2)], { type: "application/json" });
