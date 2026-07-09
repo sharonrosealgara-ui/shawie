@@ -34,6 +34,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.18.0] — 2026-07-09 · Unit 1 complete + owner's birthday
+
+- `Added` **Unit 1 fully authored** — three new interactive adventures completing "Welcome to the Philippines":
+  - **a4 · First Words: Tagalog & Hiligaynon Greetings** (Friendliness) — greetings in both languages, counting 1–10 in Filipino, Tower of Babel, speaking/listening role-play. Village theme + mano-po media.
+  - **a5 · Reading a Map: World → Asia → Philippines** (Wonder) — zoom levels, compass rose, map keys, grid coordinates, Abraham's journey. Geography theme + world/PH map media.
+  - **a6 · Our Wonder Journey Passport & Backpack** (Readiness) — passport stamps, the "invisible backpack" (curiosity/kindness/courage/gratitude), sorting & checklists, the wise builder. Island theme.
+  - Each with 8–10 sections, a 4-question game quiz, reflection, and 3-tier level missions. **14 of 72 adventures now interactive.**
+- `Added` Owner **Sharon (Teacher)** added to the default family roster with birthday **July 21** so Celebrations includes her.
+
+---
+
 ## [0.17.0] — 2026-07-09 · New adventure a3 + Animation System doc
 
 - `Added` **Adventure a3 — "The Filipino Flag & National Symbols"** (Unit 1, Fri Jul 10), fully authored per the Content Style Guide: story hook, flag colors & 8-ray sun, national symbols (sampaguita · narra · eagle · carabao), math (counting/grouping with 8), Tagalog & Hiligaynon in context, a Bible connection (God's promise / the rainbow, Genesis 9), English adjectives, family discussion, the value of **Respect**, a 4-question game quiz, reflection, and 3-tier level missions. Uses the Theme & Scene engines and the aligned flag/sampaguita/narra real-media gallery. Now **11 of 72 adventures fully interactive.**

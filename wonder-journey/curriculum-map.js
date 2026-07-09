@@ -77,7 +77,7 @@ const CURRICULUM_MAP = {
         "math": "Numbers 1–10 in Filipino",
         "english": "Speaking & listening",
         "bible": "Many languages (Babel), one God",
-        "built": false
+        "built": true
       },
       {
         "n": 5,
@@ -93,7 +93,7 @@ const CURRICULUM_MAP = {
         "math": "Map grids & the compass rose",
         "english": "Reading a simple map key",
         "bible": "Abraham's journey of faith",
-        "built": false
+        "built": true
       },
       {
         "n": 6,
@@ -109,7 +109,7 @@ const CURRICULUM_MAP = {
         "math": "Sorting & checklists",
         "english": "Writing our names & goals",
         "bible": "Being ready & wise (wise builder)",
-        "built": false
+        "built": true
       }
     ]
   },

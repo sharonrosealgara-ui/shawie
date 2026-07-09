@@ -19,6 +19,7 @@ const DEFAULT_STATE = {
     { name: "Shaun", role: "Dad", emoji: "👨", color: "#0e7c86" },
     { name: "Taylor", role: "Mom", emoji: "👩", color: "#e5674f" },
     { name: "Grandma", role: "Grandma", emoji: "👵", color: "#7a5cc4" },
+    { name: "Sharon", role: "Teacher", emoji: "👩‍🏫", color: "#c77dbb", birthday: "2001-07-21" },
     { name: "Rylee", role: "Trailblazer", emoji: "🧒", color: "#3f9d54", level: "trailblazer" },
     { name: "Ezra", role: "Adventurer", emoji: "🧒", color: "#f4a821", level: "adventurer" },
     { name: "Asa", role: "Adventurer", emoji: "🧒", color: "#12a3af", level: "adventurer" },
@@ -716,7 +717,7 @@ const THEMES = {
   village:  { id: "village",   name: "Village & Values",       sky: "linear-gradient(180deg,#bfe3f0,#dcecc4 55%,#ecd9b0 100%)", palm: true,  water: true,  decor: ["🏡","🌾","🕊️","☁️","✨"] },
   bible:    { id: "bible",     name: "Bible Lands",            sky: "linear-gradient(180deg,#f4e4b4,#e7d097 50%,#caa96b 100%)", palm: false, water: false, ground: "rgba(150,120,70,.45)", decor: ["🕊️","🫒","⭐","✨","🐑"] },
 };
-const THEME_BY_ID = { a1: "geography", a2: "island", a7: "cooking", a13: "village", a19: "festival", a25: "volcano", a31: "wildlife", a37: "terraces", a43: "ocean", a49: "history" };
+const THEME_BY_ID = { a1: "geography", a2: "island", a3: "history", a4: "village", a5: "geography", a6: "island", a7: "cooking", a13: "village", a19: "festival", a25: "volcano", a31: "wildlife", a37: "terraces", a43: "ocean", a49: "history" };
 function themeFor(a) {
   if (a.theme && THEMES[a.theme]) return THEMES[a.theme];
   if (THEME_BY_ID[a.id] && THEMES[THEME_BY_ID[a.id]]) return THEMES[THEME_BY_ID[a.id]];

@@ -240,6 +240,156 @@ const ADVENTURES = [
     reflect: ["Which national symbol is your favorite, and why?", "How did you show respect today?"],
   },
   {
+    id: "a4",
+    emoji: "🗣️",
+    title: "First Words: Tagalog & Hiligaynon Greetings",
+    region: "Language & Friendship",
+    subtitle: "Learn warm Filipino greetings and count 1–10 — the first words of our journey!",
+    value: "Friendliness",
+    badge: "tagalog-buds",
+    stamp: { emoji: "🗣️", name: "First Words" },
+    xp: 150,
+    sections: [
+      { icon: "👋", subject: "Story: A Friendly Hello", html:
+        `<p>When you meet someone new in the Philippines, the very first gift you can give is a <b>warm hello</b> and a smile. 😊</p>
+         <p>Filipinos love to greet guests like family. Let's learn the words that open every door — in <b>Tagalog</b> and <b>Hiligaynon</b>!</p>` },
+      { icon: "🗣️", subject: "Greetings in Tagalog", html:
+        `<div class="wordbank">
+           <div class="word"><b>Kumusta?</b> — How are you?</div>
+           <div class="word"><b>Magandang umaga</b> — Good morning</div>
+           <div class="word"><b>Salamat</b> — Thank you</div>
+           <div class="word"><b>Paalam</b> — Goodbye</div>
+         </div>
+         <div class="tryit">🗨️ Turn to someone and say "<b>Kumusta?</b>" with a big smile!</div>` },
+      { icon: "🗣️", subject: "Greetings in Hiligaynon", html:
+        `<div class="wordbank">
+           <div class="word"><b>Kamusta?</b> — How are you?</div>
+           <div class="word"><b>Maayong aga</b> — Good morning</div>
+           <div class="word"><b>Salamat</b> — Thank you</div>
+           <div class="word"><b>Babay / Halong</b> — Goodbye / Take care</div>
+         </div>` },
+      { icon: "🔢", subject: "Math: Count 1–10 in Filipino", html:
+        `<div class="wordbank">
+           <div class="word">1 <b>isa</b> · 2 <b>dalawa</b> · 3 <b>tatlo</b></div>
+           <div class="word">4 <b>apat</b> · 5 <b>lima</b> · 6 <b>anim</b></div>
+           <div class="word">7 <b>pito</b> · 8 <b>walo</b> · 9 <b>siyam</b> · 10 <b>sampu</b></div>
+         </div>
+         <div class="tryit">✋ Count your fingers out loud in Filipino: isa, dalawa, tatlo…!</div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Many languages, one God (Genesis 11 — the Tower of Babel).</b> Long ago everyone spoke one language. When people grew proud, God gave many languages. Today the world speaks thousands of languages — and God understands every one!</p>
+         <div class="callout faith">💜 No matter the language, we can all say "thank you" to God. He hears every heart.</div>` },
+      { icon: "📖", subject: "English — Speaking & Listening", html:
+        `<div class="tryit">🎭 <b>Role play:</b> One person says "Kumusta?" — the other answers "Mabuti, salamat!" (I'm good, thank you!). Then switch. Listen carefully!</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>Who could we greet warmly this week — a neighbor, or someone at church?</li>
+         <li>How does a friendly hello make someone feel?</li></ul>` },
+      { icon: "🤝", subject: "Character: Friendliness", value: true, html:
+        `<div class="callout char">🌟 <b>Friendliness</b> means being warm and welcoming. Try greeting three people today with a smile and a kind word. 😊</div>` },
+    ],
+    quiz: [
+      { q: "“Salamat” means…", a: ["Hello", "Thank you", "Goodbye"], correct: 1 },
+      { q: "In Filipino, the number 3 is…", a: ["tatlo", "lima", "sampu"], correct: 0 },
+      { q: "“Magandang umaga” is a greeting for the…", a: ["morning", "night", "afternoon"], correct: 0 },
+      { q: "The Tower of Babel story is about God giving people many…", a: ["languages", "coins", "boats"], correct: 0 },
+    ],
+    reflect: ["Which greeting was your favorite to say?", "Who will you greet warmly tomorrow?"],
+  },
+  {
+    id: "a5",
+    emoji: "🗺️",
+    title: "Reading a Map: World → Asia → Philippines",
+    region: "Geography & Wonder",
+    subtitle: "Zoom in from the whole world all the way to our islands, and learn to read a map like an explorer.",
+    value: "Wonder",
+    badge: "island-hopper",
+    stamp: { emoji: "🗺️", name: "Map Reader" },
+    xp: 155,
+    sections: [
+      { icon: "🔭", subject: "Story: The Explorer's Zoom", html:
+        `<p>Imagine flying like a bird, higher and higher, until you can see the whole round <b>Earth</b>. 🌍 Now let's zoom back in, step by step, to find <b>home</b>.</p>
+         <p><b>World → Asia → Philippines → our island → our town.</b> Every explorer learns to read a map!</p>` },
+      { icon: "🌏", subject: "Zooming In", html:
+        `<div class="wordbank">
+           <div class="word">🌍 <b>World</b> — all the lands & seas</div>
+           <div class="word">🗺️ <b>Asia</b> — our big continent</div>
+           <div class="word">🇵🇭 <b>Philippines</b> — 7,641 islands</div>
+           <div class="word">🏝️ <b>Our island → our town</b></div>
+         </div>` },
+      { icon: "🧭", subject: "The Compass Rose", html:
+        `<p>A <b>compass rose</b> shows directions: <b>N</b>orth, <b>E</b>ast, <b>S</b>outh, <b>W</b>est.</p>
+         <div class="tryit">🧭 Stand up! Point up = North, right = East, down = South, left = West. "Never Eat Soggy Waffles" helps us remember the order!</div>` },
+      { icon: "🔑", subject: "The Map Key", html:
+        `<p>A <b>map key</b> (legend) explains the little pictures: 🏔️ a mountain, 🌊 the sea, ⭐ a capital city, ▲ a volcano. Reading the key is like learning a map's secret language.</p>` },
+      { icon: "➕", subject: "Math: Map Grids", html:
+        `<p>Maps use a <b>grid</b> of rows and columns to find places, like <b>B-3</b>. It's just like a treasure map!</p>
+         <div class="tryit">🎯 If Manila is in box <b>C-2</b>, point across to column C, then down to row 2. X marks the spot!</div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Abraham's journey of faith (Genesis 12).</b> God told Abraham to travel to a new land He would show him. Abraham trusted God and set out — even without a map — because he believed God's promise.</p>
+         <div class="callout faith">💜 We can be brave explorers because God guides us, just like He guided Abraham.</div>` },
+      { icon: "📖", subject: "English — Reading a Map Key", html:
+        `<div class="tryit">📝 Say it out loud: "On this map, the star means the <b>capital city</b>." Can you find a symbol and read what it means?</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>If we could zoom the map to anywhere in the Philippines, where would our family visit first?</li>
+         <li>What do you wonder about that place?</li></ul>` },
+      { icon: "🤝", subject: "Character: Wonder", value: true, html:
+        `<div class="callout char">🌟 <b>Wonder</b> means being amazed and curious about the world God made. Ask one big "I wonder…" question today! 🤔</div>` },
+    ],
+    quiz: [
+      { q: "Which is the correct zoom order?", a: ["World → Asia → Philippines", "Philippines → World → Asia", "Asia → World → Philippines"], correct: 0 },
+      { q: "On a compass, the opposite of North is…", a: ["East", "South", "West"], correct: 1 },
+      { q: "A map KEY (legend) tells us what the map's…", a: ["symbols mean", "weather is", "songs are"], correct: 0 },
+      { q: "Abraham traveled to a new land because he…", a: ["trusted God", "was lost", "wanted gold"], correct: 0 },
+    ],
+    reflect: ["What place do you most wonder about?", "What new direction word did you learn?"],
+  },
+  {
+    id: "a6",
+    emoji: "🛂",
+    title: "Our Wonder Journey Passport & Backpack",
+    region: "Getting Ready",
+    subtitle: "Set up your passport for stamps and pack a backpack full of curiosity, kindness, and courage.",
+    value: "Readiness",
+    badge: "first-steps",
+    stamp: { emoji: "🛂", name: "Ready to Explore" },
+    xp: 145,
+    sections: [
+      { icon: "🎒", subject: "Story: Packing for Adventure", html:
+        `<p>Every great explorer packs a <b>backpack</b> and carries a <b>passport</b>. Today we get ours ready for the whole Wonder Journey! 🌏</p>
+         <p>But our backpack isn't only for snacks — it holds special things you can't see…</p>` },
+      { icon: "🛂", subject: "Our Passport", html:
+        `<p>A <b>passport</b> is a little book that collects a <b>stamp</b> for every place you visit. On our journey, you earn a stamp for <b>every adventure you finish</b>! 🛂✨</p>
+         <div class="tryit">👀 Open the <b>Passport</b> page later and see your stamps grow, one adventure at a time.</div>` },
+      { icon: "🎒", subject: "What's in Our Backpack?", html:
+        `<div class="wordbank">
+           <div class="word">🔍 <b>Curiosity</b> — to ask questions</div>
+           <div class="word">💛 <b>Kindness</b> — to help others</div>
+           <div class="word">🦁 <b>Courage</b> — to try new things</div>
+           <div class="word">🙏 <b>Gratitude</b> — to say thank you</div>
+         </div>` },
+      { icon: "✅", subject: "Math: Sorting & Checklists", html:
+        `<p>Getting ready means <b>sorting</b> and <b>checking</b>! Let's make a checklist.</p>
+         <ul><li>Sort real items: which go in a backpack — a <b>water bottle</b>, a <b>notebook</b>, a <b>pillow</b>? (Two yes, one no!)</li>
+         <li>Count your items and check each box: ✅ ✅ ✅</li></ul>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>The wise builder (Matthew 7).</b> Jesus told of a wise man who built his house on the <b>rock</b>, so it stood strong through the storm. Being <b>ready</b> and building on what is true keeps us strong.</p>
+         <div class="callout faith">💜 We get ready for our journey by building on God's truth — a strong and steady foundation.</div>` },
+      { icon: "📖", subject: "English — Our Names & Goals", html:
+        `<div class="tryit">✏️ Write your <b>name</b> on your passport, then finish this goal: "On this journey I want to learn ______." Say it out loud!</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>What is one thing each of us hopes to discover this year?</li>
+         <li>How can we help each other be ready and excited for each adventure?</li></ul>` },
+      { icon: "🤝", subject: "Character: Readiness", value: true, html:
+        `<div class="callout char">🌟 <b>Readiness</b> means preparing with a happy heart. Pack your invisible backpack each morning — curiosity, kindness, courage — and you're ready for anything! 🎒</div>` },
+    ],
+    quiz: [
+      { q: "In our journey, you earn a passport stamp when you…", a: ["finish an adventure", "eat a snack", "take a nap"], correct: 0 },
+      { q: "Which of these belongs in an explorer's ‘invisible backpack’?", a: ["Kindness", "A television", "Homework stress"], correct: 0 },
+      { q: "The wise builder built his house on the…", a: ["sand", "rock", "water"], correct: 1 },
+      { q: "‘Readiness’ means preparing with a…", a: ["happy heart", "grumpy face", "big yawn"], correct: 0 },
+    ],
+    reflect: ["What do you hope to discover this year?", "What did you pack in your invisible backpack today?"],
+  },
+  {
     id: "a7",
     emoji: "🍫",
     title: "Kitchen Adventure: Let's Make Champorado",
@@ -734,6 +884,21 @@ const LEVEL_MISSIONS = {
     explorer: ["Color a flag and count the sun's 8 rays out loud.", "Match each symbol to its name (flower, tree, bird, animal).", "Stand tall and quiet, like showing respect to the flag."],
     adventurer: ["Draw the flag and label each color's meaning.", "Solve: share the 8 rays between 2 people (8 ÷ 2).", "Write one sentence using the Tagalog word ‘watawat’."],
     trailblazer: ["Design a family flag and explain what every symbol means.", "Research why the sun has 8 rays; share it with the family.", "Explain how a rainbow (Genesis 9) is like a flag — a sign with meaning."],
+  },
+  a4: {
+    explorer: ["Say “Kumusta?” and “Salamat” to three people.", "Count to 5 in Filipino on your fingers.", "Wave and practice a happy “Magandang umaga!”"],
+    adventurer: ["Count 1–10 in Filipino out loud without peeking.", "Role-play a greeting: ask and answer “Kumusta?”", "Write the Tagalog and Hiligaynon words for ‘thank you’."],
+    trailblazer: ["Teach a younger sibling to count to 10 in Filipino.", "Have a 4-line greeting conversation in Tagalog or Hiligaynon.", "Explain the Tower of Babel story and why many languages exist."],
+  },
+  a5: {
+    explorer: ["Point North, East, South, West in the room.", "Find the star (capital) on a simple map.", "Zoom with your hands: world… Asia… Philippines!"],
+    adventurer: ["Use a compass rose to name all four directions.", "Find a place using a grid box like C-2.", "Read two symbols from a map key and say what they mean."],
+    trailblazer: ["Draw a map of your home with a key and a compass rose.", "Plan a route between two Philippine cities using directions.", "Retell Abraham's journey and what it means to trust God's guidance."],
+  },
+  a6: {
+    explorer: ["Write your name on your passport.", "Sort 3 items: which go in a backpack?", "Name one thing in your ‘invisible backpack’ (kindness, courage…)."],
+    adventurer: ["Make a 4-item checklist and check each box.", "Write your learning goal for the journey.", "Explain what a passport stamp means in our app."],
+    trailblazer: ["Design a family ‘readiness checklist’ for adventure days.", "Write 3 goals for the whole Wonder Journey.", "Explain the wise-builder parable and how being ready helps us."],
   },
   a7: {
     explorer: ["Help pour and stir (with an adult).", "Count the ingredients out loud.", "Serve your bowl and say “Masarap!”"],
