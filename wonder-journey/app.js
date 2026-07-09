@@ -589,6 +589,49 @@ window.isleFact = (k) => {
 };
 window.launchGoogleEarth = () => { sfxClick(); alert("🌍 A live Google Earth flyover is coming soon! For now, explore with our animated map. (Architecture is ready for the future integration.)"); };
 
+/* ---- Presentation Design Engine: per-adventure themes, one identity ---- */
+const THEMES = {
+  island:   { id: "island",   name: "Island Adventure",       sky: "linear-gradient(180deg,#7ec9ef,#a6ddf5 40%,#cfeaf7 58%,#eaf6df 63%,#f3e7c9 76%,#e6d0a2 100%)", palm: true,  water: true,  decor: ["☁️","🕊️","⛵","✨","🌺"] },
+  geography:{ id: "geography", name: "Geography Explorer",     sky: "linear-gradient(180deg,#7ec9ef,#a6ddf5 40%,#cfeaf7 58%,#eaf6df 63%,#f3e7c9 76%,#e6d0a2 100%)", palm: true,  water: true,  decor: ["☁️","🕊️","🧭","✨"] },
+  ocean:    { id: "ocean",     name: "Ocean Explorer",         sky: "linear-gradient(180deg,#5bc0ea,#2f9fd6 45%,#1f7fb8 100%)", palm: false, water: true,  decor: ["🐠","🐟","🫧","🐚","✨","🐢"] },
+  volcano:  { id: "volcano",   name: "Volcano Expedition",     sky: "linear-gradient(180deg,#ffc98a,#f0965c 45%,#8a5140 100%)", palm: false, water: false, ground: "rgba(90,45,35,.55)", decor: ["🌋","💨","🦅","☁️","✨"] },
+  terraces: { id: "terraces",  name: "Rice Terrace Journey",   sky: "linear-gradient(180deg,#ffdf94,#ffe9ac 42%,#d3ea8c 66%,#a2cf6b 100%)", palm: false, water: false, ground: "rgba(90,130,50,.5)", decor: ["🌾","🌅","🦋","💧","✨"] },
+  cooking:  { id: "cooking",   name: "Cooking Studio",         sky: "linear-gradient(180deg,#f8dcb4,#f0c58c 45%,#c78f58 100%)", palm: false, water: false, ground: "rgba(140,90,50,.5)", decor: ["🍳","♨️","🥄","🥭","✨"] },
+  wildlife: { id: "wildlife",  name: "Wildlife Adventure",     sky: "linear-gradient(180deg,#bfe8a8,#98d886 45%,#5faf5c 100%)", palm: true,  water: false, ground: "rgba(50,110,45,.5)", decor: ["🦋","🐦","🍃","🐒","✨"] },
+  festival: { id: "festival",  name: "Festival Celebration",   sky: "linear-gradient(180deg,#ffd873,#ff9fb0 50%,#c86fb0 100%)", palm: false, water: false, ground: "rgba(150,50,110,.4)", decor: ["🎉","🎊","🏮","🎵","✨"] },
+  history:  { id: "history",   name: "Historical Philippines", sky: "linear-gradient(180deg,#ecdcb2,#dcc593 50%,#bb9c66 100%)", palm: false, water: false, ground: "rgba(130,100,60,.5)", decor: ["🏛️","📜","🕊️","⭐","✨"] },
+  village:  { id: "village",   name: "Village & Values",       sky: "linear-gradient(180deg,#bfe3f0,#dcecc4 55%,#ecd9b0 100%)", palm: true,  water: true,  decor: ["🏡","🌾","🕊️","☁️","✨"] },
+  bible:    { id: "bible",     name: "Bible Lands",            sky: "linear-gradient(180deg,#f4e4b4,#e7d097 50%,#caa96b 100%)", palm: false, water: false, ground: "rgba(150,120,70,.45)", decor: ["🕊️","🫒","⭐","✨","🐑"] },
+};
+const THEME_BY_ID = { a1: "geography", a2: "island", a3: "cooking", a4: "village", a5: "festival", a6: "volcano", a7: "wildlife", a8: "terraces", a9: "ocean", a10: "history" };
+function themeFor(a) {
+  if (a.theme && THEMES[a.theme]) return THEMES[a.theme];
+  if (THEME_BY_ID[a.id] && THEMES[THEME_BY_ID[a.id]]) return THEMES[THEME_BY_ID[a.id]];
+  const t = `${a.title} ${a.region} ${a.value}`.toLowerCase();
+  const has = (...w) => w.some(x => t.includes(x));
+  let id = "island";
+  if (has("volcano", "fire mountain")) id = "volcano";
+  else if (has("ocean", "sea", "coral", "reef", "marine")) id = "ocean";
+  else if (has("rice", "terrace", "farm", "harvest", "seed", "coconut", "garden")) id = "terraces";
+  else if (has("cook", "food", "kitchen", "champorado", "feast", "recipe", "baking", "market", "fruit", "merienda")) id = "cooking";
+  else if (has("festival", "fiesta", "celebration", "tradition", "music", "lantern")) id = "festival";
+  else if (has("animal", "wildlife", "eagle", "tarsier", "forest", "rainforest")) id = "wildlife";
+  else if (has("hero", "history", "rizal", "independence", "symbol", "timeline")) id = "history";
+  else if (has("bible", "gathering", "gratitude")) id = "bible";
+  else if (has("bayanihan", "family", "value", "hospitality", "kindness", "respect")) id = "village";
+  else if (has("geography", "map", "island", "manila", "cebu", "region", "province")) id = "geography";
+  return THEMES[id] || THEMES.island;
+}
+function decorHTML(theme) {
+  const d = theme.decor || []; let h = "";
+  for (let i = 0; i < 8; i++) {
+    const e = d[i % d.length], left = (Math.random() * 96).toFixed(1), top = (6 + Math.random() * 72).toFixed(1),
+      dur = (6 + Math.random() * 8).toFixed(1), size = (22 + Math.random() * 22).toFixed(0);
+    h += `<div class="cine-decor" style="left:${left}%;top:${top}%;font-size:${size}px;animation-duration:${dur}s;animation-delay:-${(Math.random() * dur).toFixed(1)}s">${e}</div>`;
+  }
+  return h;
+}
+
 function buildScenes(a) {
   const secs = a.sections.filter(s => !(s.faith && !S.faith));
   const scenes = [{ type: "intro" }, { type: "map" }];
@@ -631,17 +674,35 @@ function mascotHTML(sc) {
 }
 
 function phMapSVG() {
-  return `<svg viewBox="0 0 200 300" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" aria-label="Map of the Philippines">
-    <defs><linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dcf1fb"/><stop offset="1" stop-color="#bfe6f5"/></linearGradient></defs>
-    <rect width="200" height="300" fill="url(#sea)"/>
-    <g stroke="#a9d9ee" stroke-width="1.4" fill="none" opacity=".7" stroke-linecap="round">
-      <path d="M14 44 q9 -6 18 0 t18 0"/><path d="M150 70 q9 -6 18 0"/><path d="M24 258 q9 -6 18 0 t18 0"/></g>
-    <g fill="#8ecb76" stroke="#5fa74e" stroke-width="1.6" stroke-linejoin="round">
-      <path d="M78 20 q24 -8 36 8 q11 17 2 36 q-7 15 -19 16 q-17 2 -23 -13 q-8 -22 4 -47z"/>
-      <path d="M97 92 q11 6 9 23 q-2 13 -11 20 q4 -22 2 -43z"/>
-      <ellipse cx="84" cy="152" rx="12" ry="9"/><ellipse cx="112" cy="160" rx="14" ry="8"/><ellipse cx="133" cy="150" rx="9" ry="12"/><ellipse cx="100" cy="178" rx="16" ry="8"/>
-      <path d="M96 212 q31 -13 51 6 q17 18 6 41 q-13 22 -39 20 q-27 -2 -31 -29 q-4 -26 13 -38z"/></g>
-    <text x="150" y="278" font-size="20">⛵</text>
+  // Stylized-accurate vector of the Philippines (correct island set & positions).
+  return `<svg viewBox="0 0 240 360" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" aria-label="Map of the Philippines">
+    <defs>
+      <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dcf1fb"/><stop offset="1" stop-color="#bfe6f5"/></linearGradient>
+      <linearGradient id="land" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9ad07f"/><stop offset="1" stop-color="#7cbb63"/></linearGradient>
+    </defs>
+    <rect width="240" height="360" fill="url(#sea)"/>
+    <g stroke="#a9d9ee" stroke-width="1.5" fill="none" opacity=".65" stroke-linecap="round">
+      <path d="M18 60 q10 -6 20 0 t20 0"/><path d="M175 96 q10 -6 20 0"/><path d="M28 300 q10 -6 20 0 t20 0"/></g>
+    <g fill="url(#land)" stroke="#57a24b" stroke-width="1.8" stroke-linejoin="round">
+      <!-- Luzon (with northern tip + central body) -->
+      <path d="M116 30 c-6 -3 -13 0 -15 8 c-8 3 -11 12 -7 20 c-6 6 -7 16 -2 24 c-2 10 2 20 11 24 c2 10 6 19 15 21 c9 -1 14 -9 12 -19 c8 2 17 -3 17 -13 c0 -10 -9 -16 -18 -14 c5 -9 4 -20 -3 -27 c0 -9 -5 -18 -13 -21 c-4 -2 -6 -3 -14 -3 z"/>
+      <!-- Bicol peninsula (SE tail of Luzon) -->
+      <path d="M140 100 c9 1 16 9 16 19 c0 9 -6 16 -14 17 c-3 4 -9 3 -10 -3 c4 -8 4 -18 3 -27 c1 -3 3 -5 5 -6 z"/>
+      <!-- Mindoro -->
+      <path d="M96 150 c-6 -1 -10 6 -8 14 c1 8 5 15 11 14 c5 -1 7 -9 5 -17 c-1 -6 -3 -11 -8 -11 z"/>
+      <!-- Palawan (long thin diagonal, SW) -->
+      <path d="M52 262 c-5 -4 -3 -12 3 -13 l46 -66 c5 -5 13 0 10 7 l-51 71 c-2 3 -6 3 -8 1 z"/>
+      <!-- Visayas: Panay, Negros, Cebu, Bohol, Leyte, Samar -->
+      <path d="M126 196 c-7 -1 -11 7 -7 14 c3 6 12 7 16 1 c3 -6 -2 -14 -9 -15 z"/>
+      <path d="M148 204 c-5 0 -7 6 -5 15 c2 9 3 16 9 15 c5 -1 5 -10 3 -18 c-1 -7 -3 -12 -7 -12 z"/>
+      <path d="M166 200 c-4 0 -5 6 -4 14 c1 9 2 15 5 15 c3 0 4 -9 3 -17 c-1 -7 -1 -12 -4 -12 z"/>
+      <ellipse cx="180" cy="226" rx="9" ry="7"/>
+      <path d="M190 206 c-4 0 -6 7 -3 14 c2 6 7 13 10 10 c3 -2 1 -12 -1 -18 c-1 -4 -3 -6 -6 -6 z"/>
+      <path d="M196 184 c-5 0 -8 8 -5 16 c3 7 8 9 11 4 c3 -6 1 -15 -2 -19 c-1 -1 -2 -1 -4 -1 z"/>
+      <!-- Mindanao (large, south) -->
+      <path d="M138 266 c-11 4 -15 17 -9 28 c-6 9 -3 22 6 27 c7 11 22 14 33 7 c13 4 26 -5 27 -19 c9 -7 9 -21 0 -28 c-3 -13 -16 -21 -28 -18 c-10 -5 -22 -3 -29 5 z"/>
+    </g>
+    <text x="176" y="330" font-size="22">⛵</text>
   </svg>`;
 }
 function phPostcard() {
@@ -739,11 +800,13 @@ function renderScene(sc) {
 function renderCine() {
   const el = cineEl(), { a, scenes, i } = cine, sc = scenes[i];
   if (sc.type === "ending" && !cine.rewarded) { cine.rewarded = true; cine.reward = awardCompletion(a, cine.score, a.quiz.length); }
+  const theme = themeFor(a);
   el.innerHTML = `
-    <div class="cine-sky bright"></div>
-    <div class="cine-palm">🌴</div>
+    <div class="cine-sky" style="background:${theme.sky}"></div>
+    ${theme.palm ? '<div class="cine-palm">🌴</div>' : ""}
     ${cineAmbient()}
-    <div class="cine-ocean"></div>
+    ${decorHTML(theme)}
+    ${theme.water ? '<div class="cine-ocean"></div>' : `<div class="cine-ground" style="background:linear-gradient(180deg,transparent,${theme.ground || "rgba(0,0,0,.12)"})"></div>`}
     <div class="cine-scene-label">${sceneLabel(sc, i, scenes.length)}</div>
     <div class="cine-top">
       <button class="cine-btn spk" onclick="toggleCineMute(this)" title="Sound on/off">${cine.muted ? "🔇" : "🔊"}</button>

@@ -309,6 +309,10 @@ a{color:var(--ocean);text-decoration:none}
 @keyframes sway{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(-1deg)}}
 .cine-ocean{position:absolute;left:0;right:0;bottom:0;height:19vh;background:linear-gradient(180deg,rgba(91,183,224,0),#69b9e2 45%,#3f9ed0);pointer-events:none;z-index:1}
 .cine-ocean::before{content:"";position:absolute;top:6px;left:-20%;right:-20%;height:16px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 34px,transparent 34px 68px);border-radius:50%;animation:wave 8s linear infinite}
+.cine-ground{position:absolute;left:0;right:0;bottom:0;height:16vh;z-index:1;pointer-events:none}
+.cine-decor{position:absolute;z-index:1;pointer-events:none;filter:drop-shadow(0 3px 5px rgba(0,0,0,.12));animation:floaty ease-in-out infinite;opacity:.92}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-16px) rotate(5deg)}}
+@media (prefers-reduced-motion: reduce){.cine-decor{animation:none}}
 
 /* scene label as kraft ribbon */
 .cine-scene-label{background:linear-gradient(180deg,#efe0c2,#e2cfa4);color:#6b5227;padding:8px 15px;border-radius:9px;box-shadow:0 4px 0 #c9b184,0 8px 12px rgba(0,0,0,.16);font-family:'Fredoka','Baloo 2',sans-serif;opacity:1;top:20px;left:130px;z-index:5}

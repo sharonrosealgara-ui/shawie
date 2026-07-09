@@ -34,6 +34,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.10.0] — 2026-07-08 · Presentation Design Engine + Real Philippines Map
+
+- `Added` **Presentation Design Engine** — one Wonder Journey identity (storybook paper, signpost, mascot, colored text) with a **per-adventure theme** that sets the sky, floating decorations and ground: Island, Geography, Ocean, Volcano, Rice Terrace, Cooking, Wildlife, Festival, Historical, Village & Bible Lands. Each adventure auto-selects its theme (explicit map + keyword inference), so **future adventures theme themselves** with no redesign.
+- `Changed` The pinned lesson map is now an **accurate vector of the Philippines** — Luzon (with the Bicol peninsula), Mindoro, the long diagonal Palawan, the Visayan islands (Panay, Negros, Cebu, Bohol, Leyte, Samar) and Mindanao, in correct relative positions. *(Stylized vector, since live satellite/map tiles can't be loaded in-sandbox; a Google-Earth/real-tile layer is the documented future upgrade.)*
+
+---
+
 ## [0.9.3] — 2026-07-08 · Warm Tropical Theater (reference match)
 
 - `Changed` **Every scene is now bright, warm and lively** (matching the design reference) — tropical sky gradient, a swaying palm, drifting clouds, a sandy beach with a moving shoreline, and dark storybook text on light.
