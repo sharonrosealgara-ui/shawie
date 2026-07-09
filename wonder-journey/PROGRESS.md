@@ -37,7 +37,7 @@ _Last updated: 2026-07-09 · Autonomous Build Session_
 ## Content Completion (World 1 — Philippines)
 
 - **Adventures scheduled (map + metadata):** 72 / 72 `██████████`
-- **Adventures with full interactive content:** 14 / 72 `██░░░░░░░░`
+- **Adventures with full interactive content:** 19 / 72 `███░░░░░░░`
 - **Media manifest coverage:** 72 / 72 `██████████` (66 curated assets, files pending licensing)
 - **Real licensed asset files present:** 0 / 66 `░░░░░░░░░░` (awaiting upload — placeholders live)
 
@@ -54,11 +54,11 @@ _Last updated: 2026-07-09 · Autonomous Build Session_
 
 **Current task:** See git log for the latest commit.
 
-**Next task:** Continue Curriculum Framework (Phase 9) — author Unit 2 (a8–a12: Rice, Market Day, Fruits, Merienda, Cookbook), then Units 3–13; migrate to the six-mascot cast (Design Bible).
+**Next task:** Continue Curriculum Framework (Phase 9) — author Unit 3 (a14–a18: Family, Values & Community), then Units 4–13; migrate to the six-mascot cast (Design Bible).
 
 **Known issues**
 - Real photo/map files not yet uploaded — the resilient media system shows honest placeholders until licensed assets are dropped into `assets/`.
-- Not-yet-authored slots use the schedule/metadata + auto-generated Teacher Portal plans; full cinematic interactive content authored for 14 adventures (Unit 1 complete: a1–a7, plus a13/a19/a25/a31/a37/a43/a49).
+- Not-yet-authored slots use the schedule/metadata + auto-generated Teacher Portal plans; full cinematic interactive content authored for 19 adventures (Units 1 & 2 complete: a1–a13, plus a19/a25/a31/a37/a43/a49).
 
 **Resolved issues**
 - Birthday/Celebrations section was hidden when empty → now always visible + dedicated Celebrations page.

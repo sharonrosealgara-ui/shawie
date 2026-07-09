@@ -451,6 +451,253 @@ const ADVENTURES = [
     reflect: ["What job did you do in the kitchen?", "How did the champorado taste? Draw a face! 😋"],
   },
   {
+    id: "a8",
+    emoji: "🍚",
+    title: "Rice: The Heart of Every Meal",
+    region: "Food & Kitchen",
+    subtitle: "Discover why rice is on every Filipino table, and measure it like a real cook using simple ratios.",
+    value: "Gratitude",
+    badge: "kitchen-helper",
+    stamp: { emoji: "🍚", name: "Rice Bowl" },
+    xp: 150,
+    sections: [
+      { icon: "🌾", subject: "Story: A Bowl of Rice", html:
+        `<p>At almost every Filipino meal, there is one faithful friend on the plate — <b>kanin</b> (rice)! 🍚 Breakfast, lunch, dinner… rice is the heart of the table.</p>
+         <p>Let's learn where it comes from and how to <b>measure</b> it just right.</p>` },
+      { icon: "🌱", subject: "From Field to Bowl", html:
+        `<div class="wordbank">
+           <div class="word">🌱 A tiny <b>seed</b> is planted in a wet field (a paddy)</div>
+           <div class="word">🌾 It grows into golden <b>rice stalks</b></div>
+           <div class="word">👐 Farmers <b>harvest</b> and dry the grains</div>
+           <div class="word">🍚 We cook it into warm, fluffy rice</div>
+         </div>` },
+      { icon: "➗", subject: "Math: The 1:2 Ratio", html:
+        `<p>Cooks use a <b>ratio</b> to cook rice: <b>1 cup rice : 2 cups water</b>.</p>
+         <ul><li>2 cups rice needs how much water? <b>(2 × 2 = 4 cups!)</b></li>
+         <li>3 cups rice? <b>(3 × 2 = 6 cups!)</b></li></ul>
+         <div class="tryit">🥣 Measure 1 cup of rice, then 2 cups of water. Feel the ratio!</div>` },
+      { icon: "🗣️", subject: "Tagalog & Hiligaynon", html:
+        `<div class="wordbank">
+           <div class="word"><b>Kanin</b> (Tag.) / <b>Kan-on</b> (Hil.) — cooked rice</div>
+           <div class="word"><b>Bigas</b> (Tag.) / <b>Bugas</b> (Hil.) — uncooked rice</div>
+           <div class="word"><b>Palay</b> — rice still in the field</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Joseph stores grain in Egypt (Genesis 41).</b> God warned Joseph that 7 hungry years were coming. Wisely, Joseph saved grain during the good years, so many people had food when the famine came.</p>
+         <div class="callout faith">💜 Joseph's wisdom saved lives. Being thankful and wise with our food honors God.</div>` },
+      { icon: "📖", subject: "English — Reading a Recipe", html:
+        `<div class="tryit">📋 Recipes use order words. Read aloud: "<b>First</b> rinse the rice. <b>Next</b> add water. <b>Then</b> cook. <b>Finally</b> serve!"</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>What is your favorite meal to eat with rice?</li>
+         <li>Who grows and cooks our food? How can we thank them?</li></ul>` },
+      { icon: "🤝", subject: "Character: Gratitude", value: true, html:
+        `<div class="callout char">🌟 <b>Gratitude</b> means a thankful heart. Before your next meal, say one thing you're thankful for. 🙏</div>` },
+    ],
+    quiz: [
+      { q: "The rice-cooking ratio is 1 cup rice to how many cups water?", a: ["1", "2", "5"], correct: 1 },
+      { q: "If you cook 3 cups of rice, how much water do you need?", a: ["6 cups", "3 cups", "9 cups"], correct: 0 },
+      { q: "Joseph was wise to ______ grain before the famine.", a: ["throw away", "store", "burn"], correct: 1 },
+      { q: "“Kanin” means…", a: ["cooked rice", "water", "fish"], correct: 0 },
+    ],
+    reflect: ["What are you thankful for at mealtime?", "What new rice word did you learn?"],
+  },
+  {
+    id: "a9",
+    emoji: "🛒",
+    title: "Market Day: Shopping & Money Math",
+    region: "Food & Kitchen",
+    subtitle: "Visit a busy Filipino market, make a shopping list, and practice money and making change.",
+    value: "Stewardship",
+    badge: "kitchen-helper",
+    stamp: { emoji: "🛒", name: "Market Day" },
+    xp: 150,
+    sections: [
+      { icon: "🏪", subject: "Story: The Palengke", html:
+        `<p>Welcome to the <b>palengke</b> (wet market)! 🛒 Stalls overflow with fish, fruit, and vegetables. Vendors call out, "<b>Bili na kayo!</b>" (Come buy!). The money here is the Philippine <b>peso</b> (₱).</p>` },
+      { icon: "📝", subject: "Our Shopping List", html:
+        `<p>Smart shoppers bring a <b>list</b>. Here's ours:</p>
+         <div class="wordbank">
+           <div class="word">🐟 Isda (fish) — ₱50</div>
+           <div class="word">🍅 Kamatis (tomato) — ₱20</div>
+           <div class="word">🧅 Sibuyas (onion) — ₱30</div>
+         </div>` },
+      { icon: "💰", subject: "Math: Money & Change", html:
+        `<p>Add it up: ₱50 + ₱20 + ₱30 = <b>₱100</b>.</p>
+         <ul><li>You pay with a ₱100 bill — your change is <b>₱0</b> (exact!).</li>
+         <li>If it cost ₱80 and you pay ₱100, your change is <b>₱20</b> (100 − 80).</li></ul>
+         <div class="tryit">🪙 Play store at home! Use paper coins to make change.</div>` },
+      { icon: "🗣️", subject: "Market Words", html:
+        `<div class="wordbank">
+           <div class="word"><b>Magkano?</b> — How much?</div>
+           <div class="word"><b>Mura</b> — Cheap · <b>Mahal</b> — Expensive</div>
+           <div class="word"><b>Salamat po</b> — Thank you (polite)</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Honesty in our dealings (Proverbs 11:1).</b> The Bible says honest scales please God. At the market, honest buying and selling — giving the right amount and the right change — is a way to do what is right.</p>
+         <div class="callout faith">💜 God cares about honesty, even in small things like counting change.</div>` },
+      { icon: "📖", subject: "English — Writing a List", html:
+        `<div class="tryit">✏️ Write a 3-item shopping list for a meal you love. Neat handwriting, one item per line!</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>How can we be wise with the money God gives our family?</li>
+         <li>What's the difference between something we <b>need</b> and something we <b>want</b>?</li></ul>` },
+      { icon: "🤝", subject: "Character: Stewardship", value: true, html:
+        `<div class="callout char">🌟 <b>Stewardship</b> means taking good care of what we're given. Help put away groceries or save a coin in a jar today. 🫙</div>` },
+    ],
+    quiz: [
+      { q: "The Filipino money is called the…", a: ["peso", "dollar", "yen"], correct: 0 },
+      { q: "Items cost ₱80 and you pay ₱100. Your change is…", a: ["₱20", "₱80", "₱10"], correct: 0 },
+      { q: "“Magkano?” means…", a: ["How much?", "Goodbye", "Where?"], correct: 0 },
+      { q: "The Bible says honest ______ please God.", a: ["scales", "boats", "songs"], correct: 0 },
+    ],
+    reflect: ["What is one thing we NEED vs one thing we WANT?", "How were you honest today?"],
+  },
+  {
+    id: "a10",
+    emoji: "🥭",
+    title: "Fruits of the Philippines",
+    region: "Food & Kitchen",
+    subtitle: "Taste sweet mango, banana, and buko — and practice sharing them equally with division.",
+    value: "Sharing",
+    badge: "kitchen-helper",
+    stamp: { emoji: "🥭", name: "Fruit Basket" },
+    xp: 150,
+    sections: [
+      { icon: "🧺", subject: "Story: A Basket of Sunshine", html:
+        `<p>The Philippines is warm and sunny — perfect for <b>tropical fruit</b>! 🥭🍌🥥 A basket might hold golden mangoes, sweet bananas, and cool <b>buko</b> (young coconut).</p>` },
+      { icon: "🍎", subject: "Fruit Friends", html:
+        `<div class="wordbank">
+           <div class="word">🥭 <b>Mangga</b> — mango (sweet & golden)</div>
+           <div class="word">🍌 <b>Saging</b> — banana</div>
+           <div class="word">🥥 <b>Buko</b> — young coconut (with juice!)</div>
+           <div class="word">🍍 <b>Pinya</b> — pineapple</div>
+         </div>` },
+      { icon: "➗", subject: "Math: Sharing Equally (Division)", html:
+        `<p><b>Sharing is dividing!</b></p>
+         <ul><li>1 mango cut into 8 slices, shared by 4 kids = <b>2 slices each</b> (8 ÷ 4).</li>
+         <li>6 bananas shared by 3 people = <b>2 each</b> (6 ÷ 3).</li></ul>
+         <div class="tryit">🍌 Share a real snack equally at home — count each person's fair share!</div>` },
+      { icon: "🗣️", subject: "Describe the Taste", html:
+        `<div class="wordbank">
+           <div class="word"><b>Matamis</b> — sweet</div>
+           <div class="word"><b>Maasim</b> — sour</div>
+           <div class="word"><b>Malutong / Malambot</b> — crunchy / soft</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>The Fruit of the Spirit (Galatians 5).</b> Just as a mango tree grows sweet fruit, God's Spirit grows good "fruit" in us: <b>love, joy, peace, patience, kindness</b>, and more.</p>
+         <div class="callout faith">💜 What good fruit can grow in your heart today? Maybe kindness or patience!</div>` },
+      { icon: "📖", subject: "English — Describing Words", html:
+        `<div class="tryit">✏️ Finish the sentence out loud: "The mango tastes ______ and feels ______." (sweet, juicy, soft…)</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>What's your favorite fruit, and who would you share it with?</li>
+         <li>Which "fruit of the Spirit" does our family want to grow more of?</li></ul>` },
+      { icon: "🤝", subject: "Character: Sharing", value: true, html:
+        `<div class="callout char">🌟 <b>Sharing</b> means giving others a fair and happy portion. Share a snack or a toy with someone today. 🤗</div>` },
+    ],
+    quiz: [
+      { q: "8 mango slices shared equally by 4 kids = ?", a: ["2 each", "4 each", "8 each"], correct: 0 },
+      { q: "“Matamis” means…", a: ["sweet", "sour", "spicy"], correct: 0 },
+      { q: "“Buko” is a young…", a: ["coconut", "banana", "mango"], correct: 0 },
+      { q: "Which is a Fruit of the Spirit?", a: ["Kindness", "Grumpiness", "Selfishness"], correct: 0 },
+    ],
+    reflect: ["Who did you share with today?", "Which fruit of the Spirit will you grow?"],
+  },
+  {
+    id: "a11",
+    emoji: "🍢",
+    title: "Merienda Time: Filipino Snacks",
+    region: "Food & Kitchen",
+    subtitle: "Make a simple afternoon snack together and double the recipe with kitchen math.",
+    value: "Joy",
+    badge: "kitchen-helper",
+    stamp: { emoji: "🍢", name: "Merienda" },
+    xp: 150,
+    sections: [
+      { icon: "🕒", subject: "Story: Afternoon Treat", html:
+        `<p>Between lunch and dinner comes a happy little tradition — <b>merienda</b>! 🍢 It's a light snack shared with family and friends, often with a warm drink.</p>` },
+      { icon: "🍡", subject: "Merienda Favorites", html:
+        `<div class="wordbank">
+           <div class="word">🍌 <b>Banana cue</b> — fried caramelized banana on a stick</div>
+           <div class="word">🍮 <b>Puto</b> — soft steamed rice cake</div>
+           <div class="word">🥪 Simple: banana + peanut butter!</div>
+         </div>
+         <div class="tryit">🍴 With a grown-up, prepare one easy snack together.</div>` },
+      { icon: "✖️", subject: "Math: Double the Recipe", html:
+        `<p><b>Doubling</b> means ×2. If a snack needs 2 bananas and 1 spoon of sugar…</p>
+         <ul><li>For double: <b>4 bananas</b> (2 × 2) and <b>2 spoons</b> of sugar!</li>
+         <li>3 sticks doubled = <b>6 sticks</b>.</li></ul>` },
+      { icon: "🗣️", subject: "Snack Words", html:
+        `<div class="wordbank">
+           <div class="word"><b>Masarap!</b> — Delicious!</div>
+           <div class="word"><b>Gutom</b> — Hungry · <b>Busog</b> — Full</div>
+           <div class="word"><b>Kain tayo!</b> — Let's eat!</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Sharing generously (Acts 2:46).</b> The early believers shared meals "with glad and generous hearts." Food tastes even better when it's shared with joy!</p>
+         <div class="callout faith">💜 A shared snack with a happy heart is a little picture of God's family.</div>` },
+      { icon: "📖", subject: "English — Describe Your Snack", html:
+        `<div class="tryit">🎤 Tell someone about your snack: "I made ______. It tastes ______ and I shared it with ______."</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>Who could we invite to share merienda this week?</li>
+         <li>What makes eating together joyful?</li></ul>` },
+      { icon: "🤝", subject: "Character: Joy", value: true, html:
+        `<div class="callout char">🌟 <b>Joy</b> is happiness that comes from the heart. Share your snack with a big smile and a "Kain tayo!" 😄</div>` },
+    ],
+    quiz: [
+      { q: "Merienda is a Filipino…", a: ["afternoon snack", "bedtime", "chore"], correct: 0 },
+      { q: "To DOUBLE 3 sticks of banana cue, you make…", a: ["6", "3", "9"], correct: 0 },
+      { q: "“Masarap!” means…", a: ["Delicious!", "I'm sleepy", "Goodbye"], correct: 0 },
+      { q: "The early believers shared meals with glad and generous…", a: ["hearts", "boats", "coins"], correct: 0 },
+    ],
+    reflect: ["Who did you share merienda with?", "What made today joyful?"],
+  },
+  {
+    id: "a12",
+    emoji: "📖",
+    title: "Our Family Cookbook Begins",
+    region: "Food & Kitchen",
+    subtitle: "Write your very first recipe into the Family Cookbook — clear steps a friend could follow.",
+    value: "Creativity",
+    badge: "kitchen-helper",
+    stamp: { emoji: "📖", name: "Our Cookbook" },
+    xp: 155,
+    sections: [
+      { icon: "📖", subject: "Story: A Book of Family Flavors", html:
+        `<p>Every family has special foods. Today we start our very own <b>Family Cookbook</b> — a treasure book of recipes we can keep forever! 📖✨</p>` },
+      { icon: "🧾", subject: "Parts of a Recipe", html:
+        `<div class="wordbank">
+           <div class="word">📛 <b>Name</b> — what the dish is called</div>
+           <div class="word">🧺 <b>Ingredients</b> — what you need (with amounts)</div>
+           <div class="word">🔢 <b>Steps</b> — what to do, in order</div>
+           <div class="word">🍽️ <b>Serve</b> — how to enjoy it</div>
+         </div>` },
+      { icon: "📏", subject: "Math: Measurement Review", html:
+        `<p>Recipes use amounts! Match them up:</p>
+         <ul><li>A big spoon = a <b>tablespoon</b> (tbsp). A little spoon = a <b>teaspoon</b> (tsp).</li>
+         <li>Remember our ratio? Rice is <b>1 : 2</b> with water!</li></ul>
+         <div class="tryit">📐 Line up ¼, ½, and 1 cup. Which is biggest?</div>` },
+      { icon: "✍️", subject: "English — Writing Clear Steps", html:
+        `<p>Good steps use <b>order words</b>: First, Next, Then, Finally.</p>
+         <div class="tryit">✏️ Write a recipe for something easy (like a sandwich) using First / Next / Then / Finally.</div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Gratitude for daily bread (Matthew 6:11).</b> Jesus taught us to pray, "Give us this day our daily bread." Every meal — and every recipe — is a gift to be thankful for.</p>
+         <div class="callout faith">💜 As we write our cookbook, we remember to thank God for our daily food.</div>` },
+      { icon: "🎨", subject: "Make It Yours", html:
+        `<div class="tryit">🖍️ Decorate your recipe page! Draw the finished dish and add a family star-rating: ⭐⭐⭐⭐⭐</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>Which family recipe should go in our cookbook first?</li>
+         <li>Who taught us this recipe? Let's honor them on the page.</li></ul>` },
+      { icon: "🤝", subject: "Character: Creativity", value: true, html:
+        `<div class="callout char">🌟 <b>Creativity</b> means making something new and wonderful. Invent a fun name for your family's first recipe! 🎨</div>` },
+    ],
+    quiz: [
+      { q: "Which part of a recipe lists what you need?", a: ["Ingredients", "The name", "The rating"], correct: 0 },
+      { q: "Good recipe steps use order words like…", a: ["First, Next, Then", "maybe, sort of", "the, a, an"], correct: 0 },
+      { q: "A big spoon measure is a…", a: ["tablespoon", "teaspoon", "cup"], correct: 0 },
+      { q: "“Give us this day our daily ______.”", a: ["bread", "gold", "boat"], correct: 0 },
+    ],
+    reflect: ["What recipe will you add first?", "Who will you thank for teaching it?"],
+  },
+  {
     id: "a13",
     emoji: "🤝",
     title: "Bayanihan: The Spirit of Helping Together",
@@ -904,6 +1151,31 @@ const LEVEL_MISSIONS = {
     explorer: ["Help pour and stir (with an adult).", "Count the ingredients out loud.", "Serve your bowl and say “Masarap!”"],
     adventurer: ["Read the recipe steps aloud in order.", "Measure the ¼ cup sugar, then double it (¼ + ¼).", "Write the recipe using First / Next / Then / Finally."],
     trailblazer: ["Lead one part of the recipe and explain each measurement.", "Double the whole recipe and list the new amounts.", "Explain “gelatinization” simply to a younger sibling."],
+  },
+  a8: {
+    explorer: ["Measure 1 cup rice and 2 cups water.", "Say the rice words: kanin, bigas, palay.", "Help rinse the rice (with an adult)."],
+    adventurer: ["Solve the water for 2 and 3 cups of rice (×2).", "Put the ‘field to bowl’ steps in order.", "Write one sentence you're thankful for at meals."],
+    trailblazer: ["Cook rice using the 1:2 ratio and explain it.", "Retell how Joseph's wisdom saved many from famine.", "Plan a thankful family grace to say before dinner."],
+  },
+  a9: {
+    explorer: ["Set up a pretend market and ‘buy’ 3 items.", "Ask “Magkano?” for each item.", "Count coins to make ₱10."],
+    adventurer: ["Add a 3-item list and find the total.", "Make change from ₱100 for an ₱80 total.", "Write a neat shopping list for one meal."],
+    trailblazer: ["Plan a small meal within a ₱200 budget.", "Explain need vs. want with two real examples.", "Connect honest scales (Proverbs) to fair buying and selling."],
+  },
+  a10: {
+    explorer: ["Share 8 slices between 4 people (2 each).", "Name 3 fruits in Filipino.", "Taste a fruit and say ‘matamis’ or ‘maasim’."],
+    adventurer: ["Solve two sharing (division) problems.", "Describe a fruit with 2 adjectives.", "List the Fruit of the Spirit you remember."],
+    trailblazer: ["Make a division word-problem for the family.", "Explain the Fruit of the Spirit with an example.", "Plan a fair way to share a treat among everyone."],
+  },
+  a11: {
+    explorer: ["Help make one simple snack (with an adult).", "Say ‘Kain tayo!’ and share it.", "Double 3 sticks — how many now?"],
+    adventurer: ["Double a 2-ingredient snack and list amounts.", "Describe your snack in 2 sentences.", "Set the table for a joyful merienda."],
+    trailblazer: ["Plan a merienda for guests and double the recipe.", "Explain how sharing meals built the early church family.", "Lead a joyful ‘thank you’ before the snack."],
+  },
+  a12: {
+    explorer: ["Draw the finished dish for your recipe page.", "Name the 4 parts of a recipe.", "Give the recipe a fun family name."],
+    adventurer: ["Write a simple recipe with First/Next/Then/Finally.", "List ingredients with their amounts.", "Add a family star-rating and one sentence."],
+    trailblazer: ["Write a full family recipe others could follow.", "Interview a family member for their special dish.", "Explain ‘give us our daily bread’ in your own words."],
   },
   a13: {
     explorer: ["Act out neighbors carrying a house together.", "Practice saying “Po” and “Opo” politely.", "Draw a bahay kubo."],

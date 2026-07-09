@@ -34,6 +34,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.19.0] — 2026-07-09 · Unit 2 complete (Filipino Food & Kitchen)
+
+- `Added` **Unit 2 fully authored** — five new interactive adventures (a8–a12), all in the Cooking Studio theme with aligned real-media:
+  - **a8 · Rice: The Heart of Every Meal** (Gratitude) — field-to-bowl, the 1:2 rice-to-water ratio, reading a recipe, Joseph storing grain.
+  - **a9 · Market Day: Shopping & Money Math** (Stewardship) — the palengke, peso money & making change, shopping lists, honest scales (Proverbs), need vs. want.
+  - **a10 · Fruits of the Philippines** (Sharing) — mango/banana/buko, division by sharing equally, taste adjectives, the Fruit of the Spirit.
+  - **a11 · Merienda Time** (Joy) — Filipino snacks, doubling a recipe (×2), sharing generously (Acts 2).
+  - **a12 · Our Family Cookbook Begins** (Creativity) — parts of a recipe, measurement review, writing clear steps, "give us our daily bread."
+  - Each with 8 sections, a 4-question game quiz, reflection, and 3-tier level missions. **Units 1 & 2 complete — 19 of 72 adventures interactive.**
+
+---
+
 ## [0.18.0] — 2026-07-09 · Unit 1 complete + owner's birthday
 
 - `Added` **Unit 1 fully authored** — three new interactive adventures completing "Welcome to the Philippines":

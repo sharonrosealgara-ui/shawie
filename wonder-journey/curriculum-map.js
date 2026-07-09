@@ -147,7 +147,7 @@ const CURRICULUM_MAP = {
         "math": "Ratios & measuring (1:2)",
         "english": "Reading a recipe",
         "bible": "Joseph stores grain in Egypt",
-        "built": false
+        "built": true
       },
       {
         "n": 9,
@@ -163,7 +163,7 @@ const CURRICULUM_MAP = {
         "math": "Money & making change",
         "english": "Writing a shopping list",
         "bible": "Honesty in our dealings",
-        "built": false
+        "built": true
       },
       {
         "n": 10,
@@ -179,7 +179,7 @@ const CURRICULUM_MAP = {
         "math": "Division (sharing slices equally)",
         "english": "Descriptive words (taste, texture)",
         "bible": "Fruit of the Spirit (intro)",
-        "built": false
+        "built": true
       },
       {
         "n": 11,
@@ -195,7 +195,7 @@ const CURRICULUM_MAP = {
         "math": "Doubling a recipe",
         "english": "Speaking: describe your snack",
         "bible": "Sharing generously with others",
-        "built": false
+        "built": true
       },
       {
         "n": 12,
@@ -211,7 +211,7 @@ const CURRICULUM_MAP = {
         "math": "Measurement review",
         "english": "Writing clear steps (a recipe)",
         "bible": "Gratitude for daily bread",
-        "built": false
+        "built": true
       }
     ]
   },
