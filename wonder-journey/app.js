@@ -242,6 +242,27 @@ function advCard(a, i, plain) {
 /* ---------- adventure detail ---------- */
 let quizState = null;
 
+function differentiationSection(a) {
+  const m = (typeof LEVEL_MISSIONS !== "undefined") ? LEVEL_MISSIONS[a.id] : null;
+  if (!m) return "";
+  return `
+    <div class="section-title"><span class="em">🎯</span> Missions for Every Explorer</div>
+    <p style="color:var(--ink-soft);font-size:14px;margin:-6px 0 12px">One adventure, three levels — each child does the tasks that fit them best. Big kids, help the little ones! 🤝</p>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">
+      ${LEVEL_TIERS.map(t => `
+        <div class="card" style="padding:18px;border-top:4px solid ${t.color}">
+          <div style="display:flex;align-items:center;gap:9px">
+            <span style="font-size:24px">${t.emoji}</span>
+            <div><b style="font-family:'Baloo 2',sans-serif;font-size:16px">${t.name}</b>
+            <div style="font-size:11px;color:var(--ink-soft);font-weight:800;text-transform:uppercase;letter-spacing:.03em">${t.age}</div></div>
+          </div>
+          <ul style="margin:12px 0 0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:7px">
+            ${m[t.key].map(x => `<li>${esc(x)}</li>`).join("")}
+          </ul>
+        </div>`).join("")}
+    </div>`;
+}
+
 function openAdventure(id) {
   const a = ADVENTURES.find(x => x.id === id);
   const idx = ADVENTURES.findIndex(x => x.id === id);
@@ -268,6 +289,8 @@ function openAdventure(id) {
           </div>
           <div class="subj-body">${s.html}</div>
         </div>`).join("")}
+
+      ${differentiationSection(a)}
 
       <div class="section-title"><span class="em">🏆</span> Adventure Quiz</div>
       ${S.teacherMode ? `<div class="card no-print" style="padding:12px 16px;margin-bottom:12px;font-size:13px;border:1px dashed color-mix(in srgb,var(--grape) 40%,transparent)"><b>🔑 Answer key (teacher only):</b> ${a.quiz.map((q, i) => `Q${i + 1} → ${esc(q.a[q.correct])}`).join(" · ")}</div>` : ""}

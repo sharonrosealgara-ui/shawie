@@ -34,6 +34,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.6.0] — 2026-07-08 · Age-Appropriate Differentiation
+
+**Summary:** Every adventure now supports siblings of different ages learning together.
+
+- `Added` **"Missions for Every Explorer"** in each adventure — three leveled task cards (🌱 Explorer 7–8 · 🌿 Adventurer 9–10 · 🔥 Trailblazer 11–12), same objective, different difficulty.
+- `Added` `LEVEL_MISSIONS` data (3 tiers × 10 adventures) and `LEVEL_TIERS` in `curriculum.js`.
+- `Documentation` Added `AGE_FRAMEWORK.md` (age groups, per-subject differentiation, content-review checklist).
+- `Improved` Encourages teamwork — older children help younger siblings.
+
+---
+
 ## [0.5.0] — 2026-07-08 · Teacher Experience
 
 **Summary:** Introduced Teacher Mode so Sharon gets teaching tools while the family

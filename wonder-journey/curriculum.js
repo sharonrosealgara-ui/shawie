@@ -637,3 +637,67 @@ const COOKBOOK = [
   { emoji: "🍢", name: "Banana Cue", tag: "Merienda", note: "Fried caramelized bananas on a stick (with an adult)." },
   { emoji: "🥥", name: "Buko Juice", tag: "Drink", note: "Refreshing young coconut water." },
 ];
+
+/* ============================================================
+   AGE-APPROPRIATE DIFFERENTIATION (see AGE_FRAMEWORK.md)
+   One shared adventure, three levels. Each child does the tasks
+   that fit them — big kids help the little ones. 🤝
+   ============================================================ */
+const LEVEL_TIERS = [
+  { key: "explorer", name: "Explorer", age: "ages 7–8", emoji: "🌱", color: "#3f9d54" },
+  { key: "adventurer", name: "Adventurer", age: "ages 9–10", emoji: "🌿", color: "#0e7c86" },
+  { key: "trailblazer", name: "Trailblazer", age: "ages 11–12", emoji: "🔥", color: "#e5674f" },
+];
+
+const LEVEL_MISSIONS = {
+  a1: {
+    explorer: ["Point to the Philippines on a globe or map.", "Color the flag and count the sun's 8 rays.", "Say “Mabuhay!” and “Salamat” out loud with a smile."],
+    adventurer: ["Write 2 sentences explaining what an archipelago is.", "Practice a short Tagalog greeting with a sibling.", "Find and name the 3 island groups on a map."],
+    trailblazer: ["Research one fact about Manila and share it with the family.", "Write a paragraph: why is a country of 7,641 islands special?", "Teach a younger sibling the greetings you learned."],
+  },
+  a2: {
+    explorer: ["Point north, south, east, west in the room.", "Match each island group to top / middle / bottom.", "Trace the 3 island groups on a map."],
+    adventurer: ["Use the map scale to estimate the Manila–Cebu distance.", "Write the Tagalog direction words; use one in a sentence.", "List one island in each group."],
+    trailblazer: ["Plan a pretend island-hopping trip across all 3 groups in order.", "Explain how the Chocolate Hills formed, in your own words.", "Compare two islands — how are they different?"],
+  },
+  a3: {
+    explorer: ["Help pour and stir (with an adult).", "Count the ingredients out loud.", "Serve your bowl and say “Masarap!”"],
+    adventurer: ["Read the recipe steps aloud in order.", "Measure the ¼ cup sugar, then double it (¼ + ¼).", "Write the recipe using First / Next / Then / Finally."],
+    trailblazer: ["Lead one part of the recipe and explain each measurement.", "Double the whole recipe and list the new amounts.", "Explain “gelatinization” simply to a younger sibling."],
+  },
+  a4: {
+    explorer: ["Act out neighbors carrying a house together.", "Practice saying “Po” and “Opo” politely.", "Draw a bahay kubo."],
+    adventurer: ["Write 2 sentences about a time someone helped you.", "Solve: a 12-minute job shared by 4 people = ? minutes.", "Learn part of the song “Bahay Kubo.”"],
+    trailblazer: ["Plan a family Bayanihan chore and lead the team.", "Compare Bayanihan with the Good Samaritan — what's the shared lesson?", "Write a thank-you note to someone who helps our family."],
+  },
+  a5: {
+    explorer: ["Make a paper flower or a simple festival mask.", "Clap or drum a festival beat.", "Point to Baguio (the flower festival) on a map."],
+    adventurer: ["Count dancers: 5 rows of 4, then subtract 3 resting.", "Write the Tagalog words for dance, music, and flower.", "Describe one festival in 2 sentences."],
+    trailblazer: ["Research one Philippine festival and present 3 respectful facts.", "Design a mini family-fiesta program (the order of activities).", "Explain why Baguio's cool climate is good for growing flowers."],
+  },
+  a6: {
+    explorer: ["Draw Mayon's triangle cone with a little smoke.", "Say the word “bulkan.”", "Do a safe baking-soda “eruption” with an adult."],
+    adventurer: ["Round Mayon's height (2,462 m) to the nearest hundred.", "Write a sentence using the word “erupt.”", "Label magma vs. lava on your drawing."],
+    trailblazer: ["Research the 1991 Pinatubo eruption; share 2 facts.", "Explain why the Philippines has many volcanoes (Ring of Fire).", "Make a simple family safety plan for an eruption warning."],
+  },
+  a7: {
+    explorer: ["Draw the tarsier's big round eyes.", "Match each animal to its name.", "Make an animal's sound and movement."],
+    adventurer: ["Write which animal is your favorite and why (2 sentences).", "Solve: 3 meals a day × 4 days = ?", "Sort the animals: bird, mammal, or fish."],
+    trailblazer: ["Research why the Philippine eagle is endangered; suggest 2 ways to help.", "Explain “endemic” using your own example.", "Create a short “protect our animals” poster or speech."],
+  },
+  a8: {
+    explorer: ["Build a mini “terrace” with blocks or steps.", "Point to the mountains on a map.", "Help measure 1 cup rice : 2 cups water."],
+    adventurer: ["Multiply: 8 rows × 5 terraces = ?", "Write why the terraces took so long to build.", "Use the ratio to find the water needed for 2 cups of rice."],
+    trailblazer: ["Research the Ifugao people; present 2 respectful facts.", "Explain how terraces stop erosion.", "Connect Ruth's harvest to the value of hard work in a short reflection."],
+  },
+  a9: {
+    explorer: ["Draw a colorful coral reef.", "Point to the sea on a map.", "Pick up “pretend trash” to keep the ocean clean."],
+    adventurer: ["Multiply: 6 rows × 5 fish = ?", "Write 3 things you might see under the sea.", "Explain why plastic hurts sea animals."],
+    trailblazer: ["Research the Coral Triangle or Tubbataha Reef; present 2 facts.", "Design a simple “save the reef” family pledge.", "Retell Jonah's lesson about second chances in your own words."],
+  },
+  a10: {
+    explorer: ["Point to the flag and name a color.", "Match a national symbol to its picture (flower, tree, bird, animal).", "Stand tall, hand on heart, and hum the anthem."],
+    adventurer: ["Write one sentence about a hero you admire.", "Subtract on a timeline: 1998 − 1898 = ? years.", "Name the national flower and the national bird."],
+    trailblazer: ["Research José Rizal; present how he used words to help people.", "Explain what Independence Day means.", "Lead a family talk: how can we be brave, kind leaders like Esther?"],
+  },
+};
