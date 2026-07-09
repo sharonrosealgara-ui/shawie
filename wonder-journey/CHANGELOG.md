@@ -34,6 +34,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.8.0] — 2026-07-08 · Full Curriculum Map (Step 1)
+
+**Summary:** Planned and scheduled the entire World 1 curriculum, July → December 2026.
+
+- `Added` **`CURRICULUM_MAP.md`** and **`curriculum-map.js`** — 72 Adventures across 13 Units, scheduled Mon/Tue/Fri from Jul 6 to **Dec 18, 2026** (last teaching week of December).
+- `Added` Per-adventure **academic spine** — explicit Math, English, Bible-story, and character-Value focus so skills build gradually and stay tied to the adventure.
+- `Improved` After an elementary-educator review: extended from 68→72 to reach the final December teaching week, and added a **Filipino Christmas & Traditions** unit (respectful, configurable) with the Nativity landing at Christmas.
+- `Documentation` The map is the schedulable database skeleton for the future Teacher Portal (auto-unlock, Start Adventure). Full per-adventure content is authored unit by unit (Step 3); Units 1–9 flagship adventures already built (10/72).
+
+---
+
 ## [0.7.0] — 2026-07-08 · Birthdays & Learning Levels
 
 **Summary:** Personalized celebrations and per-child learning levels.
