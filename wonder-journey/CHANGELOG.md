@@ -34,6 +34,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.11.0] — 2026-07-09 · Real Educational Media System (production-ready)
+
+- `Added` **`REAL_MEDIA_POLICY.md`** — the production standard for every image, map & illustration: the one rule (real things → real, licensed media, **never AI-generated**), what must be a real photo/map vs. when illustrations are allowed, full licensing/attribution rules, real **Bible-geography** rules (Sea of Galilee, Mt. Sinai, Jerusalem, Nineveh…), no-hotlinking, and the placeholder promise.
+- `Added` **Full media manifest for all 72 adventures (Jul–Dec 2026)** — regenerated `media-manifest.js` with **66 curated media entries** and a per-adventure `ADVENTURE_MEDIA` map (70 of 72 adventures carry media). Every entry has: title, category, `real` flag, local `file` path (mapped to the asset library), `alt`, `caption`, `credit`/`license` (to fill), `sourceType`, **`fallback`** placeholder, **`teacherGuidance`**, and `status`.
+- `Added` **Asset Library** — `assets/` folder tree: `philippines/{maps,landmarks,volcanoes,beaches,rice-terraces}`, `animals`, `food`, `festivals`, `bible/{maps,locations}`, `backgrounds`, `mascots`, `stickers`, `icons`, each tracked with `.gitkeep`, plus `assets/README.md`.
+- `Improved` **Resilient `mediaFigure()`** — now reads the manifest's `fallback` (emoji + label) and `teacherGuidance`; shows a **real-photo / illustration badge**, a "real, licensed photo/map coming" note until credited, and the exact file/source/license instruction in Teacher Mode. Loads local/licensed files only — never hotlinks; a missing photo never breaks a class.
+- `Added` **"Real Photos" gallery scene** — every adventure with manifest media now shows an authentic-media gallery (after Travel Mode) in a responsive `.media-grid`, reinforcing *"every picture here is a real, licensed photo or map — never a pretend one."*
+- `Docs` Add a real image = drop a licensed file at its `file` path, fill `credit` + `license`, set `status:"ready"` — the placeholder becomes the real thing with attribution shown.
+
+---
+
 ## [0.10.1] — 2026-07-08 · Real Educational Media System
 
 - `Added` **`MEDIA_POLICY.md`** — authentic photos/maps first for real places, animals, food & culture; original illustrations only for mascots/UI/decor/Bible narrative; quality, licensing, and no-hotlinking rules.

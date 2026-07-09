@@ -1,5 +1,10 @@
 # 🖼️ Media Policy — Wonder Journey OS
 
+> **See [`REAL_MEDIA_POLICY.md`](REAL_MEDIA_POLICY.md)** — the production standard that
+> governs every image, map, and illustration (authentic-media rule, when illustrations
+> are allowed, licensing/attribution, Bible-geography rules, and the placeholder promise).
+> This file remains as the original quick summary.
+
 Wonder Journey helps children **recognize the real world**. Educational authenticity
 always takes priority over decorative or fictional imagery.
 

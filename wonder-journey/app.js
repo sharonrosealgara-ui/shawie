@@ -635,6 +635,9 @@ function decorHTML(theme) {
 function buildScenes(a) {
   const secs = a.sections.filter(s => !(s.faith && !S.faith));
   const scenes = [{ type: "intro" }, { type: "map" }];
+  // "Real Photos" gallery — only when this adventure has media in the manifest.
+  const media = (typeof ADVENTURE_MEDIA !== "undefined" && ADVENTURE_MEDIA[a.id]) ? ADVENTURE_MEDIA[a.id] : [];
+  if (media.length) scenes.push({ type: "gallery", ids: media });
   secs.forEach(s => scenes.push({ type: "learn", s }));
   if (typeof LEVEL_MISSIONS !== "undefined" && LEVEL_MISSIONS[a.id]) scenes.push({ type: "missions" });
   a.quiz.forEach((q, qi) => scenes.push({ type: "quiz", qi }));
@@ -643,7 +646,7 @@ function buildScenes(a) {
 }
 
 function sceneLabel(sc, i, n) {
-  const names = { intro: "Welcome", map: "Travel Mode", learn: "Discover", missions: "Missions", quiz: "Quiz", reflect: "Reflection", ending: "Adventure Complete" };
+  const names = { intro: "Welcome", map: "Travel Mode", gallery: "Real Photos", learn: "Discover", missions: "Missions", quiz: "Quiz", reflect: "Reflection", ending: "Adventure Complete" };
   return `${names[sc.type] || "Scene"} · ${i + 1} / ${n}`;
 }
 
@@ -659,6 +662,7 @@ function mascotLine(sc) {
   switch (sc.type) {
     case "intro": return { state: "wave", text: `Mabuhay! I'm ${MASCOT.name}, your sunny guide. Let's explore together! ☀️` };
     case "map": return { state: "point", text: "Tap each island group to discover its animals, food and culture!" };
+    case "gallery": return { state: "point", text: "These are real photos and maps — let's look closely! 📸" };
     case "learn": { const tips = ["Ooh, great listening!", "You're learning so much!", "Let's discover this together!", "Wonderful — keep going!"]; return { state: "idle", text: tips[Math.floor(Math.random() * tips.length)] }; }
     case "missions": return { state: "idle", text: "Everyone has a mission — pick the one that's just right for you!" };
     case "quiz": return { state: "idle", text: "You can do it! Take your time and think it through. 🤔" };
@@ -673,19 +677,40 @@ function mascotHTML(sc) {
   return `<div class="mascot"><div class="mascot-face ${m.state}">${MASCOT.face}</div><div class="mascot-bubble" id="mascotBubble">${esc(m.text)}</div></div>`;
 }
 
-/* Resilient educational media component (see MEDIA_POLICY.md).
-   Loads a local/cloud image with alt text + caption + credit; on error it shows a
-   graceful placeholder, plus teacher guidance only in Teacher Mode. Never hotlinks. */
+/* RESILIENT IMAGE COMPONENT (see REAL_MEDIA_POLICY.md).
+   Loads a local/licensed file only — never hotlinks. If the file is missing or
+   blocked, it shows a warm placeholder built from the manifest's `fallback`
+   text, never a broken image. Always renders alt, caption + credit, and a
+   real-photo/illustration badge. In Teacher Mode it surfaces the manifest's
+   `teacherGuidance` so the lesson keeps running while media is being sourced. */
 function mediaFigure(id) {
   const m = (typeof MEDIA !== "undefined") ? MEDIA[id] : null;
   if (!m) return "";
-  const cap = m.caption ? `<figcaption>${esc(m.caption)}${m.credit ? ` <span class="credit">— ${esc(m.credit)}</span>` : ""}</figcaption>` : "";
-  const note = S.teacherMode ? `<div class="wj-teachernote">📷 Teacher: add a licensed image at <b>${esc(m.file)}</b> (${esc(m.sourceHint || "verify license")}).</div>` : "";
+  // Manifest stores fallback as "🌋 Mayon Volcano" — split emoji + label.
+  const fbRaw = m.fallback || ("🖼️ " + (m.subject || "Photo"));
+  const fbMatch = fbRaw.match(/^(\S+)\s+([\s\S]+)$/);
+  const fbEmoji = fbMatch ? fbMatch[1] : "🖼️";
+  const fbLabel = fbMatch ? fbMatch[2] : fbRaw;
+  const isMap = m.category && m.category.indexOf("map") > -1;
+  const badge = m.real === false
+    ? `<span class="wj-fig-badge illus">illustration</span>`
+    : `<span class="wj-fig-badge real">real ${isMap ? "map" : "photo"}</span>`;
+  const credit = m.credit
+    ? ` <span class="credit">— ${esc(m.credit)}${m.license ? " · " + esc(m.license) : ""}</span>`
+    : (m.status !== "ready" ? ` <span class="credit pending">— real, licensed ${isMap ? "map" : "photo"} coming</span>` : "");
+  const cap = m.caption ? `<figcaption>${esc(m.caption)}${credit}</figcaption>` : "";
+  const guide = m.teacherGuidance
+    || ("Add a licensed image at " + (m.file || "") + " (" + (m.sourceHint || "verify license") + ").");
+  const note = S.teacherMode ? `<div class="wj-teachernote">📷 <b>Teacher:</b> ${esc(guide)}</div>` : "";
   return `<figure class="wj-figure">
     <img src="${esc(m.file)}" alt="${esc(m.alt || m.subject || "")}" loading="lazy"
       onerror="this.closest('.wj-figure').classList.add('missing')" />
-    <div class="wj-figure-fallback"><span class="fb-emoji">🖼️</span><b>${esc(m.subject || "Photo")}</b><small>${esc(m.alt || "")}</small></div>
-    ${cap}${note}
+    <div class="wj-figure-fallback">
+      <span class="fb-emoji">${esc(fbEmoji)}</span>
+      <b>${esc(fbLabel)}</b>
+      <small>${esc(m.alt || "")}</small>
+    </div>
+    ${badge}${cap}${note}
   </figure>`;
 }
 
@@ -754,6 +779,18 @@ function renderScene(sc) {
       </div>
       <p class="archi-hint">👆 Tap each island group to explore its animals, food & culture · <a href="#" onclick="launchGoogleEarth();return false" style="color:#0e7c86;font-weight:800">🌍 Google Earth (soon)</a></p>
       <div id="isleInfo" class="paper" style="display:none;margin:16px auto 0;max-width:560px"></div>
+    </div>`;
+  }
+  if (sc.type === "gallery") {
+    const ids = (sc.ids || []).filter(id => typeof MEDIA !== "undefined" && MEDIA[id]);
+    const figs = ids.map(mediaFigure).join("");
+    return `<div class="scene scene-lesson">
+      <div class="paper"><div class="paper-inner">
+        <span class="signpost">📸 Real Photos</span>
+        <h2 class="title">📸 See the Real Thing! <span class="title-spark">✨</span></h2>
+        <p class="lead" style="font-size:15px;margin:2px 0 6px">Every picture here is (or will be) a <b>real, licensed photo or map</b> — never a pretend one.</p>
+        <div class="media-grid">${figs}</div>
+      </div></div>
     </div>`;
   }
   if (sc.type === "learn") {
