@@ -17,10 +17,10 @@ const DEFAULT_STATE = {
     { name: "Shaun", role: "Dad", emoji: "👨", color: "#0e7c86" },
     { name: "Taylor", role: "Mom", emoji: "👩", color: "#e5674f" },
     { name: "Grandma", role: "Grandma", emoji: "👵", color: "#7a5cc4" },
-    { name: "Rylee", role: "Explorer", emoji: "🧒", color: "#3f9d54" },
-    { name: "Ezra", role: "Explorer", emoji: "🧒", color: "#f4a821" },
-    { name: "Asa", role: "Explorer", emoji: "🧒", color: "#12a3af" },
-    { name: "Selah", role: "Explorer", emoji: "🧒", color: "#bd6980" },
+    { name: "Rylee", role: "Trailblazer", emoji: "🧒", color: "#3f9d54", level: "trailblazer" },
+    { name: "Ezra", role: "Adventurer", emoji: "🧒", color: "#f4a821", level: "adventurer" },
+    { name: "Asa", role: "Adventurer", emoji: "🧒", color: "#12a3af", level: "adventurer" },
+    { name: "Selah", role: "Explorer", emoji: "🧒", color: "#bd6980", level: "explorer" },
   ],
   faith: true,            // show Bible / faith content
   theme: "light",
@@ -39,6 +39,9 @@ function loadState() {
     if (Array.isArray(s.family) && s.family.some(f => f.name === "Kiddo")) {
       s.family = structuredClone(DEFAULT_STATE.family);
     }
+    // Backfill known children's learning levels if a saved roster predates them.
+    const KID_LEVELS = { Rylee: "trailblazer", Ezra: "adventurer", Asa: "adventurer", Selah: "explorer" };
+    if (Array.isArray(s.family)) s.family.forEach(f => { if (!f.level && KID_LEVELS[f.name]) f.level = KID_LEVELS[f.name]; });
     return s;
   } catch (e) { return structuredClone(DEFAULT_STATE); }
 }
@@ -249,17 +252,21 @@ function differentiationSection(a) {
     <div class="section-title"><span class="em">🎯</span> Missions for Every Explorer</div>
     <p style="color:var(--ink-soft);font-size:14px;margin:-6px 0 12px">One adventure, three levels — each child does the tasks that fit them best. Big kids, help the little ones! 🤝</p>
     <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">
-      ${LEVEL_TIERS.map(t => `
+      ${LEVEL_TIERS.map(t => {
+        const kids = S.family.filter(f => f.level === t.key);
+        return `
         <div class="card" style="padding:18px;border-top:4px solid ${t.color}">
           <div style="display:flex;align-items:center;gap:9px">
             <span style="font-size:24px">${t.emoji}</span>
             <div><b style="font-family:'Baloo 2',sans-serif;font-size:16px">${t.name}</b>
             <div style="font-size:11px;color:var(--ink-soft);font-weight:800;text-transform:uppercase;letter-spacing:.03em">${t.age}</div></div>
           </div>
+          ${kids.length ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px">${kids.map(k => `<span class="tag" style="background:color-mix(in srgb,${t.color} 18%,transparent);color:var(--ink)">${esc(k.emoji)} ${esc(k.name)}</span>`).join("")}</div>` : ""}
           <ul style="margin:12px 0 0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:7px">
             ${m[t.key].map(x => `<li>${esc(x)}</li>`).join("")}
           </ul>
-        </div>`).join("")}
+        </div>`;
+      }).join("")}
     </div>`;
 }
 
