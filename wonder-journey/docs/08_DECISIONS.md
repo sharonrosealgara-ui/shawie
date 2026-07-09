@@ -7,6 +7,28 @@
 
 ---
 
+### ADR-010 — Reconcile the sampler adventures with the 72-lesson map *(PROPOSED — needs owner decision)*
+**Problem:** The 10 fully-authored *playable* adventures (`curriculum.js`) are a
+one-per-unit sampler numbered `a1–a10` sequentially (Welcome, Islands, Champorado,
+Bayanihan, Fiesta, Volcanoes, Animals, Rice Terraces, Ocean, Heroes). The canonical
+**72-lesson map** (`curriculum-map.js`) assigns those same topics to *different* ids
+(Champorado=`a7`, Bayanihan=`a13`, Fiesta=`a19`, Volcanoes=`a25`, Animals=`a31`,
+Rice Terraces=`a37`, Ocean=`a43`, Heroes=`a49`). Result: the Teacher Portal
+(map-driven) and the Adventure Theater (sampler-driven) disagree on what `a3`–`a10`
+are, and `THEME_BY_ID` / legacy `ADVENTURE_MEDIA` in `app.js` are keyed to sampler
+ids while the new media manifest is keyed to map ids.
+**Options:**
+- **(A) Re-slot the sampler onto true map ids** — renumber authored a3→a7, a4→a13,
+  a5→a19, a6→a25, a7→a31, a8→a37, a9→a43, a10→a49 (a1/a2 unchanged); update
+  `THEME_BY_ID`, `LEVEL_MISSIONS`, legacy media keys, and the map's `built` flags.
+  Then author the remaining slots unit by unit. *Single canonical curriculum.*
+  **(Recommended.)**
+- **(B) Keep the sampler as "Volume 0"** and treat the 72-map as a separate future
+  track. *Fastest, but leaves two parallel curricula and a confusing Teacher Portal.*
+- **(C) Re-theme the sampler in place** to match map a1–a10 exactly (a3=Flag,
+  a4=Greetings, …) and move the current sampler content to their real slots later.
+**Status:** Awaiting owner decision before large curriculum authoring proceeds.
+
 ### ADR-009 — Teacher Portal & Parent Dashboard read the curriculum map
 **Decision:** Grown-up planning tools generate lesson plans, materials and
 summaries from `CURRICULUM_MAP` metadata + a `MATERIALS` layer, so all 72
