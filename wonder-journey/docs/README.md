@@ -19,6 +19,8 @@ lower number wins, and `00` (the Constitution) always wins.
 | 10 | [Changelog Policy & Dev Log](10_CHANGELOG.md) | Changelog rules + session log (entries in root [CHANGELOG.md](../CHANGELOG.md)) |
 | 11 | [Content Style Guide](11_CONTENT_STYLE_GUIDE.md) | Writing standards for all content |
 | 12 | [Testing & QA Guide](12_TESTING_GUIDE.md) | Quality assurance standards |
+| 13 | [Deployment Guide](13_DEPLOYMENT_GUIDE.md) | Deployment strategy, environments, checklists |
+| 14 | [Brand Guidelines](14_BRAND_GUIDELINES.md) | Brand identity, voice, palette, mascots |
 
 **Also see:** [PROGRESS.md](../PROGRESS.md) (live build tracker) ·
 [CHANGELOG.md](../CHANGELOG.md) · [CONTRIBUTING.md](../CONTRIBUTING.md) ·
