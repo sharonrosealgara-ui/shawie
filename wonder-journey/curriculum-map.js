@@ -249,7 +249,7 @@ const CURRICULUM_MAP = {
         "math": "Age & time (older / younger, years)",
         "english": "Polite words & manners",
         "bible": "Honor your father & mother",
-        "built": false
+        "built": true
       },
       {
         "n": 15,
@@ -265,7 +265,7 @@ const CURRICULUM_MAP = {
         "math": "Arrays: setting the table",
         "english": "Inviting & welcoming phrases",
         "bible": "Abraham welcomes three visitors",
-        "built": false
+        "built": true
       },
       {
         "n": 16,
@@ -281,7 +281,7 @@ const CURRICULUM_MAP = {
         "math": "Generations & simple diagrams",
         "english": "Family vocabulary",
         "bible": "Ruth's loyalty to family",
-        "built": false
+        "built": true
       },
       {
         "n": 17,
@@ -297,7 +297,7 @@ const CURRICULUM_MAP = {
         "math": "Tally & graph acts of kindness",
         "english": "Sentence writing",
         "bible": "Love your neighbor",
-        "built": false
+        "built": true
       },
       {
         "n": 18,
@@ -313,7 +313,7 @@ const CURRICULUM_MAP = {
         "math": "Planning & measuring supplies",
         "english": "Reflection writing",
         "bible": "Jesus serves others (gently told)",
-        "built": false
+        "built": true
       }
     ]
   },

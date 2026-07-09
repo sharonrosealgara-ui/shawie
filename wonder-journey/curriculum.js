@@ -749,6 +749,255 @@ const ADVENTURES = [
     reflect: ["Who will you help this week?", "What did Bayanihan teach you about our family?"],
   },
   {
+    id: "a14",
+    emoji: "🙏",
+    title: "Respect for Elders: Po, Opo & Mano",
+    region: "Family & Values",
+    subtitle: "Learn the gentle Filipino ways of honoring elders — “po,” “opo,” and the mano blessing.",
+    value: "Respect",
+    badge: "kind-heart",
+    stamp: { emoji: "🙏", name: "Mano Po" },
+    xp: 150,
+    sections: [
+      { icon: "👵", subject: "Story: A Gentle Greeting", html:
+        `<p>In Filipino homes, children have beautiful ways to honor <b>lolo</b> (grandpa) and <b>lola</b> (grandma). One is the <b>mano</b> — gently taking an elder's hand and touching it to your forehead to receive a blessing. 🙏</p>` },
+      { icon: "🗣️", subject: "Polite Words: Po & Opo", html:
+        `<div class="wordbank">
+           <div class="word"><b>Po</b> — a polite word added to show respect</div>
+           <div class="word"><b>Opo</b> — a respectful "yes"</div>
+           <div class="word"><b>Salamat po</b> — thank you (politely)</div>
+           <div class="word"><b>Mano po</b> — asking for an elder's blessing</div>
+         </div>
+         <div class="tryit">🙌 Practice: answer a grown-up with a warm "<b>Opo!</b>"</div>` },
+      { icon: "👨‍👩‍👧", subject: "Words for Elders", html:
+        `<div class="wordbank">
+           <div class="word"><b>Lolo</b> — grandfather · <b>Lola</b> — grandmother</div>
+           <div class="word"><b>Tito</b> — uncle · <b>Tita</b> — aunt</div>
+           <div class="word"><b>Ate</b> — older sister · <b>Kuya</b> — older brother</div>
+         </div>` },
+      { icon: "🔢", subject: "Math: Older & Younger", html:
+        `<p><b>Age & time!</b> If Lola is 60 and you are 8…</p>
+         <ul><li>How many years older is Lola? <b>(60 − 8 = 52 years!)</b></li>
+         <li>Put the family in order from youngest to oldest.</li></ul>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Honor your father and mother (Exodus 20:12).</b> One of God's Ten Commandments tells us to honor our parents — and it comes with a promise of blessing! Respecting our elders pleases God.</p>
+         <div class="callout faith">💜 Honoring the people who care for us is one of the kindest things we can do.</div>` },
+      { icon: "📖", subject: "English — Polite Manners", html:
+        `<div class="tryit">✏️ Say it kindly: "May I ______, po?" and "Thank you, po." Manners are magic words!</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>How does our family show respect to Grandma and elders?</li>
+         <li>What is one polite word we can use more this week?</li></ul>` },
+      { icon: "🤝", subject: "Character: Respect", value: true, html:
+        `<div class="callout char">🌟 <b>Respect</b> means honoring others with our words and actions. Do the <b>mano</b> or say "po/opo" to an elder today. 🙏</div>` },
+    ],
+    quiz: [
+      { q: "The “mano” is a way to receive an elder's…", a: ["blessing", "homework", "snack"], correct: 0 },
+      { q: "A polite, respectful “yes” is…", a: ["opo", "sige", "hindi"], correct: 0 },
+      { q: "If Lola is 60 and you are 8, she is how many years older?", a: ["52", "68", "8"], correct: 0 },
+      { q: "God's commandment says to ______ your father and mother.", a: ["honor", "ignore", "race"], correct: 0 },
+    ],
+    reflect: ["How did you show respect to an elder today?", "Which polite word will you use more?"],
+  },
+  {
+    id: "a15",
+    emoji: "🏡",
+    title: "Filipino Hospitality: Welcoming Guests",
+    region: "Family & Values",
+    subtitle: "Discover the warm Filipino heart for guests — where visitors are welcomed like family.",
+    value: "Hospitality",
+    badge: "kind-heart",
+    stamp: { emoji: "🏡", name: "Welcome Home" },
+    xp: 150,
+    sections: [
+      { icon: "🚪", subject: "Story: Tuloy Po Kayo!", html:
+        `<p>Knock, knock! When a guest arrives at a Filipino home, they hear the warmest words: "<b>Tuloy po kayo!</b>" (Please come in!). Guests are treated like family — offered a seat, a drink, and always food. 🍽️</p>` },
+      { icon: "🤗", subject: "The Filipino Welcome", html:
+        `<div class="wordbank">
+           <div class="word">😊 A warm smile & "Tuloy po kayo!"</div>
+           <div class="word">🪑 The best seat for the guest</div>
+           <div class="word">🍚 Food is always shared — "Kain tayo!"</div>
+           <div class="word">💛 "Pakumbaba" — humble, giving hearts</div>
+         </div>` },
+      { icon: "🔢", subject: "Math: Setting the Table (Arrays)", html:
+        `<p>Setting places is an <b>array</b> — rows and columns!</p>
+         <ul><li>4 guests each need 1 plate + 1 spoon + 1 fork = <b>4 × 3 = 12 items</b>.</li>
+         <li>2 rows of 3 chairs = <b>6 chairs</b>.</li></ul>
+         <div class="tryit">🍽️ Help set the table tonight — count each person's set!</div>` },
+      { icon: "🗣️", subject: "Welcoming Phrases", html:
+        `<div class="wordbank">
+           <div class="word"><b>Tuloy po kayo</b> — Please come in</div>
+           <div class="word"><b>Kumain na po kayo</b> — Please eat</div>
+           <div class="word"><b>Salamat sa pagbisita</b> — Thanks for visiting</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Abraham welcomes three visitors (Genesis 18).</b> Abraham saw three travelers and hurried to welcome them — offering water, rest, and a good meal. His kindness to strangers became a blessing to his whole family.</p>
+         <div class="callout faith">💜 The Bible says to welcome others warmly — sometimes we welcome angels without knowing it!</div>` },
+      { icon: "📖", subject: "English — Inviting Words", html:
+        `<div class="tryit">🎤 Practice a friendly invitation: "Welcome! Please come in and sit down. Would you like something to eat?"</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>How can our family make a guest feel welcome this week?</li>
+         <li>Who could we invite over or reach out to?</li></ul>` },
+      { icon: "🤝", subject: "Character: Hospitality", value: true, html:
+        `<div class="callout char">🌟 <b>Hospitality</b> means welcoming others with an open, generous heart. Help prepare a warm welcome for a guest today. 🏡</div>` },
+    ],
+    quiz: [
+      { q: "“Tuloy po kayo!” means…", a: ["Please come in!", "Goodbye!", "Be quiet!"], correct: 0 },
+      { q: "4 guests each needing 3 items is how many items?", a: ["12", "7", "4"], correct: 0 },
+      { q: "Abraham welcomed three ______ with food and rest.", a: ["visitors", "sheep", "boats"], correct: 0 },
+      { q: "Hospitality means welcoming others with a ______ heart.", a: ["generous", "grumpy", "closed"], correct: 0 },
+    ],
+    reflect: ["How will you welcome a guest this week?", "When did someone make you feel welcome?"],
+  },
+  {
+    id: "a16",
+    emoji: "🌳",
+    title: "Our Family Tree & Kinship Words",
+    region: "Family & Values",
+    subtitle: "Build your family tree and learn the Filipino words that connect every generation.",
+    value: "Family",
+    badge: "kind-heart",
+    stamp: { emoji: "🌳", name: "Family Tree" },
+    xp: 150,
+    sections: [
+      { icon: "🌳", subject: "Story: Roots and Branches", html:
+        `<p>A family is like a strong tree. 🌳 <b>Grandparents</b> are the deep roots, <b>parents</b> are the trunk, and <b>children</b> are the growing branches. Every person has a special place!</p>` },
+      { icon: "👨‍👩‍👧‍👦", subject: "Family Words (Filipino)", html:
+        `<div class="wordbank">
+           <div class="word"><b>Pamilya</b> — family</div>
+           <div class="word"><b>Nanay / Inay</b> — mother · <b>Tatay / Itay</b> — father</div>
+           <div class="word"><b>Kapatid</b> — sibling · <b>Pinsan</b> — cousin</div>
+           <div class="word"><b>Lolo / Lola</b> — grandparents</div>
+         </div>` },
+      { icon: "🔢", subject: "Math: Generations & Diagrams", html:
+        `<p>A family tree is a <b>diagram</b> with levels called <b>generations</b>.</p>
+         <ul><li>Grandparents = generation 1. Parents = generation 2. You = generation 3!</li>
+         <li>If 2 grandparents had 3 children, draw the branches — how many in generation 2?</li></ul>
+         <div class="tryit">✏️ Draw your own family tree with names and little pictures.</div>` },
+      { icon: "🗣️", subject: "Ate, Kuya & More", html:
+        `<div class="wordbank">
+           <div class="word"><b>Ate</b> — older sister · <b>Kuya</b> — older brother</div>
+           <div class="word"><b>Bunso</b> — youngest child</div>
+           <div class="word"><b>Angkan</b> — clan / whole family line</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Ruth's loyalty to family (Ruth 1).</b> When hard times came, Ruth stayed lovingly by her mother-in-law Naomi, saying, "Where you go, I will go." Her faithful love blessed her whole family for generations.</p>
+         <div class="callout faith">💜 Loving loyalty holds a family together, just like Ruth's did.</div>` },
+      { icon: "📖", subject: "English — Family Vocabulary", html:
+        `<div class="tryit">✏️ Finish the sentences: "My mother is my ______. My grandfather is my ______." Use the Filipino words too!</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>Who is in our family tree, and what do we love about each one?</li>
+         <li>What family story should we remember and pass on?</li></ul>` },
+      { icon: "🤝", subject: "Character: Family Love", value: true, html:
+        `<div class="callout char">🌟 <b>Family</b> is a gift from God. Tell one family member today, "I'm thankful you're in our family!" 💛</div>` },
+    ],
+    quiz: [
+      { q: "“Kapatid” means…", a: ["sibling", "cousin", "grandma"], correct: 0 },
+      { q: "In a family tree, grandparents are which generation?", a: ["the first", "the last", "none"], correct: 0 },
+      { q: "Ruth showed loyal love by staying with…", a: ["Naomi", "a king", "a merchant"], correct: 0 },
+      { q: "“Ate” means older…", a: ["sister", "brother", "cousin"], correct: 0 },
+    ],
+    reflect: ["Who is someone special in your family tree?", "What family story do you want to remember?"],
+  },
+  {
+    id: "a17",
+    emoji: "💛",
+    title: "Kindness in Our Community",
+    region: "Family & Values",
+    subtitle: "Open your eyes to the needs around you and plan a small act of kindness for a neighbor.",
+    value: "Kindness",
+    badge: "kind-heart",
+    stamp: { emoji: "💛", name: "Kind Heart" },
+    xp: 150,
+    sections: [
+      { icon: "🏘️", subject: "Story: A Kind Neighborhood", html:
+        `<p>A <b>barangay</b> (neighborhood) is stronger when neighbors are kind. 💛 A smile, a helping hand, or sharing what we have can brighten someone's whole day!</p>` },
+      { icon: "👀", subject: "Noticing Needs", html:
+        `<div class="wordbank">
+           <div class="word">🧹 Someone who needs help carrying or cleaning</div>
+           <div class="word">🍚 Someone who could use a shared meal</div>
+           <div class="word">😊 Someone who just needs a friendly hello</div>
+         </div>
+         <div class="tryit">👀 Look around today — who might need a little kindness?</div>` },
+      { icon: "📊", subject: "Math: Tally & Graph Kindness", html:
+        `<p>Let's count our kind acts with <b>tally marks</b>!</p>
+         <ul><li>Each kind act = one mark: I I I I. Five marks = a bundle!</li>
+         <li>At the end of the day, count them and color a little bar graph. 📊</li></ul>` },
+      { icon: "🗣️", subject: "Kind Words", html:
+        `<div class="wordbank">
+           <div class="word"><b>Mabait</b> — kind</div>
+           <div class="word"><b>Tulong</b> — help · <b>Tutulong ako</b> — I will help</div>
+           <div class="word"><b>Pasensya na po</b> — I'm sorry (politely)</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Love your neighbor (Mark 12:31).</b> Jesus said the second greatest commandment is to "love your neighbor as yourself." Kindness to the people around us is a way we live out God's love.</p>
+         <div class="callout faith">💜 Every kind act, no matter how small, shows God's love to our neighbors.</div>` },
+      { icon: "📖", subject: "English — Writing a Sentence", html:
+        `<div class="tryit">✏️ Write one full sentence: "Today I will be kind by ______." Then do it!</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>Who in our community could use some kindness right now?</li>
+         <li>What is one kind act our whole family could do together?</li></ul>` },
+      { icon: "🤝", subject: "Character: Kindness", value: true, html:
+        `<div class="callout char">🌟 <b>Kindness</b> is love in action. Do one kind thing for a neighbor or family member today, and add a tally mark! 💛</div>` },
+    ],
+    quiz: [
+      { q: "A “barangay” is a Filipino…", a: ["neighborhood", "boat", "fruit"], correct: 0 },
+      { q: "We can count kind acts using…", a: ["tally marks", "raindrops", "songs"], correct: 0 },
+      { q: "Jesus said to love your neighbor as…", a: ["yourself", "a stranger", "a king"], correct: 0 },
+      { q: "“Mabait” means…", a: ["kind", "tall", "fast"], correct: 0 },
+    ],
+    reflect: ["What kind act did you do today?", "Who will you be kind to tomorrow?"],
+  },
+  {
+    id: "a18",
+    emoji: "🤝",
+    title: "Family Act-of-Service Project",
+    region: "Family & Values",
+    subtitle: "Put love into action — plan and complete a hands-on service project together as a family.",
+    value: "Service",
+    badge: "kind-heart",
+    stamp: { emoji: "🤝", name: "Helping Hands" },
+    xp: 160,
+    sections: [
+      { icon: "🛠️", subject: "Story: Love with Our Hands", html:
+        `<p>We've learned about respect, hospitality, family, and kindness. Now let's put them together into a <b>family service project</b> — love you can see and touch! 🤝</p>` },
+      { icon: "💡", subject: "Choose Your Project", html:
+        `<div class="wordbank">
+           <div class="word">🍞 Prepare & share a meal or snack for someone</div>
+           <div class="word">🧹 Clean or fix something for a neighbor or lolo/lola</div>
+           <div class="word">🎁 Make cards or a care package to give away</div>
+           <div class="word">🌱 Plant something or tidy a shared space</div>
+         </div>
+         <div class="tryit">👨‍👩‍👧‍👦 As a family, pick ONE project everyone can help with.</div>` },
+      { icon: "📋", subject: "Math: Plan the Supplies", html:
+        `<p>Good helpers <b>plan</b>! Make a supply list and count what you need.</p>
+         <ul><li>If we make 6 cards, we need 6 sheets of paper. Do we have enough?</li>
+         <li>Measure or count each supply and check it off. ✅</li></ul>` },
+      { icon: "🗣️", subject: "Words for Serving", html:
+        `<div class="wordbank">
+           <div class="word"><b>Paglilingkod</b> — service</div>
+           <div class="word"><b>Tutulong ang pamilya</b> — the family will help</div>
+           <div class="word"><b>Para sa iba</b> — for others</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Jesus serves others (John 13).</b> Jesus, the greatest leader, gently washed His friends' feet to show that loving others means <b>serving</b> them. He said, "I have given you an example."</p>
+         <div class="callout faith">💜 We follow Jesus' example when we serve our family and neighbors with love.</div>` },
+      { icon: "📖", subject: "English — Reflection Writing", html:
+        `<div class="tryit">✏️ After your project, write 2 sentences: "We served by ______. It made me feel ______."</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>How did it feel to serve someone together?</li>
+         <li>What service project should we do again next month?</li></ul>` },
+      { icon: "🤝", subject: "Character: Service", value: true, html:
+        `<div class="callout char">🌟 <b>Service</b> is love with our hands and feet. Finish your family project with joyful hearts — you followed Jesus' example! 🤝</div>` },
+    ],
+    quiz: [
+      { q: "A service project means doing something helpful for…", a: ["others", "only ourselves", "no one"], correct: 0 },
+      { q: "Good helpers first make a ______ of supplies.", a: ["plan / list", "mess", "nap"], correct: 0 },
+      { q: "Jesus washed His friends' feet to show that leaders should…", a: ["serve", "rest", "hide"], correct: 0 },
+      { q: "“Paglilingkod” means…", a: ["service", "sleeping", "shopping"], correct: 0 },
+    ],
+    reflect: ["How did serving together feel?", "What service project should we do next?"],
+  },
+  {
     id: "a19",
     emoji: "🎉",
     title: "Fiesta! Festivals of the Philippines",
@@ -1181,6 +1430,31 @@ const LEVEL_MISSIONS = {
     explorer: ["Act out neighbors carrying a house together.", "Practice saying “Po” and “Opo” politely.", "Draw a bahay kubo."],
     adventurer: ["Write 2 sentences about a time someone helped you.", "Solve: a 12-minute job shared by 4 people = ? minutes.", "Learn part of the song “Bahay Kubo.”"],
     trailblazer: ["Plan a family Bayanihan chore and lead the team.", "Compare Bayanihan with the Good Samaritan — what's the shared lesson?", "Write a thank-you note to someone who helps our family."],
+  },
+  a14: {
+    explorer: ["Do the ‘mano po’ with an elder.", "Answer a grown-up with a warm ‘Opo!’", "Match: lolo, lola, tito, tita to their meanings."],
+    adventurer: ["Solve an age difference (e.g., 60 − 8).", "Order the family from youngest to oldest.", "Use ‘po’ politely in three sentences."],
+    trailblazer: ["Explain why the 5th commandment matters, with an example.", "Teach a younger sibling three respectful words.", "Write a short thank-you to an elder you honor."],
+  },
+  a15: {
+    explorer: ["Help set the table for a guest.", "Practice saying ‘Tuloy po kayo!’", "Offer someone the best seat kindly."],
+    adventurer: ["Use an array to count place settings (4 × 3).", "Write a friendly welcome invitation.", "Plan a snack to share with a visitor."],
+    trailblazer: ["Host a mini welcome for a family member and lead it.", "Retell how Abraham welcomed his three visitors.", "Explain how hospitality blesses both guest and host."],
+  },
+  a16: {
+    explorer: ["Draw a simple family tree with names.", "Name three Filipino family words.", "Point to yourself on the tree — which generation?"],
+    adventurer: ["Label three generations on your tree.", "Write two sentences using Filipino family words.", "Ask a parent for one family story."],
+    trailblazer: ["Build a 3-generation family tree with pictures.", "Interview a relative and record their story.", "Explain Ruth's loyalty and why it blessed her family."],
+  },
+  a17: {
+    explorer: ["Do one kind act and add a tally mark.", "Say a kind word to someone.", "Draw a picture of helping a neighbor."],
+    adventurer: ["Tally your kind acts and make a small bar graph.", "Write a sentence: ‘Today I will be kind by…’.", "Learn the words ‘mabait’ and ‘tutulong ako’."],
+    trailblazer: ["Plan a family kindness for the barangay.", "Graph a week of kind acts and describe the pattern.", "Explain ‘love your neighbor’ with a real example."],
+  },
+  a18: {
+    explorer: ["Help choose the family service project.", "Count the supplies you need.", "Do your part with a happy heart."],
+    adventurer: ["Make a supply list and check each item.", "Write 2 reflection sentences after serving.", "Explain who your project helped and how."],
+    trailblazer: ["Plan and lead the whole service project.", "Measure/budget the supplies needed.", "Explain how Jesus washing feet models servant leadership."],
   },
   a19: {
     explorer: ["Make a paper flower or a simple festival mask.", "Clap or drum a festival beat.", "Point to Baguio (the flower festival) on a map."],

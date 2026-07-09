@@ -34,6 +34,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.20.0] — 2026-07-09 · Unit 3 complete (Family, Values & Community)
+
+- `Added` **Unit 3 fully authored** — five new interactive adventures (a14–a18), Village & Values theme:
+  - **a14 · Respect for Elders: Po, Opo & Mano** (Respect) — the mano blessing, polite words, elder & kinship terms, age math, honor your father & mother.
+  - **a15 · Filipino Hospitality: Welcoming Guests** (Hospitality) — "Tuloy po kayo!", table-setting arrays, welcoming phrases, Abraham's three visitors.
+  - **a16 · Our Family Tree & Kinship Words** (Family) — roots-and-branches, Filipino family vocabulary, generations & diagrams, Ruth's loyalty.
+  - **a17 · Kindness in Our Community** (Kindness) — the barangay, tally & graph kind acts, love your neighbor.
+  - **a18 · Family Act-of-Service Project** (Service) — choose & plan a real project, supply math, Jesus washing feet, reflection writing.
+  - Each with 8 sections, a 4-question quiz, reflection, and 3-tier missions. **Units 1–3 complete (a1–a18) — 24 of 72 adventures interactive.**
+
+---
+
 ## [0.19.0] — 2026-07-09 · Unit 2 complete (Filipino Food & Kitchen)
 
 - `Added` **Unit 2 fully authored** — five new interactive adventures (a8–a12), all in the Cooking Studio theme with aligned real-media:
