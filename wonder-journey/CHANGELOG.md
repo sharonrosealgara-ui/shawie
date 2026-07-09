@@ -34,6 +34,20 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.9.0] — 2026-07-08 · Cinematic Adventure Theater
+
+**Summary:** Adventures can now play as an immersive, animated, scene-based story —
+not a slideshow.
+
+- `Added` **Cinematic Presentation Mode** ("🎬 Present as Story") — full-screen theater that plays each adventure as scenes (Welcome → Travel → Discover → Missions → Quiz → Reflection → Adventure Complete) with cinematic fade/zoom transitions.
+- `Added` **Animated archipelago map** — ocean sky, drifting clouds, twinkling sparkles, a rotating globe, and Luzon/Visayas/Mindanao that glow in sequence and are **clickable to reveal** animals, food, culture, language & cities.
+- `Added` **Sound design** — synthesized (Web Audio, CSP-safe) click / correct / wrong / stamp / celebrate cues, with a mute toggle; respects `prefers-reduced-motion`.
+- `Added` In-theater **quiz** (one question per scene, big buttons, instant feedback) and a **sunset ending** with stats, stamp, badges, and "See you on our next adventure."
+- `Added` **Google Earth launch hook** (stubbed) with the built-in animated map as the documented fallback.
+- `Changed` Refactored completion into `awardCompletion()` so cinema and scroll modes share reward logic. The scroll view remains as the teacher/reading view — role separation preserved.
+
+---
+
 ## [0.8.0] — 2026-07-08 · Full Curriculum Map (Step 1)
 
 **Summary:** Planned and scheduled the entire World 1 curriculum, July → December 2026.

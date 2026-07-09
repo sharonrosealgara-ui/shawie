@@ -100,10 +100,9 @@ function checkAutoBadges(newlyEarned) {
   if (ADVENTURES.every(a => isDone(a.id))) grant("world1-champ");
 }
 
-function completeAdventure(adv, score, total) {
+function awardCompletion(adv, score, total) {
   const firstTime = !isDone(adv.id);
   const newly = [];
-  // XP: full award first time, small replay bonus after
   let gained = 0;
   if (firstTime) {
     gained = adv.xp + score * 10;
@@ -111,7 +110,6 @@ function completeAdventure(adv, score, total) {
     if (!S.stamps.includes(adv.id)) S.stamps.push(adv.id);
     const b = awardBadge(adv.badge); if (b) newly.push(b);
   } else {
-    // keep best score
     const prev = S.completed[adv.id];
     if (score > prev.score) prev.score = score;
     gained = score * 4;
@@ -120,7 +118,11 @@ function completeAdventure(adv, score, total) {
   S.xp += gained;
   checkAutoBadges(newly);
   save(); renderTop();
-  celebrate(adv, score, total, gained, newly, firstTime);
+  return { gained, newly, firstTime };
+}
+function completeAdventure(adv, score, total) {
+  const r = awardCompletion(adv, score, total);
+  celebrate(adv, score, total, r.gained, r.newly, r.firstTime);
 }
 
 /* ---------- celebration modal ---------- */
@@ -298,6 +300,9 @@ function openAdventure(id) {
         <h1>${a.emoji} ${esc(a.title)}</h1>
         <p>${esc(a.subtitle)}</p>
         <div class="big">${a.emoji}</div>
+      </div>
+      <div style="margin:14px 0">
+        <button class="btn btn-primary" style="font-size:16px" onclick="openCinema('${a.id}')">🎬 Present as Story — Cinematic Mode</button>
       </div>
       ${teacherToolbar()}
 
@@ -532,6 +537,202 @@ function checkBirthdays() {
     setTimeout(() => birthdayModal(names), 500);
   }
 }
+
+/* ============================================================
+   CINEMATIC PRESENTATION MODE — the Adventure Theater.
+   Plays an adventure as animated scenes with transitions and
+   optional synthesized sound. Additive: the scroll view remains
+   the teacher/reading view; this is the immersive family view.
+   ============================================================ */
+let cine = null;
+const cineEl = () => document.getElementById("cinema");
+
+/* --- sound (Web Audio, synthesized — CSP-safe, no external files) --- */
+let actx = null;
+function ac() { if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} } return actx; }
+function tone(freq, dur = 0.15, type = "sine", vol = 0.15, when = 0) {
+  if (cine && cine.muted) return;
+  const a = ac(); if (!a) return;
+  const t = a.currentTime + when;
+  const o = a.createOscillator(), g = a.createGain();
+  o.type = type; o.frequency.value = freq; o.connect(g); g.connect(a.destination);
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(vol, t + 0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.start(t); o.stop(t + dur + 0.02);
+}
+const sfxClick = () => tone(320, 0.08, "triangle", 0.12);
+const sfxWhoosh = () => { tone(600, 0.18, "sine", 0.08); tone(300, 0.22, "sine", 0.06, 0.03); };
+const sfxCorrect = () => { tone(523, 0.12, "sine", 0.14); tone(784, 0.16, "sine", 0.14, 0.1); };
+const sfxWrong = () => tone(180, 0.22, "sine", 0.12);
+const sfxStamp = () => tone(120, 0.14, "square", 0.16);
+const sfxCelebrate = () => [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.2, "triangle", 0.13, i * 0.11));
+
+const ISLES = {
+  luzon: { emoji: "🏙️", name: "Luzon", blurb: "The largest island group, in the north.", animals: "Philippine eagle, carabao", food: "Champorado, longganisa", culture: "Home of Manila & the Banaue Rice Terraces", lang: "Tagalog, Ilocano", cities: "Manila, Baguio, Vigan" },
+  visayas: { emoji: "🏝️", name: "Visayas", blurb: "The central islands, famous for beaches.", animals: "Tarsier, whale shark", food: "Sweet mangoes, lechon", culture: "Sinulog & Ati-Atihan festivals; Chocolate Hills", lang: "Hiligaynon, Cebuano", cities: "Cebu, Iloilo, Tacloban" },
+  mindanao: { emoji: "🌋", name: "Mindanao", blurb: "The southern island group — the fruit basket of the Philippines.", animals: "Philippine eagle, clownfish", food: "Durian, pomelo", culture: "Mount Apo (tallest peak); kulintang music", lang: "Cebuano & many languages", cities: "Davao, Cagayan de Oro, Zamboanga" },
+};
+window.isleFact = (k) => {
+  const d = ISLES[k]; sfxClick();
+  const box = document.getElementById("isleInfo"); if (!box) return;
+  box.style.display = "block";
+  box.innerHTML = `<h2>${d.emoji} ${d.name}</h2><p>${esc(d.blurb)}</p>
+    <ul style="margin:8px 0 0 18px">
+      <li>🐾 <b>Animals:</b> ${esc(d.animals)}</li>
+      <li>🍽️ <b>Food:</b> ${esc(d.food)}</li>
+      <li>🎉 <b>Culture:</b> ${esc(d.culture)}</li>
+      <li>🗣️ <b>Language:</b> ${esc(d.lang)}</li>
+      <li>🏙️ <b>Cities:</b> ${esc(d.cities)}</li>
+    </ul>`;
+};
+window.launchGoogleEarth = () => { sfxClick(); alert("🌍 A live Google Earth flyover is coming soon! For now, explore with our animated map. (Architecture is ready for the future integration.)"); };
+
+function buildScenes(a) {
+  const secs = a.sections.filter(s => !(s.faith && !S.faith));
+  const scenes = [{ type: "intro" }, { type: "map" }];
+  secs.forEach(s => scenes.push({ type: "learn", s }));
+  if (typeof LEVEL_MISSIONS !== "undefined" && LEVEL_MISSIONS[a.id]) scenes.push({ type: "missions" });
+  a.quiz.forEach((q, qi) => scenes.push({ type: "quiz", qi }));
+  scenes.push({ type: "reflect" }, { type: "ending" });
+  return scenes;
+}
+
+function sceneLabel(sc, i, n) {
+  const names = { intro: "Welcome", map: "Travel Mode", learn: "Discover", missions: "Missions", quiz: "Quiz", reflect: "Reflection", ending: "Adventure Complete" };
+  return `${names[sc.type] || "Scene"} · ${i + 1} / ${n}`;
+}
+
+function cineAmbient() {
+  let h = "";
+  for (let i = 0; i < 4; i++) { const top = 5 + i * 12 + Math.random() * 6, w = 130 + Math.random() * 150, dur = 45 + Math.random() * 40; h += `<div class="cine-cloud" style="top:${top}%;width:${w}px;height:${w * 0.5}px;animation-duration:${dur}s;animation-delay:-${(Math.random() * dur).toFixed(1)}s"></div>`; }
+  for (let i = 0; i < 12; i++) h += `<div class="cine-spark" style="left:${(Math.random() * 100).toFixed(1)}%;top:${(Math.random() * 68).toFixed(1)}%;animation-delay:${(Math.random() * 3).toFixed(1)}s"></div>`;
+  return h;
+}
+
+function renderScene(sc) {
+  const a = cine.a;
+  if (sc.type === "intro") {
+    return `<div class="scene zoom">
+      <div class="kicker">🌏 Wonder Journey · Today's Adventure</div>
+      <div class="big-emoji">${a.emoji}</div>
+      <h1>${esc(a.title)}</h1>
+      <p class="lead">${esc(a.subtitle)}</p>
+      <p class="lead" style="opacity:.82;font-size:15px">${esc(a.region)} · 💛 ${esc(a.value)}</p>
+    </div>`;
+  }
+  if (sc.type === "map") {
+    return `<div class="scene">
+      <div class="kicker">🗺️ Travel Mode</div>
+      <h1 style="font-size:clamp(24px,4.4vw,42px)">From the world… to the Philippines 🇵🇭</h1>
+      <div class="archi">
+        <div class="globe"></div>
+        <button class="isle isle-luzon" onclick="isleFact('luzon')"><span class="lbl">Luzon</span></button>
+        <button class="isle isle-visayas" onclick="isleFact('visayas')"><span class="lbl">Visayas</span></button>
+        <button class="isle isle-mindanao" onclick="isleFact('mindanao')"><span class="lbl">Mindanao</span></button>
+      </div>
+      <p class="archi-hint">👆 Tap each island group to explore its animals, food & culture · <a href="#" onclick="launchGoogleEarth();return false" style="color:#ffe08a">🌍 Google Earth (soon)</a></p>
+      <div id="isleInfo" class="glass" style="display:none;margin-top:16px"></div>
+    </div>`;
+  }
+  if (sc.type === "learn") {
+    return `<div class="scene">
+      <div class="kicker">${sc.s.icon} ${esc(sc.s.subject)}</div>
+      <div class="glass"><h2>${sc.s.icon} ${esc(sc.s.subject)}</h2>${sc.s.html}</div>
+    </div>`;
+  }
+  if (sc.type === "missions") {
+    const m = LEVEL_MISSIONS[a.id];
+    return `<div class="scene">
+      <div class="kicker">🎯 Missions for Every Explorer</div>
+      <div class="glass">${LEVEL_TIERS.map(t => `<div style="margin-bottom:14px"><b style="color:#0e7c86">${t.emoji} ${t.name} · ${t.age}</b><ul style="margin:6px 0 0 18px">${m[t.key].map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div>
+    </div>`;
+  }
+  if (sc.type === "quiz") {
+    const q = a.quiz[sc.qi];
+    return `<div class="scene">
+      <div class="kicker">🏆 Quiz · Question ${sc.qi + 1} of ${a.quiz.length}</div>
+      <h1 style="font-size:clamp(22px,3.6vw,38px)">${esc(q.q)}</h1>
+      <div style="margin-top:22px">${q.a.map((opt, oi) => `<button class="cine-opt" data-o="${oi}" onclick="cineAnswer(${sc.qi},${oi})">${esc(opt)}</button>`).join("")}</div>
+    </div>`;
+  }
+  if (sc.type === "reflect") {
+    return `<div class="scene">
+      <div class="kicker">📝 Reflection</div>
+      <h1 style="font-size:clamp(24px,4vw,40px)">Let's talk together 💬</h1>
+      <div class="glass">${a.reflect.map(q => `<p style="font-size:19px;margin:10px 0">• ${esc(q)}</p>`).join("")}</div>
+    </div>`;
+  }
+  // ending
+  const r = cine.reward || { gained: 0, newly: [], firstTime: false };
+  return `<div class="scene zoom" style="background:radial-gradient(120% 90% at 50% 120%, rgba(244,168,33,.35), transparent 60%);border-radius:28px;padding:24px">
+    <div class="kicker">🌅 Adventure Complete</div>
+    <div class="big-emoji">🏆</div>
+    <h1>${cine.score === a.quiz.length ? "Perfect Adventure!" : "Wonderful Journey!"}</h1>
+    <p class="lead">${esc(a.title)}</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:18px 0">
+      <div class="glass" style="padding:14px 18px">⭐ +${r.gained} XP</div>
+      <div class="glass" style="padding:14px 18px">📝 ${cine.score}/${a.quiz.length}</div>
+      <div class="glass" style="padding:14px 18px">🛂 ${esc(a.stamp.name)}</div>
+    </div>
+    ${r.newly && r.newly.length ? `<p style="font-weight:800;color:#ffe08a">New badges: ${r.newly.map(b => `${b.emoji} ${esc(b.name)}`).join(" · ")}</p>` : ""}
+    <p class="lead" style="margin-top:16px;font-style:italic">"See you on our next adventure!" 🌏</p>
+    <button class="btn btn-sun" style="margin-top:16px" onclick="closeCinema();go('map')">Back to the Map 🗺️</button>
+  </div>`;
+}
+
+function renderCine() {
+  const el = cineEl(), { a, scenes, i } = cine, sc = scenes[i];
+  if (sc.type === "ending" && !cine.rewarded) { cine.rewarded = true; cine.reward = awardCompletion(a, cine.score, a.quiz.length); }
+  el.innerHTML = `
+    <div class="cine-sky"></div>
+    ${cineAmbient()}
+    <div class="cine-waves"></div>
+    <div class="cine-scene-label">${sceneLabel(sc, i, scenes.length)}</div>
+    <div class="cine-top">
+      <button class="cine-btn" onclick="toggleCineMute(this)" title="Sound on/off">${cine.muted ? "🔇" : "🔊"}</button>
+      <button class="cine-btn" onclick="closeCinema()" title="Exit theater">✕</button>
+    </div>
+    <div class="cine-stage">${renderScene(sc)}</div>
+    <div class="cine-controls">
+      <button class="cine-btn" onclick="cinePrev()" ${i === 0 ? "disabled" : ""} title="Back">‹</button>
+      <div class="cine-dots">${scenes.map((s, k) => `<span class="cine-dot ${k === i ? "on" : k < i ? "done" : ""}"></span>`).join("")}</div>
+      <button class="cine-btn" onclick="cineNext()" ${i === scenes.length - 1 ? "disabled" : ""} title="Next">›</button>
+    </div>`;
+  if (sc.type === "ending") { confettiBurst(); sfxStamp(); sfxCelebrate(); }
+}
+
+window.openCinema = (id) => {
+  const a = ADVENTURES.find(x => x.id === id), idx = ADVENTURES.findIndex(x => x.id === id);
+  if (!isUnlocked(idx)) return;
+  cine = { a, scenes: buildScenes(a), i: 0, score: 0, answered: {}, muted: false, rewarded: false };
+  const el = cineEl(); el.classList.add("show"); document.body.style.overflow = "hidden";
+  const ctx = ac(); if (ctx && ctx.state === "suspended") ctx.resume();
+  (el.requestFullscreen || el.webkitRequestFullscreen || (() => {})).call(el);
+  renderCine();
+};
+window.closeCinema = () => {
+  stopTimer();
+  if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+  cineEl().classList.remove("show"); cineEl().innerHTML = ""; document.body.style.overflow = ""; cine = null;
+};
+window.cineNext = () => { if (cine && cine.i < cine.scenes.length - 1) { cine.i++; sfxWhoosh(); renderCine(); } };
+window.cinePrev = () => { if (cine && cine.i > 0) { cine.i--; renderCine(); } };
+window.toggleCineMute = (btn) => { if (cine) { cine.muted = !cine.muted; btn.textContent = cine.muted ? "🔇" : "🔊"; } };
+window.cineAnswer = (qi, oi) => {
+  if (!cine || cine.answered[qi] !== undefined) return;
+  cine.answered[qi] = oi;
+  const q = cine.a.quiz[qi];
+  if (oi === q.correct) { cine.score++; sfxCorrect(); } else sfxWrong();
+  document.querySelectorAll(".cine-opt").forEach(b => { const o = +b.dataset.o; if (o === q.correct) b.classList.add("correct"); else if (o === oi) b.classList.add("wrong"); });
+  setTimeout(() => { if (cine) cineNext(); }, 1300);
+};
+document.addEventListener("keydown", (e) => {
+  if (!cine) return;
+  if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); cineNext(); }
+  else if (e.key === "ArrowLeft") cinePrev();
+  else if (e.key === "Escape") closeCinema();
+});
 
 /* ---------- passport ---------- */
 function viewPassport() {
