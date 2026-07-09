@@ -1,0 +1,18 @@
+# Netlify config — publishes the Wonder Journey OS static app (wonder-journey/).
+# No build step: Wonder Journey is a dependency-free static site (HTML/CSS/JS).
+# This also stops Netlify from auto-building the Next.js project at the repo root.
+
+[build]
+  publish = "wonder-journey"
+  command = "echo 'Wonder Journey is a static site — no build needed.'"
+
+# Long-cache the static assets; always re-fetch the HTML so updates show immediately.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
