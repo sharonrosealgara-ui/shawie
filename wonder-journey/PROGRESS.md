@@ -1,0 +1,75 @@
+# 📊 Wonder Journey OS — Progress Tracker
+
+> **Permanent build tracker.** Updated at every milestone. `██████████` = done ·
+> `░░░░░░░░░░` = not started. Governed by [`CONSTITUTION.md`](CONSTITUTION.md).
+
+_Last updated: 2026-07-09 · Autonomous Build Session_
+
+---
+
+## Milestone Status
+
+| Phase | Milestone | Progress |
+|---|---|---|
+| 1 | Foundation · Architecture · Documentation | `██████████` 100% |
+| 2 | Teacher Portal | `██████████` 100% |
+| 3 | Family Portal | `██████████` 100% |
+| 4 | Adventure Theater (cinematic player) | `██████████` 100% |
+| 5 | Presentation Design Engine | `██████████` 100% |
+| 6 | Theme Engine | `██████████` 100% |
+| 7 | Scene Engine | `██████████` 100% |
+| 8 | Real Educational Media System | `██████████` 100% |
+| 9 | Curriculum Framework (72-lesson map) | `████████░░` 80% |
+| 10 | Adventure Builder | `███░░░░░░░` 30% |
+| 11 | Quiz Engine | `█████████░` 90% |
+| 12 | Family Storybook | `██████████` 100% |
+| 13 | Family Cookbook | `████████░░` 80% |
+| 14 | Passport | `██████████` 100% |
+| 15 | Badges | `██████████` 100% |
+| 16 | Adventure Tree | `██████████` 100% |
+| 17 | Celebrations | `██████████` 100% |
+| 18 | Parent Dashboard | `██████████` 100% |
+| 19 | Make.com Preparation | `██░░░░░░░░` 20% |
+| 20 | Deployment Preparation | `███████░░░` 70% |
+
+---
+
+## Content Completion (World 1 — Philippines)
+
+- **Adventures scheduled (map + metadata):** 72 / 72 `██████████`
+- **Adventures with full interactive content:** 10 / 72 `█░░░░░░░░░`
+- **Media manifest coverage:** 72 / 72 `██████████` (66 curated assets, files pending licensing)
+- **Real licensed asset files present:** 0 / 66 `░░░░░░░░░░` (awaiting upload — placeholders live)
+
+---
+
+## This Session
+
+**Completed today**
+- Documentation foundation: `docs/` source-of-truth set (index + Architecture + Roadmap + Decisions), permanent progress tracker.
+- **Teacher Portal** — week-by-week schedule, per-lesson plans (objectives across Language/Math/Science/Culture/Bible/Value), materials & ingredient lists, teacher notes, copy-ready lesson summary.
+- **Parent Dashboard** — at-a-glance progress, upcoming lessons preview, materials-to-prepare list, copy-ready after-class summary.
+- Certificates — printable "Adventure Completed" & milestone awards.
+
+**Current task:** See git log for the latest commit.
+
+**Next task:** Continue Curriculum Framework (Phase 9) — author full interactive content unit by unit (Unit 3 onward).
+
+**Known issues**
+- Real photo/map files not yet uploaded — the resilient media system shows honest placeholders until licensed assets are dropped into `assets/`.
+- Adventures a11–a72 use the schedule/metadata + auto-generated Teacher Portal plans; full cinematic interactive content authored a1–a10 so far.
+
+**Resolved issues**
+- Birthday/Celebrations section was hidden when empty → now always visible + dedicated Celebrations page.
+
+**Estimated remaining work**
+- Author interactive content for Units 3–13 (62 adventures) — the largest remaining effort.
+- Source & license real media assets (editorial, not code).
+- Make.com automation + Supabase backend (post-MVP SaaS phase).
+
+---
+
+## Legend / Definitions
+- **Family Portal** = the child/family-facing app (Home, Map, Adventures, Passport, Badges, Tree, Cookbook, Storybook, Celebrations).
+- **Teacher Portal / Parent Dashboard** = grown-up planning & review tools (Teacher Mode + Teacher Portal + Parent Dashboard views).
+- **Adventure Theater** = the full-screen cinematic lesson player.
