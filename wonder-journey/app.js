@@ -19,7 +19,7 @@ const DEFAULT_STATE = {
     { name: "Shaun", role: "Dad", emoji: "👨", color: "#0e7c86" },
     { name: "Taylor", role: "Mom", emoji: "👩", color: "#e5674f" },
     { name: "Grandma", role: "Grandma", emoji: "👵", color: "#7a5cc4" },
-    { name: "Sharon", role: "Teacher", emoji: "👩‍🏫", color: "#c77dbb", birthday: "2001-07-21" },
+    { name: "Teacher Sha", role: "Teacher", emoji: "👩‍🏫", color: "#c77dbb", birthday: "2001-07-21" },
     { name: "Rylee", role: "Trailblazer", emoji: "🧒", color: "#3f9d54", level: "trailblazer" },
     { name: "Ezra", role: "Adventurer", emoji: "🧒", color: "#f4a821", level: "adventurer" },
     { name: "Asa", role: "Adventurer", emoji: "🧒", color: "#12a3af", level: "adventurer" },
@@ -46,6 +46,14 @@ function loadState() {
     // Backfill known children's learning levels if a saved roster predates them.
     const KID_LEVELS = { Rylee: "trailblazer", Ezra: "adventurer", Asa: "adventurer", Selah: "explorer" };
     if (Array.isArray(s.family)) s.family.forEach(f => { if (!f.level && KID_LEVELS[f.name]) f.level = KID_LEVELS[f.name]; });
+    // One-time: ensure the owner's birthday member ("Teacher Sha", Jul 21) is present,
+    // even on devices whose saved roster predates it.
+    if (!s.ownerBdayV1 && Array.isArray(s.family)) {
+      let m = s.family.find(f => f.name === "Teacher Sha" || f.name === "Sharon" || f.role === "Teacher");
+      if (m) { m.name = "Teacher Sha"; m.role = "Teacher"; m.birthday = "2001-07-21"; if (!m.emoji) m.emoji = "👩‍🏫"; if (!m.color) m.color = "#c77dbb"; }
+      else s.family.push({ name: "Teacher Sha", role: "Teacher", emoji: "👩‍🏫", color: "#c77dbb", birthday: "2001-07-21" });
+      s.ownerBdayV1 = true;
+    }
     // One-time curriculum re-slot (ADR-010): the 10 authored adventures moved from
     // sequential ids to their canonical 72-map ids. Remap any saved progress once.
     if (!s.reslotV2) {
