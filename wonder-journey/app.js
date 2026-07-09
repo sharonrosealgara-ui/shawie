@@ -1196,6 +1196,253 @@ function viewCelebrations() {
     </div>`;
 }
 
+/* Lightweight toast (achievement/confirmation), auto-dismisses. */
+let _toastT = null;
+function toast(msg) {
+  let el = document.getElementById("wjToast");
+  if (!el) { el = document.createElement("div"); el.id = "wjToast"; el.className = "wj-toast"; document.body.appendChild(el); }
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(_toastT);
+  _toastT = setTimeout(() => el.classList.remove("show"), 2600);
+}
+window.toast = toast;
+
+/* ============================================================
+   TEACHER PORTAL + PARENT DASHBOARD (Constitution §Parent Experience)
+   Grown-up planning & review tools generated from the curriculum map metadata
+   plus a materials layer — so every one of the 72 adventures is plannable even
+   before its full interactive prose is authored.
+   ============================================================ */
+const MATERIALS_BY_THEME = {
+  cooking:  ["Apron & clean hands", "Measuring cups & spoons", "Mixing bowl & spoon", "Stove/pot (with a grown-up)"],
+  festival: ["Colored paper & scissors", "Glue or tape", "Markers or crayons", "String or craft sticks"],
+  wildlife: ["Paper & pencils", "Crayons or watercolors", "(Optional) a short nature walk"],
+  volcano:  ["Baking soda & vinegar", "Small cup or bottle", "A tray to catch drips", "Clay or paper for the cone"],
+  terraces: ["Cardboard or clay", "Scissors & glue", "A cup, soil & a seed to plant"],
+  ocean:    ["Blue paper & scissors", "Crayons or paint", "A jar or shoebox (for a diorama)"],
+  history:  ["Paper & pencils", "Cardboard for a timeline", "Markers"],
+  village:  ["Paper & crayons", "(Optional) simple build/craft items from home"],
+  geography:["A real map or globe", "Colored pencils", "Paper"],
+  island:   ["Paper & crayons", "Blue paper for the sea", "(Optional) small toy boats"],
+  bible:    ["A Bible or story Bible", "Paper & crayons", "(Optional) craft materials"],
+};
+const THEME_FOCUS = {
+  cooking:  "Science: measuring, heat & mixing · Culture: Filipino food & the family table",
+  festival: "Science: sound & rhythm · Culture: Philippine festivals & traditions",
+  wildlife: "Science: animals & habitats · Culture: caring for God's creatures",
+  volcano:  "Science: volcanoes, the Ring of Fire & the earth · Culture: living with volcanoes",
+  terraces: "Science: plants, seeds & harvest · Culture: the rice terraces & farming life",
+  ocean:    "Science: the sea, reefs & marine life · Culture: island & fishing life",
+  history:  "Social studies: Filipino heroes & our story · Culture: national identity",
+  village:  "Social studies: family, community & values · Culture: Filipino daily life",
+  geography:"Geography: maps, directions & the islands · Culture: where Filipinos live",
+  island:   "Geography: Luzon, Visayas & Mindanao · Culture: island life",
+  bible:    "Bible geography & timeline · Character: faith and God's story",
+};
+// Specific ingredient/material lists where a lesson calls for them.
+const LESSON_MATERIALS = {
+  a7:  { heading: "Champorado ingredients", items: ["1 cup glutinous rice (malagkit)", "4 cups water", "¼ cup cocoa powder or tablea", "¼ cup sugar", "A pinch of salt", "Milk, to serve"] },
+  a11: { heading: "Merienda snack ideas", items: ["Ingredients for one simple snack (e.g., banana + peanut butter)", "Small plates & spoons", "A jar of water to drink"] },
+  a30: { heading: "Build-a-volcano kit", items: ["Baking soda", "Vinegar", "Red food coloring (optional)", "Clay or a plastic bottle", "A tray"] },
+  a42: { heading: "Plant-a-seed kit", items: ["A seed (bean or rice)", "A clear cup", "Cotton or soil", "Water & a sunny window"] },
+  a68: { heading: "Parol (star lantern) craft", items: ["Sticks or straws", "Colored paper or cellophane", "Glue & string", "Scissors (with a grown-up)"] },
+};
+
+// All adventures from the curriculum map (falls back to authored ADVENTURES).
+function allMapAdventures() {
+  if (typeof CURRICULUM_MAP !== "undefined" && CURRICULUM_MAP.units) {
+    return CURRICULUM_MAP.units.flatMap(u => u.adventures.map(a => ({ ...a, unitName: a.unitName || u.name })));
+  }
+  return (typeof ADVENTURES !== "undefined" ? ADVENTURES : []).map(a => ({ id: a.id, title: a.title, objective: a.subtitle, value: a.value, built: true }));
+}
+function fmtDate(d) {
+  if (!d) return "";
+  try { return new Date(d + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric" }); } catch { return d; }
+}
+// Build a full lesson plan from an adventure's metadata.
+function teacherPlan(a) {
+  const theme = themeFor(a).id;
+  const subjects = [];
+  if (a.english) subjects.push(["🗣️ Language / English", a.english]);
+  if (a.math) subjects.push(["🔢 Math", a.math]);
+  subjects.push(["🔬 Science & Culture", THEME_FOCUS[theme] || "Explore and discover together"]);
+  if (a.bible && S.faith) subjects.push(["📖 Bible", a.bible]);
+  if (a.value) subjects.push(["💛 Value", a.value]);
+  const mats = (MATERIALS_BY_THEME[theme] || ["Paper & crayons"]).slice();
+  const special = LESSON_MATERIALS[a.id];
+  const kids = personalActivities(a);
+  return { theme, subjects, mats, special, kids };
+}
+function lessonSummaryText(a) {
+  const p = teacherPlan(a);
+  const L = [];
+  L.push(`WONDER JOURNEY — Lesson Plan`);
+  L.push(`${a.title}`);
+  L.push(`Unit ${a.unit || ""}: ${a.unitName || ""} · ${a.day || ""} ${fmtDate(a.date)}`);
+  L.push(``);
+  L.push(`Objective: ${a.objective || ""}`);
+  L.push(``);
+  L.push(`Subjects woven in:`);
+  p.subjects.forEach(([k, v]) => L.push(`  - ${k.replace(/^[^ ]+ /, "")}: ${v}`));
+  L.push(``);
+  L.push(`Materials to prepare:`);
+  p.mats.forEach(m => L.push(`  - ${m}`));
+  if (p.special) { L.push(`  ${p.special.heading}:`); p.special.items.forEach(i => L.push(`    · ${i}`)); }
+  L.push(``);
+  L.push(`Personalized activities:`);
+  p.kids.forEach(k => L.push(`  - ${k.name}: ${k.text}`));
+  return L.join("\n");
+}
+function copyLesson(id) {
+  const a = allMapAdventures().find(x => x.id === id);
+  if (!a) return;
+  const text = lessonSummaryText(a);
+  const done = () => toast("📋 Lesson plan copied!");
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, () => fallbackCopy(text, done));
+  else fallbackCopy(text, done);
+}
+function fallbackCopy(text, cb) {
+  try { const t = document.createElement("textarea"); t.value = text; document.body.appendChild(t); t.select(); document.execCommand("copy"); t.remove(); cb && cb(); } catch { alert(text); }
+}
+window.copyLesson = copyLesson;
+
+function lessonCardHTML(a, opts = {}) {
+  const p = teacherPlan(a);
+  const badge = a.built ? `<span class="lp-badge built">interactive ✓</span>` : `<span class="lp-badge">plan ready</span>`;
+  const open = opts.open ? " open" : "";
+  return `<details class="lesson-card"${open}>
+    <summary>
+      <span class="lp-when">${esc(a.day || "")} · ${esc(fmtDate(a.date))}</span>
+      <span class="lp-title">${esc(a.title)}</span>
+      ${badge}
+    </summary>
+    <div class="lp-body">
+      <p class="lp-obj">🎯 <b>Objective:</b> ${esc(a.objective || "")}</p>
+      <div class="lp-subjects">
+        ${p.subjects.map(([k, v]) => `<div class="lp-sub"><b>${k}</b><span>${esc(v)}</span></div>`).join("")}
+      </div>
+      <div class="lp-cols">
+        <div class="lp-mats">
+          <h4>🧰 Materials to prepare</h4>
+          <ul>${p.mats.map(m => `<li>${esc(m)}</li>`).join("")}</ul>
+          ${p.special ? `<div class="lp-special"><b>${esc(p.special.heading)}</b><ul>${p.special.items.map(i => `<li>${esc(i)}</li>`).join("")}</ul></div>` : ""}
+        </div>
+        <div class="lp-kids">
+          <h4>🌟 Personalized activities</h4>
+          ${p.kids.map(k => `<div class="lp-kid"><span>${k.icon}</span><div><b>${esc(k.name)}</b> — ${esc(k.text)}</div></div>`).join("")}
+        </div>
+      </div>
+      <div class="lp-actions">
+        <button class="btn btn-ghost" onclick="copyLesson('${a.id}')">📋 Copy lesson plan</button>
+        ${a.built ? `<button class="btn btn-ocean" onclick="openAdventure('${a.id}')">▶ Open Adventure</button>` : `<span class="lp-soon">Full interactive lesson coming — plan is ready to teach from now.</span>`}
+      </div>
+    </div>
+  </details>`;
+}
+
+function viewTeacher() {
+  const advs = allMapAdventures();
+  const units = {};
+  advs.forEach(a => { (units[a.unit] = units[a.unit] || { name: a.unitName, items: [] }).items.push(a); });
+  const builtCount = advs.filter(a => a.built).length;
+  // This week's upcoming lessons
+  const todayISO = new Date().toISOString().slice(0, 10);
+  const upcoming = advs.filter(a => a.date && a.date >= todayISO).slice(0, 3);
+  root().innerHTML = `
+    <div class="view">
+      <h1 style="font-size:26px">👩‍🏫 Teacher Portal</h1>
+      <p style="color:var(--ink-soft);margin:6px 0 4px">Everything you need to prepare and teach — objectives, materials, ingredients, personalized activities and a copy-ready plan for all <b>${advs.length}</b> adventures.</p>
+      <div class="callout" style="margin:10px 0 18px">💡 <b>Tip:</b> ${builtCount} adventures are fully interactive; the rest come with a ready-to-teach plan from the curriculum map. Turn on <b>Teacher Mode</b> in Settings for the in-lesson timer & answer key.</div>
+
+      ${upcoming.length ? `<div class="section-title"><span class="em">📅</span> Coming up next</div>
+        <div class="grid" style="gap:12px">${upcoming.map(a => lessonCardHTML(a, { open: false })).join("")}</div>` : ""}
+
+      ${Object.keys(units).sort((x, y) => x - y).map(un => {
+        const u = units[un];
+        return `<div class="section-title" style="margin-top:22px"><span class="em">📚</span> Unit ${un} · ${esc(u.name || "")}</div>
+          <div class="grid" style="gap:12px">${u.items.map(a => lessonCardHTML(a)).join("")}</div>`;
+      }).join("")}
+    </div>`;
+}
+
+function viewParent() {
+  const advs = allMapAdventures();
+  const done = Object.keys(S.completed).length, total = advs.length;
+  const pct = Math.round((done / total) * 100);
+  const todayISO = new Date().toISOString().slice(0, 10);
+  const upcoming = advs.filter(a => a.date && a.date >= todayISO).slice(0, 3);
+  // Aggregate materials to prepare for the upcoming lessons
+  const prep = new Set();
+  upcoming.forEach(a => { const p = teacherPlan(a); p.mats.forEach(m => prep.add(m)); if (p.special) p.special.items.forEach(i => prep.add(i)); });
+  // Recently completed (for after-class summary), newest first by date
+  const recent = advs.filter(a => S.completed[a.id]).sort((x, y) => (S.completed[y.id].date || "").localeCompare(S.completed[x.id].date || "")).slice(0, 5);
+  const lvl = typeof levelInfo === "function" ? levelInfo() : null;
+
+  root().innerHTML = `
+    <div class="view">
+      <h1 style="font-size:26px">📊 Parent Dashboard</h1>
+      <p style="color:var(--ink-soft);margin:6px 0 16px">A calm at-a-glance view of your family's learning — progress, what to prepare next, and a copy-ready recap to share.</p>
+
+      <div class="section-title"><span class="em">🌟</span> Progress at a glance</div>
+      <div class="prog-hero card">
+        <div class="prog-ring" style="--pct:${pct}"><span>${pct}%</span></div>
+        <div class="prog-facts">
+          <div><b>${done}/${total}</b><small>Adventures</small></div>
+          <div><b>${S.xp}</b><small>Total XP</small></div>
+          <div><b>${S.badges.length}/${BADGES.length}</b><small>Badges</small></div>
+          <div><b>${S.stamps.length}</b><small>Stamps</small></div>
+          ${lvl ? `<div><b>${lvl.cur.emoji} ${esc(lvl.cur.name)}</b><small>Level</small></div>` : ""}
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top:22px"><span class="em">📅</span> Coming up — preview &amp; prep</div>
+      ${upcoming.length ? `
+        <div class="grid g-auto">
+          ${upcoming.map(a => `<div class="card" style="padding:16px">
+            <div style="font-size:12px;font-weight:800;color:var(--ink-soft)">${esc(a.day || "")} · ${esc(fmtDate(a.date))}</div>
+            <h3 style="margin:4px 0 6px">${esc(a.title)}</h3>
+            <p style="color:var(--ink-soft);font-size:14px">${esc(a.objective || "")}</p>
+            <div style="margin-top:8px"><span class="tag">💛 ${esc(a.value || "")}</span></div>
+          </div>`).join("")}
+        </div>
+        <div class="card" style="padding:18px;margin-top:12px">
+          <h4 style="margin:0 0 8px">🧰 Prepare these for the week</h4>
+          <div class="prep-chips">${[...prep].map(m => `<span class="prep-chip">${esc(m)}</span>`).join("")}</div>
+          <button class="btn btn-ghost" style="margin-top:12px" onclick="go('teacher')">👩‍🏫 Full lesson plans →</button>
+        </div>` : `<div class="card empty"><div class="em">🎉</div><p>You've reached the end of the schedule — what a journey!</p></div>`}
+
+      <div class="section-title" style="margin-top:22px"><span class="em">💌</span> After-class summary</div>
+      ${recent.length ? `
+        <div class="card" style="padding:18px">
+          <p style="color:var(--ink-soft);margin:0 0 10px">A warm recap of your latest adventures — copy it to share with family or save to your records.</p>
+          <div id="acSummary" class="ac-summary">${esc(afterClassSummary(recent))}</div>
+          <button class="btn btn-primary" style="margin-top:12px" onclick="copyAfterClass()">📋 Copy summary</button>
+        </div>` : `<div class="card empty"><div class="em">🌱</div><p>Finish your first adventure and a friendly recap will appear here, ready to share.</p><button class="btn btn-primary" style="margin-top:12px" onclick="go('map')">Start an Adventure 🗺️</button></div>`}
+    </div>`;
+}
+function afterClassSummary(recent) {
+  const lines = ["🌏 Wonder Journey — Family Learning Recap", ""];
+  recent.forEach(a => {
+    const c = S.completed[a.id] || {};
+    lines.push(`• ${a.title}${c.date ? ` (${fmtDate(c.date)})` : ""}`);
+    if (a.objective) lines.push(`   Learned: ${a.objective}`);
+    if (a.value) lines.push(`   Value: ${a.value}`);
+    if (c.total) lines.push(`   Quiz: ${c.score}/${c.total}`);
+  });
+  lines.push("", `Total: ${Object.keys(S.completed).length} adventures · ${S.xp} XP · ${S.badges.length} badges earned. 💛`);
+  return lines.join("\n");
+}
+function copyAfterClass() {
+  const advs = allMapAdventures();
+  const recent = advs.filter(a => S.completed[a.id]).sort((x, y) => (S.completed[y.id].date || "").localeCompare(S.completed[x.id].date || "")).slice(0, 5);
+  const text = afterClassSummary(recent);
+  const done = () => toast("📋 Summary copied!");
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, () => fallbackCopy(text, done));
+  else fallbackCopy(text, done);
+}
+window.copyAfterClass = copyAfterClass;
+
 /* ---------- cookbook ---------- */
 function viewCookbook() {
   root().innerHTML = `
@@ -1443,7 +1690,7 @@ function applyTheme() { document.body.classList.toggle("dark", S.theme === "dark
 $("#themeBtn").addEventListener("click", () => { S.theme = S.theme === "dark" ? "light" : "dark"; save(); applyTheme(); renderTop(); });
 
 /* ---------- router ---------- */
-const VIEWS = { home: viewHome, blessings: viewBlessings, map: viewMap, passport: viewPassport, badges: viewBadges, celebrations: viewCelebrations, tree: viewTree, cookbook: viewCookbook, storybook: viewStorybook, family: viewFamily, settings: viewSettings };
+const VIEWS = { home: viewHome, blessings: viewBlessings, map: viewMap, passport: viewPassport, badges: viewBadges, celebrations: viewCelebrations, tree: viewTree, cookbook: viewCookbook, storybook: viewStorybook, teacher: viewTeacher, parent: viewParent, family: viewFamily, settings: viewSettings };
 function go(view) {
   stopTimer();
   (VIEWS[view] || viewHome)();

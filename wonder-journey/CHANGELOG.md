@@ -34,6 +34,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.14.0] — 2026-07-09 · Teacher Portal + Parent Dashboard (grown-up tools)
+
+- `Added` **👩‍🏫 Teacher Portal** — a plannable view of **all 72 adventures**, grouped by unit with a "coming up next" section. Each lesson is an expandable plan generated from the curriculum map: objective; woven subjects (Language · Math · Science & Culture · Bible · Value); **materials & ingredient lists** (theme-based + specific kits like champorado ingredients, build-a-volcano, plant-a-seed, parol craft); personalized per-child activities; a **📋 Copy lesson plan** button; and an *Open Adventure* shortcut for fully interactive lessons.
+- `Added` **📊 Parent Dashboard** — a calm at-a-glance view: progress ring + stats (adventures, XP, badges, stamps, level), an **upcoming-lessons preview** with a de-duplicated **"prepare these for the week"** materials list, and a **copy-ready after-class summary** (what we learned, value, quiz scores) to share or save.
+- `Added` `curriculum-map.js` is now loaded by the app, powering both grown-up tools; `MATERIALS_BY_THEME`, `THEME_FOCUS`, `LESSON_MATERIALS`, `teacherPlan()`, `lessonSummaryText()`, `afterClassSummary()`, and a lightweight `toast()`.
+- `Added` A **"For Grown-ups"** sidebar group (Parent Dashboard · Teacher Portal). In-adventure teacher extras remain gated behind Teacher Mode; Family View stays clean.
+
+---
+
 ## [0.13.0] — 2026-07-09 · Celebrations page (birthdays · milestones · memory timeline)
 
 - `Added` **Dedicated "🎉 Celebrations" page** in the sidebar — a single home for everything the family celebrates (Constitution §Celebrations):
