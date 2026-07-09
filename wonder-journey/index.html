@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Wonder Journey OS · The Ferrell Family</title>
 <meta name="description" content="Wonder Journey OS — a gamified family learning adventure through the Philippines. Learn together, explore together, grow together." />
+<!-- Rounded child-friendly fonts (loads on hosted/local; falls back gracefully where blocked) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
 :root{
   --sand:#fbf3e6; --sand-2:#f4e7d2; --ink:#2b2015; --ink-soft:#6b5a44;
@@ -23,7 +27,7 @@ body{
   font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:var(--sand);color:var(--ink);
   -webkit-font-smoothing:antialiased;min-height:100vh;line-height:1.55;
 }
-h1,h2,h3,h4{font-family:'Baloo 2','Nunito',system-ui,sans-serif;font-weight:800;line-height:1.15;letter-spacing:-.01em}
+h1,h2,h3,h4{font-family:'Fredoka','Baloo 2','Nunito',system-ui,sans-serif;font-weight:700;line-height:1.15;letter-spacing:-.01em}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 img{max-width:100%}
 a{color:var(--ocean);text-decoration:none}
@@ -267,6 +271,27 @@ a{color:var(--ocean);text-decoration:none}
   .cine-cloud,.cine-waves::before,.cine-waves::after,.cine-spark,.scene,.scene.zoom,.scene .big-emoji,.archi .globe,.isle{animation:none !important}
   .isle{opacity:1}
 }
+
+/* ===== Storybook paper lesson card (reference look) ===== */
+.paper{position:relative;background:#fbf3e6;color:#2b2015;border-radius:28px;padding:30px 30px 26px;box-shadow:0 22px 55px rgba(0,0,0,.34);text-align:left;max-height:62vh;overflow:auto;border:3px solid #fff}
+.paper::before{content:"";position:absolute;inset:12px;border:2px dashed #d9c3a0;border-radius:20px;pointer-events:none}
+.paper-inner{position:relative}
+.signpost{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(180deg,#caa063,#a97b3f);color:#fff;font-family:'Fredoka','Baloo 2',sans-serif;font-weight:700;padding:9px 20px;border-radius:14px;box-shadow:0 5px 0 #7d5a2c,0 12px 18px rgba(0,0,0,.22);letter-spacing:.1em;text-transform:uppercase;font-size:14px;margin-bottom:16px}
+.paper h2.title{font-family:'Fredoka','Baloo 2',sans-serif;color:#0e7c86;font-size:clamp(30px,5vw,52px);line-height:1.05;margin:2px 0 14px;text-shadow:2px 2px 0 #fff}
+.paper :is(p,li){font-size:clamp(18px,2.1vw,25px);line-height:1.55;color:#2b2015}
+.paper ul{list-style:none;padding-left:2px;margin:10px 0}
+.paper ul li{position:relative;padding-left:36px;margin:12px 0}
+.paper ul li::before{content:"⭐";position:absolute;left:0;top:2px;font-size:20px}
+.paper ol{padding-left:26px} .paper ol li{margin:10px 0}
+.paper b{color:#0e7c86}
+.paper .tryit{background:#fff5df;border:2px dashed #e0a93f;border-radius:16px;padding:14px 18px;margin:14px 0;color:#5a4420;font-size:clamp(16px,2vw,22px)}
+.paper .callout{background:#eef7f4;border-left:5px solid #0e7c86;border-radius:14px;padding:14px 18px;margin:12px 0;color:#233}
+.paper .callout.faith{border-left-color:#7a5cc4;background:#f2edfb}
+.paper .callout.char{border-left-color:#e5674f;background:#fdeeea}
+.paper .wordbank{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}
+.paper .word{background:#fff;border:2px solid #ecdcbd;border-radius:14px;padding:9px 14px;font-size:clamp(15px,1.8vw,20px);color:#2b2015;box-shadow:0 3px 0 #ecdcbd}
+.paper .word b{color:#0e7c86}
+.paper-tier{margin:0 0 16px} .paper-tier b{color:#0e7c86;font-size:clamp(17px,2vw,22px)}
 
 /* ===== Mascot guide (Sinag) ===== */
 .mascot{position:absolute;left:22px;bottom:92px;z-index:3;display:flex;align-items:flex-end;gap:10px;max-width:min(62vw,380px)}

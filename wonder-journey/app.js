@@ -656,16 +656,23 @@ function renderScene(sc) {
     </div>`;
   }
   if (sc.type === "learn") {
+    const title = sc.s.subject.replace(/^Character:\s*/, "");
     return `<div class="scene">
-      <div class="kicker">${sc.s.icon} ${esc(sc.s.subject)}</div>
-      <div class="glass"><h2>${sc.s.icon} ${esc(sc.s.subject)}</h2>${sc.s.html}</div>
+      <div class="paper"><div class="paper-inner">
+        <span class="signpost">${sc.s.icon} ${esc(sc.s.subject)}</span>
+        <h2 class="title">${sc.s.icon} ${esc(title)}</h2>
+        ${sc.s.html}
+      </div></div>
     </div>`;
   }
   if (sc.type === "missions") {
     const m = LEVEL_MISSIONS[a.id];
     return `<div class="scene">
-      <div class="kicker">🎯 Missions for Every Explorer</div>
-      <div class="glass">${LEVEL_TIERS.map(t => `<div style="margin-bottom:14px"><b style="color:#0e7c86">${t.emoji} ${t.name} · ${t.age}</b><ul style="margin:6px 0 0 18px">${m[t.key].map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div>
+      <div class="paper"><div class="paper-inner">
+        <span class="signpost">🎯 Missions</span>
+        <h2 class="title">🎯 A Mission for Everyone</h2>
+        ${LEVEL_TIERS.map(t => `<div class="paper-tier"><b>${t.emoji} ${t.name} · ${t.age}</b><ul>${m[t.key].map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}
+      </div></div>
     </div>`;
   }
   if (sc.type === "quiz") {
@@ -678,9 +685,11 @@ function renderScene(sc) {
   }
   if (sc.type === "reflect") {
     return `<div class="scene">
-      <div class="kicker">📝 Reflection</div>
-      <h1 style="font-size:clamp(24px,4vw,40px)">Let's talk together 💬</h1>
-      <div class="glass">${a.reflect.map(q => `<p style="font-size:19px;margin:10px 0">• ${esc(q)}</p>`).join("")}</div>
+      <div class="paper"><div class="paper-inner">
+        <span class="signpost">📝 Reflection</span>
+        <h2 class="title">💬 Let's Talk Together</h2>
+        <ul>${a.reflect.map(q => `<li>${esc(q)}</li>`).join("")}</ul>
+      </div></div>
     </div>`;
   }
   // ending

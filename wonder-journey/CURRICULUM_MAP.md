@@ -9,6 +9,11 @@
 > unit-by-unit (Step 3). Faith content is optional (faith toggle). Moving one Adventure shifts the
 > sequence — it never breaks the curriculum.
 
+> **🕎 Holidays are configurable.** The Ferrell family observes **biblical Feast Days** rather than
+> Christmas/Easter traditions, so **no holiday-specific crafts or activities are assumed**. The December
+> unit is reframed as *Traditions & Family Celebrations (fully configurable)* — adaptable to each
+> family's own celebrations and Feast Days.
+
 **Units:** 13 · **Adventures:** 72 · **Built so far:** 10 / 72
 
 ### Academic spine (how skills build)
@@ -140,14 +145,14 @@
 | 65 | **Filipino Jobs & Livelihood**<br/>Explore jobs and practice money math. | Tue, Dec 1 | Money, wages & simple budgeting | Interviewing & speaking | Working heartily (Colossians) | Diligence | 🔜 |
 | 66 | **Markets & Sari-Sari Stores**<br/>Learn trading, sari-sari stores, and change-making. | Fri, Dec 4 | Money, change & simple profit | Persuasive / ad writing | The parable of the talents | Enterprise | 🔜 |
 
-## Unit 12 — Filipino Christmas & Traditions  (configurable)
+## Unit 12 — Traditions & Family Celebrations  (fully configurable)
 
 | # | Adventure | Date | Math | English | Bible | Value | ✓ |
 |---|-----------|------|------|---------|-------|-------|---|
-| 67 | **Paskong Pinoy: A Filipino Christmas**<br/>Discover Filipino Christmas traditions, respectfully. | Mon, Dec 7 | Counting down the days (Advent) | Reading about traditions | The Birth of Jesus (Nativity) | Hope | 🔜 |
-| 68 | **Make a Parol: The Christmas Lantern**<br/>Craft a parol and learn the geometry of a star. | Tue, Dec 8 | Geometry: sides, angles, symmetry | How-to instructions | The star of Bethlehem | Creativity | 🔜 |
-| 69 | **Filipino Christmas Traditions**<br/>Explore Simbang Gabi and family customs, respectfully. | Fri, Dec 11 | Time (early morning; 9 days) | Reading & discussion | The shepherds & the angels | Respect | 🔜 |
-| 70 | **Noche Buena: A Family Feast**<br/>Plan a festive family meal with recipe math. | Mon, Dec 14 | Fractions & doubling recipes | Menu & recipe writing | The wise men bring gifts | Generosity | 🔜 |
+| 67 | **Filipino Family Traditions**<br/>Explore how Filipino families gather and celebrate — configurable to your family's own celebrations. | Mon, Dec 7 | Counting down & calendars | Reading about traditions | God's appointed Feasts — an overview (Leviticus 23) | Hope | 🔜 |
+| 68 | **The Star Lantern: A Filipino Parol Craft**<br/>Craft a Filipino star lantern and learn the geometry of a star (a cultural craft, not tied to any holiday). | Tue, Dec 8 | Geometry: sides, angles, symmetry | How-to instructions | God is our light | Creativity | 🔜 |
+| 69 | **Gathering & Gratitude**<br/>Discover the joy of gathering, hospitality and thankfulness — adaptable to your family's Feast Days. | Fri, Dec 11 | Time & planning a gathering | Reading & discussion | A thankful, gathered people | Respect | 🔜 |
+| 70 | **A Family Feast Together**<br/>Plan a special family meal with recipe math and shared gratitude. | Mon, Dec 14 | Fractions & doubling recipes | Menu & recipe writing | Sharing a feast (hospitality) | Generosity | 🔜 |
 
 ## Unit 13 — Year-End Wonder Showcase
 

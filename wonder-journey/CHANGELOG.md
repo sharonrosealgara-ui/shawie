@@ -34,6 +34,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.9.2] — 2026-07-08 · Storybook Look & Feast-Day Respect
+
+- `Changed` **Cinematic learn/missions/reflection scenes redesigned as a storybook** — cream paper lesson card with a dashed border, a wooden **signpost header**, a big rounded teal title, ⭐ **sticker bullets**, and larger child-friendly text — much closer to the design reference.
+- `Added` Rounded child fonts (**Fredoka / Baloo 2 / Nunito**) for the hosted/local app (graceful fallback where webfonts are blocked).
+- `Changed` **Holidays are now configurable & Feast-Day respectful** — the December unit was reframed to *Traditions & Family Celebrations (fully configurable)*; no Christmas/Easter crafts are assumed, honoring the family's observance of biblical Feast Days.
+- `Documentation` Curriculum map notes the configurable-holiday policy.
+
+---
+
 ## [0.9.1] — 2026-07-08 · Sinag the Mascot Guide
 
 - `Added` **Sinag ☀️** — a friendly mascot guide in Cinematic Mode who waves hello, points at the map, encourages during the quiz, cheers correct answers, and celebrates at the ending (animated, with per-scene speech).
