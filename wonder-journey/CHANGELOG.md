@@ -34,6 +34,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.7.0] — 2026-07-08 · Birthdays & Learning Levels
+
+**Summary:** Personalized celebrations and per-child learning levels.
+
+- `Added` **Birthday Celebrations** — configurable birthdays in the family editor, a joyful pop-up on the day (shown once), and an **Upcoming Birthdays** card on Home Base.
+- `Added` Per-child **learning levels** — Rylee (Trailblazer), Ezra & Asa (Adventurer), Selah (Explorer) — now shown on their matching Missions cards inside every adventure.
+- `Documentation` Added `PEDAGOGY.md` (educational philosophy, screen-time cadence, level ladders, positive-education standards).
+- `Improved` Safe migration backfills learning levels for known children in older saved rosters.
+
+---
+
 ## [0.6.0] — 2026-07-08 · Age-Appropriate Differentiation
 
 **Summary:** Every adventure now supports siblings of different ages learning together.

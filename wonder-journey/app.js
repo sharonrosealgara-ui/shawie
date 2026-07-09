@@ -13,6 +13,7 @@ const DEFAULT_STATE = {
   stamps: [],             // [adventureId]
   reflections: {},        // { adventureId: [answers] }
   blessings: {},          // { "YYYY-MM-DD": { gratitude:[{id,name,text}], prayed:bool } }
+  birthdayShown: {},      // { "YYYY-MM-DD": [names already celebrated today] }
   family: [
     { name: "Shaun", role: "Dad", emoji: "👨", color: "#0e7c86" },
     { name: "Taylor", role: "Mom", emoji: "👩", color: "#e5674f" },
@@ -187,6 +188,18 @@ function viewHome() {
         ${stat("Passport Stamps", S.stamps.length, "🛂")}
         ${stat("Badges Earned", `${S.badges.length} / ${BADGES.length}`, "🏅")}
       </div>
+
+      ${(() => {
+        const ub = upcomingBirthdays();
+        if (!ub.length) return "";
+        const soon = ub.slice(0, 3);
+        const label = (d) => d === 0 ? "🎉 Today!" : d === 1 ? "Tomorrow" : `in ${d} days`;
+        return `
+        <div class="section-title"><span class="em">🎂</span> Upcoming Birthdays</div>
+        <div class="grid g-auto">
+          ${soon.map(u => `<div class="card stat" style="padding:16px"><span class="em">${u.emoji}</span><span class="lbl">${esc(u.name)}</span><span class="val" style="font-size:18px">${label(u.days)}</span><p style="color:var(--ink-soft);font-size:12px;margin-top:2px">${u.next.toLocaleDateString(undefined, { month: "long", day: "numeric" })}</p></div>`).join("")}
+        </div>`;
+      })()}
 
       <div class="section-title"><span class="em">🎯</span> ${next ? "Up Next" : "You did it!"}</div>
       ${next ? advCard(next, nextIdx, true) : `<div class="card empty"><div class="em">🏆</div><p>You've finished every adventure in World 1. Amazing work, team!</p></div>`}
@@ -485,6 +498,41 @@ window.removeGratitude = (id) => {
 window.togglePrayed = () => { const t = ensureToday(); t.prayed = !t.prayed; save(); viewBlessings(); };
 window.nextPrayerLeader = () => { if (S.family.length) { S.prayerLeaderIndex = (S.prayerLeaderIndex + 1) % S.family.length; save(); viewBlessings(); } };
 
+/* ---------- birthdays ---------- */
+function upcomingBirthdays() {
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  return S.family
+    .filter(f => f.birthday && f.birthday.length >= 10)
+    .map(f => {
+      const [mo, da] = f.birthday.slice(5).split("-").map(Number);
+      let next = new Date(today.getFullYear(), mo - 1, da);
+      if (next < today) next = new Date(today.getFullYear() + 1, mo - 1, da);
+      return { name: f.name, emoji: f.emoji, days: Math.round((next - today) / 86400000), next };
+    })
+    .sort((a, b) => a.days - b.days);
+}
+function birthdayModal(names) {
+  confettiBurst();
+  $("#modalBox").innerHTML = `
+    <div class="burst">🎂</div>
+    <h2>Happy Birthday!</h2>
+    <p style="font-size:22px;font-weight:800;font-family:'Baloo 2',sans-serif;color:var(--coral)">${names.map(esc).join(" & ")} 🎉</p>
+    <p>The whole family is celebrating you today. We're so grateful for you! 💛</p>
+    <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="closeModal()">Hooray! 🥳</button>`;
+  $("#modalBg").classList.add("show");
+}
+function checkBirthdays() {
+  const key = todayKey(), md = key.slice(5);
+  const shown = (S.birthdayShown && S.birthdayShown[key]) || [];
+  const names = S.family.filter(f => f.birthday && f.birthday.length >= 10 && f.birthday.slice(5) === md && !shown.includes(f.name)).map(f => f.name);
+  if (names.length) {
+    if (!S.birthdayShown) S.birthdayShown = {};
+    S.birthdayShown[key] = [...shown, ...names];
+    save();
+    setTimeout(() => birthdayModal(names), 500);
+  }
+}
+
 /* ---------- passport ---------- */
 function viewPassport() {
   root().innerHTML = `
@@ -670,6 +718,7 @@ function viewSettings() {
               <input value="${esc(f.emoji)}" maxlength="2" style="width:56px;text-align:center;font-size:20px" data-f="${i}" data-k="emoji" />
               <input value="${esc(f.name)}" placeholder="Name" data-f="${i}" data-k="name" />
               <input value="${esc(f.role)}" placeholder="Role" data-f="${i}" data-k="role" style="max-width:120px" />
+              <input type="date" value="${esc(f.birthday || "")}" data-f="${i}" data-k="birthday" title="Birthday (optional)" style="max-width:160px" />
               <button class="del" onclick="removeFamily(${i})" title="Remove">✕</button>
             </div>`).join("")}
         </div>
@@ -708,7 +757,12 @@ window.addFamily = () => { S.family.push({ name: "New Explorer", role: "Explorer
 window.removeFamily = (i) => { S.family.splice(i, 1); save(); viewSettings(); };
 window.saveFamily = () => {
   document.querySelectorAll("#famList .fam-editor").forEach((row, i) => {
-    row.querySelectorAll("input").forEach(inp => { if (S.family[i]) S.family[i][inp.dataset.k] = inp.value || S.family[i][inp.dataset.k]; });
+    if (!S.family[i]) return;
+    row.querySelectorAll("input").forEach(inp => {
+      const k = inp.dataset.k, v = inp.value;
+      if (k === "birthday") { if (v) S.family[i].birthday = v; else delete S.family[i].birthday; }
+      else if (v) S.family[i][k] = v;
+    });
   });
   save(); renderTop();
   const b = event.target; const o = b.textContent; b.textContent = "Saved! ✓"; setTimeout(() => b.textContent = o, 1400);
@@ -808,3 +862,4 @@ backdrop.addEventListener("click", closeNav);
 applyTheme();
 renderTop();
 go("home");
+checkBirthdays();
