@@ -630,6 +630,30 @@ function mascotHTML(sc) {
   return `<div class="mascot"><div class="mascot-face ${m.state}">${MASCOT.face}</div><div class="mascot-bubble" id="mascotBubble">${esc(m.text)}</div></div>`;
 }
 
+function phMapSVG() {
+  return `<svg viewBox="0 0 200 300" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" aria-label="Map of the Philippines">
+    <defs><linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dcf1fb"/><stop offset="1" stop-color="#bfe6f5"/></linearGradient></defs>
+    <rect width="200" height="300" fill="url(#sea)"/>
+    <g stroke="#a9d9ee" stroke-width="1.4" fill="none" opacity=".7" stroke-linecap="round">
+      <path d="M14 44 q9 -6 18 0 t18 0"/><path d="M150 70 q9 -6 18 0"/><path d="M24 258 q9 -6 18 0 t18 0"/></g>
+    <g fill="#8ecb76" stroke="#5fa74e" stroke-width="1.6" stroke-linejoin="round">
+      <path d="M78 20 q24 -8 36 8 q11 17 2 36 q-7 15 -19 16 q-17 2 -23 -13 q-8 -22 4 -47z"/>
+      <path d="M97 92 q11 6 9 23 q-2 13 -11 20 q4 -22 2 -43z"/>
+      <ellipse cx="84" cy="152" rx="12" ry="9"/><ellipse cx="112" cy="160" rx="14" ry="8"/><ellipse cx="133" cy="150" rx="9" ry="12"/><ellipse cx="100" cy="178" rx="16" ry="8"/>
+      <path d="M96 212 q31 -13 51 6 q17 18 6 41 q-13 22 -39 20 q-27 -2 -31 -29 q-4 -26 13 -38z"/></g>
+    <text x="150" y="278" font-size="20">⛵</text>
+  </svg>`;
+}
+function phPostcard() {
+  return `<div class="postcard">
+    <span class="tape"></span>
+    <div class="pc-map">${phMapSVG()}</div>
+    <span class="rtag tag-luzon">Luzon</span>
+    <span class="rtag tag-visayas">Visayas</span>
+    <span class="rtag tag-mindanao">Mindanao</span>
+  </div>`;
+}
+
 function renderScene(sc) {
   const a = cine.a;
   if (sc.type === "intro") {
@@ -651,18 +675,19 @@ function renderScene(sc) {
         <button class="isle isle-visayas" onclick="isleFact('visayas')"><span class="lbl">Visayas</span></button>
         <button class="isle isle-mindanao" onclick="isleFact('mindanao')"><span class="lbl">Mindanao</span></button>
       </div>
-      <p class="archi-hint">👆 Tap each island group to explore its animals, food & culture · <a href="#" onclick="launchGoogleEarth();return false" style="color:#ffe08a">🌍 Google Earth (soon)</a></p>
-      <div id="isleInfo" class="glass" style="display:none;margin-top:16px"></div>
+      <p class="archi-hint">👆 Tap each island group to explore its animals, food & culture · <a href="#" onclick="launchGoogleEarth();return false" style="color:#0e7c86;font-weight:800">🌍 Google Earth (soon)</a></p>
+      <div id="isleInfo" class="paper" style="display:none;margin:16px auto 0;max-width:560px"></div>
     </div>`;
   }
   if (sc.type === "learn") {
     const title = sc.s.subject.replace(/^Character:\s*/, "");
-    return `<div class="scene">
+    return `<div class="scene scene-lesson">
       <div class="paper"><div class="paper-inner">
         <span class="signpost">${sc.s.icon} ${esc(sc.s.subject)}</span>
-        <h2 class="title">${sc.s.icon} ${esc(title)}</h2>
+        <h2 class="title">${sc.s.icon} ${esc(title)} <span class="title-spark">✨</span></h2>
         ${sc.s.html}
       </div></div>
+      ${phPostcard()}
     </div>`;
   }
   if (sc.type === "missions") {
@@ -694,19 +719,20 @@ function renderScene(sc) {
   }
   // ending
   const r = cine.reward || { gained: 0, newly: [], firstTime: false };
-  return `<div class="scene zoom" style="background:radial-gradient(120% 90% at 50% 120%, rgba(244,168,33,.35), transparent 60%);border-radius:28px;padding:24px">
-    <div class="kicker">🌅 Adventure Complete</div>
-    <div class="big-emoji">🏆</div>
-    <h1>${cine.score === a.quiz.length ? "Perfect Adventure!" : "Wonderful Journey!"}</h1>
-    <p class="lead">${esc(a.title)}</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:18px 0">
-      <div class="glass" style="padding:14px 18px">⭐ +${r.gained} XP</div>
-      <div class="glass" style="padding:14px 18px">📝 ${cine.score}/${a.quiz.length}</div>
-      <div class="glass" style="padding:14px 18px">🛂 ${esc(a.stamp.name)}</div>
+  return `<div class="scene zoom">
+    <div class="paper" style="text-align:center;max-width:640px;margin:0 auto">
+      <div class="big-emoji" style="animation:none">🏆</div>
+      <h2 class="title" style="text-align:center">${cine.score === a.quiz.length ? "Perfect Adventure!" : "Wonderful Journey!"} <span class="title-spark">✨</span></h2>
+      <p style="font-size:clamp(18px,2.2vw,23px)">${esc(a.title)}</p>
+      <div class="reward-pills">
+        <span>⭐ +${r.gained} XP</span>
+        <span>📝 ${cine.score}/${a.quiz.length}</span>
+        <span>🛂 ${esc(a.stamp.name)}</span>
+      </div>
+      ${r.newly && r.newly.length ? `<p style="font-weight:800;color:#e0862f">New badges: ${r.newly.map(b => `${b.emoji} ${esc(b.name)}`).join(" · ")}</p>` : ""}
+      <p style="margin-top:14px;font-style:italic;font-size:clamp(17px,2vw,21px);color:#5a4420">"See you on our next adventure!" 🌏</p>
+      <button class="btn btn-sun" style="margin-top:14px" onclick="closeCinema();go('map')">Back to the Map 🗺️</button>
     </div>
-    ${r.newly && r.newly.length ? `<p style="font-weight:800;color:#ffe08a">New badges: ${r.newly.map(b => `${b.emoji} ${esc(b.name)}`).join(" · ")}</p>` : ""}
-    <p class="lead" style="margin-top:16px;font-style:italic">"See you on our next adventure!" 🌏</p>
-    <button class="btn btn-sun" style="margin-top:16px" onclick="closeCinema();go('map')">Back to the Map 🗺️</button>
   </div>`;
 }
 
@@ -714,20 +740,21 @@ function renderCine() {
   const el = cineEl(), { a, scenes, i } = cine, sc = scenes[i];
   if (sc.type === "ending" && !cine.rewarded) { cine.rewarded = true; cine.reward = awardCompletion(a, cine.score, a.quiz.length); }
   el.innerHTML = `
-    <div class="cine-sky"></div>
+    <div class="cine-sky bright"></div>
+    <div class="cine-palm">🌴</div>
     ${cineAmbient()}
-    <div class="cine-waves"></div>
+    <div class="cine-ocean"></div>
     <div class="cine-scene-label">${sceneLabel(sc, i, scenes.length)}</div>
     <div class="cine-top">
-      <button class="cine-btn" onclick="toggleCineMute(this)" title="Sound on/off">${cine.muted ? "🔇" : "🔊"}</button>
-      <button class="cine-btn" onclick="closeCinema()" title="Exit theater">✕</button>
+      <button class="cine-btn spk" onclick="toggleCineMute(this)" title="Sound on/off">${cine.muted ? "🔇" : "🔊"}</button>
+      <button class="cine-btn xbtn" onclick="closeCinema()" title="Exit theater">✕</button>
     </div>
     <div class="cine-stage">${renderScene(sc)}</div>
     ${mascotHTML(sc)}
     <div class="cine-controls">
-      <button class="cine-btn" onclick="cinePrev()" ${i === 0 ? "disabled" : ""} title="Back">‹</button>
-      <div class="cine-dots">${scenes.map((s, k) => `<span class="cine-dot ${k === i ? "on" : k < i ? "done" : ""}"></span>`).join("")}</div>
-      <button class="cine-btn" onclick="cineNext()" ${i === scenes.length - 1 ? "disabled" : ""} title="Next">›</button>
+      <button class="cine-btn cine-nav" onclick="cinePrev()" ${i === 0 ? "disabled" : ""} title="Back">‹</button>
+      <div class="cine-dots">${scenes.map((s, k) => `<span class="cine-dot ${k === i ? "on" : k < i ? "done" : ""}"></span>`).join("")}<span class="dot-star">⭐</span></div>
+      <button class="cine-btn cine-nav" onclick="cineNext()" ${i === scenes.length - 1 ? "disabled" : ""} title="Next">›</button>
     </div>`;
   if (sc.type === "ending") { confettiBurst(); sfxStamp(); sfxCelebrate(); }
 }

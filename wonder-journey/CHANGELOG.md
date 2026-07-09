@@ -34,6 +34,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.9.3] — 2026-07-08 · Warm Tropical Theater (reference match)
+
+- `Changed` **Every scene is now bright, warm and lively** (matching the design reference) — tropical sky gradient, a swaying palm, drifting clouds, a sandy beach with a moving shoreline, and dark storybook text on light.
+- `Added` **Pinned Philippines map postcard** on every lesson scene — a taped watercolor-style map with Luzon (green), Visayas (purple) & Mindanao (orange) tags and a little sailboat.
+- `Added` **Reference-exact colored keywords & star bullets** in the Geography lesson (blue *Philippines*, red *7,641 islands*, green/purple/orange island groups, pink *Manila*, teal *Filipinos*).
+- `Changed` Warm controls — kraft ribbon scene label, blue speaker + orange close buttons, brown storybook nav arrows, gold progress dots with a star; quiz options and the ending are now light warm cards.
+
+---
+
 ## [0.9.2] — 2026-07-08 · Storybook Look & Feast-Day Respect
 
 - `Changed` **Cinematic learn/missions/reflection scenes redesigned as a storybook** — cream paper lesson card with a dashed border, a wooden **signpost header**, a big rounded teal title, ⭐ **sticker bullets**, and larger child-friendly text — much closer to the design reference.

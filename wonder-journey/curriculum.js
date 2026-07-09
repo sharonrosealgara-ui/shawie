@@ -49,11 +49,13 @@ const ADVENTURES = [
     xp: 120,
     sections: [
       { icon: "🌍", subject: "Geography", html:
-        `<p>The <b>Philippines</b> is a country made of <b>7,641 islands</b> in Southeast Asia, surrounded by the sparkling Pacific Ocean and the South China Sea!</p>
-         <ul><li>The three big island groups are <b>Luzon</b> (north), <b>Visayas</b> (middle), and <b>Mindanao</b> (south).</li>
-         <li>The capital city is <b>Manila</b>, on the island of Luzon.</li>
-         <li>People here are called <b>Filipinos</b>. 🇵🇭</li></ul>
-         <div class="tryit">🔎 <b>Try it:</b> Find the Philippines on a world map or globe. Is it above or below the equator?</div>` },
+        `<p>The <span class="hl-blue">Philippines</span> is a country made of <span class="hl-red">7,641 islands</span> in Southeast Asia, surrounded by the sparkling <span class="hl-blue">Pacific Ocean</span> and the <span class="hl-blue">South China Sea</span>!</p>
+         <ul class="stars">
+           <li><span class="bstar" style="color:#2f7fd6">★</span> The three big island groups are <span class="hl-green">Luzon</span> (north), <span class="hl-purple">Visayas</span> (middle), and <span class="hl-orange">Mindanao</span> (south).</li>
+           <li><span class="bstar" style="color:#3f9d54">★</span> The capital city is <span class="hl-pink">Manila</span>, on the island of Luzon.</li>
+           <li><span class="bstar" style="color:#d6559a">★</span> People here are called <span class="hl-teal">Filipinos</span>. 🇵🇭</li>
+         </ul>
+         <div class="tryit">🔎 <b style="color:#e5486a">Try it!</b> Find the Philippines on a world map or globe. Is it above or below the equator?</div>` },
       { icon: "🗣️", subject: "Tagalog", html:
         `<p>Tagalog is one of the main languages of the Philippines. Let's learn our first greetings!</p>
          <div class="wordbank">
