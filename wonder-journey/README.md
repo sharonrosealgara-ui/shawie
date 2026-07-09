@@ -9,6 +9,10 @@ interactive, story-based experiences.
 
 </div>
 
+> **📜 Governed by [`CONSTITUTION.md`](CONSTITUTION.md)** — the project's highest
+> authority. When any feature, UI, curriculum, content, or code decision conflicts
+> with the Constitution, the Constitution wins.
+
 > **Status legend** — `✅ Live now` works in today's build · `🔜 Planned` is on the roadmap.
 > This README documents both the shipped MVP and the vision it's growing toward.
 

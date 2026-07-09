@@ -4,6 +4,11 @@ Wonder Journey OS is Sharon's flagship educational product. Every contribution m
 protect the **product vision, architecture, design quality, and family learning
 experience**. This guide keeps contributions safe, consistent, and on-mission.
 
+> **📜 Read [`CONSTITUTION.md`](CONSTITUTION.md) first.** It is the project's highest
+> authority. If anything in this guide — or any feature, design, or content decision —
+> ever conflicts with the Constitution, **the Constitution wins.** Before approving any
+> lesson, run it through the Constitution's *Final Question.*
+
 > **Note on stack:** Today's MVP is a **dependency-free vanilla-JS static app**
 > (`index.html` + `curriculum.js` + `app.js`). The **TypeScript / React / Next.js**
 > standards below are the **target for the SaaS migration** — they apply as we move

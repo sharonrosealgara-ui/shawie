@@ -34,6 +34,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.11.1] — 2026-07-09 · The Wonder Journey Constitution
+
+- `Added` **`CONSTITUTION.md` (v1.0)** — the project's **highest-authority** document. It codifies the mission (joyful family learning, not an LMS), who it's built for (the Ferrell family by name), the parents' priority order (Philippine language → culture → values → cooking → geography → academics), the Christian foundation (Feast-Day-respectful, holiday content configurable), each child's interests, and the standards for design, presentation, real media, themes, scenes, maps, animation, sound, lesson structure, family participation, parent experience, and celebrations — ending with the *Final Question* and the *Wonder Journey Promise*. **When any decision conflicts with the Constitution, the Constitution wins.**
+- `Documentation` `README.md` and `CONTRIBUTING.md` now point to the Constitution as the top authority.
+
+---
+
 ## [0.11.0] — 2026-07-09 · Real Educational Media System (production-ready)
 
 - `Added` **`REAL_MEDIA_POLICY.md`** — the production standard for every image, map & illustration: the one rule (real things → real, licensed media, **never AI-generated**), what must be a real photo/map vs. when illustrations are allowed, full licensing/attribution rules, real **Bible-geography** rules (Sea of Galilee, Mt. Sinai, Jerusalem, Nineveh…), no-hotlinking, and the placeholder promise.
