@@ -7,7 +7,7 @@
 
 ---
 
-### ADR-010 — Reconcile the sampler adventures with the 72-lesson map *(PROPOSED — needs owner decision)*
+### ADR-010 — Reconcile the sampler adventures with the 72-lesson map *(ACCEPTED — Option A, 2026-07-09)*
 **Problem:** The 10 fully-authored *playable* adventures (`curriculum.js`) are a
 one-per-unit sampler numbered `a1–a10` sequentially (Welcome, Islands, Champorado,
 Bayanihan, Fiesta, Volcanoes, Animals, Rice Terraces, Ocean, Heroes). The canonical
@@ -27,7 +27,11 @@ ids while the new media manifest is keyed to map ids.
   track. *Fastest, but leaves two parallel curricula and a confusing Teacher Portal.*
 - **(C) Re-theme the sampler in place** to match map a1–a10 exactly (a3=Flag,
   a4=Greetings, …) and move the current sampler content to their real slots later.
-**Status:** Awaiting owner decision before large curriculum authoring proceeds.
+**Decision:** Option A, chosen by the owner. Implemented in v0.16.0 — authored ids
+re-slotted (a3→a7, a4→a13, a5→a19, a6→a25, a7→a31, a8→a37, a9→a43, a10→a49);
+`THEME_BY_ID`, `LEVEL_MISSIONS`, map `built` flags updated; a one-time
+`loadState()` migration (`reslotV2`) remaps saved progress. Verified: every
+adventure opens on its map id with matching theme + media; zero errors.
 
 ### ADR-009 — Teacher Portal & Parent Dashboard read the curriculum map
 **Decision:** Grown-up planning tools generate lesson plans, materials and

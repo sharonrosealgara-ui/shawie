@@ -34,6 +34,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.16.0] — 2026-07-09 · Curriculum id alignment (single canonical schedule)
+
+- `Changed` **Re-slotted the 10 fully-authored adventures onto their canonical 72-map ids** (ADR-010, Option A): Champorado a3→**a7**, Bayanihan a4→**a13**, Fiesta a5→**a19**, Volcanoes a6→**a25**, Animals a7→**a31**, Rice Terraces a8→**a37**, Ocean a9→**a43**, Heroes a10→**a49** (a1/a2 unchanged). The Adventure Theater and Teacher Portal now agree, and the theme engine, level missions, and **real-media manifest all align with what actually plays** (e.g., a7 Champorado shows champorado media).
+- `Changed` `curriculum-map.js` `built` flags now mark exactly the 10 interactive slots; the other 62 correctly read as "plan ready" in the Teacher Portal.
+- `Improved` `THEME_BY_ID` updated to the map ids.
+- `Fixed` One-time `loadState()` migration (`reslotV2`) remaps any saved progress (completed · stamps · reflections) from old sequential ids to the new map ids, so returning families keep their stamps and scores.
+- `Documentation` ADR-010 recorded; this alignment unblocks unit-by-unit authoring of the remaining slots.
+
+---
+
 ## [0.15.0] — 2026-07-09 · Certificates + milestone celebrations
 
 - `Added` **Printable certificates** — an elegant, print/PDF-ready certificate (double-gold border, globe seal, family explorers' names, achievement, live stats, dated signature). Two kinds: **Adventure Journey** (always available) and **World 1 Champions** (unlocks at all 72). Available from the Celebrations page; dedicated print stylesheet renders just the certificate in landscape.

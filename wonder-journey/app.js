@@ -36,7 +36,7 @@ let S = loadState();
 function loadState() {
   try {
     const raw = localStorage.getItem(STORE_KEY);
-    if (!raw) return structuredClone(DEFAULT_STATE);
+    if (!raw) { const d = structuredClone(DEFAULT_STATE); d.reslotV2 = true; return d; } // fresh state already uses map ids
     const s = Object.assign(structuredClone(DEFAULT_STATE), JSON.parse(raw));
     // One-time safe upgrade: replace the old placeholder roster with the real family.
     if (Array.isArray(s.family) && s.family.some(f => f.name === "Kiddo")) {
@@ -45,6 +45,23 @@ function loadState() {
     // Backfill known children's learning levels if a saved roster predates them.
     const KID_LEVELS = { Rylee: "trailblazer", Ezra: "adventurer", Asa: "adventurer", Selah: "explorer" };
     if (Array.isArray(s.family)) s.family.forEach(f => { if (!f.level && KID_LEVELS[f.name]) f.level = KID_LEVELS[f.name]; });
+    // One-time curriculum re-slot (ADR-010): the 10 authored adventures moved from
+    // sequential ids to their canonical 72-map ids. Remap any saved progress once.
+    if (!s.reslotV2) {
+      const RESLOT = { a3: "a7", a4: "a13", a5: "a19", a6: "a25", a7: "a31", a8: "a37", a9: "a43", a10: "a49" };
+      const remapKeys = obj => {
+        if (!obj || typeof obj !== "object") return obj;
+        const out = {};
+        Object.keys(obj).forEach(k => { out[RESLOT[k] || k] = obj[k]; });
+        return out;
+      };
+      // Process in high→low order so a7→a31 happens before a3→a7 (no clobber).
+      const remapArr = arr => Array.isArray(arr) ? arr.map(id => RESLOT[id] || id) : arr;
+      s.completed = remapKeys(s.completed);
+      s.reflections = remapKeys(s.reflections);
+      s.stamps = remapArr(s.stamps);
+      s.reslotV2 = true;
+    }
     return s;
   } catch (e) { return structuredClone(DEFAULT_STATE); }
 }
@@ -699,7 +716,7 @@ const THEMES = {
   village:  { id: "village",   name: "Village & Values",       sky: "linear-gradient(180deg,#bfe3f0,#dcecc4 55%,#ecd9b0 100%)", palm: true,  water: true,  decor: ["🏡","🌾","🕊️","☁️","✨"] },
   bible:    { id: "bible",     name: "Bible Lands",            sky: "linear-gradient(180deg,#f4e4b4,#e7d097 50%,#caa96b 100%)", palm: false, water: false, ground: "rgba(150,120,70,.45)", decor: ["🕊️","🫒","⭐","✨","🐑"] },
 };
-const THEME_BY_ID = { a1: "geography", a2: "island", a3: "cooking", a4: "village", a5: "festival", a6: "volcano", a7: "wildlife", a8: "terraces", a9: "ocean", a10: "history" };
+const THEME_BY_ID = { a1: "geography", a2: "island", a7: "cooking", a13: "village", a19: "festival", a25: "volcano", a31: "wildlife", a37: "terraces", a43: "ocean", a49: "history" };
 function themeFor(a) {
   if (a.theme && THEMES[a.theme]) return THEMES[a.theme];
   if (THEME_BY_ID[a.id] && THEMES[THEME_BY_ID[a.id]]) return THEMES[THEME_BY_ID[a.id]];

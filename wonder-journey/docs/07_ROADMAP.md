@@ -19,7 +19,7 @@
 | 6 | Theme Engine | ✅ | 11 themes, auto-selected |
 | 7 | Scene Engine | ✅ | Reusable scene renderers |
 | 8 | Real Educational Media System | ✅ | Manifest + resilient component + asset library |
-| 9 | Curriculum Framework | 🟡 | 72 scheduled; 10 fully authored; author Units 3–13 |
+| 9 | Curriculum Framework | 🟡 | 72 scheduled; 10 authored & **now aligned to canonical map ids** (ADR-010); author remaining slots unit by unit |
 | 10 | Adventure Builder | 🟡 | Data-driven schema exists; no visual editor yet |
 | 11 | Quiz Engine | ✅ | Per-adventure quizzes, scoring, Quiz Star badge |
 | 12 | Family Storybook | ✅ | Auto-generated from reflections/completions |

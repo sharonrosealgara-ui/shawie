@@ -41,7 +41,7 @@
 | Quiz Engine | `██████████████░░░░░░` | 70% | 🟡 Multiple-choice live; alt types pending |
 | Family Cookbook | `██████████████░░░░░░` | 70% | 🟡 Recipe cards live |
 | Media Library | `███████████░░░░░░░░░` | 55% | 🟡 Manifest 100%; asset files pending licensing |
-| Curriculum | `███████░░░░░░░░░░░░░` | 35% | 🟡 72 scheduled; 10 fully authored |
+| Curriculum | `████████░░░░░░░░░░░░` | 38% | 🟡 72 scheduled; 10 authored & aligned to canonical map ids (ADR-010) |
 | Deployment | `█████████████░░░░░░░` | 65% | 🟡 Vercel config + docs; domain pending |
 | Make.com Integration | `██░░░░░░░░░░░░░░░░░░` | 10% | 🔲 Summary export format defined |
 
