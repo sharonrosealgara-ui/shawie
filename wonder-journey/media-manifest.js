@@ -33,13 +33,14 @@ function mk(o){
     file: o.file,
     alt: o.alt,
     caption: o.caption,
-    credit: "",
-    license: "",
+    credit: o.credit || "",
+    license: o.license || "",
+    source: o.source || "",
     sourceType: o.sourceType,
     sourceHint: o.sourceType,
     fallback: o.fallback,
     teacherGuidance: o.teacherGuidance,
-    status: "needed"
+    status: o.status || "needed"
   };
 }
 

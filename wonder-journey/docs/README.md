@@ -24,6 +24,7 @@ lower number wins, and `00` (the Constitution) always wins.
 | 15 | [Animation System](15_ANIMATION_SYSTEM.md) | Motion language, timing, transitions, reduced-motion |
 | 16 | [Cooking Academy](16_COOKING_ACADEMY.md) | Cooking module architecture, recipes, roadmap |
 | 17 | [Sound System](17_SOUND_SYSTEM.md) | Sound Director, adaptive ambient engine, mixer |
+| 18 | [Media Sourcing Runbook](18_MEDIA_SOURCING.md) | One-command licensed-photo pipeline + review checklist |
 
 **Also see:** [PROGRESS.md](../PROGRESS.md) (live build tracker) ·
 [CHANGELOG.md](../CHANGELOG.md) · [CONTRIBUTING.md](../CONTRIBUTING.md) ·

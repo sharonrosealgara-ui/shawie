@@ -34,6 +34,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.23.1] — 2026-07-14 · 📷 Real-media licensing pipeline
+
+- `Added` **`tools/source-media.mjs`** — the one-command licensed-photo pipeline: searches Wikimedia Commons with 71 curated terms, accepts **only commercial-safe licenses** (Public Domain · CC0 · CC BY · CC BY-SA — NC/ND/unknown rejected), downloads 1200px copies to the exact `assets/…` paths (never hotlinks), auto-fills `credit` + `license` + `source` + `status:"ready"` in the manifest, and writes an attribution table to `CREDITS.md`. Supports `--dry-run`, `--only`, `--redo`.
+- `Fixed` `mk()` in `media-manifest.js` now honors `credit`/`license`/`source`/`status` overrides (previously hardcoded), so sourced attribution actually flows to `mediaFigure()` — which displays the photo **with visible credit** the moment a file lands.
+- `Documentation` `docs/18_MEDIA_SOURCING.md` — runbook + human-review checklist + own-photos guidance + video policy. Note: this cloud sandbox's network policy blocks image sites, so the tool runs on the owner's machine (or a session with web access); everything else is automated.
+
+---
+
 ## [0.23.0] — 2026-07-14 · 🔊 Immersive Cinematic Sound System (core)
 
 - `Added` **Sound Director** — one centralized audio engine (`SND`): master + channel gains (ambient · effects; music/voice reserved), crossfades, persistence, and teardown. No component plays audio independently; all legacy sound effects now route through it. **Fully synthesized Web Audio** — CSP-safe, zero files, nothing to license.
