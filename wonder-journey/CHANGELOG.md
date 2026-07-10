@@ -34,6 +34,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.23.0] — 2026-07-14 · 🔊 Immersive Cinematic Sound System (core)
+
+- `Added` **Sound Director** — one centralized audio engine (`SND`): master + channel gains (ambient · effects; music/voice reserved), crossfades, persistence, and teardown. No component plays audio independently; all legacy sound effects now route through it. **Fully synthesized Web Audio** — CSP-safe, zero files, nothing to license.
+- `Added` **Adaptive Sound Engine** — every adventure automatically gets a gentle themed environment that crossfades in/out with the Adventure Theater: ocean waves + gulls (islands/geography), wind + faint rumble (volcano), stream + birds (terraces/village), forest calls (wildlife), kitchen bubbling (cooking), soft distant drums (festival), a peaceful pad + breeze (Bible lands), calm breeze (history). Obeys the theater mute button; never cuts abruptly.
+- `Added` **🔊 Sound Studio** in Settings — mute-all, **Reduced Sound Mode** (brief cues only, no ambience), Master/Ambient/Effects sliders, preview chime; preferences saved.
+- `Added` Signature **memory-saved chime** on Cookbook keepsake saves; gentle (never harsh) quiz feedback retained.
+- `Accessibility` Wonder Journey remains fully usable with sound off; reduced-sound honors sensitive listeners.
+- `Documentation` `docs/17_SOUND_SYSTEM.md` — live features + roadmap (music library, narration engine, mascot voices, Family Voice Memories).
+
+---
+
 ## [0.22.0] — 2026-07-14 · Unit 4 complete + two-portal architecture (ADR-011)
 
 - `Added` **Unit 4 fully authored** — five new interactive adventures (a20–a24), Festival theme with aligned real-media:

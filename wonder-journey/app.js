@@ -44,6 +44,7 @@ const DEFAULT_STATE = {
   teacherMode: false,     // teacher extras (lesson timer + answer key); family view stays clean
   mascot: true,           // show Sinag the mascot guide in cinematic mode
   cookbookEntries: [],    // Cooking Academy keepsakes: { recipeId, name, emoji, date, participants, rating, favorite, gratitude, notes, region, badge, xp }
+  sound: { master: 0.8, ambient: 0.5, ui: 0.8, muted: false, reduced: false }, // Sound Director mixer
 };
 
 // Merge Cooking Academy badges into the badge set (recipes.js loads first).
@@ -689,26 +690,95 @@ function checkBirthdays() {
 let cine = null;
 const cineEl = () => document.getElementById("cinema");
 
-/* --- sound (Web Audio, synthesized — CSP-safe, no external files) --- */
+/* ============================================================
+   🔊 SOUND DIRECTOR (docs/17_SOUND_SYSTEM.md)
+   One centralized audio engine — no page or component plays audio on
+   its own. Channels: master → { ambient, ui } (music/voice reserved).
+   All audio is SYNTHESIZED Web Audio (CSP-safe, zero external files):
+   the Adaptive Sound Engine builds a gentle per-theme environment
+   (ocean, wind, birds, water, kitchen bubbles, soft pads) with natural
+   crossfades. Volumes persist; Reduced-Sound mode keeps only brief UI
+   cues; everything works fully with sound off (accessibility first).
+   ============================================================ */
 let actx = null;
 function ac() { if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} } return actx; }
-function tone(freq, dur = 0.15, type = "sine", vol = 0.15, when = 0) {
-  if (cine && cine.muted) return;
-  const a = ac(); if (!a) return;
-  const t = a.currentTime + when;
-  const o = a.createOscillator(), g = a.createGain();
-  o.type = type; o.frequency.value = freq; o.connect(g); g.connect(a.destination);
-  g.gain.setValueAtTime(0.0001, t);
-  g.gain.exponentialRampToValueAtTime(vol, t + 0.02);
-  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-  o.start(t); o.stop(t + dur + 0.02);
-}
+
+const SND = {
+  ready: false, master: null, ch: {}, env: null, envTimers: [],
+  get cfg() { return S.sound || (S.sound = { master: 0.8, ambient: 0.5, ui: 0.8, muted: false, reduced: false }); },
+  init() {
+    const a = ac(); if (!a || this.ready) return this.ready;
+    this.master = a.createGain(); this.master.connect(a.destination);
+    ["ambient", "ui"].forEach(k => { const g = a.createGain(); g.connect(this.master); this.ch[k] = g; });
+    this.ready = true; this.apply(); return true;
+  },
+  apply() {
+    if (!this.ready) return;
+    const c = this.cfg, m = c.muted ? 0 : c.master;
+    this.master.gain.value = m;
+    this.ch.ambient.gain.value = c.reduced ? 0 : c.ambient;
+    this.ch.ui.gain.value = c.ui;
+  },
+  set(k, v) { this.cfg[k] = v; save(); this.apply(); if (k === "reduced" && v) this.stopAmbient(); },
+  /* --- UI tones (routed through the ui channel) --- */
+  tone(freq, dur = 0.15, type = "sine", vol = 0.15, when = 0) {
+    if (this.cfg.muted || (cine && cine.muted)) return;
+    if (!this.init()) return;
+    const a = ac(), t = a.currentTime + when;
+    const o = a.createOscillator(), g = a.createGain();
+    o.type = type; o.frequency.value = freq; o.connect(g); g.connect(this.ch.ui);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.start(t); o.stop(t + dur + 0.02);
+  },
+  /* --- helpers for the ambient engine --- */
+  noise(a) { const len = a.sampleRate * 2, buf = a.createBuffer(1, len, a.sampleRate), d = buf.getChannelData(0); for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1; const src = a.createBufferSource(); src.buffer = buf; src.loop = true; return src; },
+  /* --- ADAPTIVE SOUND ENGINE: one gentle environment per theme --- */
+  startAmbient(themeId) {
+    if (this.cfg.muted || this.cfg.reduced || (cine && cine.muted)) return;
+    if (!this.init()) return;
+    this.stopAmbient(0.8);
+    const a = ac(), out = a.createGain(); out.gain.value = 0.0001; out.connect(this.ch.ambient);
+    const nodes = [out], timers = [];
+    const filteredNoise = (type, freq, q, gain) => { const n = this.noise(a), f = a.createBiquadFilter(), g = a.createGain(); f.type = type; f.frequency.value = freq; f.Q.value = q; g.gain.value = gain; n.connect(f); f.connect(g); g.connect(out); n.start(); nodes.push(n, f, g); return g; };
+    const lfo = (target, base, depth, rate) => { const o = a.createOscillator(), g = a.createGain(); o.frequency.value = rate; g.gain.value = depth; o.connect(g); g.connect(target.gain); target.gain.value = base; o.start(); nodes.push(o, g); };
+    const chirper = (min, max, gap) => { const t = setInterval(() => { if (Math.random() < 0.6) { const f = min + Math.random() * (max - min); this._blip(out, f, 0.09, "sine", 0.05); if (Math.random() < 0.5) this._blip(out, f * 1.25, 0.07, "sine", 0.04, 0.1); } }, gap); timers.push(t); };
+    const pad = (freqs, gain) => freqs.forEach(fr => { const o = a.createOscillator(), g = a.createGain(); o.type = "sine"; o.frequency.value = fr; g.gain.value = gain; o.connect(g); g.connect(out); o.start(); nodes.push(o, g); });
+    switch (themeId) {
+      case "ocean": case "island": case "geography": { const w = filteredNoise("lowpass", 420, 0.6, 0.5); lfo(w, 0.35, 0.25, 0.11); chirper(1800, 2600, 5200); break; }         // waves + gulls
+      case "volcano": { filteredNoise("bandpass", 300, 0.4, 0.4); pad([55], 0.10); break; }                                                                                      // wind + faint rumble
+      case "terraces": case "village": { filteredNoise("highpass", 3200, 0.4, 0.10); const b = filteredNoise("lowpass", 900, 0.5, 0.22); lfo(b, 0.2, 0.1, 0.07); chirper(2000, 3200, 3800); break; } // stream + breeze + birds
+      case "wildlife": { const b = filteredNoise("lowpass", 1100, 0.5, 0.25); lfo(b, 0.22, 0.1, 0.05); chirper(1600, 3400, 2200); break; }                                       // forest + bird calls
+      case "cooking": { filteredNoise("lowpass", 500, 0.7, 0.18); const t = setInterval(() => { if (Math.random() < 0.7) this._blip(out, 90 + Math.random() * 160, 0.1, "sine", 0.07); }, 700); timers.push(t); break; } // kitchen hiss + bubbling
+      case "festival": { const t = setInterval(() => { this._blip(out, 110, 0.12, "triangle", 0.09); setTimeout(() => this._blip(out, 110, 0.1, "triangle", 0.06), 300); }, 1200); timers.push(t); break; } // soft distant drums
+      case "bible": { pad([196, 247, 294], 0.035); filteredNoise("lowpass", 700, 0.4, 0.10); break; }                                                                            // gentle pad + breeze
+      case "history": default: { const b = filteredNoise("lowpass", 800, 0.5, 0.18); lfo(b, 0.16, 0.08, 0.06); break; }                                                          // calm breeze
+    }
+    out.gain.exponentialRampToValueAtTime(0.9, a.currentTime + 1.6); // crossfade in
+    this.env = { out, nodes, timers };
+  },
+  _blip(dest, freq, dur, type, vol, delay = 0) { const a = ac(); if (!a) return; const t = a.currentTime + delay; const o = a.createOscillator(), g = a.createGain(); o.type = type; o.frequency.value = freq; o.connect(g); g.connect(dest); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.03); g.gain.exponentialRampToValueAtTime(0.0001, t + dur); o.start(t); o.stop(t + dur + 0.05); },
+  stopAmbient(fade = 1.0) {
+    const e = this.env; if (!e) return; this.env = null;
+    e.timers.forEach(clearTimeout); e.timers.forEach(clearInterval);
+    const a = ac();
+    try { e.out.gain.exponentialRampToValueAtTime(0.0001, a.currentTime + fade); } catch (x) {}
+    setTimeout(() => e.nodes.forEach(n => { try { n.stop && n.stop(); } catch (x) {} try { n.disconnect(); } catch (x) {} }), fade * 1000 + 120);
+  },
+};
+window.SND = SND;
+
+/* Legacy tone + signature sounds (all routed through the Sound Director). */
+function tone(freq, dur, type, vol, when) { SND.tone(freq, dur, type, vol, when); }
 const sfxClick = () => tone(320, 0.08, "triangle", 0.12);
-const sfxWhoosh = () => { tone(600, 0.18, "sine", 0.08); tone(300, 0.22, "sine", 0.06, 0.03); };
-const sfxCorrect = () => { tone(523, 0.12, "sine", 0.14); tone(784, 0.16, "sine", 0.14, 0.1); };
-const sfxWrong = () => tone(180, 0.22, "sine", 0.12);
-const sfxStamp = () => tone(120, 0.14, "square", 0.16);
-const sfxCelebrate = () => [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.2, "triangle", 0.13, i * 0.11));
+const sfxWhoosh = () => { tone(600, 0.18, "sine", 0.08); tone(300, 0.22, "sine", 0.06, 0.03); };  // page turn
+const sfxCorrect = () => { tone(523, 0.12, "sine", 0.14); tone(784, 0.16, "sine", 0.14, 0.1); };  // reward chime
+const sfxWrong = () => tone(180, 0.22, "sine", 0.12);                                             // gentle, never harsh
+const sfxStamp = () => tone(120, 0.14, "square", 0.16);                                           // ink press
+const sfxCelebrate = () => [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.2, "triangle", 0.13, i * 0.11)); // signature celebration
+const sfxMemory = () => { tone(659, 0.16, "sine", 0.1); tone(988, 0.22, "sine", 0.1, 0.14); };    // memory saved
+const sfxDing = sfxCorrect;
 
 const ISLES = {
   luzon: { emoji: "🏙️", name: "Luzon", blurb: "The largest island group, in the north.", animals: "Philippine eagle, carabao", food: "Champorado, longganisa", culture: "Home of Manila & the Banaue Rice Terraces", lang: "Tagalog, Ilocano", cities: "Manila, Baguio, Vigan" },
@@ -1135,17 +1205,23 @@ window.openCinema = (id) => {
   cine = { a, scenes: buildScenes(a), i: 0, score: 0, answered: {}, muted: false, rewarded: false };
   const el = cineEl(); el.classList.add("show"); document.body.style.overflow = "hidden";
   const ctx = ac(); if (ctx && ctx.state === "suspended") ctx.resume();
+  SND.startAmbient(themeFor(a).id); // Adaptive Sound Engine: per-theme environment
   (el.requestFullscreen || el.webkitRequestFullscreen || (() => {})).call(el);
   renderCine();
 };
 window.closeCinema = () => {
   stopTimer();
+  SND.stopAmbient(); // fade the environment out — never cut abruptly
   if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
   cineEl().classList.remove("show"); cineEl().innerHTML = ""; document.body.style.overflow = ""; cine = null;
 };
 window.cineNext = () => { if (cine && cine.i < cine.scenes.length - 1) { cine.i++; sfxWhoosh(); renderCine(); } };
 window.cinePrev = () => { if (cine && cine.i > 0) { cine.i--; renderCine(); } };
-window.toggleCineMute = (btn) => { if (cine) { cine.muted = !cine.muted; btn.textContent = cine.muted ? "🔇" : "🔊"; } };
+window.toggleCineMute = (btn) => {
+  if (!cine) return;
+  cine.muted = !cine.muted; btn.textContent = cine.muted ? "🔇" : "🔊";
+  if (cine.muted) SND.stopAmbient(0.4); else SND.startAmbient(themeFor(cine.a).id);
+};
 window.cineAnswer = (qi, oi) => {
   if (!cine || cine.answered[qi] !== undefined) return;
   cine.answered[qi] = oi;
@@ -1762,7 +1838,7 @@ function finishRecipe(id) {
     if (S.cookbookEntries.length >= 5) { const fe = awardBadge("food-explorer"); if (fe) newly.push(fe); }
   }
   save(); renderTop();
-  confettiBurst(); if (typeof sfxCelebrate === "function") try { sfxCelebrate(); } catch (e) {}
+  confettiBurst(); try { sfxCelebrate(); setTimeout(sfxMemory, 600); } catch (e) {} // signature: celebration + memory-saved
   $("#modalBox").innerHTML = `
     <div class="burst">🎉</div>
     <h2>Saved to the Cookbook!</h2>
@@ -1933,6 +2009,23 @@ function viewSettings() {
       </div>
 
       <div class="card" style="padding:22px;margin-top:16px">
+        <h3 style="margin-bottom:6px">🔊 Sound Studio</h3>
+        <p style="color:var(--ink-soft);font-size:13px;margin-bottom:10px">Every adventure has its own gentle sound environment — ocean for islands, birds for wildlife, bubbling pots for cooking. Tune it here (Wonder Journey works fully with sound off, too).</p>
+        <div class="toggle-row">
+          <div class="t-txt"><b>Mute all sound</b><small>One switch for everything.</small></div>
+          <div class="sw ${SND.cfg.muted ? "on" : ""}" onclick="sndToggle('muted',this)"></div>
+        </div>
+        <div class="toggle-row">
+          <div class="t-txt"><b>Reduced Sound Mode</b><small>Keeps only brief, soft cues — no continuous ambience. Great for sound-sensitive moments.</small></div>
+          <div class="sw ${SND.cfg.reduced ? "on" : ""}" onclick="sndToggle('reduced',this)"></div>
+        </div>
+        <div class="snd-slider"><label>🎚️ Master volume</label><input type="range" min="0" max="100" value="${Math.round(SND.cfg.master * 100)}" oninput="sndVol('master',this.value)" /></div>
+        <div class="snd-slider"><label>🌊 Ambient environments</label><input type="range" min="0" max="100" value="${Math.round(SND.cfg.ambient * 100)}" oninput="sndVol('ambient',this.value)" /></div>
+        <div class="snd-slider"><label>✨ Sound effects</label><input type="range" min="0" max="100" value="${Math.round(SND.cfg.ui * 100)}" oninput="sndVol('ui',this.value)" /></div>
+        <button class="btn btn-ghost" style="margin-top:10px" onclick="sndPreview()">🎧 Preview a chime</button>
+      </div>
+
+      <div class="card" style="padding:22px;margin-top:16px">
         <h3 style="margin-bottom:6px">🙏 Faith Content</h3>
         <div class="toggle-row">
           <div class="t-txt"><b>Include Bible stories & Christian character</b><small>Turn off to hide all faith-based lessons (for other families).</small></div>
@@ -1970,6 +2063,9 @@ function pickColor() { const c = ["#0e7c86", "#e5674f", "#3f9d54", "#7a5cc4", "#
 window.toggleFaith = (sw) => { S.faith = !S.faith; sw.classList.toggle("on", S.faith); save(); };
 window.toggleTeacher = (sw) => { S.teacherMode = !S.teacherMode; sw.classList.toggle("on", S.teacherMode); save(); };
 window.toggleMascot = (sw) => { S.mascot = !S.mascot; sw.classList.toggle("on", S.mascot); save(); };
+window.sndToggle = (k, sw) => { SND.set(k, !SND.cfg[k]); sw.classList.toggle("on", SND.cfg[k]); };
+window.sndVol = (k, v) => SND.set(k, Math.max(0, Math.min(1, v / 100)));
+window.sndPreview = () => { SND.init(); const c = ac(); if (c && c.state === "suspended") c.resume(); sfxCelebrate(); };
 
 window.exportData = () => {
   const blob = new Blob([JSON.stringify(S, null, 2)], { type: "application/json" });
