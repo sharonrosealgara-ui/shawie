@@ -318,6 +318,16 @@ function viewHome() {
   root().innerHTML = `
     <div class="view">
       <div class="hero">
+        <div class="hero-scene" aria-hidden="true">
+          <span class="hs-sun"></span>
+          <span class="hs-cloud" style="top:14%;left:0;width:64px;height:20px;animation-duration:52s"></span>
+          <span class="hs-cloud" style="top:34%;left:0;width:44px;height:15px;animation-duration:74s;animation-delay:-30s;opacity:.7"></span>
+          <span class="hs-bird" style="top:22%;animation-duration:34s">🕊️</span>
+          <span class="hs-bird" style="top:30%;animation-duration:46s;animation-delay:-18s;font-size:12px">🕊️</span>
+          <span class="hs-ocean"></span>
+          <span class="hs-boat">⛵</span>
+          <span class="hs-palm">🌴</span>
+        </div>
         <h1>Kumusta, ${esc(fam)} Family! 👋</h1>
         <p>Welcome to your Wonder Journey. Right now you're exploring <b>World 1 — the Philippines 🇵🇭</b>. Learn together, cook together, and grow together, one adventure at a time.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px">

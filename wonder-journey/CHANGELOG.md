@@ -34,6 +34,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.29.0] — 2026-07-14 · ✨ Premium polish pass v1 (identity-preserving)
+
+- `Improved` **Cinematic Home hero** — a living tropical scene now breathes behind the same welcome (glowing sun, drifting clouds, flying doves, animated ocean waves, a sailing bangka ⛵, swaying palm). Content, copy, and buttons unchanged; decorations are aria-hidden.
+- `Improved` **Premium sidebar** — gold selection indicator, gentle hover slide, playful icon micro-motion. **Story cards** — soft depth + collectible hover lift across cards, recipes, lessons, and cookbook keepsakes. **Buttons** — tactile hover/press micro-interactions. **Backgrounds** — soft warm glows so no page feels flat.
+- `Accessibility` Every new animation is disabled under prefers-reduced-motion; no hover-required functionality; CSS-only transforms/opacity (fast on any device, zero new assets).
+- `Documentation` `docs/34_PREMIUM_UI_DIRECTIVE.md` — the redesign directive + the owner's guardrail (no novelty; strengthen the adventure-journal identity) + the continuing surface-by-surface program.
+
+---
+
 ## [0.28.0] — 2026-07-14 · 📱 Installable PWA + offline learning
 
 - `Added` **Wonder Journey is now an installable app (PWA)** — `manifest.webmanifest` (name, 🌏 icons 192/512, standalone display, brand theme colors): on the hosted site (Netlify), "Add to Home Screen / Install" turns it into a real app on tablets, phones, and desktops.
