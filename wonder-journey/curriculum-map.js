@@ -453,7 +453,7 @@ const CURRICULUM_MAP = {
         "math": "Comparing numbers (>, <)",
         "english": "Compare & contrast writing",
         "bible": "God's power over creation",
-        "built": false
+        "built": true
       },
       {
         "n": 27,
@@ -469,7 +469,7 @@ const CURRICULUM_MAP = {
         "math": "Simple maps & counting",
         "english": "Reading nonfiction",
         "bible": "The earth is the Lord's",
-        "built": false
+        "built": true
       },
       {
         "n": 28,
@@ -485,7 +485,7 @@ const CURRICULUM_MAP = {
         "math": "Elevation & measurement",
         "english": "Descriptive writing",
         "bible": "Faith that moves mountains",
-        "built": false
+        "built": true
       },
       {
         "n": 29,
@@ -501,7 +501,7 @@ const CURRICULUM_MAP = {
         "math": "Reading a weather graph",
         "english": "Days & seasons vocabulary",
         "bible": "God gives the seasons (Noah)",
-        "built": false
+        "built": true
       },
       {
         "n": 30,
@@ -517,7 +517,7 @@ const CURRICULUM_MAP = {
         "math": "Measuring ingredients",
         "english": "Recording observations",
         "bible": "God the Creator of all",
-        "built": false
+        "built": true
       }
     ]
   },

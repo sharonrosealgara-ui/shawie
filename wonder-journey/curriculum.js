@@ -1361,6 +1361,246 @@ const ADVENTURES = [
     reflect: ["What amazed you most about volcanoes?", "Which volcano would you like to see safely from far away?"],
   },
   {
+    id: "a26",
+    emoji: "⛰️",
+    title: "Mayon, Taal & Pinatubo Up Close",
+    region: "Volcanoes & Landforms",
+    subtitle: "Meet three famous Philippine volcanoes face to face — and compare them like a scientist.",
+    value: "Curiosity",
+    badge: "volcano-explorer",
+    stamp: { emoji: "⛰️", name: "Three Volcanoes" },
+    xp: 150,
+    sections: [
+      { icon: "🔭", subject: "Story: Three Fire Mountains", html:
+        `<p>Today we visit three famous volcanoes — each with its own personality! One is <b>perfectly shaped</b>, one is <b>tiny but tricky</b>, and one once made the <b>biggest eruption</b> in recent history. Let's compare them up close. 🔍</p>` },
+      { icon: "🌋", subject: "Meet the Three", html:
+        `<div class="wordbank">
+           <div class="word">🌋 <b>Mayon (Albay)</b> — the almost-perfect cone, ~2,462 m tall</div>
+           <div class="word">🏞️ <b>Taal (Batangas)</b> — one of the world's smallest volcanoes, sitting in a lake</div>
+           <div class="word">💨 <b>Pinatubo (Zambales)</b> — its 1991 eruption cooled the whole planet a little!</div>
+         </div>` },
+      { icon: "🔢", subject: "Math: Comparing (>, <)", html:
+        `<p>Scientists compare with <b>greater than</b> and <b>less than</b>!</p>
+         <ul><li>Mayon 2,462 m vs Taal ~311 m → 2,462 <b>&gt;</b> 311</li>
+         <li>Which is taller, Mayon (2,462 m) or Pinatubo (1,486 m)? <b>Mayon!</b></li>
+         <li>Put all three in order from shortest to tallest.</li></ul>` },
+      { icon: "🗣️", subject: "Volcano Words", html:
+        `<div class="wordbank">
+           <div class="word"><b>Bulkan</b> — volcano · <b>Bundok</b> — mountain</div>
+           <div class="word"><b>Lawa</b> — lake · <b>Abo</b> — ash</div>
+           <div class="word"><b>Mataas</b> — tall · <b>Mababa</b> — low</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>God's power over creation (Psalm 65:5–8, Job 38).</b> The God who set the mountains in place and calms the roaring seas is mightier than any volcano. When we see such power in nature, we remember the far greater power — and kindness — of its Maker.</p>
+         <div class="callout faith">💜 Volcanoes remind us how powerful God is — and He holds the whole earth in His hands.</div>` },
+      { icon: "📖", subject: "English — Compare & Contrast", html:
+        `<div class="tryit">✏️ Use compare words out loud: "Mayon is <b>taller than</b> Taal. Taal is <b>smaller but</b> sits in a lake. <b>Both</b> are volcanoes."</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>Which of the three volcanoes would you most like to see (safely!) and why?</li>
+         <li>What question would you ask a volcano scientist (a volcanologist)?</li></ul>` },
+      { icon: "🤝", subject: "Character: Curiosity", value: true, html:
+        `<div class="callout char">🌟 <b>Curiosity</b> asks "why?" and "how?" like a scientist. Ask three curious questions today and hunt for the answers together! 🔍</div>` },
+    ],
+    quiz: [
+      { q: "Which volcano is famous for its almost-perfect cone?", a: ["Mayon", "Taal", "Pinatubo"], correct: 0 },
+      { q: "Taal volcano sits in the middle of a…", a: ["lake", "desert", "city"], correct: 0 },
+      { q: "2,462 ___ 311 — which symbol fits?", a: [">", "<", "="], correct: 0 },
+      { q: "Pinatubo's 1991 eruption briefly ______ the planet.", a: ["cooled", "flooded", "flattened"], correct: 0 },
+    ],
+    reflect: ["Which volcano surprised you most?", "What curious question will you explore next?"],
+  },
+  {
+    id: "a27",
+    emoji: "🔥",
+    title: "The Ring of Fire & Our Earth",
+    region: "Earth Science",
+    subtitle: "Discover the great circle of volcanoes around the Pacific — and why our islands sit right on it.",
+    value: "Awe",
+    badge: "volcano-explorer",
+    stamp: { emoji: "🔥", name: "Ring of Fire" },
+    xp: 150,
+    sections: [
+      { icon: "🌏", subject: "Story: A Circle of Fire", html:
+        `<p>If you drew all the world's volcanoes on a map, you'd see something amazing: most of them form a giant <b>circle around the Pacific Ocean</b> — the <b>Ring of Fire</b>! And the Philippines sits right on it. 🔥</p>` },
+      { icon: "🧩", subject: "Why Earthquakes & Volcanoes?", html:
+        `<div class="wordbank">
+           <div class="word">🧩 Earth's crust is made of giant puzzle pieces called <b>plates</b></div>
+           <div class="word">↔️ The plates slowly push and slide against each other</div>
+           <div class="word">🌋 Where they meet: <b>volcanoes</b> grow and <b>earthquakes</b> shake</div>
+           <div class="word">📍 The Philippines sits where big plates meet!</div>
+         </div>` },
+      { icon: "🔢", subject: "Math: Map Counting", html:
+        `<p>The Philippines has about <b>24 active volcanoes</b>.</p>
+         <ul><li>If 24 volcanoes were split evenly among the 3 island groups, that's 24 ÷ 3 = <b>8 each</b>.</li>
+         <li>Trace a circle on a world map — that's your Ring of Fire path!</li></ul>` },
+      { icon: "🦺", subject: "Being Earthquake-Ready", html:
+        `<div class="tryit">🦺 Practice the safety move together: <b>DROP, COVER, and HOLD ON</b> — drop low, cover under a sturdy table, hold on until shaking stops. Being ready is being wise!</div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>"The earth is the LORD's" (Psalm 24:1).</b> The plates, the mountains, the deep sea — all of it belongs to God and moves under His watch. We study His world with awe and care for it as His stewards.</p>
+         <div class="callout faith">💜 Awe means being amazed at how great God's world is — science helps us see it up close.</div>` },
+      { icon: "📖", subject: "English — Reading Nonfiction", html:
+        `<div class="tryit">📖 Nonfiction gives FACTS. Read this fact aloud, then say it in your own words: "The Ring of Fire circles the Pacific Ocean and holds most of Earth's volcanoes."</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>What amazes you most about how the earth works?</li>
+         <li>Is our family earthquake kit ready? What should go in it?</li></ul>` },
+      { icon: "🤝", subject: "Character: Awe", value: true, html:
+        `<div class="callout char">🌟 <b>Awe</b> is wonder that makes you say "WOW — thank You, God!" Find one WOW fact today and share it at dinner. 🌏</div>` },
+    ],
+    quiz: [
+      { q: "The Ring of Fire circles which ocean?", a: ["Pacific", "Atlantic", "Indian"], correct: 0 },
+      { q: "Earth's crust is made of giant moving…", a: ["plates", "pillows", "wheels"], correct: 0 },
+      { q: "24 volcanoes shared by 3 groups = ? each", a: ["8", "6", "12"], correct: 0 },
+      { q: "In an earthquake we DROP, COVER, and…", a: ["hold on", "jump", "run in circles"], correct: 0 },
+    ],
+    reflect: ["What made you say WOW today?", "What goes in our family's ready-kit?"],
+  },
+  {
+    id: "a28",
+    emoji: "🏔️",
+    title: "Mountains & Highlands",
+    region: "Landforms",
+    subtitle: "Climb (in our imaginations!) to the roof of the Philippines — Mount Apo — and the cool highlands.",
+    value: "Perseverance",
+    badge: "volcano-explorer",
+    stamp: { emoji: "🏔️", name: "Mount Apo" },
+    xp: 150,
+    sections: [
+      { icon: "🥾", subject: "Story: To the Roof of the Philippines", html:
+        `<p>Lace up your boots! Today we climb to the <b>highest point in the whole Philippines</b> — <b>Mount Apo</b> in Mindanao, 2,954 meters tall. Step by step, higher and higher… don't give up! 🥾</p>` },
+      { icon: "⛰️", subject: "Highlands Tour", html:
+        `<div class="wordbank">
+           <div class="word">🏔️ <b>Mount Apo (Mindanao)</b> — 2,954 m, the tallest</div>
+           <div class="word">⛰️ <b>Mount Pulag (Luzon)</b> — 2,928 m, famous "sea of clouds"</div>
+           <div class="word">🌲 <b>The Cordillera</b> — cool northern highlands (Baguio!)</div>
+           <div class="word">🌡️ Higher up = <b>cooler</b> air</div>
+         </div>` },
+      { icon: "📏", subject: "Math: Elevation", html:
+        `<p><b>Elevation</b> = height above the sea.</p>
+         <ul><li>Apo 2,954 m − Pulag 2,928 m = only <b>26 m</b> difference!</li>
+         <li>If you climb 500 m each day, how many days to reach ~3,000 m? <b>(6 days!)</b></li></ul>` },
+      { icon: "🗣️", subject: "Mountain Words", html:
+        `<div class="wordbank">
+           <div class="word"><b>Bundok</b> — mountain · <b>Tuktok</b> — peak/top</div>
+           <div class="word"><b>Malamig</b> — cold · <b>Ulap</b> — cloud</div>
+           <div class="word"><b>Akyat</b> — to climb</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Faith that moves mountains (Matthew 17:20).</b> Jesus said that faith even as small as a mustard seed can move mountains. With God, the biggest, hardest things are never too big.</p>
+         <div class="callout faith">💜 Keep climbing — with faith and perseverance, one small step at a time.</div>` },
+      { icon: "📖", subject: "English — Describing the View", html:
+        `<div class="tryit">✏️ From the top, what do you see? Describe it with 3 senses: "I see ______, I feel ______, I hear ______."</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>What is a "mountain" (a hard thing) our family is climbing right now?</li>
+         <li>How can we help each other keep going?</li></ul>` },
+      { icon: "🤝", subject: "Character: Perseverance", value: true, html:
+        `<div class="callout char">🌟 <b>Perseverance</b> means not giving up, step after step. Finish one hard thing today — then celebrate at the "summit"! 🏔️</div>` },
+    ],
+    quiz: [
+      { q: "The tallest mountain in the Philippines is…", a: ["Mount Apo", "Mount Fuji", "Mount Pulag"], correct: 0 },
+      { q: "Higher elevation usually means ______ air.", a: ["cooler", "hotter", "saltier"], correct: 0 },
+      { q: "Apo (2,954 m) − Pulag (2,928 m) = ?", a: ["26 m", "126 m", "6 m"], correct: 0 },
+      { q: "Jesus said faith like a tiny ______ seed can move mountains.", a: ["mustard", "mango", "rice"], correct: 0 },
+    ],
+    reflect: ["What 'mountain' will you keep climbing this week?", "Where would you love to see a sea of clouds?"],
+  },
+  {
+    id: "a29",
+    emoji: "🌦️",
+    title: "Tropical Weather: Wet & Dry Seasons",
+    region: "Weather & Seasons",
+    subtitle: "Why does it pour in July and shine in April? Discover the two Philippine seasons and read weather like a forecaster.",
+    value: "Preparedness",
+    badge: "volcano-explorer",
+    stamp: { emoji: "🌦️", name: "Weather Watcher" },
+    xp: 150,
+    sections: [
+      { icon: "☔", subject: "Story: Two Seasons, One Sky", html:
+        `<p>Some countries have four seasons. The tropical Philippines has <b>two</b>: <b>tag-ulan</b> (the wet season, ~June–November) and <b>tag-init/tag-araw</b> (the dry, hot season, ~December–May). One sky, two moods! ☔☀️</p>` },
+      { icon: "🌧️", subject: "Where Rain Comes From", html:
+        `<div class="wordbank">
+           <div class="word">☀️ Sun warms the sea → water rises as invisible <b>vapor</b></div>
+           <div class="word">☁️ Vapor cools high up → forms <b>clouds</b></div>
+           <div class="word">🌧️ Heavy clouds → <b>rain</b> falls → rivers → sea → again!</div>
+           <div class="word">🔁 That loop is the <b>water cycle</b></div>
+         </div>
+         <p>Strong storms called <b>bagyo</b> (typhoons) visit in the wet season — that's why families prepare.</p>` },
+      { icon: "📊", subject: "Math: Reading a Weather Graph", html:
+        `<p>Forecasters read <b>graphs</b>! Rainy days last week: Mon 2, Tue 0, Wed 5, Thu 3, Fri 1 (hours of rain).</p>
+         <ul><li>Which day rained the most? <b>Wednesday!</b></li>
+         <li>Total rain hours: 2+0+5+3+1 = <b>11</b>.</li></ul>
+         <div class="tryit">📊 Chart your own week of weather with suns and clouds!</div>` },
+      { icon: "🗣️", subject: "Weather Words", html:
+        `<div class="wordbank">
+           <div class="word"><b>Ulan</b> — rain · <b>Araw</b> — sun</div>
+           <div class="word"><b>Bagyo</b> — storm/typhoon · <b>Hangin</b> — wind</div>
+           <div class="word"><b>Tag-ulan</b> — wet season · <b>Tag-init</b> — dry season</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>God gives the seasons (Genesis 8:22).</b> After the flood, God promised Noah: "While the earth remains, seedtime and harvest, cold and heat, summer and winter, day and night shall not cease." The rhythm of seasons is God's faithful promise, still keeping time today.</p>
+         <div class="callout faith">💜 Every season — rainy or sunny — arrives on God's faithful schedule.</div>` },
+      { icon: "📖", subject: "English — Season Vocabulary", html:
+        `<div class="tryit">✏️ Finish out loud: "In the wet season we ______. In the dry season we ______." (bring umbrellas, swim, plant, harvest…)</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>What does our family do differently in rainy vs sunny months?</li>
+         <li>What should be in our storm-ready bag?</li></ul>` },
+      { icon: "🤝", subject: "Character: Preparedness", value: true, html:
+        `<div class="callout char">🌟 <b>Preparedness</b> means getting ready calmly before the storm. Check one "ready" item tonight — flashlight, water, or umbrella by the door! 🔦</div>` },
+    ],
+    quiz: [
+      { q: "How many seasons does the Philippines have?", a: ["two", "four", "seven"], correct: 0 },
+      { q: "“Tag-ulan” is the ______ season.", a: ["wet/rainy", "dry", "snowy"], correct: 0 },
+      { q: "Rain hours 2+0+5+3+1 = ?", a: ["11", "9", "15"], correct: 0 },
+      { q: "After the flood, God promised the seasons would…", a: ["never cease", "stop", "get boring"], correct: 0 },
+    ],
+    reflect: ["Which season do you like more, and why?", "What will you add to our ready-bag?"],
+  },
+  {
+    id: "a30",
+    emoji: "🧪",
+    title: "Science Project: Build a Volcano",
+    region: "Hands-on Science",
+    subtitle: "The grand Unit 5 finale — build your own volcano model and make it safely erupt. For science!",
+    value: "Discovery",
+    badge: "volcano-explorer",
+    stamp: { emoji: "🧪", name: "Junior Volcanologist" },
+    xp: 160,
+    sections: [
+      { icon: "👷", subject: "Story: Volcano Builders", html:
+        `<p>We've studied Mayon, Taal, Pinatubo, the Ring of Fire, mountains, and storms. Now it's time to <b>build our own volcano</b> — and watch it erupt (safely, and only a little bit messy)! 🧪🌋</p>` },
+      { icon: "🛠️", subject: "Build the Cone", html:
+        `<div class="wordbank">
+           <div class="word">1️⃣ Stand a small bottle or cup on a tray</div>
+           <div class="word">2️⃣ Shape clay, dough, or paper around it into a cone</div>
+           <div class="word">3️⃣ Paint or decorate — add trees, a village, a warning sign!</div>
+         </div>` },
+      { icon: "📏", subject: "Math: Measure the Eruption Mix", html:
+        `<p>Scientists measure carefully!</p>
+         <ul><li>Into the bottle: <b>2 tbsp baking soda</b>.</li>
+         <li>In a cup: <b>¼ cup vinegar</b> + a drop of red coloring + a tiny squirt of dish soap.</li>
+         <li>Doubling the eruption? 2 tbsp → <b>4 tbsp</b>, ¼ cup → <b>½ cup</b>.</li></ul>` },
+      { icon: "🌋", subject: "ERUPTION! (and the Science)", html:
+        `<div class="tryit">🌋 Pour the vinegar mix into the bottle and step back — foamy "lava"!</div>
+         <p><b>Why it works:</b> baking soda (a <b>base</b>) + vinegar (an <b>acid</b>) react and make <b>carbon-dioxide gas</b>. The bubbles push the foam up and out — just like real gas pushes magma up a volcano!</p>` },
+      { icon: "📖", subject: "English — Record Observations", html:
+        `<div class="tryit">✏️ Be a scientist: write or say your observation — "First it ______. Then it ______. It looked like ______." Draw what happened!</div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>God the Creator of all (Genesis 1, Colossians 1:16).</b> Every reaction, every bubble, every law of nature we discover was designed by the Creator. Doing science is exploring how God built His world.</p>
+         <div class="callout faith">💜 Discovery is worship with your eyes open — "Great are the works of the LORD, studied by all who delight in them." (Psalm 111:2)</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>What was your favorite discovery in all of Unit 5?</li>
+         <li>If we could safely visit one place from this unit, where would we go?</li></ul>` },
+      { icon: "🤝", subject: "Character: Discovery", value: true, html:
+        `<div class="callout char">🌟 <b>Discovery</b> means trying, watching closely, and learning from what happens. Try one "what if…?" experiment idea (safely, with a grown-up) this week! 🧪</div>` },
+    ],
+    quiz: [
+      { q: "The eruption gas made by baking soda + vinegar is…", a: ["carbon dioxide", "oxygen", "helium"], correct: 0 },
+      { q: "Baking soda is a base; vinegar is an…", a: ["acid", "animal", "ash"], correct: 0 },
+      { q: "Doubling ¼ cup of vinegar gives…", a: ["½ cup", "1 cup", "2 cups"], correct: 0 },
+      { q: "Who should supervise the eruption?", a: ["a grown-up", "the cat", "no one"], correct: 0 },
+    ],
+    reflect: ["What did your eruption look like?", "What experiment do you want to try next?"],
+  },
+  {
     id: "a31",
     emoji: "🦅",
     title: "Amazing Animals of the Philippines",
@@ -1736,6 +1976,31 @@ const LEVEL_MISSIONS = {
     explorer: ["Draw Mayon's triangle cone with a little smoke.", "Say the word “bulkan.”", "Do a safe baking-soda “eruption” with an adult."],
     adventurer: ["Round Mayon's height (2,462 m) to the nearest hundred.", "Write a sentence using the word “erupt.”", "Label magma vs. lava on your drawing."],
     trailblazer: ["Research the 1991 Pinatubo eruption; share 2 facts.", "Explain why the Philippines has many volcanoes (Ring of Fire).", "Make a simple family safety plan for an eruption warning."],
+  },
+  a26: {
+    explorer: ["Point to Mayon, Taal, and Pinatubo on the map.", "Say which volcano is tallest.", "Draw the three volcanoes side by side."],
+    adventurer: ["Order the three volcanoes by height using > and <.", "Write one compare sentence (taller than / smaller than).", "Match each volcano to its province."],
+    trailblazer: ["Make a comparison chart (height, location, famous for).", "Research one more Philippine volcano and add it.", "Explain why Taal is called a 'volcano in a lake in a volcano.'"],
+  },
+  a27: {
+    explorer: ["Trace the Ring of Fire circle on a world map.", "Practice DROP, COVER, HOLD ON.", "Say the word 'plates' and wiggle two puzzle pieces together."],
+    adventurer: ["Solve 24 volcanoes ÷ 3 groups.", "Read one nonfiction fact aloud and retell it.", "List 3 items for an earthquake ready-kit."],
+    trailblazer: ["Explain plate tectonics with two crackers or books.", "Lead the family earthquake drill.", "Connect Psalm 24:1 to caring for God's earth in your own words."],
+  },
+  a28: {
+    explorer: ["Climb the stairs and count your steps like a mountaineer.", "Say 'bundok' and 'tuktok.'", "Draw Mount Apo with a sea of clouds."],
+    adventurer: ["Solve the elevation subtraction (2,954 − 2,928).", "Describe the summit view with 3 senses.", "Find the Cordillera and Mount Apo on the map."],
+    trailblazer: ["Plan a pretend 6-day climb (500 m/day) with a schedule.", "Research Mount Pulag's sea of clouds; share 2 facts.", "Share a 'mountain' you're climbing and your next small step."],
+  },
+  a29: {
+    explorer: ["Chart today's weather with a sun or cloud sticker.", "Say 'ulan' (rain) and 'araw' (sun).", "Put the umbrella by the door — preparedness!"],
+    adventurer: ["Read the rain graph: biggest day + total hours.", "Draw the water cycle with arrows.", "Write one sentence for each season."],
+    trailblazer: ["Track 5 days of weather and graph it.", "Explain how a typhoon forms, simply.", "Prepare a family storm-ready checklist and check it twice."],
+  },
+  a30: {
+    explorer: ["Help shape the volcano cone.", "Pour the vinegar (with a grown-up) and watch!", "Say what you saw: 'First… then…'"],
+    adventurer: ["Measure the baking soda and vinegar exactly.", "Write a 3-step observation report.", "Explain the gas that makes the foam."],
+    trailblazer: ["Lead the whole build and eruption safely.", "Double the recipe and predict the difference — then test it.", "Explain acid + base → gas to a younger sibling."],
   },
   a31: {
     explorer: ["Draw the tarsier's big round eyes.", "Match each animal to its name.", "Make an animal's sound and movement."],

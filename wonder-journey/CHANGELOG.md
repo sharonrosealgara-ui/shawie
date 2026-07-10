@@ -34,6 +34,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.25.0] — 2026-07-14 · Unit 5 complete (Fire Mountains & Landforms)
+
+- `Added` **Unit 5 fully authored** — five new interactive adventures (a26–a30), volcano/earth-science themes with aligned real-media:
+  - **a26 · Mayon, Taal & Pinatubo Up Close** (Curiosity) — comparing volcanoes with > and <, compare/contrast writing, God's power over creation.
+  - **a27 · The Ring of Fire & Our Earth** (Awe) — tectonic plates, DROP-COVER-HOLD-ON drill, map counting, "the earth is the LORD's."
+  - **a28 · Mountains & Highlands** (Perseverance) — Mount Apo & Pulag, elevation math, sensory description, faith that moves mountains.
+  - **a29 · Tropical Weather: Wet & Dry Seasons** (Preparedness) — the water cycle, bagyo readiness, reading a weather graph, God's promise of seasons (Genesis 8:22).
+  - **a30 · Science Project: Build a Volcano** (Discovery) — the grand hands-on finale: acid + base → CO₂, measured eruption mix, observation reports.
+  - Each with 8 sections, a 4-question quiz, reflection, and 3-tier missions. **Units 1–5 complete (a1–a30) — 34 of 72 adventures interactive.**
+
+---
+
 ## [0.24.0] — 2026-07-14 · 🗂️ Knowledge & Media Library (manager + architecture)
 
 - `Added` **Media Library manager** in the Teacher Portal — instant search across all 71 assets (title/tag/category), filters by category and ready/needed status, live previews via `mediaFigure`, per-asset license & credit display. The library is the single source of truth: lessons reference media ids, never file paths.
