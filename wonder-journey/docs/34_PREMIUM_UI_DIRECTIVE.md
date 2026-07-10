@@ -1,6 +1,34 @@
-# ✨ Wonder Journey OS — Master Premium UI/UX Directive
+# ✨ Wonder Journey OS — Master Premium Visual Directive
 
-- **Version:** 1.0 · **Status:** Active · Governed by the [Constitution](../CONSTITUTION.md) & [Design Bible](01_DESIGN_BIBLE.md)
+- **Version:** 2.0 (Final Art Direction) · **Status:** Active · Governed by the [Constitution](../CONSTITUTION.md) & [Design Bible](01_DESIGN_BIBLE.md)
+
+## v2.0 — The official visual benchmark 🎨
+The owner's approved premium mockup (illustrated Home page) is now the
+**permanent design language** for the entire platform — every section, every
+portal. Quality bar: *"Would this screen be believable as an official product
+from Disney, National Geographic Kids, Apple Education, or Duolingo?"*
+
+**Typography (canonical):**
+- Headings — `"DM Serif Display"` (fallbacks: Fraunces, Fredoka, Baloo 2, serif),
+  large editorial scale (Home hero clamps up to ~54px; grows per-surface).
+- Body — `"Nunito Sans"` (fallbacks: Nunito, Segoe UI, system-ui).
+
+**Every major page earns a cinematic hero:** editorial headline · warm welcome
+line · decorative gold divider (`.hero-divider`) · artwork slot · primary +
+secondary CTA.
+
+**Illustrated art slots:** the layout ships with drop-in slots for painted
+watercolor/storybook artwork (no clipart). Home hero expects
+`assets/backgrounds/hero-philippines.jpg` (`.hero-art`, auto-hides if absent);
+a passport-stamp watermark (`.hero-stamp`) anchors the World identity.
+Real-photography policy (doc 05) is unchanged — illustration is for decorative
+framing, photos remain authentic and licensed.
+
+**Shipped in v0.30.0:** global serif heading system · captioned stat cards with
+per-card label colors · Today's Adventure journey row (World card + Upcoming
+Celebration card) · hero divider/stamp/art-slot. Next surfaces: Map, Passport,
+Cooking Academy, Storybook, Teacher Portal heroes — one at a time, same
+guardrail.
 
 > Transform Wonder Journey into one of the most beautiful family educational
 > platforms ever created — think Disney Imagineering · Nat Geo Kids · Duolingo ·

@@ -328,7 +328,10 @@ function viewHome() {
           <span class="hs-boat">⛵</span>
           <span class="hs-palm">🌴</span>
         </div>
+        <div class="hero-art" aria-hidden="true"><img src="assets/backgrounds/hero-philippines.jpg" alt="" onerror="this.parentElement.style.display='none'" /></div>
+        <div class="hero-stamp" aria-hidden="true"><b>🌴</b>Philippines<span style="font-size:8px;letter-spacing:.3em">• Passport •</span></div>
         <h1>Kumusta, ${esc(fam)} Family! 👋</h1>
+        <div class="hero-divider" aria-hidden="true"><span>❖</span></div>
         <p>Your backpacks are packed and your passports are ready — <b>World 1: the Philippines 🇵🇭</b> is calling! Together we'll wander breathtaking islands, cook delicious dishes, learn beautiful new words, and write another page in our family's story — one adventure at a time.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px">
           ${next
@@ -340,10 +343,35 @@ function viewHome() {
       </div>
 
       <div class="grid g-auto" style="margin-top:20px">
-        ${stat("Places Explored", `${doneCount} / ${ADVENTURES.length}`, "🧭")}
-        ${stat("Explorer Points", S.xp, "⭐")}
-        ${stat("Passport Stamps", S.stamps.length, "🛂")}
-        ${stat("Adventure Achievements", `${S.badges.length} / ${BADGES.length}`, "🏅")}
+        ${stat("Places Explored", `${doneCount} / ${ADVENTURES.length}`, "🧭", "Let's discover more amazing places!")}
+        ${stat("Explorer Points", S.xp, "⭐", "Keep learning, keep growing!")}
+        ${stat("Passport Stamps", S.stamps.length, "🛂", "Collect stamps from every journey!")}
+        ${stat("Adventure Achievements", `${S.badges.length} / ${BADGES.length}`, "🏅", "Earn badges and celebrate together!")}
+      </div>
+
+      <div class="section-title"><span class="em">🌴</span> Today's Adventure</div>
+      <div class="journey-row">
+        <div class="world-card">
+          <span class="wc-tag">World 1</span>
+          <div style="position:relative;z-index:1">
+            <h3>The Philippines</h3>
+            <p>Islands of Beauty, People, and Heritage 🇵🇭</p>
+          </div>
+          <div class="wc-scene" aria-hidden="true"><span>🏝️</span><span>🌋</span><span>⛵</span></div>
+          <button class="btn btn-sun" onclick="${next ? `openAdventure('${next.id}')` : `go('passport')`}">${next ? "Continue Adventure →" : "View Passport 🏆"}</button>
+        </div>
+        ${(() => {
+          const nb = upcomingBirthdays()[0];
+          const when = nb ? (nb.days === 0 ? "is today! 🎉" : nb.days === 1 ? "is tomorrow!" : `in ${nb.days} days`) : "";
+          return `
+          <div class="celebration-card">
+            <span class="cc-stars" aria-hidden="true">✨</span>
+            <span class="cc-kicker">Upcoming Celebration</span>
+            ${nb
+              ? `<h4>${esc(nb.name)}'s Birthday ${nb.emoji}</h4><small>${when === "is today! 🎉" || when === "is tomorrow!" ? when : `Coming ${when} — let's plan something special!`}</small>`
+              : `<h4>A Feast Day Awaits 🌺</h4><small>Add birthdays in Settings and we'll count down together!</small>`}
+          </div>`;
+        })()}
       </div>
 
       ${(() => {
@@ -385,8 +413,8 @@ function viewHome() {
     </div>`;
 }
 
-function stat(lbl, val, em) {
-  return `<div class="card stat"><span class="em">${em}</span><span class="lbl">${lbl}</span><span class="val">${val}</span></div>`;
+function stat(lbl, val, em, cap) {
+  return `<div class="card stat"><span class="em">${em}</span><span class="lbl">${lbl}</span><span class="val">${val}</span>${cap ? `<span class="cap">${cap}</span>` : ""}</div>`;
 }
 
 function viewMap() {

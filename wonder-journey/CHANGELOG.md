@@ -34,6 +34,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.30.0] — 2026-07-10 · 🎨 Premium mockup art direction (Directive v2)
+
+- `Added` **Official visual benchmark implemented on Home** (from the owner's approved illustrated mockup): editorial serif headline with decorative gold **hero divider ❖**, circular **passport-stamp watermark** (🌴 Philippines · Passport), and a painted-artwork **hero art slot** — drop `assets/backgrounds/hero-philippines.jpg` into the repo and the illustrated right-side scene appears automatically (auto-hides while absent).
+- `Added` **Today's Adventure journey row**: a World 1 destination card (*The Philippines — Islands of Beauty, People, and Heritage 🇵🇭* with **Continue Adventure →**) beside an **Upcoming Celebration** card that counts down to the next family birthday.
+- `Changed` **Typography system (Directive v2.0)**: headings now use **DM Serif Display** (fallbacks Fraunces → Fredoka → Baloo 2) across the whole app; body text upgraded to **Nunito Sans**. Hero headline scales up to ~54px for the storybook-editorial feel.
+- `Improved` Stat cards now carry warm encouragement captions (*"Let's discover more amazing places!" · "Keep learning, keep growing!" · "Collect stamps from every journey!" · "Earn badges and celebrate together!"*) with per-card label colors (green/orange/blue/purple) and serif numerals.
+- `Documentation` `docs/34_PREMIUM_UI_DIRECTIVE.md` upgraded to **v2.0 Final Art Direction** — the mockup is the permanent design language; typography canon; per-page cinematic-hero requirement; art-slot instructions.
+- Verified: all 13 views render clean (regression sweep), Theater opens 22-scene lesson, zero console errors.
+
 ## [0.29.1] — 2026-07-14 · ✍️ Storybook voice — UI copy pass v1
 
 - `Improved` Interface copy rewritten in the adventure-book voice (layout & functions untouched): Home hero now begins *"Your backpacks are packed and your passports are ready…"* with **🌴 Begin Today's Adventure / ✈️ Continue Our Journey / 🧭 Explore the Adventure Map**; stats became **Places Explored · Explorer Points · Adventure Achievements**; "Up Next" → **"Today's Journey Begins Here"**; quizzes are now **Adventure Challenges**; celebrations invite you to *stay a little longer 🌺*; empty states invite instead of report (*"Our adventure book is waiting for its very first memory"*).

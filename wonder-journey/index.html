@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&family=Fredoka:wght@500;600;700&family=Baloo+2:wght@600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
 :root{
   --sand:#fbf3e6; --sand-2:#f4e7d2; --ink:#2b2015; --ink-soft:#6b5a44;
@@ -28,10 +28,10 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:var(--sand);color:var(--ink);
+  font-family:'Nunito Sans','Nunito','Segoe UI',system-ui,sans-serif;background:var(--sand);color:var(--ink);
   -webkit-font-smoothing:antialiased;min-height:100vh;line-height:1.55;
 }
-h1,h2,h3,h4{font-family:'Fredoka','Baloo 2','Nunito',system-ui,sans-serif;font-weight:700;line-height:1.15;letter-spacing:-.01em}
+h1,h2,h3,h4{font-family:'DM Serif Display','Fraunces','Fredoka','Baloo 2',serif;font-weight:400;line-height:1.15;letter-spacing:0}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 img{max-width:100%}
 a{color:var(--ocean);text-decoration:none}
@@ -516,10 +516,43 @@ a{color:var(--ocean);text-decoration:none}
 .tdash-stats{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--ink-soft,#6a5a45);margin-bottom:10px}
 .tdash-stats b{color:var(--ink,#3a2c18)}
 .tdash-actions{display:flex;gap:8px;flex-wrap:wrap}
+/* ===== Premium mockup pass (docs/34 v2): typography, art slot, journey row ===== */
+.hero h1{font-family:"DM Serif Display","Fraunces","Baloo 2",serif;font-weight:400;color:#0c5c63;font-size:clamp(32px,5vw,54px);line-height:1.06;letter-spacing:0}
+.section-title{font-family:"DM Serif Display","Fraunces","Baloo 2",serif;font-weight:400;color:#6a4a20;font-size:21px}
+.hero-divider{display:flex;align-items:center;gap:10px;margin:14px 0 12px;max-width:420px}
+.hero-divider:before,.hero-divider:after{content:"";flex:1;height:2px;background:linear-gradient(90deg,transparent,#c9a24b);border-radius:2px}
+.hero-divider:after{background:linear-gradient(90deg,#c9a24b,transparent)}
+.hero-divider span{color:#c9a24b;font-size:15px}
+/* Painted-art slot: drop assets/backgrounds/hero-philippines.jpg to complete the look */
+.hero-art{position:absolute;top:0;right:0;bottom:0;width:48%;z-index:1;pointer-events:none}
+.hero-art img{width:100%;height:100%;object-fit:cover;object-position:center;-webkit-mask-image:linear-gradient(90deg,transparent,#000 26%);mask-image:linear-gradient(90deg,transparent,#000 26%)}
+.hero-stamp{position:absolute;top:18px;right:30px;width:110px;height:110px;border:3px double rgba(160,120,60,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;transform:rotate(12deg);color:rgba(160,120,60,.45);font-family:"Fraunces",serif;font-weight:700;font-size:10px;letter-spacing:.18em;text-transform:uppercase;z-index:1;pointer-events:none}
+.hero-stamp b{font-size:22px;letter-spacing:0}
+@media(max-width:860px){.hero-art{display:none}.hero-stamp{display:none}}
+/* Captioned premium stat cards with per-card label colors */
+.stat .cap{display:block;font-size:12px;color:var(--ink-soft,#8a7a60);margin-top:4px;line-height:1.3}
+.grid.g-auto .stat:nth-child(1) .lbl{color:#3f7d3f}.grid.g-auto .stat:nth-child(2) .lbl{color:#c8763a}
+.grid.g-auto .stat:nth-child(3) .lbl{color:#2f6bb0}.grid.g-auto .stat:nth-child(4) .lbl{color:#7a4fb3}
+.stat .val{font-family:"DM Serif Display","Fraunces","Baloo 2",serif;font-weight:400;font-size:30px}
+/* Today's Adventure journey row */
+.journey-row{display:grid;grid-template-columns:1fr 300px;gap:14px}
+@media(max-width:900px){.journey-row{grid-template-columns:1fr}}
+.world-card{position:relative;display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-lg);background:linear-gradient(100deg,#0e5c63 0%,#12808c 42%,transparent 75%),linear-gradient(180deg,#bfe3f0,#dcecc4)}
+.world-card .wc-tag{position:absolute;top:12px;left:0;background:#0c4a50;color:#ffd66e;font-size:10.5px;font-weight:800;letter-spacing:.1em;padding:4px 12px 4px 10px;border-radius:0 999px 999px 0;text-transform:uppercase}
+.world-card h3{font-family:"DM Serif Display","Fraunces",serif;font-weight:400;color:#fff;font-size:24px;margin:14px 0 2px}
+.world-card p{color:rgba(255,255,255,.85);font-size:13px;margin:0}
+.world-card .wc-scene{position:absolute;right:200px;top:0;bottom:0;width:30%;font-size:40px;display:flex;align-items:center;justify-content:space-evenly;opacity:.55;pointer-events:none}
+@media(max-width:900px){.world-card .wc-scene{display:none}}
+.world-card .btn{margin-left:auto;position:relative;z-index:1}
+.celebration-card{background:linear-gradient(160deg,#fff8ec,#ffeeda);border:1.5px solid #f0d9a8;border-radius:18px;padding:16px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.celebration-card .cc-kicker{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#c8763a}
+.celebration-card h4{font-family:"DM Serif Display","Fraunces",serif;font-weight:400;color:#a33d68;font-size:19px;margin:6px 0 2px}
+.celebration-card small{color:#8a6a40;font-weight:700}
+.celebration-card .cc-stars{position:absolute;right:10px;top:8px;font-size:20px;opacity:.85}
 /* ===== Premium polish pass (docs/34) — deepen the adventure-journal identity ===== */
 /* Cinematic Home hero: layered tropical scenery behind the same content */
 .hero{min-height:250px}
-.hero>*:not(.hero-scene){position:relative;z-index:2}
+.hero>*:not(.hero-scene):not(.hero-art):not(.hero-stamp){position:relative;z-index:2}
 .hero-scene{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:inherit;z-index:0}
 .hs-sun{position:absolute;top:-46px;right:8%;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,110,.55),rgba(255,214,110,.18) 55%,transparent 72%);animation:hsGlow 7s ease-in-out infinite}
 @keyframes hsGlow{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.08);opacity:1}}
