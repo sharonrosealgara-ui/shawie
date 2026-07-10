@@ -26,6 +26,22 @@ lower number wins, and `00` (the Constitution) always wins.
 | 17 | [Sound System](17_SOUND_SYSTEM.md) | Sound Director, adaptive ambient engine, mixer |
 | 18 | [Media Sourcing Runbook](18_MEDIA_SOURCING.md) | One-command licensed-photo pipeline + review checklist |
 | 19 | [Knowledge & Media Library](19_KNOWLEDGE_MEDIA_LIBRARY.md) | Centralized media architecture (DAM) |
+| 20 | [Teacher Portal](20_TEACHER_PORTAL.md) | Admin portal spec (live + roadmap) |
+| 21 | [Student/Client Portal](21_STUDENT_CLIENT_PORTAL.md) | Learner portal spec (live + roadmap) |
+| 22 | [World Engine](22_WORLD_ENGINE.md) | Multi-world curriculum architecture |
+| 23 | [Auth & Security](23_AUTH_SECURITY.md) | Security posture + SaaS auth/RBAC spec |
+| 24 | [PRD](24_PRD.md) | Product requirements & status |
+| 25 | [AI & Automation Engine](25_AI_AUTOMATION.md) | Teacher-assistant AI + automation architecture |
+| — | [CHARTER](CHARTER.md) | Permanent Lead-Architect role & mission |
+
+## Charter document-name map
+The [Charter](CHARTER.md) references canonical document *names*; our file numbers
+stay stable (renumbering would break links). Mapping: Master Directive → CHARTER ·
+Teacher Portal → 20 · Student/Client Portal → 21 · World Engine → 22 · Motion/
+Animation System → 15 · Sound System → 17 · Theme Engine → 02 (Experience Engine) ·
+Cinematic Experience Engine → 02 · Knowledge & Media Library → 19 · Authentication
+& Security → 23 · PRD → 24 · AI & Automation Engine → 25 · Deployment → 13 ·
+Brand → 14. New documents are integrated here automatically (ADR-012).
 
 **Also see:** [PROGRESS.md](../PROGRESS.md) (live build tracker) ·
 [CHANGELOG.md](../CHANGELOG.md) · [CONTRIBUTING.md](../CONTRIBUTING.md) ·

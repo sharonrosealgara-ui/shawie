@@ -7,6 +7,16 @@
 
 ---
 
+### ADR-012 — Lead-Architect Charter adopted; stable doc numbering with name map *(ACCEPTED)*
+**Decision:** The owner's permanent role charter is enshrined as `docs/CHARTER.md`
+and governs all future sessions (commercial-platform mindset, two portals, reusable
+engines, real media, scalability/security/accessibility bars). The charter's
+canonical document *names* are mapped onto our existing files in `docs/README.md`
+rather than renumbering the set — renumbering would break every cross-reference for
+zero content gain. Missing referenced documents were created: Teacher Portal (20),
+Student/Client Portal (21), World Engine (22), Auth & Security (23), PRD (24),
+AI & Automation Engine (25). Future documents integrate via the index + this map.
+
 ### ADR-011 — Two-portal architecture (Teacher Portal + Client/Student Portal) *(ACCEPTED — owner directive)*
 **Decision:** Wonder Journey has exactly **two portals**. (1) **Teacher Portal** —
 private/administrative: lesson plans, class preparation, client summary & recap,
