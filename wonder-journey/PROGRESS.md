@@ -37,7 +37,7 @@ _Last updated: 2026-07-09 · Autonomous Build Session_
 ## Content Completion (World 1 — Philippines)
 
 - **Adventures scheduled (map + metadata):** 72 / 72 `██████████`
-- **Adventures with full interactive content:** 24 / 72 `███░░░░░░░`
+- **Adventures with full interactive content:** 29 / 72 `████░░░░░░`
 - **Media manifest coverage:** 72 / 72 `██████████` (66 curated assets, files pending licensing)
 - **Real licensed asset files present:** 0 / 66 `░░░░░░░░░░` (awaiting upload — placeholders live)
 
@@ -54,17 +54,17 @@ _Last updated: 2026-07-09 · Autonomous Build Session_
 
 **Current task:** See git log for the latest commit.
 
-**Next task:** Continue Curriculum Framework (Phase 9) — author Unit 4 (a20–a24: Fiestas, Music & Celebrations), then Units 5–13; migrate to the six-mascot cast (Design Bible).
+**Next task:** Continue Curriculum Framework (Phase 9) — author Unit 5 (a26–a30: Fire Mountains & Landforms), then Units 6–13; migrate to the six-mascot cast (Design Bible).
 
 **Known issues**
 - Real photo/map files not yet uploaded — the resilient media system shows honest placeholders until licensed assets are dropped into `assets/`.
-- Not-yet-authored slots use the schedule/metadata + auto-generated Teacher Portal plans; full cinematic interactive content authored for 24 adventures (Units 1–3 complete: a1–a18, plus a19/a25/a31/a37/a43/a49).
+- Not-yet-authored slots use the schedule/metadata + auto-generated Teacher Portal plans; full cinematic interactive content authored for 29 adventures (Units 1–4 complete: a1–a24, plus a25/a31/a37/a43/a49).
 
 **Resolved issues**
 - Birthday/Celebrations section was hidden when empty → now always visible + dedicated Celebrations page.
 
 **Estimated remaining work**
-- Author interactive content for Units 4–13 (48 adventures) — the largest remaining effort.
+- Author interactive content for Units 5–13 (43 adventures) — the largest remaining effort.
 - Source & license real media assets (editorial, not code).
 - Make.com automation + Supabase backend (post-MVP SaaS phase).
 

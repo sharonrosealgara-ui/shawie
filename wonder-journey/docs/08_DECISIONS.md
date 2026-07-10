@@ -7,6 +7,25 @@
 
 ---
 
+### ADR-011 — Two-portal architecture (Teacher Portal + Client/Student Portal) *(ACCEPTED — owner directive)*
+**Decision:** Wonder Journey has exactly **two portals**. (1) **Teacher Portal** —
+private/administrative: lesson plans, class preparation, client summary & recap,
+Teacher Mode (timer, answer key), and future admin tools (curriculum/quiz builders,
+client management, automation, branding, reports). (2) **Client / Student Portal** —
+everything learner-facing: Home Base, Adventure Theater, Map, Passport, Badges,
+Tree, Cooking Academy, Cookbook, Storybook, Celebrations, Blessings, Settings. There
+is no separate "Family Portal" — the Client/Student Portal serves families, parents,
+students, homeschool clients, tutoring clients, and learning-center clients alike.
+**Sellable-product rule:** architecture uses generic terms (teacher, client,
+student, group, learner). Client-specific names/branding live only in **`WJ_CONFIG`**
+and seed/saved state (the Ferrell family is seed data, not architecture). The client
+portal never shows teacher tools (timer, notes, answer keys, admin) — already gated
+behind Teacher Mode / the Teacher Portal nav group.
+**Deferred to SaaS phase:** real logins/role auth, live-class sync (teacher presenter
+view driving a separate client screen), multi-client management. In the static MVP,
+"portal separation" = the Teacher Portal sidebar group + Teacher-Mode gating; on one
+shared device the teacher simply presents fullscreen (Family View shows no controls).
+
 ### ADR-010 — Reconcile the sampler adventures with the 72-lesson map *(ACCEPTED — Option A, 2026-07-09)*
 **Problem:** The 10 fully-authored *playable* adventures (`curriculum.js`) are a
 one-per-unit sampler numbered `a1–a10` sequentially (Welcome, Islands, Champorado,

@@ -1057,6 +1057,252 @@ const ADVENTURES = [
     reflect: ["Which festival would you love to see?", "How did our family fiesta feel?"],
   },
   {
+    id: "a20",
+    emoji: "🥁",
+    title: "Sinulog & Ati-Atihan: Dance & Drums",
+    region: "Festivals & Culture",
+    subtitle: "Feel the beat of two of the Philippines' most famous festivals — dancing streets and thundering drums!",
+    value: "Enthusiasm",
+    badge: "festival-fan",
+    stamp: { emoji: "🥁", name: "Drumbeat" },
+    xp: 150,
+    sections: [
+      { icon: "🎶", subject: "Story: The Streets Start to Dance", html:
+        `<p>BOOM… boom-boom… BOOM! In January, whole cities turn into rivers of color. In <b>Cebu</b>, it's <b>Sinulog</b>. In <b>Aklan</b>, it's <b>Ati-Atihan</b> — often called the "mother of Philippine festivals." 🥁</p>
+         <p>Dancers step <i>two steps forward, one step back</i> — like the flowing of a river!</p>` },
+      { icon: "🥁", subject: "Two Famous Festivals", html:
+        `<div class="wordbank">
+           <div class="word">🌊 <b>Sinulog (Cebu)</b> — its name comes from <i>sulog</i>, the river current; dancers move like flowing water</div>
+           <div class="word">🥁 <b>Ati-Atihan (Kalibo, Aklan)</b> — street dancing and drums honoring the Ati people</div>
+           <div class="word">🗓️ Both happen in <b>January</b>, in the Visayas</div>
+         </div>` },
+      { icon: "🔢", subject: "Math: Counting the Beat", html:
+        `<p>Drummers count in <b>patterns</b>! A Sinulog step is often counted <b>1-2, 1-2-3</b>.</p>
+         <ul><li>Clap this pattern 4 times. How many claps total? (5 × 4 = <b>20</b>!)</li>
+         <li>If a drum plays 2 beats per second, how many beats in 10 seconds? <b>(20!)</b></li></ul>
+         <div class="tryit">👏 Make your own repeating clap pattern and teach it to the family.</div>` },
+      { icon: "🗣️", subject: "Festival Words", html:
+        `<div class="wordbank">
+           <div class="word"><b>Sayaw</b> (Tag.) / <b>Saot</b> (Hil.) — dance</div>
+           <div class="word"><b>Tambol</b> — drum</div>
+           <div class="word"><b>Saya</b> — joy · <b>Masaya</b> — happy</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Miriam's song of celebration (Exodus 15).</b> After God brought His people safely through the sea, Miriam took a tambourine and led the women in dancing and singing praise to God. Celebration can be a way of saying <b>thank You</b>!</p>
+         <div class="callout faith">💜 Like Miriam, we can celebrate with joy and thank God with music and dance.</div>` },
+      { icon: "📖", subject: "English — Reading About Festivals", html:
+        `<div class="tryit">📖 Read aloud: "The dancers move to the beat of the drums." Now find the two nouns and the verb in that sentence!</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>What does our family love to celebrate together?</li>
+         <li>How does music change the way a celebration feels?</li></ul>` },
+      { icon: "🤝", subject: "Character: Enthusiasm", value: true, html:
+        `<div class="callout char">🌟 <b>Enthusiasm</b> means joining in with your whole heart. Try today's clap pattern with your biggest smile and energy! 🥁</div>` },
+    ],
+    quiz: [
+      { q: "Sinulog is celebrated in which city?", a: ["Cebu", "Baguio", "Davao"], correct: 0 },
+      { q: "The word ‘Sinulog’ comes from ‘sulog,’ meaning…", a: ["river current", "big drum", "long dress"], correct: 0 },
+      { q: "“Sayaw” means…", a: ["dance", "drum", "dinner"], correct: 0 },
+      { q: "Miriam celebrated God's rescue with a…", a: ["tambourine & dancing", "nap", "race"], correct: 0 },
+    ],
+    reflect: ["Which beat pattern was your favorite?", "What would you thank God for with a song?"],
+  },
+  {
+    id: "a21",
+    emoji: "🌸",
+    title: "Panagbenga: The Flower Festival",
+    region: "Festivals & Nature",
+    subtitle: "Visit cool Baguio when the whole city blooms — giant flower floats, dancing, and gardens everywhere!",
+    value: "Appreciation",
+    badge: "festival-fan",
+    stamp: { emoji: "🌸", name: "Panagbenga" },
+    xp: 150,
+    sections: [
+      { icon: "⛰️", subject: "Story: A City in Bloom", html:
+        `<p>High in the cool mountains of <b>Baguio</b>, February brings <b>Panagbenga</b> — the Flower Festival! Its name means "<b>season of blooming</b>." Giant floats covered in thousands of real flowers parade through town. 🌸</p>` },
+      { icon: "🌼", subject: "Why Baguio?", html:
+        `<div class="wordbank">
+           <div class="word">🌡️ Baguio is <b>cool</b> (high in the mountains) — perfect for flowers</div>
+           <div class="word">🌸 Roses, sunflowers, everlastings & more grow there</div>
+           <div class="word">🎉 Panagbenga also celebrates Baguio's <b>strength</b> after a hard earthquake in 1990</div>
+         </div>` },
+      { icon: "🔢", subject: "Math: Symmetry in Flowers", html:
+        `<p>Many flowers are <b>symmetrical</b> — one half mirrors the other!</p>
+         <ul><li>A flower with 8 petals folded in half shows <b>4</b> petals per side.</li>
+         <li>Draw a flower, fold your paper down the middle — do the halves match?</li></ul>
+         <div class="tryit">✂️ Fold paper, cut half a flower shape on the fold, open it — instant symmetry!</div>` },
+      { icon: "🗣️", subject: "Flower Words", html:
+        `<div class="wordbank">
+           <div class="word"><b>Bulaklak</b> (Tag.) / <b>Bulak</b> (Hil.) — flower</div>
+           <div class="word"><b>Halaman</b> — plant</div>
+           <div class="word"><b>Maganda</b> (Tag.) / <b>Matahum</b> (Hil.) — beautiful</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Consider the lilies (Matthew 6:28–29).</b> Jesus said to look at the flowers of the field — they don't worry or work, yet God dresses them more beautifully than a king. If God cares for flowers, how much more does He care for you!</p>
+         <div class="callout faith">💜 Every bloom in Panagbenga is a little reminder: God cares for His creation — and for us.</div>` },
+      { icon: "📖", subject: "English — Descriptive Writing", html:
+        `<div class="tryit">✏️ Describe a flower with THREE describing words: "The ______ , ______ , ______ flower." (soft, bright, tiny…)</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>What beautiful things has God put around our home?</li>
+         <li>How can we show appreciation for them (and for each other)?</li></ul>` },
+      { icon: "🤝", subject: "Character: Appreciation", value: true, html:
+        `<div class="callout char">🌟 <b>Appreciation</b> means noticing beauty and saying thank you. Point out three beautiful things today — and one kind thing about each family member! 🌸</div>` },
+    ],
+    quiz: [
+      { q: "Panagbenga means the season of…", a: ["blooming", "raining", "sleeping"], correct: 0 },
+      { q: "Panagbenga happens in which cool mountain city?", a: ["Baguio", "Cebu", "Iloilo"], correct: 0 },
+      { q: "A shape whose halves mirror each other has…", a: ["symmetry", "gravity", "electricity"], correct: 0 },
+      { q: "Jesus said God dresses the ______ more beautifully than a king.", a: ["lilies (flowers)", "rocks", "clouds"], correct: 0 },
+    ],
+    reflect: ["What is the most beautiful flower you've seen?", "Who did you appreciate today?"],
+  },
+  {
+    id: "a22",
+    emoji: "🎵",
+    title: "Filipino Music & Instruments",
+    region: "Music & Culture",
+    subtitle: "Meet the kulintang gongs, the rondalla strings, and the bamboo instruments that make the islands sing.",
+    value: "Creativity",
+    badge: "festival-fan",
+    stamp: { emoji: "🎵", name: "Kulintang" },
+    xp: 150,
+    sections: [
+      { icon: "🎶", subject: "Story: The Islands Sing", html:
+        `<p>Close your eyes and listen… <b>ting-ting-TONG!</b> That's the <b>kulintang</b> — a row of small golden gongs from Mindanao, played like a melody of bells. The Philippines is full of music, from bamboo to brass! 🎵</p>` },
+      { icon: "🎸", subject: "Meet the Instruments", html:
+        `<div class="wordbank">
+           <div class="word">🔔 <b>Kulintang</b> — a row of 8 small gongs (Mindanao)</div>
+           <div class="word">🎸 <b>Rondalla</b> — a string band: bandurria, octavina, guitar</div>
+           <div class="word">🎋 <b>Angklung & bamboo</b> — instruments made from bamboo</div>
+           <div class="word">🥁 <b>Tambol</b> — the festival drum</div>
+         </div>` },
+      { icon: "🔢", subject: "Math: Rhythm is Fractions!", html:
+        `<p>Music counts time in parts — just like <b>fractions</b>.</p>
+         <ul><li>A whole note = 4 beats. A half note = 2 beats. A quarter note = <b>1 beat</b>.</li>
+         <li>Clap this: 1 whole + 2 halves = how many beats? (4 + 2 + 2 = <b>8</b>!)</li></ul>
+         <div class="tryit">👏 Clap quarter notes while someone taps half notes — you just made a rhythm pattern!</div>` },
+      { icon: "🗣️", subject: "Music Words", html:
+        `<div class="wordbank">
+           <div class="word"><b>Musika</b> — music · <b>Awit / Kanta</b> — song</div>
+           <div class="word"><b>Tugtog</b> — to play (music)</div>
+           <div class="word"><b>Kanta kita!</b> (Hil.) — let's sing!</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>The Psalms — songs of praise (Psalm 150).</b> The Bible's songbook says: "Praise Him with trumpet… harp… tambourine… cymbals!" God loves when His people make music with everything they have.</p>
+         <div class="callout faith">💜 Every instrument — even clapping hands — can praise God. Let everything that has breath praise the Lord!</div>` },
+      { icon: "📖", subject: "English — Listening Words", html:
+        `<div class="tryit">👂 Listen to any song. Is it <b>loud</b> or <b>soft</b>? <b>Fast</b> or <b>slow</b>? <b>Happy</b> or <b>gentle</b>? Use two new words to describe it.</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>What song does our family love to sing together?</li>
+         <li>If we formed a family band, who would play what?</li></ul>` },
+      { icon: "🤝", subject: "Character: Creativity", value: true, html:
+        `<div class="callout char">🌟 <b>Creativity</b> means making something wonderful from what you have. Turn cups, spoons, and boxes into instruments and play one song together! 🎵</div>` },
+    ],
+    quiz: [
+      { q: "The kulintang is a row of small…", a: ["gongs", "guitars", "flutes"], correct: 0 },
+      { q: "A rondalla is a band of ______ instruments.", a: ["string", "electric", "invisible"], correct: 0 },
+      { q: "If a whole note = 4 beats, a half note = ?", a: ["2 beats", "10 beats", "0 beats"], correct: 0 },
+      { q: "Psalm 150 says to praise God with…", a: ["instruments & everything that has breath", "silence only", "grumbling"], correct: 0 },
+    ],
+    reflect: ["Which instrument would you love to play?", "What song will our family sing this week?"],
+  },
+  {
+    id: "a23",
+    emoji: "🎭",
+    title: "Make & Move: Festival Crafts & Dance",
+    region: "Crafts & Movement",
+    subtitle: "Craft your own festival mask and banderitas, then learn a simple festival step — it's fiesta time at home!",
+    value: "Expression",
+    badge: "festival-fan",
+    stamp: { emoji: "🎭", name: "Festival Maker" },
+    xp: 155,
+    sections: [
+      { icon: "✂️", subject: "Story: Our Home Fiesta Workshop", html:
+        `<p>Today OUR home becomes the festival workshop! We'll make <b>masks</b> like Ati-Atihan, string up <b>banderitas</b> (little flags), and learn a dance step. Ready, festival makers? 🎭</p>` },
+      { icon: "🎨", subject: "Craft 1: Festival Mask", html:
+        `<div class="wordbank">
+           <div class="word">1️⃣ Cut a mask shape from cardboard</div>
+           <div class="word">2️⃣ Decorate with colors, feathers, beans, or paper</div>
+           <div class="word">3️⃣ Add a craft-stick handle or string</div>
+         </div>` },
+      { icon: "🚩", subject: "Craft 2: Banderitas", html:
+        `<p>Cut small paper <b>triangles</b> and glue them along a string — instant fiesta! 🚩</p>` },
+      { icon: "🔢", subject: "Math: Shapes & Measuring", html:
+        `<ul><li>Banderitas are <b>triangles</b> — count the sides (3) and corners (3)!</li>
+         <li>Measure your face before cutting the mask: about how many centimeters wide?</li>
+         <li>If each flag is 10 cm wide and the string is 1 meter (100 cm), how many flags fit? <b>(10!)</b></li></ul>` },
+      { icon: "💃", subject: "Move: A Simple Festival Step", html:
+        `<div class="tryit">🥁 The Sinulog step: <b>two steps forward, one step back</b> — count "1-2, back!" Repeat with music. Now dance it as a family train! 🚂</div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Using the talents God gave us (Matthew 25).</b> Jesus told of servants trusted with talents. The faithful ones USED their gifts — and heard "Well done!" Making, building, dancing, painting — our gifts grow when we use them.</p>
+         <div class="callout faith">💜 Your creativity is a gift from God. Use it with joy today!</div>` },
+      { icon: "📖", subject: "English — How-To Instructions", html:
+        `<div class="tryit">✏️ Teach your craft! Say the steps in order: "First cut… Next decorate… Then attach… Finally wear it!"</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>What did each of us make, and what makes it special?</li>
+         <li>How does it feel to create something with your own hands?</li></ul>` },
+      { icon: "🤝", subject: "Character: Expression", value: true, html:
+        `<div class="callout char">🌟 <b>Expression</b> means showing your heart through what you make and how you move. Wear your mask, wave your flags, and dance YOUR way! 🎭</div>` },
+    ],
+    quiz: [
+      { q: "Banderitas are little paper…", a: ["flags", "boats", "hats"], correct: 0 },
+      { q: "A triangle has how many sides?", a: ["3", "4", "8"], correct: 0 },
+      { q: "The Sinulog step is two steps forward and…", a: ["one step back", "a big jump", "a spin"], correct: 0 },
+      { q: "In Jesus' story, the faithful servants ______ their talents.", a: ["used", "buried", "lost"], correct: 0 },
+    ],
+    reflect: ["What did you create today?", "Which talent will you use for others this week?"],
+  },
+  {
+    id: "a24",
+    emoji: "🎊",
+    title: "Our Family Celebration Project",
+    region: "Family & Celebration",
+    subtitle: "Put it all together — plan a small family celebration with music, crafts, food, and thankful hearts.",
+    value: "Togetherness",
+    badge: "festival-fan",
+    stamp: { emoji: "🎊", name: "Family Fiesta" },
+    xp: 160,
+    sections: [
+      { icon: "📋", subject: "Story: Our Very Own Celebration", html:
+        `<p>We've drummed like Sinulog, bloomed like Panagbenga, played like a rondalla, and crafted like festival makers. Now for the grand finale — <b>our own family celebration!</b> 🎊</p>` },
+      { icon: "🗓️", subject: "Plan It Together", html:
+        `<div class="wordbank">
+           <div class="word">🎯 <b>What</b> are we celebrating? (Pick something thankful!)</div>
+           <div class="word">🕕 <b>When?</b> Set the time</div>
+           <div class="word">🎵 <b>Music</b> — who picks the songs?</div>
+           <div class="word">🎨 <b>Decor</b> — hang your banderitas & wear your masks</div>
+           <div class="word">🍽️ <b>Food</b> — a Cooking Academy snack, maybe?</div>
+         </div>` },
+      { icon: "🔢", subject: "Math: Make a Schedule", html:
+        `<p>Celebrations run on <b>time</b>!</p>
+         <ul><li>Snack at 4:00, dance at 4:30, story at 5:00 — how long from start to story? <b>(1 hour!)</b></li>
+         <li>If each activity is 20 minutes and there are 3, that's <b>60 minutes</b> total.</li></ul>
+         <div class="tryit">🕕 Write your celebration schedule with a time for each part.</div>` },
+      { icon: "🗣️", subject: "Celebration Words", html:
+        `<div class="wordbank">
+           <div class="word"><b>Pagdiriwang</b> — celebration</div>
+           <div class="word"><b>Salu-salo</b> — a shared meal / gathering</div>
+           <div class="word"><b>Magsaya kita!</b> (Hil.) — let's be joyful!</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Joyful gatherings (Nehemiah 8:10, Acts 2:46).</b> God's people gathered to eat, sing, and give thanks — "the joy of the LORD is your strength." Celebrating together with grateful hearts is a gift from God.</p>
+         <div class="callout faith">💜 A family that celebrates with thankfulness grows strong in joy.</div>` },
+      { icon: "📖", subject: "English — Speaking & Presenting", html:
+        `<div class="tryit">🎤 At the celebration, each person shares ONE sentence: "I'm thankful for ______." Speak clearly, look at your audience, and smile!</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>What was everyone's favorite moment of our celebration?</li>
+         <li>What should we celebrate next — and who could we invite?</li></ul>` },
+      { icon: "🤝", subject: "Character: Togetherness", value: true, html:
+        `<div class="callout char">🌟 <b>Togetherness</b> means everyone belongs and everyone joins in. Make sure every family member has a part in today's celebration — no one left out! 🎊</div>` },
+    ],
+    quiz: [
+      { q: "A good celebration plan includes what, when, music, decor, and…", a: ["food", "homework", "naps"], correct: 0 },
+      { q: "Snack 4:00 → story 5:00. How much time passed?", a: ["1 hour", "5 minutes", "3 hours"], correct: 0 },
+      { q: "“Salu-salo” means a…", a: ["shared meal/gathering", "loud drum", "flower float"], correct: 0 },
+      { q: "Nehemiah said the ______ of the LORD is your strength.", a: ["joy", "money", "speed"], correct: 0 },
+    ],
+    reflect: ["What was your favorite part of our celebration?", "What are you most thankful for this month?"],
+  },
+  {
     id: "a25",
     emoji: "🌋",
     title: "Fire Mountains: Volcanoes of the Philippines",
@@ -1460,6 +1706,31 @@ const LEVEL_MISSIONS = {
     explorer: ["Make a paper flower or a simple festival mask.", "Clap or drum a festival beat.", "Point to Baguio (the flower festival) on a map."],
     adventurer: ["Count dancers: 5 rows of 4, then subtract 3 resting.", "Write the Tagalog words for dance, music, and flower.", "Describe one festival in 2 sentences."],
     trailblazer: ["Research one Philippine festival and present 3 respectful facts.", "Design a mini family-fiesta program (the order of activities).", "Explain why Baguio's cool climate is good for growing flowers."],
+  },
+  a20: {
+    explorer: ["Clap the 1-2, 1-2-3 Sinulog pattern.", "Say ‘sayaw’ (dance) and ‘tambol’ (drum).", "March two steps forward, one step back."],
+    adventurer: ["Count total claps: a 5-clap pattern done 4 times.", "Find Cebu and Aklan on the map.", "Write one sentence about a festival."],
+    trailblazer: ["Create your own repeating rhythm and teach it.", "Compare Sinulog and Ati-Atihan — same and different.", "Retell Miriam's celebration and what it teaches about praise."],
+  },
+  a21: {
+    explorer: ["Fold-and-cut a symmetrical paper flower.", "Say ‘bulaklak’ and ‘maganda’.", "Point to Baguio (up in the mountains) on the map."],
+    adventurer: ["Draw a flower and its line of symmetry.", "Describe a flower with 3 adjectives.", "Explain why cool Baguio grows good flowers."],
+    trailblazer: ["Find symmetry in 3 real objects at home.", "Write a short paragraph describing Panagbenga.", "Explain ‘consider the lilies’ in your own words."],
+  },
+  a22: {
+    explorer: ["Clap quarter notes while someone taps halves.", "Name one Filipino instrument.", "Make a shaker from a cup and beans."],
+    adventurer: ["Solve the note math: 1 whole + 2 halves = ? beats.", "Sort instruments: string, drum, or gong.", "Describe a song with two new listening words."],
+    trailblazer: ["Lead a family cup-and-spoon band in one song.", "Research the kulintang or rondalla; share 2 facts.", "Pick a Psalm line and set it to your own rhythm."],
+  },
+  a23: {
+    explorer: ["Cut and decorate a festival mask.", "Count the triangles in your banderitas.", "Dance the festival step with the family."],
+    adventurer: ["Measure your mask so it fits your face.", "Figure how many 10-cm flags fit a 100-cm string.", "Say your craft steps with First/Next/Then/Finally."],
+    trailblazer: ["Design and lead the whole craft station.", "Plan the dance formation for the family train.", "Explain the parable of the talents with your own example."],
+  },
+  a24: {
+    explorer: ["Help decorate for the family celebration.", "Say one ‘I'm thankful for…’ sentence out loud.", "Join every activity with a smile."],
+    adventurer: ["Write the celebration schedule with times.", "Calculate the total minutes of the program.", "Introduce one part of the celebration clearly."],
+    trailblazer: ["Plan and host the celebration program.", "Budget or time-box each activity and keep the schedule.", "Explain why joyful, thankful gatherings make a family strong."],
   },
   a25: {
     explorer: ["Draw Mayon's triangle cone with a little smoke.", "Say the word “bulkan.”", "Do a safe baking-soda “eruption” with an adult."],

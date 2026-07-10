@@ -34,6 +34,20 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.22.0] — 2026-07-14 · Unit 4 complete + two-portal architecture (ADR-011)
+
+- `Added` **Unit 4 fully authored** — five new interactive adventures (a20–a24), Festival theme with aligned real-media:
+  - **a20 · Sinulog & Ati-Atihan: Dance & Drums** (Enthusiasm) — the two great January festivals, rhythm patterns & counting beats, Miriam's song.
+  - **a21 · Panagbenga: The Flower Festival** (Appreciation) — Baguio in bloom, symmetry in flowers, descriptive writing, consider the lilies.
+  - **a22 · Filipino Music & Instruments** (Creativity) — kulintang, rondalla & bamboo, rhythm as fractions, Psalm 150.
+  - **a23 · Make & Move: Festival Crafts & Dance** (Expression) — masks & banderitas, shapes & measuring, the Sinulog step, parable of the talents.
+  - **a24 · Our Family Celebration Project** (Togetherness) — plan a real celebration, schedule/time math, speaking & presenting, joyful gatherings.
+  - Each with 8–9 sections, a 4-question quiz, reflection, and 3-tier missions. **Units 1–4 complete (a1–a24) — 29 of 72 adventures interactive.**
+- `Changed` **Two-portal architecture (ADR-011)** — exactly two portals: **👩‍🏫 Teacher Portal** (Lesson Plans + Client Summary + Teacher Mode; admin tools roadmap) and the **Client/Student Portal** (everything learner-facing), which serves families, students, tutoring and learning-center clients alike. "Parent Dashboard" is now **Client Summary** under the Teacher Portal group.
+- `Added` **`WJ_CONFIG`** — client name/branding now lives in configuration (title, sidebar footer, storybook line), never in architecture; the Ferrell family is seed data. Ready for future multi-client sale.
+
+---
+
 ## [0.21.0] — 2026-07-09 · 🍳 Cooking Academy (core)
 
 - `Added` **Wonder Journey Cooking Academy** — a new sidebar module where each recipe is a full studio lesson, not a recipe card. `recipes.js` holds a modular `RECIPES` data model (extensible to more dishes and future world cuisines with no code changes) + 9 cooking badges.

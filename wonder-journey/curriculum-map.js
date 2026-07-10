@@ -351,7 +351,7 @@ const CURRICULUM_MAP = {
         "math": "Rhythm patterns & counting beats",
         "english": "Reading about festivals",
         "bible": "Miriam's song of celebration",
-        "built": false
+        "built": true
       },
       {
         "n": 21,
@@ -367,7 +367,7 @@ const CURRICULUM_MAP = {
         "math": "Symmetry in flowers",
         "english": "Descriptive writing",
         "bible": "Consider the lilies — God's care",
-        "built": false
+        "built": true
       },
       {
         "n": 22,
@@ -383,7 +383,7 @@ const CURRICULUM_MAP = {
         "math": "Patterns & fractions in rhythm",
         "english": "Listening & new words",
         "bible": "The Psalms — songs of praise",
-        "built": false
+        "built": true
       },
       {
         "n": 23,
@@ -399,7 +399,7 @@ const CURRICULUM_MAP = {
         "math": "Shapes & measuring (masks)",
         "english": "How-to instructions",
         "bible": "Using the talents God gave us",
-        "built": false
+        "built": true
       },
       {
         "n": 24,
@@ -415,7 +415,7 @@ const CURRICULUM_MAP = {
         "math": "Planning a schedule (time)",
         "english": "Speaking & presenting",
         "bible": "Joyful gatherings together",
-        "built": false
+        "built": true
       }
     ]
   },

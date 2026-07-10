@@ -6,6 +6,19 @@
 
 const STORE_KEY = "wonder-journey:v1";
 
+/* ============================================================
+   CLIENT CONFIGURATION (ADR-011 — sellable product rule)
+   All client-specific names/branding live HERE (or in saved state),
+   never in architecture. The app serves any client type: a family,
+   a homeschool group, a tutor's students, or a learning center.
+   ============================================================ */
+const WJ_CONFIG = {
+  clientName: "The Ferrell Family",     // shown in title, footer, certificates
+  clientShort: "Ferrell Family",
+  clientType: "family",                 // family | group | students | center (affects wording only)
+  worldLabel: "World 1 · 🇵🇭 The Philippines",
+};
+
 const DEFAULT_STATE = {
   xp: 0,
   completed: {},          // { adventureId: { score, total, date } }
@@ -731,7 +744,7 @@ const THEMES = {
   village:  { id: "village",   name: "Village & Values",       sky: "linear-gradient(180deg,#bfe3f0,#dcecc4 55%,#ecd9b0 100%)", palm: true,  water: true,  decor: ["🏡","🌾","🕊️","☁️","✨"] },
   bible:    { id: "bible",     name: "Bible Lands",            sky: "linear-gradient(180deg,#f4e4b4,#e7d097 50%,#caa96b 100%)", palm: false, water: false, ground: "rgba(150,120,70,.45)", decor: ["🕊️","🫒","⭐","✨","🐑"] },
 };
-const THEME_BY_ID = { a1: "geography", a2: "island", a3: "history", a4: "village", a5: "geography", a6: "island", a7: "cooking", a8: "cooking", a9: "cooking", a10: "cooking", a11: "cooking", a12: "cooking", a13: "village", a14: "village", a15: "village", a16: "village", a17: "village", a18: "village", a19: "festival", a25: "volcano", a31: "wildlife", a37: "terraces", a43: "ocean", a49: "history" };
+const THEME_BY_ID = { a1: "geography", a2: "island", a3: "history", a4: "village", a5: "geography", a6: "island", a7: "cooking", a8: "cooking", a9: "cooking", a10: "cooking", a11: "cooking", a12: "cooking", a13: "village", a14: "village", a15: "village", a16: "village", a17: "village", a18: "village", a19: "festival", a20: "festival", a21: "festival", a22: "festival", a23: "festival", a24: "festival", a25: "volcano", a31: "wildlife", a37: "terraces", a43: "ocean", a49: "history" };
 function themeFor(a) {
   if (a.theme && THEMES[a.theme]) return THEMES[a.theme];
   if (THEME_BY_ID[a.id] && THEMES[THEME_BY_ID[a.id]]) return THEMES[THEME_BY_ID[a.id]];
@@ -1501,8 +1514,8 @@ function viewParent() {
 
   root().innerHTML = `
     <div class="view">
-      <h1 style="font-size:26px">📊 Parent Dashboard</h1>
-      <p style="color:var(--ink-soft);margin:6px 0 16px">A calm at-a-glance view of your family's learning — progress, what to prepare next, and a copy-ready recap to share.</p>
+      <h1 style="font-size:26px">📊 Client Summary</h1>
+      <p style="color:var(--ink-soft);margin:6px 0 16px">A calm at-a-glance view of ${esc(WJ_CONFIG.clientShort)}'s learning — progress, what to prepare next, and a copy-ready recap to share.</p>
 
       <div class="section-title"><span class="em">🌟</span> Progress at a glance</div>
       <div class="prog-hero card">
@@ -1934,7 +1947,7 @@ function viewSettings() {
         <button class="btn btn-ghost" style="margin-left:8px;color:var(--coral)" onclick="resetAll()">🗑️ Reset All Progress</button>
       </div>
 
-      <p style="text-align:center;color:var(--ink-soft);font-size:13px;margin-top:24px">Wonder Journey OS · World 1 · Built for the Ferrell Family 🇵🇭</p>
+      <p style="text-align:center;color:var(--ink-soft);font-size:13px;margin-top:24px">Wonder Journey OS · ${esc(WJ_CONFIG.worldLabel)} · Built for ${esc(WJ_CONFIG.clientName)}</p>
     </div>`;
 }
 
@@ -2049,4 +2062,10 @@ backdrop.addEventListener("click", closeNav);
 applyTheme();
 renderTop();
 go("home");
+// Apply client configuration (ADR-011): branding comes from WJ_CONFIG, not architecture.
+(function applyConfig() {
+  document.title = `Wonder Journey OS · ${WJ_CONFIG.clientName}`;
+  const sf = document.getElementById("sideFoot");
+  if (sf) sf.innerHTML = `${esc(WJ_CONFIG.worldLabel)}<br/>Made with ❤️ for ${esc(WJ_CONFIG.clientName)}`;
+})();
 checkBirthdays();
