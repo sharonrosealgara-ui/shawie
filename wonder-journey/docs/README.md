@@ -34,6 +34,7 @@ lower number wins, and `00` (the Constitution) always wins.
 | 25 | [AI & Automation Engine](25_AI_AUTOMATION.md) | Teacher-assistant AI + automation architecture |
 | 26 | [Teacher CMS & Lesson Builder](26_TEACHER_CMS_LESSON_BUILDER.md) | CMS architecture + live no-code Lesson Builder |
 | 27 | [Identity & User Management](27_IDENTITY_USER_MANAGEMENT.md) | Multi-tenant auth/RBAC architecture (SaaS) |
+| 28 | [SaaS & Multi-Tenant Architecture](28_SAAS_MULTITENANT.md) | One codebase, many organizations |
 | — | [CHARTER](CHARTER.md) | Permanent Lead-Architect role & mission |
 
 ## Charter document-name map
