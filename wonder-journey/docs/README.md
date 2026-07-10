@@ -35,6 +35,7 @@ lower number wins, and `00` (the Constitution) always wins.
 | 26 | [Teacher CMS & Lesson Builder](26_TEACHER_CMS_LESSON_BUILDER.md) | CMS architecture + live no-code Lesson Builder |
 | 27 | [Identity & User Management](27_IDENTITY_USER_MANAGEMENT.md) | Multi-tenant auth/RBAC architecture (SaaS) |
 | 28 | [SaaS & Multi-Tenant Architecture](28_SAAS_MULTITENANT.md) | One codebase, many organizations |
+| 29 | [Analytics, Progress & Reporting](29_ANALYTICS_REPORTING.md) | Encouraging, privacy-first progress engine |
 | — | [CHARTER](CHARTER.md) | Permanent Lead-Architect role & mission |
 
 ## Charter document-name map
