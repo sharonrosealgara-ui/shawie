@@ -34,6 +34,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.29.1] — 2026-07-14 · ✍️ Storybook voice — UI copy pass v1
+
+- `Improved` Interface copy rewritten in the adventure-book voice (layout & functions untouched): Home hero now begins *"Your backpacks are packed and your passports are ready…"* with **🌴 Begin Today's Adventure / ✈️ Continue Our Journey / 🧭 Explore the Adventure Map**; stats became **Places Explored · Explorer Points · Adventure Achievements**; "Up Next" → **"Today's Journey Begins Here"**; quizzes are now **Adventure Challenges**; celebrations invite you to *stay a little longer 🌺*; empty states invite instead of report (*"Our adventure book is waiting for its very first memory"*).
+- `Documentation` `docs/35_STORYTELLING_COPY.md` — the copy directive, banned-vocabulary map, and the owner's north-star sentence enshrined verbatim; continuing surface-by-surface program.
+
+---
+
 ## [0.29.0] — 2026-07-14 · ✨ Premium polish pass v1 (identity-preserving)
 
 - `Improved` **Cinematic Home hero** — a living tropical scene now breathes behind the same welcome (glowing sun, drifting clouds, flying doves, animated ocean waves, a sailing bangka ⛵, swaying palm). Content, copy, and buttons unchanged; decorations are aria-hidden.

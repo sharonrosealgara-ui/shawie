@@ -41,6 +41,7 @@ lower number wins, and `00` (the Constitution) always wins.
 | 32 | [Mobile & Offline Learning](32_MOBILE_OFFLINE.md) | PWA (live), offline packages, sync engine |
 | 33 | [QA & Release Management](33_QA_RELEASE_MANAGEMENT.md) | Testing layers, release workflow, UAT |
 | 34 | [Premium UI/UX Directive](34_PREMIUM_UI_DIRECTIVE.md) | Identity-preserving premium polish program |
+| 35 | [Storytelling & UI Copy](35_STORYTELLING_COPY.md) | Storybook voice for all interface text |
 | — | [CHARTER](CHARTER.md) | Permanent Lead-Architect role & mission |
 
 ## Charter document-name map

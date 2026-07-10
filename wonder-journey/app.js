@@ -286,8 +286,8 @@ function celebrate(adv, score, total, gained, badges, firstTime) {
     </div>
     ${badges.length ? `<p style="font-weight:800;margin-top:6px">New badge${badges.length > 1 ? "s" : ""} unlocked!</p>
       <div class="reward-row">${badges.map(b => `<div class="reward">${b.emoji} ${esc(b.name)}</div>`).join("")}</div>` : ""}
-    <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="closeModal();go('map')">Back to the Map 🗺️</button>
-    <button class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="closeModal()">Stay here</button>
+    <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="closeModal();go('map')">🧭 Back to Our Map</button>
+    <button class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="closeModal()">Stay a little longer 🌺</button>
   `;
   $("#modalBg").classList.add("show");
 }
@@ -329,21 +329,21 @@ function viewHome() {
           <span class="hs-palm">🌴</span>
         </div>
         <h1>Kumusta, ${esc(fam)} Family! 👋</h1>
-        <p>Welcome to your Wonder Journey. Right now you're exploring <b>World 1 — the Philippines 🇵🇭</b>. Learn together, cook together, and grow together, one adventure at a time.</p>
+        <p>Your backpacks are packed and your passports are ready — <b>World 1: the Philippines 🇵🇭</b> is calling! Together we'll wander breathtaking islands, cook delicious dishes, learn beautiful new words, and write another page in our family's story — one adventure at a time.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px">
           ${next
-            ? `<button class="btn btn-primary" onclick="openAdventure('${next.id}')">${doneCount ? "Continue" : "Start"} Adventure ${next.emoji}</button>`
+            ? `<button class="btn btn-primary" onclick="openAdventure('${next.id}')">${doneCount ? "✈️ Continue Our Journey" : "🌴 Begin Today's Adventure"} ${next.emoji}</button>`
             : `<button class="btn btn-sun" onclick="go('passport')">🏆 World 1 Complete! View Passport</button>`}
-          <button class="btn btn-ghost" onclick="go('map')">🗺️ See the Map</button>
+          <button class="btn btn-ghost" onclick="go('map')">🧭 Explore the Adventure Map</button>
         </div>
         <div class="wave">🏝️</div>
       </div>
 
       <div class="grid g-auto" style="margin-top:20px">
-        ${stat("Adventures Done", `${doneCount} / ${ADVENTURES.length}`, "🧭")}
-        ${stat("Total XP", S.xp, "⭐")}
+        ${stat("Places Explored", `${doneCount} / ${ADVENTURES.length}`, "🧭")}
+        ${stat("Explorer Points", S.xp, "⭐")}
         ${stat("Passport Stamps", S.stamps.length, "🛂")}
-        ${stat("Badges Earned", `${S.badges.length} / ${BADGES.length}`, "🏅")}
+        ${stat("Adventure Achievements", `${S.badges.length} / ${BADGES.length}`, "🏅")}
       </div>
 
       ${(() => {
@@ -371,8 +371,8 @@ function viewHome() {
         <div style="text-align:center;margin-top:10px"><button class="btn btn-ghost" onclick="go('settings')">🎂 Manage birthdays</button></div>`;
       })()}
 
-      <div class="section-title"><span class="em">🎯</span> ${next ? "Up Next" : "You did it!"}</div>
-      ${next ? advCard(next, nextIdx, true) : `<div class="card empty"><div class="em">🏆</div><p>You've finished every adventure in World 1. Amazing work, team!</p></div>`}
+      <div class="section-title"><span class="em">🎯</span> ${next ? "Today's Journey Begins Here" : "Every Destination Discovered!"}</div>
+      ${next ? advCard(next, nextIdx, true) : `<div class="card empty"><div class="em">🏆</div><p>You've explored every corner of World 1 — what an incredible family of explorers! 🎉</p></div>`}
 
       <div class="section-title"><span class="em">👨‍👩‍👧‍👦</span> Our Explorers</div>
       <div class="grid g-auto">
@@ -985,7 +985,7 @@ function buildScenes(a) {
 }
 
 function sceneLabel(sc, i, n) {
-  const names = { intro: "Welcome", map: "Travel Mode", gallery: "Real Photos", learn: "Discover", missions: "Missions", yourway: "Explore It Your Way", quiz: "Quiz", reflect: "Reflection", ending: "Adventure Complete" };
+  const names = { intro: "Welcome", map: "Travel Mode", gallery: "Real Photos", learn: "Discover", missions: "Missions", yourway: "Explore It Your Way", quiz: "Adventure Challenge", reflect: "Reflection", ending: "Adventure Complete" };
   return `${names[sc.type] || "Scene"} · ${i + 1} / ${n}`;
 }
 
@@ -1172,7 +1172,7 @@ function renderScene(sc) {
   if (sc.type === "quiz") {
     const q = a.quiz[sc.qi];
     return `<div class="scene">
-      <div class="kicker">🏆 Quiz · Question ${sc.qi + 1} of ${a.quiz.length}</div>
+      <div class="kicker">🏆 Adventure Challenge · ${sc.qi + 1} of ${a.quiz.length}</div>
       <h1 style="font-size:clamp(22px,3.6vw,38px)">${esc(q.q)}</h1>
       <div style="margin-top:22px">${q.a.map((opt, oi) => `<button class="cine-opt" data-o="${oi}" onclick="cineAnswer(${sc.qi},${oi})">${esc(opt)}</button>`).join("")}</div>
     </div>`;
@@ -1276,7 +1276,7 @@ function viewPassport() {
   root().innerHTML = `
     <div class="view">
       <h1 style="font-size:26px">🛂 Family Passport</h1>
-      <p style="color:var(--ink-soft);margin:6px 0 20px">Collect a stamp for every adventure you complete. You have <b>${S.stamps.length} / ${ADVENTURES.length}</b>!</p>
+      <p style="color:var(--ink-soft);margin:6px 0 20px">Every destination adds a stamp to our family's passport journey. <b>${S.stamps.length} / ${ADVENTURES.length}</b> collected — the world is opening up! 🌏</p>
       <div class="passport-grid">
         ${ADVENTURES.map(a => {
           const got = S.stamps.includes(a.id);
@@ -1421,7 +1421,7 @@ function viewCelebrations() {
           <div class="tl-dot">${e.icon}</div>
           <div class="tl-body"><div class="tl-top"><b>${esc(e.title)}</b><span class="tl-date">${e.date ? new Date(e.date + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) : ""}</span></div>${e.detail ? `<small>${esc(e.detail)}</small>` : ""}</div>
         </div>`).join("")}
-      </div>` : `<div class="card empty" style="text-align:center"><div class="em">🗺️</div><p>Your memory timeline begins with your first adventure. Finish one to plant your first memory!</p><button class="btn btn-primary" style="margin-top:12px" onclick="go('map')">Start an Adventure 🗺️</button></div>`}
+      </div>` : `<div class="card empty" style="text-align:center"><div class="em">🗺️</div><p>Our adventure book is waiting for its very first memory — today's journey might just write it! 🌱</p><button class="btn btn-primary" style="margin-top:12px" onclick="go('map')">Start an Adventure 🗺️</button></div>`}
 
       <div class="section-title" style="margin-top:22px"><span class="em">🎖️</span> Certificates</div>
       <div class="card" style="padding:18px">
@@ -2039,7 +2039,7 @@ function viewCookbook() {
       <h1 style="font-size:26px">📖 Family Cookbook</h1>
       <p style="color:var(--ink-soft);margin:6px 0 16px">Your growing keepsake of dishes you've cooked together. Each page is a memory. 💛</p>
       ${entries.length ? `<div class="section-title"><span class="em">📖</span> Our Keepsake Pages (${entries.length})</div>
-        <div class="cookbook-grid">${entries.map(page).join("")}</div>` : `<div class="card empty" style="text-align:center"><div class="em">📖</div><p>Your cookbook is ready for its first memory! Cook a recipe in the Cooking Academy and it becomes a beautiful keepsake page here.</p><button class="btn btn-primary" style="margin-top:12px" onclick="go('cooking')">👨‍🍳 Open the Cooking Academy</button></div>`}
+        <div class="cookbook-grid">${entries.map(page).join("")}</div>` : `<div class="card empty" style="text-align:center"><div class="em">📖</div><p>Every family cookbook begins with one delicious memory. Tie on your aprons — your first keepsake page is waiting to be cooked! 🍳</p><button class="btn btn-primary" style="margin-top:12px" onclick="go('cooking')">👨‍🍳 Open the Cooking Academy</button></div>`}
 
       <div class="section-title" style="margin-top:24px"><span class="em">👨‍🍳</span> Recipes to Cook</div>
       <div class="grid g-auto">
