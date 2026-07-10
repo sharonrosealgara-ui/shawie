@@ -36,6 +36,7 @@ lower number wins, and `00` (the Constitution) always wins.
 | 27 | [Identity & User Management](27_IDENTITY_USER_MANAGEMENT.md) | Multi-tenant auth/RBAC architecture (SaaS) |
 | 28 | [SaaS & Multi-Tenant Architecture](28_SAAS_MULTITENANT.md) | One codebase, many organizations |
 | 29 | [Analytics, Progress & Reporting](29_ANALYTICS_REPORTING.md) | Encouraging, privacy-first progress engine |
+| 30 | [Infrastructure & DevOps](30_INFRASTRUCTURE_DEVOPS.md) | Cloud/DevOps/SRE architecture, CI/CD, providers |
 | — | [CHARTER](CHARTER.md) | Permanent Lead-Architect role & mission |
 
 ## Charter document-name map
