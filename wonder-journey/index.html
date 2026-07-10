@@ -504,6 +504,14 @@ a{color:var(--ocean);text-decoration:none}
 .ml-chip{font-size:10.5px;font-weight:800;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:#f4ead6;color:#7a5a2c}
 .ml-chip.ok{background:#dff3ea;color:#0e9c86}.ml-chip.todo{background:#fde8e4;color:#c0442e}
 .ml-lic{font-size:11.5px;color:var(--ink-soft,#8a7a60);margin-top:6px}
+/* Lesson Builder + Teacher Dashboard */
+.lb-row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.cc-field textarea{width:100%;padding:9px 12px;border:2px solid #e6d5b8;border-radius:10px;font-family:inherit;font-size:14px;resize:vertical}
+.cc-field select{width:100%;padding:9px 12px;border:2px solid #e6d5b8;border-radius:10px;font-family:inherit;font-size:14px;background:var(--card,#fff)}
+.tdash{background:var(--card,#fff);border:2px solid rgba(0,0,0,.06);border-radius:16px;padding:14px 16px;margin:12px 0;box-shadow:0 5px 14px rgba(0,0,0,.07)}
+.tdash-stats{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--ink-soft,#6a5a45);margin-bottom:10px}
+.tdash-stats b{color:var(--ink,#3a2c18)}
+.tdash-actions{display:flex;gap:8px;flex-wrap:wrap}
 /* Certificates */
 #certOverlay{position:fixed;inset:0;z-index:9998;display:none;flex-direction:column;align-items:center;justify-content:flex-start;gap:16px;padding:24px;overflow:auto;background:rgba(30,40,35,.72);backdrop-filter:blur(3px)}
 #certOverlay.show{display:flex}
@@ -586,6 +594,7 @@ body.cert-open{overflow:hidden}
     <button class="nav-item" data-view="storybook"><span class="ic">📖</span> Family Storybook</button>
     <div class="nav-group">👩‍🏫 Teacher Portal</div>
     <button class="nav-item" data-view="teacher"><span class="ic">📚</span> Lesson Plans</button>
+    <button class="nav-item" data-view="builder"><span class="ic">🧰</span> Lesson Builder</button>
     <button class="nav-item" data-view="medialib"><span class="ic">🗂️</span> Media Library</button>
     <button class="nav-item" data-view="parent"><span class="ic">📊</span> Client Summary</button>
     <button class="nav-item" data-view="family"><span class="ic">👨‍👩‍👧‍👦</span> Our Family</button>

@@ -45,6 +45,7 @@ const DEFAULT_STATE = {
   mascot: true,           // show Sinag the mascot guide in cinematic mode
   cookbookEntries: [],    // Cooking Academy keepsakes: { recipeId, name, emoji, date, participants, rating, favorite, gratitude, notes, region, badge, xp }
   sound: { master: 0.8, ambient: 0.5, ui: 0.8, muted: false, reduced: false }, // Sound Director mixer
+  customLessons: [],      // Lesson Builder (docs/26): teacher-created lessons, draft or published
 };
 
 // Merge Cooking Academy badges into the badge set (recipes.js loads first).
@@ -53,6 +54,25 @@ if (typeof COOKING_BADGES !== "undefined" && typeof BADGES !== "undefined") {
 }
 
 let S = loadState();
+
+/* Lesson Builder (docs/26): map a published custom lesson into the adventure
+   schema so the Theater, map, passport & personalization treat it natively. */
+function customToAdventure(c) {
+  return {
+    id: c.id, custom: true, emoji: c.emoji || "⭐", title: c.title,
+    region: "My Lessons", subtitle: c.subtitle || "A lesson made by your teacher.",
+    value: c.value || "Curiosity", theme: c.theme || "island", badge: null,
+    stamp: { emoji: c.emoji || "⭐", name: (c.title || "Lesson").slice(0, 16) }, xp: c.xp || 100,
+    sections: (c.sections || []).filter(s => s.text).map(s => ({ icon: s.icon || "📖", subject: s.subject || "Discover", html: `<p>${esc(s.text)}</p>` })),
+    quiz: (c.quiz || []).filter(q => q.q && q.a.filter(Boolean).length >= 2).map(q => ({ q: q.q, a: q.a.filter(Boolean), correct: Math.min(q.correct || 0, q.a.filter(Boolean).length - 1) })),
+    reflect: (c.reflect || []).filter(Boolean).length ? c.reflect.filter(Boolean) : ["What did you enjoy most today?"],
+  };
+}
+function mergeCustomLessons() {
+  for (let i = ADVENTURES.length - 1; i >= 0; i--) if (ADVENTURES[i].custom) ADVENTURES.splice(i, 1);
+  (S.customLessons || []).filter(c => c.published).forEach(c => ADVENTURES.push(customToAdventure(c)));
+}
+// (called at boot, after helpers are defined)
 
 function loadState() {
   try {
@@ -115,6 +135,7 @@ function levelInfo() {
 const isDone = (id) => !!S.completed[id];
 function isUnlocked(idx) {
   if (idx === 0) return true;
+  if (ADVENTURES[idx] && ADVENTURES[idx].custom) return true; // teacher-made lessons are always open
   return isDone(ADVENTURES[idx - 1].id); // linear path
 }
 
@@ -1562,6 +1583,26 @@ function viewTeacher() {
     <div class="view">
       <h1 style="font-size:26px">👩‍🏫 Teacher Portal</h1>
       <p style="color:var(--ink-soft);margin:6px 0 4px">Everything you need to prepare and teach — objectives, materials, ingredients, personalized activities and a copy-ready plan for all <b>${advs.length}</b> adventures.</p>
+      ${(() => { // Teacher Dashboard strip (docs/26)
+        const done = Object.keys(S.completed).length;
+        const missing = typeof MEDIA !== "undefined" ? Object.values(MEDIA).filter(m => m.status !== "ready").length : 0;
+        const nextB = upcomingBirthdays()[0];
+        const today = advs.find(a => a.date === new Date().toISOString().slice(0, 10));
+        return `<div class="tdash">
+          <div class="tdash-stats">
+            <span>🎯 <b>${done}</b>/${advs.length} taught</span>
+            <span>🧰 <b>${(S.customLessons || []).length}</b> my lessons</span>
+            <span>📷 <b>${missing}</b> media needed</span>
+            ${nextB ? `<span>🎂 ${esc(nextB.name)} in <b>${nextB.days}</b>d</span>` : ""}
+            ${today ? `<span>📌 Today: <b>${esc(today.title.slice(0, 26))}</b></span>` : ""}
+          </div>
+          <div class="tdash-actions">
+            <button class="btn btn-primary" onclick="lbNew()">➕ Create Lesson</button>
+            <button class="btn btn-ghost" onclick="go('builder')">🧰 My Lessons</button>
+            <button class="btn btn-ghost" onclick="go('medialib')">🗂️ Media Library</button>
+            <button class="btn btn-ghost" onclick="go('parent')">📊 Client Summary</button>
+          </div>
+        </div>`; })()}
       <div class="callout" style="margin:10px 0 18px">💡 <b>Tip:</b> ${builtCount} adventures are fully interactive; the rest come with a ready-to-teach plan from the curriculum map. Turn on <b>Teacher Mode</b> in Settings for the in-lesson timer & answer key.</div>
 
       ${upcoming.length ? `<div class="section-title"><span class="em">📅</span> Coming up next</div>
@@ -1574,6 +1615,88 @@ function viewTeacher() {
       }).join("")}
     </div>`;
 }
+
+/* ---------- Lesson Builder (Teacher CMS · docs/26) ---------- */
+let _lbEdit = null; // id of the custom lesson being edited, or null (list mode)
+function viewBuilder() {
+  const list = S.customLessons || [];
+  if (_lbEdit === null) {
+    root().innerHTML = `
+      <div class="view">
+        <h1 style="font-size:26px">🧰 Lesson Builder</h1>
+        <p style="color:var(--ink-soft);margin:6px 0 14px">Create your own lessons — no code needed. Published lessons appear on the Adventure Map under <b>My Lessons</b> and play in the full cinematic Theater (theme, sound, quiz, stamp and all).</p>
+        <button class="btn btn-primary" onclick="lbNew()">➕ Create a Lesson</button>
+        ${list.length ? `<div class="section-title" style="margin-top:20px"><span class="em">📚</span> My Lessons (${list.length})</div>
+        <div class="grid" style="gap:12px">
+          ${list.map(c => `<div class="lesson-card" style="padding:14px 16px;display:flex;align-items:center;gap:12px">
+            <span style="font-size:30px">${esc(c.emoji || "⭐")}</span>
+            <div style="flex:1"><b style="font-family:'Baloo 2',sans-serif">${esc(c.title)}</b><div style="font-size:12px;color:var(--ink-soft)">${esc(c.theme || "island")} · ${(c.sections || []).filter(s => s.text).length} sections · ${(c.quiz || []).filter(q => q.q).length} quiz</div></div>
+            <span class="lp-badge ${c.published ? "built" : ""}">${c.published ? "published ✓" : "draft"}</span>
+            <button class="btn btn-ghost" onclick="lbOpen('${c.id}')">✏️ Edit</button>
+            ${c.published ? `<button class="btn btn-ocean" onclick="openAdventure('${c.id}')">▶ Play</button>` : ""}
+          </div>`).join("")}
+        </div>` : `<div class="card empty" style="margin-top:18px;text-align:center"><div class="em">🧰</div><p>No lessons yet. Create your first one — it takes about five minutes.</p></div>`}
+      </div>`;
+    return;
+  }
+  const c = list.find(x => x.id === _lbEdit) || { id: _lbEdit, emoji: "⭐", theme: "island", sections: [{}, {}, {}], quiz: [{ a: ["", "", ""] }, { a: ["", "", ""] }], reflect: ["", ""] };
+  while ((c.sections = c.sections || []).length < 3) c.sections.push({});
+  while ((c.quiz = c.quiz || []).length < 2) c.quiz.push({ a: ["", "", ""] });
+  c.quiz.forEach(q => { while ((q.a = q.a || []).length < 3) q.a.push(""); });
+  const themeOpts = Object.keys(THEMES).map(t => `<option value="${t}" ${c.theme === t ? "selected" : ""}>${THEMES[t].name}</option>`).join("");
+  root().innerHTML = `
+    <div class="view">
+      <button class="btn btn-ghost" onclick="_lbEdit=null;go('builder')">← My Lessons</button>
+      <h1 style="font-size:24px;margin-top:10px">${(S.customLessons || []).some(x => x.id === c.id) ? "✏️ Edit Lesson" : "➕ New Lesson"}</h1>
+      <div class="card" style="padding:20px;margin-top:12px">
+        <div class="lb-row"><div class="cc-field" style="flex:0 0 90px"><label>Emoji</label><input id="lbEmoji" maxlength="4" value="${esc(c.emoji || "⭐")}" style="text-align:center;font-size:20px" /></div>
+        <div class="cc-field" style="flex:1"><label>Lesson title *</label><input id="lbTitle" placeholder="e.g., Our Trip to the Beach" value="${esc(c.title || "")}" /></div></div>
+        <div class="lb-row"><div class="cc-field" style="flex:1"><label>One-line description</label><input id="lbSub" placeholder="What will we discover today?" value="${esc(c.subtitle || "")}" /></div>
+        <div class="cc-field" style="flex:0 0 200px"><label>Theme (sets the world & sound)</label><select id="lbTheme">${themeOpts}</select></div>
+        <div class="cc-field" style="flex:0 0 150px"><label>Character value</label><input id="lbValue" placeholder="e.g., Kindness" value="${esc(c.value || "")}" /></div></div>
+      </div>
+      <div class="card" style="padding:20px;margin-top:12px"><h3 style="margin:0 0 4px">📖 Teaching sections <small style="color:var(--ink-soft);font-weight:400">(fill any — blank ones are skipped)</small></h3>
+        ${c.sections.slice(0, 3).map((s, i) => `<div class="lb-row"><div class="cc-field" style="flex:0 0 200px"><label>Section ${i + 1} title</label><input id="lbSecT${i}" placeholder="e.g., The Story" value="${esc(s.subject || "")}" /></div>
+        <div class="cc-field" style="flex:1"><label>What will you teach?</label><textarea id="lbSecX${i}" rows="2" placeholder="Write it warmly, like telling a story…">${esc(s.text || "")}</textarea></div></div>`).join("")}
+      </div>
+      <div class="card" style="padding:20px;margin-top:12px"><h3 style="margin:0 0 4px">🏆 Quiz <small style="color:var(--ink-soft);font-weight:400">(pick the correct answer)</small></h3>
+        ${c.quiz.slice(0, 2).map((q, qi) => `<div style="margin-top:10px"><div class="cc-field"><label>Question ${qi + 1}</label><input id="lbQ${qi}" value="${esc(q.q || "")}" placeholder="Ask something from the lesson…" /></div>
+        <div class="lb-row">${q.a.slice(0, 3).map((a, ai) => `<div class="cc-field" style="flex:1"><label><input type="radio" name="lbC${qi}" value="${ai}" ${(q.correct || 0) === ai ? "checked" : ""}/> Answer ${ai + 1}${(q.correct || 0) === ai ? " ✓" : ""}</label><input id="lbA${qi}_${ai}" value="${esc(a || "")}" /></div>`).join("")}</div></div>`).join("")}
+      </div>
+      <div class="card" style="padding:20px;margin-top:12px"><h3 style="margin:0 0 4px">💬 Reflection questions</h3>
+        <div class="lb-row">${[0, 1].map(i => `<div class="cc-field" style="flex:1"><input id="lbR${i}" value="${esc((c.reflect || [])[i] || "")}" placeholder="e.g., What surprised you today?" /></div>`).join("")}</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center">
+        <button class="btn btn-primary" onclick="lbSave('${c.id}',true)">🚀 Save & Publish</button>
+        <button class="btn btn-ocean" onclick="lbSave('${c.id}',false)">💾 Save as Draft</button>
+        ${(S.customLessons || []).some(x => x.id === c.id) ? `<button class="btn btn-ghost" style="color:#c0442e" onclick="lbDelete('${c.id}')">🗑️ Delete</button>` : ""}
+      </div>
+    </div>`;
+}
+window.lbNew = () => { _lbEdit = "c" + uid(); go("builder"); };
+window.lbOpen = (id) => { _lbEdit = id; go("builder"); };
+window.lbSave = (id, publish) => {
+  const g = (i) => (document.getElementById(i) || {}).value || "";
+  const title = g("lbTitle").trim();
+  if (!title) { toast("✏️ Please give your lesson a title first."); return; }
+  const lesson = {
+    id, title, emoji: g("lbEmoji").trim() || "⭐", subtitle: g("lbSub").trim(), value: g("lbValue").trim() || "Curiosity",
+    theme: g("lbTheme") || "island", xp: 100, published: !!publish,
+    sections: [0, 1, 2].map(i => ({ icon: "📖", subject: g("lbSecT" + i).trim() || "Discover", text: g("lbSecX" + i).trim() })),
+    quiz: [0, 1].map(qi => ({ q: g("lbQ" + qi).trim(), a: [0, 1, 2].map(ai => g(`lbA${qi}_${ai}`).trim()), correct: +((document.querySelector(`input[name=lbC${qi}]:checked`) || {}).value || 0) })),
+    reflect: [g("lbR0").trim(), g("lbR1").trim()],
+  };
+  if (!S.customLessons) S.customLessons = [];
+  const i = S.customLessons.findIndex(x => x.id === id);
+  if (i > -1) S.customLessons[i] = lesson; else S.customLessons.push(lesson);
+  save(); mergeCustomLessons();
+  toast(publish ? "🚀 Published! It's live on the Adventure Map." : "💾 Draft saved.");
+  _lbEdit = null; go("builder");
+};
+window.lbDelete = (id) => {
+  S.customLessons = (S.customLessons || []).filter(x => x.id !== id);
+  save(); mergeCustomLessons(); toast("🗑️ Lesson deleted."); _lbEdit = null; go("builder");
+};
 
 /* ---------- Media Library manager (Teacher Portal · docs/19) ---------- */
 let _mlq = "", _mlcat = "all", _mlstat = "all";
@@ -2170,7 +2293,7 @@ function applyTheme() { document.body.classList.toggle("dark", S.theme === "dark
 $("#themeBtn").addEventListener("click", () => { S.theme = S.theme === "dark" ? "light" : "dark"; save(); applyTheme(); renderTop(); });
 
 /* ---------- router ---------- */
-const VIEWS = { home: viewHome, blessings: viewBlessings, map: viewMap, passport: viewPassport, badges: viewBadges, celebrations: viewCelebrations, tree: viewTree, cooking: viewCooking, cookbook: viewCookbook, storybook: viewStorybook, teacher: viewTeacher, medialib: viewMediaLib, parent: viewParent, family: viewFamily, settings: viewSettings };
+const VIEWS = { home: viewHome, blessings: viewBlessings, map: viewMap, passport: viewPassport, badges: viewBadges, celebrations: viewCelebrations, tree: viewTree, cooking: viewCooking, cookbook: viewCookbook, storybook: viewStorybook, teacher: viewTeacher, builder: viewBuilder, medialib: viewMediaLib, parent: viewParent, family: viewFamily, settings: viewSettings };
 function go(view) {
   stopTimer();
   (VIEWS[view] || viewHome)();
@@ -2194,6 +2317,7 @@ backdrop.addEventListener("click", closeNav);
 applyTheme();
 renderTop();
 go("home");
+mergeCustomLessons(); // Lesson Builder: publish teacher-made lessons into the map/theater
 // Apply client configuration (ADR-011): branding comes from WJ_CONFIG, not architecture.
 (function applyConfig() {
   document.title = `Wonder Journey OS · ${WJ_CONFIG.clientName}`;

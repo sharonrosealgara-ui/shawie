@@ -34,6 +34,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.26.0] — 2026-07-14 · 🧰 Lesson Builder + Teacher Dashboard (Teacher CMS core)
+
+- `Added` **Lesson Builder** — teachers create their own lessons with **zero code**: title, emoji, theme (drives world + ambient sound), character value, teaching sections, multiple-choice quiz with correct answers, and reflection prompts. **Draft → Published** states; published lessons appear on the Adventure Map under **My Lessons** (always unlocked) and play in the full cinematic Theater — intro, map, personalization scene, quiz, celebration, and passport stamp, identical to built-in adventures. Edit/delete anytime.
+- `Added` **Teacher Dashboard strip** in the Teacher Portal — taught count, my-lessons count, missing-media count, next birthday, today's lesson, and quick actions (Create Lesson · My Lessons · Media Library · Client Summary).
+- `Documentation` `docs/26_TEACHER_CMS_LESSON_BUILDER.md` (full CMS architecture, live-vs-SaaS) and `docs/27_IDENTITY_USER_MANAGEMENT.md` (multi-tenant identity/RBAC architecture, extends doc 23); indexed.
+
+---
+
 ## [0.25.0] — 2026-07-14 · Unit 5 complete (Fire Mountains & Landforms)
 
 - `Added` **Unit 5 fully authored** — five new interactive adventures (a26–a30), volcano/earth-science themes with aligned real-media:
