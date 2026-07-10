@@ -37,7 +37,7 @@ _Last updated: 2026-07-09 · Autonomous Build Session_
 ## Content Completion (World 1 — Philippines)
 
 - **Adventures scheduled (map + metadata):** 72 / 72 `██████████`
-- **Adventures with full interactive content:** 34 / 72 `█████░░░░░`
+- **Adventures with full interactive content:** 39 / 72 `█████░░░░░`
 - **Media manifest coverage:** 72 / 72 `██████████` (66 curated assets, files pending licensing)
 - **Real licensed asset files present:** 0 / 66 `░░░░░░░░░░` (awaiting upload — placeholders live)
 
@@ -54,17 +54,17 @@ _Last updated: 2026-07-09 · Autonomous Build Session_
 
 **Current task:** See git log for the latest commit.
 
-**Next task:** Continue Curriculum Framework (Phase 9) — author Unit 6 (a32–a36: Amazing Animals), then Units 7–13; migrate to the six-mascot cast (Design Bible).
+**Next task:** Continue Curriculum Framework (Phase 9) — author Unit 7 (a38–a42: Farms, Rice & Growing Things), then Units 8–13; migrate to the six-mascot cast (Design Bible).
 
 **Known issues**
 - Real photo/map files not yet uploaded — the resilient media system shows honest placeholders until licensed assets are dropped into `assets/`.
-- Not-yet-authored slots use the schedule/metadata + auto-generated Teacher Portal plans; full cinematic interactive content authored for 34 adventures (Units 1–5 complete: a1–a30, plus a31/a37/a43/a49).
+- Not-yet-authored slots use the schedule/metadata + auto-generated Teacher Portal plans; full cinematic interactive content authored for 39 adventures (Units 1–6 complete: a1–a36, plus a37/a43/a49).
 
 **Resolved issues**
 - Birthday/Celebrations section was hidden when empty → now always visible + dedicated Celebrations page.
 
 **Estimated remaining work**
-- Author interactive content for Units 6–13 (38 adventures) — the largest remaining effort.
+- Author interactive content for Units 7–13 (33 adventures) — the largest remaining effort.
 - Source & license real media assets (editorial, not code).
 - Make.com automation + Supabase backend (post-MVP SaaS phase).
 

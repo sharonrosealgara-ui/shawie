@@ -34,6 +34,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.27.0] — 2026-07-14 · Unit 6 complete (Amazing Animals)
+
+- `Added` **Unit 6 fully authored** — five new interactive adventures (a32–a36), Wildlife theme with aligned real-media:
+  - **a32 · The Mighty Philippine Eagle** (Protection) — the haribon, wingspan measurement vs your arm span, nonfiction number-facts, wings like eagles (Isaiah 40:31).
+  - **a33 · The Tiny Tarsier** (Gentleness) — Bohol's night watcher, small-number comparisons, descriptive writing, God cares for sparrows (Matthew 10:29).
+  - **a34 · The Carabao: Farmer's Friend** (Diligence) — the national animal, field-work multiplication, who/what/why comprehension, hard work honored (Proverbs).
+  - **a35 · Rainforest & Night Creatures** (Curiosity) — four forest layers, nocturnal vs diurnal sorting, creative writing, day and night (Genesis 1).
+  - **a36 · Conservation Project** (Responsibility) — why animals become endangered, a real family guardian project, survey & tally math, persuasive posters, stewardship (Genesis 2:15).
+  - Each with 8 sections, a 4-question quiz, reflection, and 3-tier missions. **Units 1–6 complete (a1–a36) — 39 of 72 adventures interactive — past the halfway mark!**
+
+---
+
 ## [0.26.0] — 2026-07-14 · 🧰 Lesson Builder + Teacher Dashboard (Teacher CMS core)
 
 - `Added` **Lesson Builder** — teachers create their own lessons with **zero code**: title, emoji, theme (drives world + ambient sound), character value, teaching sections, multiple-choice quiz with correct answers, and reflection prompts. **Draft → Published** states; published lessons appear on the Adventure Map under **My Lessons** (always unlocked) and play in the full cinematic Theater — intro, map, personalization scene, quiz, celebration, and passport stamp, identical to built-in adventures. Edit/delete anytime.

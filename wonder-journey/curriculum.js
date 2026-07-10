@@ -1659,6 +1659,247 @@ const ADVENTURES = [
     reflect: ["Which amazing animal will you remember?", "How can we be good stewards of nature?"],
   },
   {
+    id: "a32",
+    emoji: "🦅",
+    title: "The Mighty Philippine Eagle",
+    region: "Wildlife",
+    subtitle: "Come face to face with one of the largest, rarest eagles on Earth — the king of the Philippine forest.",
+    value: "Protection",
+    badge: "animal-friend",
+    stamp: { emoji: "🦅", name: "Eagle Eye" },
+    xp: 150,
+    sections: [
+      { icon: "🌲", subject: "Story: The King of the Forest", html:
+        `<p>High above the rainforest, a shadow glides between the trees. Feathered crown, fierce golden eyes, wings wider than Dad is tall — the <b>Philippine Eagle</b>, our national bird! 🦅</p>` },
+      { icon: "🦅", subject: "Meet the Haribon", html:
+        `<div class="wordbank">
+           <div class="word">👑 Old name: <b>haribon</b> — from "hari" (king) + "ibon" (bird)</div>
+           <div class="word">📏 Wingspan up to <b>2 meters</b> — one of the world's largest eagles</div>
+           <div class="word">🏠 Lives ONLY in the Philippines (endemic!)</div>
+           <div class="word">⚠️ <b>Critically endangered</b> — few hundred pairs remain</div>
+         </div>` },
+      { icon: "📏", subject: "Math: Wingspan Measurement", html:
+        `<p>An eagle's wingspan can reach <b>200 cm</b>.</p>
+         <ul><li>Measure YOUR arm span with a tape measure. Who's closest to 200 cm?</li>
+         <li>If your span is 120 cm, the eagle beats you by 200 − 120 = <b>80 cm</b>!</li></ul>
+         <div class="tryit">📏 Stretch your arms wide and compare to a 2-meter string on the floor!</div>` },
+      { icon: "🗣️", subject: "Bird Words", html:
+        `<div class="wordbank">
+           <div class="word"><b>Agila</b> — eagle · <b>Ibon</b> (Tag.) / <b>Pispis</b> (Hil.) — bird</div>
+           <div class="word"><b>Pakpak</b> — wing · <b>Lipad</b> — to fly</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Wings like eagles (Isaiah 40:31).</b> "They who wait for the LORD shall renew their strength; they shall mount up with wings like eagles; they shall run and not be weary." God gives strength that soars!</p>
+         <div class="callout faith">💜 When you feel tired, remember: waiting on God lifts us up like eagle wings.</div>` },
+      { icon: "📖", subject: "English — Nonfiction Reading", html:
+        `<div class="tryit">📖 Read this fact and find the NUMBER facts in it: "The Philippine eagle can grow one meter tall and its wingspan can reach two meters." How many number facts did you spot? (2!)</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>Why do you think the eagle became our national bird?</li>
+         <li>What would the forest lose if the haribon disappeared?</li></ul>` },
+      { icon: "🤝", subject: "Character: Protection", value: true, html:
+        `<div class="callout char">🌟 <b>Protection</b> means standing up for those who can't protect themselves. Protect something small today — a plant, a pet, a little sibling's feelings. 🛡️</div>` },
+    ],
+    quiz: [
+      { q: "“Haribon” means…", a: ["king bird", "small bird", "night bird"], correct: 0 },
+      { q: "The Philippine eagle's wingspan can reach about…", a: ["2 meters", "20 meters", "2 centimeters"], correct: 0 },
+      { q: "The Philippine eagle lives…", a: ["only in the Philippines", "everywhere on Earth", "only in zoos"], correct: 0 },
+      { q: "Isaiah says those who wait for the LORD rise up with wings like…", a: ["eagles", "bats", "planes"], correct: 0 },
+    ],
+    reflect: ["What amazed you about the haribon?", "What will you protect this week?"],
+  },
+  {
+    id: "a33",
+    emoji: "🐒",
+    title: "The Tiny Tarsier",
+    region: "Wildlife",
+    subtitle: "Meet one of the world's smallest primates — a palm-sized night watcher with enormous golden eyes.",
+    value: "Gentleness",
+    badge: "animal-friend",
+    stamp: { emoji: "🐒", name: "Tarsier Friend" },
+    xp: 150,
+    sections: [
+      { icon: "🌙", subject: "Story: Big Eyes in the Dark", html:
+        `<p>In the quiet forests of <b>Bohol</b>, something tiny clings to a branch. It's smaller than your hand, but its <b>eyes are enormous</b> — each eye as big as its brain! Meet the <b>Philippine tarsier</b>. 🐒</p>` },
+      { icon: "🐒", subject: "Tarsier Facts", html:
+        `<div class="wordbank">
+           <div class="word">🖐️ Body about <b>10–12 cm</b> — fits in a hand (but please don't hold one!)</div>
+           <div class="word">👀 Huge eyes for seeing at <b>night</b> (nocturnal)</div>
+           <div class="word">🔄 Can turn its head almost all the way around</div>
+           <div class="word">🤫 Very shy and easily stressed — we watch <b>quietly, from far away</b></div>
+         </div>` },
+      { icon: "🔢", subject: "Math: Small-Number Comparisons", html:
+        `<ul><li>A tarsier is ~12 cm; a Philippine eagle is ~100 cm tall. The eagle is about how many times taller? (100 ÷ 12 ≈ <b>8 times!</b>)</li>
+         <li>Measure 12 cm with a ruler — find something in the room that's tarsier-sized!</li></ul>` },
+      { icon: "🗣️", subject: "Gentle Words", html:
+        `<div class="wordbank">
+           <div class="word"><b>Maliit</b> — small · <b>Malaki</b> — big</div>
+           <div class="word"><b>Mata</b> — eye · <b>Gabi</b> — night</div>
+           <div class="word"><b>Hinay-hinay</b> (Hil.) — gently, slowly</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>God cares for small creatures (Matthew 10:29).</b> Jesus said not even a little sparrow falls without the Father knowing. If God watches over the tiniest tarsier, how much more does He care for you!</p>
+         <div class="callout faith">💜 No one is too small for God's love — not a tarsier, not a sparrow, not you.</div>` },
+      { icon: "📖", subject: "English — Descriptive Writing", html:
+        `<div class="tryit">✏️ Describe the tarsier in one sentence using 3 adjectives: "The ______, ______, ______ tarsier watches the night."</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>Why must visitors stay quiet and gentle near tarsiers?</li>
+         <li>Who in our family needs extra gentleness this week?</li></ul>` },
+      { icon: "🤝", subject: "Character: Gentleness", value: true, html:
+        `<div class="callout char">🌟 <b>Gentleness</b> is strength with a soft touch. Use a gentle voice and gentle hands all day today. 🕊️</div>` },
+    ],
+    quiz: [
+      { q: "The Philippine tarsier is famous for its huge…", a: ["eyes", "ears", "tail feathers"], correct: 0 },
+      { q: "Tarsiers are nocturnal, meaning they are awake at…", a: ["night", "noon", "breakfast"], correct: 0 },
+      { q: "Which island is famous for tarsiers?", a: ["Bohol", "Palawan", "Batanes"], correct: 0 },
+      { q: "Jesus said not even a ______ falls without the Father knowing.", a: ["sparrow", "coconut", "star"], correct: 0 },
+    ],
+    reflect: ["What did you love about the tarsier?", "How were you gentle today?"],
+  },
+  {
+    id: "a34",
+    emoji: "🐃",
+    title: "The Carabao: Farmer's Friend",
+    region: "Wildlife & Farm",
+    subtitle: "Meet the strong, patient water buffalo who helps feed the whole country — the national animal!",
+    value: "Diligence",
+    badge: "animal-friend",
+    stamp: { emoji: "🐃", name: "Carabao Strong" },
+    xp: 150,
+    sections: [
+      { icon: "🌾", subject: "Story: The Quiet Helper", html:
+        `<p>Before sunrise, a farmer walks to the field — and beside him plods his best helper: the <b>carabao</b>! 🐃 Strong shoulders, curved horns, and a heart for hard work. Rice on our tables owes a lot to this gentle giant.</p>` },
+      { icon: "🐃", subject: "Carabao Facts", html:
+        `<div class="wordbank">
+           <div class="word">🇵🇭 The <b>national animal</b> of the Philippines</div>
+           <div class="word">💪 Pulls the <b>plow</b> through muddy rice paddies</div>
+           <div class="word">💦 Loves mud baths — they keep it cool!</div>
+           <div class="word">🥛 Carabao milk makes <b>kesong puti</b> (white cheese)</div>
+         </div>` },
+      { icon: "✖️", subject: "Math: Field Work Multiplication", html:
+        `<ul><li>A carabao plows 3 rows each hour. In 4 hours: 3 × 4 = <b>12 rows</b>!</li>
+         <li>Two carabaos working together: 12 × 2 = <b>24 rows</b>.</li></ul>
+         <div class="tryit">✖️ Make your own carabao word problem for the family to solve!</div>` },
+      { icon: "🗣️", subject: "Farm Words", html:
+        `<div class="wordbank">
+           <div class="word"><b>Kalabaw</b> (Tag.) / <b>Karabaw</b> (Hil.) — carabao</div>
+           <div class="word"><b>Bukid</b> — farm/field · <b>Araro</b> — plow</div>
+           <div class="word"><b>Masipag</b> — hardworking</div>
+         </div>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Hard work is honored (Proverbs 12:11, 14:23).</b> "Whoever works his land will have plenty of bread." The Bible honors steady, faithful work — like the farmer and his carabao, morning after morning.</p>
+         <div class="callout faith">💜 Faithful work, done with a willing heart, is a way of serving God and others.</div>` },
+      { icon: "📖", subject: "English — Reading Comprehension", html:
+        `<div class="tryit">📖 Listen: "The carabao pulls the plow so the farmer can plant rice." Now answer: WHO pulls? WHAT does it pull? WHY?</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>Who works hard so our family can eat? How can we thank them?</li>
+         <li>What chore can each of us do 'carabao-strong' this week?</li></ul>` },
+      { icon: "🤝", subject: "Character: Diligence", value: true, html:
+        `<div class="callout char">🌟 <b>Diligence</b> means working steadily until the job is done. Pick one chore and finish it completely — no half-plowed fields! 🐃</div>` },
+    ],
+    quiz: [
+      { q: "The national animal of the Philippines is the…", a: ["carabao", "tiger", "kangaroo"], correct: 0 },
+      { q: "A carabao plows 3 rows an hour. In 4 hours it plows…", a: ["12 rows", "7 rows", "34 rows"], correct: 0 },
+      { q: "Carabaos love mud baths because mud keeps them…", a: ["cool", "shiny", "sleepy"], correct: 0 },
+      { q: "“Masipag” means…", a: ["hardworking", "sleepy", "hungry"], correct: 0 },
+    ],
+    reflect: ["What job will you do 'carabao-strong'?", "Who will you thank for their hard work?"],
+  },
+  {
+    id: "a35",
+    emoji: "🌙",
+    title: "Rainforest & Night Creatures",
+    region: "Wildlife",
+    subtitle: "When the sun sets, the forest wakes up! Explore the rainforest's layers and its nighttime world.",
+    value: "Curiosity",
+    badge: "animal-friend",
+    stamp: { emoji: "🌙", name: "Night Explorer" },
+    xp: 150,
+    sections: [
+      { icon: "🌳", subject: "Story: The Forest That Never Sleeps", html:
+        `<p>Shhh… the sun is setting over the rainforest. Day animals tuck in — and the <b>night shift</b> wakes up! Eyes blink open, wings stretch, and the forest fills with new sounds. 🌙</p>` },
+      { icon: "🌲", subject: "Layers of the Rainforest", html:
+        `<div class="wordbank">
+           <div class="word">☀️ <b>Emergent</b> — the tallest treetops (eagles nest here!)</div>
+           <div class="word">🌳 <b>Canopy</b> — the leafy roof, busiest layer</div>
+           <div class="word">🌿 <b>Understory</b> — shady middle (tarsiers!)</div>
+           <div class="word">🍄 <b>Forest floor</b> — dark, damp, full of life</div>
+         </div>` },
+      { icon: "🦇", subject: "Night Crew vs Day Crew", html:
+        `<p><b>Nocturnal</b> = awake at night (tarsier, owl, fruit bat, firefly). <b>Diurnal</b> = awake by day (eagle, butterfly, carabao).</p>
+         <div class="tryit">🔦 Sorting game: call out an animal — everyone shouts "NIGHT!" or "DAY!"</div>` },
+      { icon: "🔢", subject: "Math: Sort & Count Habitats", html:
+        `<ul><li>Sort 8 animal cards into night/day — if 5 are nocturnal, how many are diurnal? (8 − 5 = <b>3</b>)</li>
+         <li>Count forest layers: 4! Which layer would YOU live in?</li></ul>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Day and night (Genesis 1:14–19).</b> God made the day AND the night, each with its own purpose — and creatures for both! "Yours is the day, yours also the night." (Psalm 74:16)</p>
+         <div class="callout faith">💜 Even in the dark, God's creation is wide awake and cared for. The night is His, too.</div>` },
+      { icon: "📖", subject: "English — Creative Writing", html:
+        `<div class="tryit">✏️ Imagine you're a night creature! Write or tell 3 sentences: "I am a ______. At night I ______. My favorite thing is ______."</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>What night sounds do we hear where we live?</li>
+         <li>If our family were night creatures, what would we be?</li></ul>` },
+      { icon: "🤝", subject: "Character: Curiosity", value: true, html:
+        `<div class="callout char">🌟 <b>Curiosity</b> explores even after dark! Tonight, step outside (with a grown-up), stay very still, and count the night sounds you hear. 🌙</div>` },
+    ],
+    quiz: [
+      { q: "Animals awake at night are called…", a: ["nocturnal", "diurnal", "cereal"], correct: 0 },
+      { q: "The leafy 'roof' of the rainforest is the…", a: ["canopy", "basement", "beach"], correct: 0 },
+      { q: "8 animals, 5 nocturnal — how many diurnal?", a: ["3", "5", "13"], correct: 0 },
+      { q: "Psalm 74 says the day AND the ______ belong to God.", a: ["night", "moon rocks", "snacks"], correct: 0 },
+    ],
+    reflect: ["Which night creature would you be?", "What did you hear in the dark?"],
+  },
+  {
+    id: "a36",
+    emoji: "🛡️",
+    title: "Conservation Project: Protect Our Animals",
+    region: "Wildlife & Stewardship",
+    subtitle: "The Unit 6 finale — become wildlife guardians and create a real project to help protect God's creatures.",
+    value: "Responsibility",
+    badge: "animal-friend",
+    stamp: { emoji: "🛡️", name: "Wildlife Guardian" },
+    xp: 160,
+    sections: [
+      { icon: "🦅", subject: "Story: Guardians Needed", html:
+        `<p>The haribon, the tarsier, the tamaraw — many Philippine animals are <b>endangered</b>, which means very few are left. But here's the hopeful part: <b>people who care can change the story.</b> Today, WE become wildlife guardians! 🛡️</p>` },
+      { icon: "💡", subject: "Why Animals Become Endangered", html:
+        `<div class="wordbank">
+           <div class="word">🪓 Forests cut down = homes lost (habitat loss)</div>
+           <div class="word">🎯 Hunting and capturing wild animals</div>
+           <div class="word">🗑️ Pollution in rivers and seas</div>
+           <div class="word">💚 Good news: protecting forests & reefs protects EVERYONE inside them</div>
+         </div>` },
+      { icon: "🛠️", subject: "Choose Your Guardian Project", html:
+        `<div class="wordbank">
+           <div class="word">🖼️ Make a "Protect the Haribon" poster for your wall</div>
+           <div class="word">🗑️ Do a family cleanup walk (trash bag + gloves)</div>
+           <div class="word">🌱 Plant something that gives food or shelter to birds</div>
+           <div class="word">📢 Teach someone 3 facts about an endangered animal</div>
+         </div>` },
+      { icon: "📊", subject: "Math: Survey & Tally", html:
+        `<p>Guardians collect <b>data</b>!</p>
+         <ul><li>Survey the family: "Which animal should we protect first?" Tally the votes: 𝍩𝍩𝍩</li>
+         <li>On your cleanup walk, tally each piece of trash — then count the total you removed. Every tally = help!</li></ul>` },
+      { icon: "🙏", subject: "Bible Story", faith: true, html:
+        `<p><b>Stewardship of creation (Genesis 2:15).</b> God placed people in the garden "to work it and keep it." The animals are His handiwork, trusted to our care. Guarding them is part of our first and oldest job!</p>
+         <div class="callout faith">💜 Caring for God's creatures is a way of honoring the Creator who made them — and us.</div>` },
+      { icon: "📖", subject: "English — Persuasive Poster", html:
+        `<div class="tryit">✏️ Great posters persuade! Write a headline with a strong verb: "SAVE the Haribon!" "PROTECT our reefs!" Add one fact and one picture.</div>` },
+      { icon: "❤️", subject: "Family Discussion", html:
+        `<ul><li>Which project did we choose, and when will we do it?</li>
+         <li>What's one habit our family can keep all year (less plastic, feeding birds, picking up trash)?</li></ul>` },
+      { icon: "🤝", subject: "Character: Responsibility", value: true, html:
+        `<div class="callout char">🌟 <b>Responsibility</b> means God's world is partly in YOUR hands. Finish your guardian project this week — and sign your names as official Wildlife Guardians! 🛡️</div>` },
+    ],
+    quiz: [
+      { q: "“Endangered” means an animal…", a: ["has very few left", "is dangerous", "sleeps a lot"], correct: 0 },
+      { q: "A big cause of animal endangerment is losing their…", a: ["habitat (home)", "toys", "homework"], correct: 0 },
+      { q: "Guardians collect survey data using…", a: ["tally marks", "guesses", "naps"], correct: 0 },
+      { q: "Genesis says God put people in the garden to work it and…", a: ["keep it", "sell it", "leave it"], correct: 0 },
+    ],
+    reflect: ["Which guardian project did you choose?", "What habit will our family keep all year?"],
+  },
+  {
     id: "a37",
     emoji: "🌾",
     title: "The Rice Terraces: Stairways to the Sky",
@@ -2006,6 +2247,31 @@ const LEVEL_MISSIONS = {
     explorer: ["Draw the tarsier's big round eyes.", "Match each animal to its name.", "Make an animal's sound and movement."],
     adventurer: ["Write which animal is your favorite and why (2 sentences).", "Solve: 3 meals a day × 4 days = ?", "Sort the animals: bird, mammal, or fish."],
     trailblazer: ["Research why the Philippine eagle is endangered; suggest 2 ways to help.", "Explain “endemic” using your own example.", "Create a short “protect our animals” poster or speech."],
+  },
+  a32: {
+    explorer: ["Stretch your arms like a 2-meter wingspan.", "Say 'agila' and 'lipad' (fly).", "Draw the eagle's feathered crown."],
+    adventurer: ["Measure your arm span and subtract it from 200 cm.", "Read one eagle fact and retell it.", "Explain what 'endemic' means."],
+    trailblazer: ["Research the Philippine Eagle Foundation; share 2 facts.", "Compare the haribon to another world eagle.", "Memorize Isaiah 40:31 and explain it in your own words."],
+  },
+  a33: {
+    explorer: ["Measure 12 cm — find a tarsier-sized object.", "Practice moving hinay-hinay (gently, slowly).", "Draw a tarsier with giant golden eyes."],
+    adventurer: ["Solve: how many times taller is a 100-cm eagle than a 12-cm tarsier?", "Write a 3-adjective sentence about the tarsier.", "Explain why visitors must be quiet near tarsiers."],
+    trailblazer: ["Research tarsier conservation in Bohol; share 2 facts.", "Explain 'nocturnal' with three examples.", "Connect Matthew 10:29 to caring for small creatures."],
+  },
+  a34: {
+    explorer: ["Act out a carabao pulling a plow — slow and strong.", "Say 'kalabaw' and 'masipag.'", "Pick one chore and finish it completely."],
+    adventurer: ["Solve two carabao multiplication problems.", "Answer who/what/why about the carabao sentence.", "List 3 ways carabaos help farmers."],
+    trailblazer: ["Make a word problem about farm work and quiz the family.", "Research kesong puti; explain how it's made.", "Connect Proverbs 12:11 to a real chore you own."],
+  },
+  a35: {
+    explorer: ["Play the NIGHT!/DAY! sorting game.", "Draw the 4 rainforest layers.", "Listen for night sounds with a grown-up."],
+    adventurer: ["Sort 8 animals into nocturnal/diurnal and count.", "Write 3 sentences as a night creature.", "Name the 4 forest layers in order."],
+    trailblazer: ["Research one Philippine nocturnal animal; share 3 facts.", "Explain why some animals evolved night vision.", "Journal the night sounds you hear for 10 minutes."],
+  },
+  a36: {
+    explorer: ["Vote in the family animal survey and add your tally.", "Color the guardian poster.", "Say one way to protect animals."],
+    adventurer: ["Run the survey and count the tallies.", "Write a persuasive poster headline with a strong verb.", "Do the cleanup walk and tally the trash removed."],
+    trailblazer: ["Plan and lead the whole guardian project.", "Graph the survey results.", "Explain Genesis 2:15 stewardship and set one family habit."],
   },
   a37: {
     explorer: ["Build a mini “terrace” with blocks or steps.", "Point to the mountains on a map.", "Help measure 1 cup rice : 2 cups water."],

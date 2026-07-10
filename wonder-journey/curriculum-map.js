@@ -555,7 +555,7 @@ const CURRICULUM_MAP = {
         "math": "Wingspan measurement",
         "english": "Nonfiction reading",
         "bible": "Wings like eagles (Isaiah)",
-        "built": false
+        "built": true
       },
       {
         "n": 33,
@@ -571,7 +571,7 @@ const CURRICULUM_MAP = {
         "math": "Size comparison (small numbers)",
         "english": "Descriptive writing",
         "bible": "God cares for small creatures",
-        "built": false
+        "built": true
       },
       {
         "n": 34,
@@ -587,7 +587,7 @@ const CURRICULUM_MAP = {
         "math": "Multiplication (work in the fields)",
         "english": "Reading comprehension",
         "bible": "Hard work is honored (Proverbs)",
-        "built": false
+        "built": true
       },
       {
         "n": 35,
@@ -603,7 +603,7 @@ const CURRICULUM_MAP = {
         "math": "Sorting habitats; counting",
         "english": "Creative writing: a night animal",
         "bible": "Day and night (Creation)",
-        "built": false
+        "built": true
       },
       {
         "n": 36,
@@ -619,7 +619,7 @@ const CURRICULUM_MAP = {
         "math": "Data & tally (a survey)",
         "english": "Persuasive writing (a poster)",
         "bible": "Stewardship of creation",
-        "built": false
+        "built": true
       }
     ]
   },
