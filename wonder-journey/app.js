@@ -1575,6 +1575,42 @@ function viewTeacher() {
     </div>`;
 }
 
+/* ---------- Media Library manager (Teacher Portal · docs/19) ---------- */
+let _mlq = "", _mlcat = "all", _mlstat = "all";
+function viewMediaLib() {
+  const all = Object.entries(MEDIA).map(([id, m]) => ({ id, ...m }));
+  const cats = [...new Set(all.map(m => m.category))].sort();
+  const q = _mlq.toLowerCase();
+  const list = all.filter(m =>
+    (_mlcat === "all" || m.category === _mlcat) &&
+    (_mlstat === "all" || m.status === _mlstat) &&
+    (!q || (m.id + " " + m.subject + " " + m.category + " " + (m.caption || "")).toLowerCase().includes(q)));
+  const ready = all.filter(m => m.status === "ready").length;
+  root().innerHTML = `
+    <div class="view">
+      <h1 style="font-size:26px">🗂️ Media Library</h1>
+      <p style="color:var(--ink-soft);margin:6px 0 12px">The single source of truth for every lesson's media — ${all.length} assets · <b style="color:#0e9c86">${ready} ready</b> · ${all.length - ready} awaiting a licensed file. Run <code>tools/source-media.mjs</code> to fill them (docs/18).</p>
+      <div class="ml-bar">
+        <input id="mlq" placeholder="🔍 Search title, tag, category…" value="${esc(_mlq)}" oninput="_mlq=this.value;mlRefresh()" />
+        <select onchange="_mlcat=this.value;mlRefresh()">${["all", ...cats].map(c => `<option value="${c}" ${_mlcat === c ? "selected" : ""}>${c === "all" ? "All categories" : c}</option>`).join("")}</select>
+        <select onchange="_mlstat=this.value;mlRefresh()">${["all", "ready", "needed"].map(s => `<option value="${s}" ${_mlstat === s ? "selected" : ""}>${s === "all" ? "Any status" : s}</option>`).join("")}</select>
+      </div>
+      <div class="ml-grid">
+        ${list.map(m => `<div class="ml-card">
+          ${mediaFigure(m.id)}
+          <div class="ml-meta">
+            <span class="ml-id">${esc(m.id)}</span>
+            <span class="ml-chip">${esc(m.category)}</span>
+            <span class="ml-chip ${m.status === "ready" ? "ok" : "todo"}">${m.status === "ready" ? "✓ ready" : "needed"}</span>
+          </div>
+          ${m.license ? `<div class="ml-lic">📜 ${esc(m.license)}${m.credit ? " — " + esc(m.credit) : ""}</div>` : ""}
+        </div>`).join("") || `<div class="card empty" style="grid-column:1/-1"><div class="em">🔍</div><p>No assets match — try another search.</p></div>`}
+      </div>
+    </div>`;
+  const inp = document.getElementById("mlq"); if (inp && _mlq) { inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); }
+}
+window.mlRefresh = () => { const y = window.scrollY; viewMediaLib(); window.scrollTo(0, y); };
+
 function viewParent() {
   const advs = allMapAdventures();
   const done = Object.keys(S.completed).length, total = advs.length;
@@ -2134,7 +2170,7 @@ function applyTheme() { document.body.classList.toggle("dark", S.theme === "dark
 $("#themeBtn").addEventListener("click", () => { S.theme = S.theme === "dark" ? "light" : "dark"; save(); applyTheme(); renderTop(); });
 
 /* ---------- router ---------- */
-const VIEWS = { home: viewHome, blessings: viewBlessings, map: viewMap, passport: viewPassport, badges: viewBadges, celebrations: viewCelebrations, tree: viewTree, cooking: viewCooking, cookbook: viewCookbook, storybook: viewStorybook, teacher: viewTeacher, parent: viewParent, family: viewFamily, settings: viewSettings };
+const VIEWS = { home: viewHome, blessings: viewBlessings, map: viewMap, passport: viewPassport, badges: viewBadges, celebrations: viewCelebrations, tree: viewTree, cooking: viewCooking, cookbook: viewCookbook, storybook: viewStorybook, teacher: viewTeacher, medialib: viewMediaLib, parent: viewParent, family: viewFamily, settings: viewSettings };
 function go(view) {
   stopTimer();
   (VIEWS[view] || viewHome)();

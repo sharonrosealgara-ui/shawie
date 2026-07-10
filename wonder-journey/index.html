@@ -492,6 +492,18 @@ a{color:var(--ocean);text-decoration:none}
 .snd-slider{display:flex;align-items:center;gap:12px;margin:10px 0}
 .snd-slider label{flex:0 0 190px;font-size:13.5px;font-weight:700;color:var(--ink,#4a3c28)}
 .snd-slider input[type=range]{flex:1;accent-color:#f4a821;height:6px}
+/* Media Library manager */
+.ml-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.ml-bar input{flex:2;min-width:200px;padding:10px 14px;border:2px solid #e6d5b8;border-radius:12px;font-family:inherit;font-size:14px}
+.ml-bar select{flex:1;min-width:130px;padding:10px;border:2px solid #e6d5b8;border-radius:12px;font-family:inherit;font-size:14px;background:var(--card,#fff)}
+.ml-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.ml-card{background:var(--card,#fff);border:2px solid rgba(0,0,0,.06);border-radius:14px;padding:12px;box-shadow:0 4px 10px rgba(0,0,0,.06)}
+.ml-card .wj-figure{margin:0}
+.ml-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.ml-id{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--ink-soft,#8a7a60)}
+.ml-chip{font-size:10.5px;font-weight:800;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:#f4ead6;color:#7a5a2c}
+.ml-chip.ok{background:#dff3ea;color:#0e9c86}.ml-chip.todo{background:#fde8e4;color:#c0442e}
+.ml-lic{font-size:11.5px;color:var(--ink-soft,#8a7a60);margin-top:6px}
 /* Certificates */
 #certOverlay{position:fixed;inset:0;z-index:9998;display:none;flex-direction:column;align-items:center;justify-content:flex-start;gap:16px;padding:24px;overflow:auto;background:rgba(30,40,35,.72);backdrop-filter:blur(3px)}
 #certOverlay.show{display:flex}
@@ -574,6 +586,7 @@ body.cert-open{overflow:hidden}
     <button class="nav-item" data-view="storybook"><span class="ic">📖</span> Family Storybook</button>
     <div class="nav-group">👩‍🏫 Teacher Portal</div>
     <button class="nav-item" data-view="teacher"><span class="ic">📚</span> Lesson Plans</button>
+    <button class="nav-item" data-view="medialib"><span class="ic">🗂️</span> Media Library</button>
     <button class="nav-item" data-view="parent"><span class="ic">📊</span> Client Summary</button>
     <button class="nav-item" data-view="family"><span class="ic">👨‍👩‍👧‍👦</span> Our Family</button>
     <button class="nav-item" data-view="settings"><span class="ic">⚙️</span> Settings</button>

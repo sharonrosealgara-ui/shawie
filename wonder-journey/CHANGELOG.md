@@ -34,6 +34,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.24.0] — 2026-07-14 · 🗂️ Knowledge & Media Library (manager + architecture)
+
+- `Added` **Media Library manager** in the Teacher Portal — instant search across all 71 assets (title/tag/category), filters by category and ready/needed status, live previews via `mediaFigure`, per-asset license & credit display. The library is the single source of truth: lessons reference media ids, never file paths.
+- `Documentation` `docs/19_KNOWLEDGE_MEDIA_LIBRARY.md` — the full DAM production architecture (metadata schema, categories, licensing, uploads, video library, interactive maps, client customization, security, scalability), mapped honestly to what is live in the MVP vs SaaS-phase.
+
+---
+
 ## [0.23.1] — 2026-07-14 · 📷 Real-media licensing pipeline
 
 - `Added` **`tools/source-media.mjs`** — the one-command licensed-photo pipeline: searches Wikimedia Commons with 71 curated terms, accepts **only commercial-safe licenses** (Public Domain · CC0 · CC BY · CC BY-SA — NC/ND/unknown rejected), downloads 1200px copies to the exact `assets/…` paths (never hotlinks), auto-fills `credit` + `license` + `source` + `status:"ready"` in the manifest, and writes an attribution table to `CREDITS.md`. Supports `--dry-run`, `--only`, `--redo`.
