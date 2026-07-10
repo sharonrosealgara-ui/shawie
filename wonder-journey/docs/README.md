@@ -38,6 +38,8 @@ lower number wins, and `00` (the Constitution) always wins.
 | 29 | [Analytics, Progress & Reporting](29_ANALYTICS_REPORTING.md) | Encouraging, privacy-first progress engine |
 | 30 | [Infrastructure & DevOps](30_INFRASTRUCTURE_DEVOPS.md) | Cloud/DevOps/SRE architecture, CI/CD, providers |
 | 31 | [API & Integration Platform](31_API_INTEGRATIONS.md) | Adapter-based integrations, versioned API, webhooks |
+| 32 | [Mobile & Offline Learning](32_MOBILE_OFFLINE.md) | PWA (live), offline packages, sync engine |
+| 33 | [QA & Release Management](33_QA_RELEASE_MANAGEMENT.md) | Testing layers, release workflow, UAT |
 | — | [CHARTER](CHARTER.md) | Permanent Lead-Architect role & mission |
 
 ## Charter document-name map

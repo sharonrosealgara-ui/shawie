@@ -34,6 +34,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com) and
 
 ---
 
+## [0.28.0] — 2026-07-14 · 📱 Installable PWA + offline learning
+
+- `Added` **Wonder Journey is now an installable app (PWA)** — `manifest.webmanifest` (name, 🌏 icons 192/512, standalone display, brand theme colors): on the hosted site (Netlify), "Add to Home Screen / Install" turns it into a real app on tablets, phones, and desktops.
+- `Added` **Offline learning** — `sw.js` service worker caches the entire app shell (all code + icons) cache-first, and same-origin media as it's viewed. **Verified: with the network fully offline, the app reloads and boots completely** — all 39 lessons, quizzes, cookbook, Lesson Builder keep working (everything already saves locally). Versioned cache auto-cleans on update; registration is guarded (silent no-op in the artifact preview).
+- `Documentation` `docs/32_MOBILE_OFFLINE.md` (Document 27: phased P0–P4 plan — P0/P1 live, download packages/sync engine/native apps staged) and `docs/33_QA_RELEASE_MANAGEMENT.md` (Document 28: testing layers, release workflow & criteria, UAT with the family, continuous-improvement loop); indexed.
+
+---
+
 ## [0.27.0] — 2026-07-14 · Unit 6 complete (Amazing Animals)
 
 - `Added` **Unit 6 fully authored** — five new interactive adventures (a32–a36), Wildlife theme with aligned real-media:

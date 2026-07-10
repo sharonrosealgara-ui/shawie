@@ -1,0 +1,14 @@
+{
+  "name": "Wonder Journey OS",
+  "short_name": "Wonder Journey",
+  "description": "A premium interactive family learning adventure — World 1: Discover the Philippines.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fdf3e2",
+  "theme_color": "#0e7c86",
+  "orientation": "any",
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

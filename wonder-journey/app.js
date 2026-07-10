@@ -2318,6 +2318,11 @@ applyTheme();
 renderTop();
 go("home");
 mergeCustomLessons(); // Lesson Builder: publish teacher-made lessons into the map/theater
+// PWA (docs/32): register the service worker for offline learning + installability.
+// Guarded: only on http(s) origins where sw.js exists (no-op in file:// and the artifact preview).
+if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+  navigator.serviceWorker.register("sw.js").catch(() => {});
+}
 // Apply client configuration (ADR-011): branding comes from WJ_CONFIG, not architecture.
 (function applyConfig() {
   document.title = `Wonder Journey OS · ${WJ_CONFIG.clientName}`;
